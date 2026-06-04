@@ -1,0 +1,53 @@
+{
+  "manifest_version": 3,
+  "name": "小羊多多",
+  "version": "1.1.0",
+  "description": "🐑 拼多多视频智能助手 - 数据监控、批量发布一站式解决方案\n\n【核心功能】\n📊 数据监控：实时监控多多视频播放量、订单数、成交金额\n📈 增长追踪：自动记录每日数据变化，生成增长趋势\n🎬 批量发布：支持多视频批量上传，自动填写商品ID\n🔄 自动保活：智能保持登录状态，无需频繁重新登录\n📤 数据导出：一键导出Excel，方便数据分析\n\n【适用场景】\n✓ 多多视频创作者数据追踪\n✓ 电商运营数据监控\n✓ 批量视频内容发布",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "tabs",
+    "activeTab",
+    "scripting",
+    "webRequest",
+    "notifications",
+    "nativeMessaging"
+  ],
+  "host_permissions": [
+    "*://*.pinduoduo.com/*",
+    "*://live.pinduoduo.com/*",
+    "*://mms.pinduoduo.com/*",
+    "http://localhost:3000/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.pinduoduo.com/*"],
+      "js": ["inject.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["*://*.pinduoduo.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "小羊多多 - 拼多多视频智能助手"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["inject.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

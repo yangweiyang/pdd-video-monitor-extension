@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bgGrad48" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a8edea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7ee8fa;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="woolGrad48" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="112" height="112" rx="24" fill="url(#bgGrad48)"/>
+  <ellipse cx="64" cy="72" rx="38" ry="28" fill="url(#woolGrad48)"/>
+  <circle cx="38" cy="65" r="14" fill="url(#woolGrad48)"/>
+  <circle cx="90" cy="65" r="14" fill="url(#woolGrad48)"/>
+  <circle cx="50" cy="50" r="16" fill="url(#woolGrad48)"/>
+  <circle cx="78" cy="50" r="16" fill="url(#woolGrad48)"/>
+  <circle cx="64" cy="45" r="15" fill="url(#woolGrad48)"/>
+  <ellipse cx="42" cy="38" rx="8" ry="14" fill="#ffdbac" transform="rotate(-20 42 38)"/>
+  <ellipse cx="86" cy="38" rx="8" ry="14" fill="#ffdbac" transform="rotate(20 86 38)"/>
+  <ellipse cx="64" cy="58" rx="22" ry="20" fill="#ffdbac"/>
+  <circle cx="56" cy="54" r="5" fill="#333"/>
+  <circle cx="58" cy="52" r="2" fill="#fff"/>
+  <circle cx="72" cy="54" r="5" fill="#333"/>
+  <circle cx="74" cy="52" r="2" fill="#fff"/>
+  <ellipse cx="48" cy="62" rx="5" ry="3" fill="#ffb6c1" opacity="0.6"/>
+  <ellipse cx="80" cy="62" rx="5" ry="3" fill="#ffb6c1" opacity="0.6"/>
+  <ellipse cx="64" cy="62" rx="4" ry="3" fill="#ff9999"/>
+  <path d="M60 68 Q64 72 68 68" stroke="#ff9999" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <rect x="44" y="90" width="10" height="16" rx="5" fill="#ffdbac"/>
+  <rect x="74" y="90" width="10" height="16" rx="5" fill="#ffdbac"/>
+</svg>

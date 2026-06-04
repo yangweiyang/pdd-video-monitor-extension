@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小羊多多</title>
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-light: #818cf8;
+      --primary-dark: #4f46e5;
+      --primary-glow: rgba(99, 102, 241, 0.4);
+      --secondary: #64748b;
+      --success: #10b981;
+      --success-light: #34d399;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      --surface: #ffffff;
+      --surface-glass: rgba(255, 255, 255, 0.9);
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --shadow-glow: 0 0 20px var(--primary-glow);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      width: 420px;
+      min-height: 600px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 24px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%, 100% { transform: translate(-30%, -30%); }
+      50% { transform: translate(30%, 30%); }
+    }
+    .header-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .header-icon svg {
+      width: 28px;
+      height: 28px;
+      color: white;
+    }
+    .header h1 { 
+      font-size: 20px; 
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+      position: relative;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .header .subtitle { 
+      font-size: 12px; 
+      color: rgba(255,255,255,0.85);
+      position: relative;
+    }
+
+    /* Status Bar */
+    .status-bar {
+      background: var(--surface);
+      padding: 20px 16px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: -20px 16px 16px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      z-index: 10;
+    }
+    .status-item { 
+      text-align: center;
+      padding: 8px 4px;
+      border-radius: var(--radius-md);
+      transition: all 0.3s ease;
+    }
+    .status-item:hover {
+      background: var(--bg);
+      transform: translateY(-2px);
+    }
+    .status-item .icon-wrap {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8px;
+    }
+    .status-item:nth-child(1) .icon-wrap { background: linear-gradient(135deg, #818cf8 0%, #6366f1 100%); }
+    .status-item:nth-child(2) .icon-wrap { background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%); }
+    .status-item:nth-child(3) .icon-wrap { background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); }
+    .status-item:nth-child(4) .icon-wrap { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); }
+    .status-item .icon-wrap svg {
+      width: 18px;
+      height: 18px;
+      color: white;
+    }
+    .status-item .value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .status-item .label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 12px 18px;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    .btn:hover::before {
+      left: 100%;
+    }
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      transition: all 0.3s ease;
+    }
+    .btn:hover svg {
+      transform: scale(1.1) rotate(5deg);
+    }
+    .btn:active { transform: scale(0.96); }
+
+    .btn-primary { 
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      box-shadow: var(--shadow), 0 0 0 0 var(--primary-glow);
+    }
+    .btn-primary:hover { 
+      box-shadow: var(--shadow-md), var(--shadow-glow);
+      transform: translateY(-2px);
+    }
+    .btn-primary:disabled {
+      background: var(--border);
+      color: var(--text-muted);
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .btn-secondary { 
+      background: var(--surface);
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+    .btn-secondary:hover { 
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(99, 102, 241, 0.05);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, var(--success-light) 0%, var(--success) 100%);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+    .btn-success:hover { 
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, #f87171 0%, var(--danger) 100%);
+      color: white;
+    }
+    .btn-danger:hover { 
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Controls Row */
+    .controls-row {
+      padding: 0 16px;
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .controls-row .btn { flex: 1; }
+
+    /* Video List */
+    .video-list {
+      max-height: 280px;
+      overflow-y: auto;
+      padding: 0 16px;
+      margin-bottom: 16px;
+    }
+    .video-list::-webkit-scrollbar { width: 6px; }
+    .video-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .video-list::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--primary-light), var(--primary));
+      border-radius: 3px;
+    }
+    .video-item {
+      background: var(--surface);
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .video-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--primary-light), var(--primary));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .video-item:hover {
+      border-color: var(--primary-light);
+      box-shadow: var(--shadow-md);
+      transform: translateX(4px);
+    }
+    .video-item:hover::before {
+      opacity: 1;
+    }
+    .video-title {
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .video-stats {
+      display: flex;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+    .video-stats span {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .video-stats span svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 50px 24px;
+      color: var(--text-muted);
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      border: 2px dashed var(--border);
+      margin: 0 16px;
+    }
+    .empty-state .icon-wrap { 
+      width: 80px;
+      height: 80px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .empty-state .icon-wrap svg {
+      width: 40px;
+      height: 40px;
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+    .empty-state p { font-size: 14px; font-weight: 500; }
+    .empty-state p.sub { 
+      font-size: 12px; 
+      margin-top: 6px;
+      opacity: 0.7;
+      font-weight: 400;
+    }
+
+    /* Keep Alive Toggle */
+    .keep-alive-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 18px;
+      background: var(--surface);
+      margin: 0 16px;
+      border-radius: var(--radius-md);
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+    }
+    .keep-alive-toggle .label-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .keep-alive-toggle .icon-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .keep-alive-toggle .icon-wrap svg {
+      width: 20px;
+      height: 20px;
+      color: #d97706;
+    }
+    .keep-alive-toggle .label { 
+      font-size: 14px; 
+      font-weight: 600;
+      color: var(--text);
+    }
+    .keep-alive-toggle .hint { 
+      font-size: 11px; 
+      color: var(--text-muted); 
+      margin-top: 2px;
+    }
+
+    /* Toggle Switch */
+    .toggle {
+      position: relative;
+      width: 52px;
+      height: 28px;
+    }
+    .toggle input { 
+      opacity: 0; 
+      width: 0; 
+      height: 0; 
+    }
+    .toggle .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      transition: 0.3s;
+      border-radius: 28px;
+    }
+    .toggle .slider:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.3s;
+      border-radius: 50%;
+      box-shadow: var(--shadow);
+    }
+    .toggle input:checked + .slider { 
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+    .toggle input:checked + .slider:before { 
+      transform: translateX(24px);
+    }
+
+    /* Last Update */
+    .last-update {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 12px 16px;
+      background: var(--surface);
+      margin: 0 16px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: var(--shadow-sm);
+    }
+    .last-update svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Update Banner */
+    .update-banner {
+      margin: 0 16px 12px;
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 1px solid #f59e0b;
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+    }
+    .update-banner.show { display: block; }
+    .update-banner.success {
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      border-color: var(--success);
+    }
+    .update-banner.error {
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      border-color: var(--danger);
+    }
+    .update-banner .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .update-banner .title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #92400e;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .update-banner.success .title { color: #065f46; }
+    .update-banner.error .title { color: #991b1b; }
+    .update-banner .title svg {
+      width: 16px;
+      height: 16px;
+    }
+    .update-banner .version-info {
+      font-size: 11px;
+      color: #92400e;
+      margin-bottom: 8px;
+    }
+    .update-banner.success .version-info { color: #065f46; }
+    .update-banner .notes {
+      font-size: 11px;
+      color: #78350f;
+      max-height: 60px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+    .update-banner.success .notes { color: #047857; }
+    .update-banner .actions {
+      display: flex;
+      gap: 8px;
+    }
+    .update-banner .btn-sm {
+      padding: 6px 14px;
+      font-size: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .update-banner .btn-download {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: white;
+      border: none;
+    }
+    .update-banner .btn-download:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+    .update-banner .btn-dismiss {
+      background: transparent;
+      color: #92400e;
+      border: 1px solid rgba(146,64,14,0.3);
+    }
+    .update-banner .btn-dismiss:hover {
+      background: rgba(255,255,255,0.5);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .status-bar, .controls-row, .video-list, .keep-alive-toggle, .last-update {
+      animation: fadeIn 0.4s ease-out;
+    }
+    .controls-row:nth-child(2) { animation-delay: 0.1s; }
+    .controls-row:nth-child(3) { animation-delay: 0.15s; }
+    .video-list { animation-delay: 0.2s; }
+    .keep-alive-toggle { animation-delay: 0.25s; }
+    .last-update { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+        <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+        <line x1="9" y1="9" x2="9.01" y2="9"/>
+        <line x1="15" y1="9" x2="15.01" y2="9"/>
+      </svg>
+    </div>
+    <h1>小羊多多</h1>
+    <p class="subtitle">拼多多视频智能助手</p>
+  </div>
+
+  <!-- 数据监控面板 -->
+  <div class="tab-content active" id="monitor-panel">
+    <div class="status-bar">
+      <div class="status-item">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+            <line x1="7" y1="2" x2="7" y2="22"/>
+            <line x1="17" y1="2" x2="17" y2="22"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <line x1="2" y1="7" x2="7" y2="7"/>
+            <line x1="2" y1="17" x2="7" y2="17"/>
+            <line x1="17" y1="17" x2="22" y2="17"/>
+            <line x1="17" y1="7" x2="22" y2="7"/>
+          </svg>
+        </div>
+        <div class="value" id="videoCount">0</div>
+        <div class="label">视频数</div>
+      </div>
+      <div class="status-item">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+        </div>
+        <div class="value" id="totalPlays">0</div>
+        <div class="label">总播放</div>
+      </div>
+      <div class="status-item">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"/>
+            <circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+        </div>
+        <div class="value" id="totalOrders">0</div>
+        <div class="label">总订单</div>
+      </div>
+      <div class="status-item">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div class="value" id="totalAmount">¥0</div>
+        <div class="label">总金额</div>
+      </div>
+    </div>
+
+    <div class="controls-row">
+      <button class="btn btn-secondary" id="refreshBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 4v6h-6"/>
+          <path d="M1 20v-6h6"/>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+        </svg>
+        刷新
+      </button>
+      <button class="btn btn-primary" id="syncBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.66 0 3-4.03 3-9s-1.34-9-3-9m0 18c-1.66 0-3-4.03-3-9s1.34-9 3-9m-9 9a9 9 0 0 1 9-9"/>
+        </svg>
+        同步
+      </button>
+    </div>
+
+    <div class="controls-row">
+      <button class="btn btn-secondary" id="exportBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        导出
+      </button>
+      <button class="btn btn-secondary" id="clearBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="3 6 5 6 21 6"/>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+          <line x1="10" y1="11" x2="10" y2="17"/>
+          <line x1="14" y1="11" x2="14" y2="17"/>
+        </svg>
+        清空
+      </button>
+    </div>
+
+    <div class="video-list" id="videoList">
+      <div class="empty-state">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </div>
+        <p>暂无视频数据</p>
+        <p class="sub">请访问拼多多视频页面</p>
+      </div>
+    </div>
+
+    <div class="keep-alive-toggle">
+      <div class="label-wrap">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/>
+            <line x1="12" y1="2" x2="12" y2="12"/>
+          </svg>
+        </div>
+        <div>
+          <div class="label">自动保活</div>
+          <div class="hint">每2分钟自动刷新保持登录</div>
+        </div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="keepAliveToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!-- 更新提示横幅 -->
+    <div class="update-banner" id="updateBanner">
+      <div class="header-row">
+        <div class="title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span id="updateTitle">发现新版本</span>
+        </div>
+        <button class="btn-sm btn-dismiss" id="dismissUpdateBtn">关闭</button>
+      </div>
+      <div class="version-info" id="updateVersionInfo"></div>
+      <div class="notes" id="updateNotes"></div>
+      <div class="actions">
+        <button class="btn-sm btn-download" id="downloadUpdateBtn">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          下载更新
+        </button>
+        <button class="btn-sm btn-dismiss" id="checkUpdateBtn">重新检查</button>
+      </div>
+    </div>
+
+    <div class="last-update" id="lastUpdate">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
+      <span>暂无数据</span>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
