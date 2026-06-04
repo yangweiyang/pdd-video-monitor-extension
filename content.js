@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // 全局错误处理 - 防止扩展插件导致页面崩溃
@@ -1846,26 +1846,55 @@
     // 默认显示数据监控页面，添加上传页面切换功能
     let currentView = 'data'; // 'data' 或 'upload'
     
-    // 创建圆球容器
+    // 创建圆球容器 - 可爱小羊卡通形象
     const ball = document.createElement('div');
     ball.id = 'pdd-monitor-ball';
     ball.innerHTML = `
       <div class="ball-icon">
-        <svg viewBox="0 0 64 64" width="30" height="30" fill="none">
+        <svg viewBox="0 0 64 64" width="36" height="36" fill="none">
+          <!-- 羊毛 - 蓬松云朵状 -->
           <defs>
-            <linearGradient id="ballGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#ff4d6d;stop-opacity:1" />
-              <stop offset="50%" style="stop-color:#ff8fa3;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#ffb3c1;stop-opacity:1" />
+            <linearGradient id="sheepWool" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="100%" stop-color="#f0e8f0"/>
             </linearGradient>
+            <linearGradient id="sheepFace" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#fff5e6"/>
+              <stop offset="100%" stop-color="#ffe4c9"/>
+            </linearGradient>
+            <filter id="sheepGlow" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#ff6b6b" flood-opacity="0.25"/>
+            </filter>
           </defs>
-          <circle cx="32" cy="32" r="26" fill="url(#ballGrad)"/>
-          <rect x="14" y="24" width="36" height="20" rx="5" fill="#ffffff"/>
-          <rect x="18" y="28" width="14" height="12" rx="3" fill="#ff4d6d"/>
-          <rect x="36" y="30" width="10" height="3" rx="1.5" fill="#ff4d6d"/>
-          <rect x="36" y="36" width="8" height="3" rx="1.5" fill="#ff4d6d" opacity="0.6"/>
-          <circle cx="32" cy="16" r="6" fill="#ffffff"/>
-          <path d="M28 14L30 18L36 16L32 20L34 14Z" fill="#ff4d6d"/>
+          <!-- 羊毛身体 -->
+          <ellipse cx="32" cy="38" rx="22" ry="18" fill="url(#sheepWool)" filter="url(#sheepGlow)"/>
+          <!-- 羊毛团 -->
+          <circle cx="16" cy="32" r="10" fill="url(#sheepWool)"/>
+          <circle cx="48" cy="32" r="10" fill="url(#sheepWool)"/>
+          <circle cx="22" cy="22" r="11" fill="url(#sheepWool)"/>
+          <circle cx="42" cy="22" r="11" fill="url(#sheepWool)"/>
+          <circle cx="32" cy="17" r="12" fill="url(#sheepWool)"/>
+          <!-- 耳朵 -->
+          <ellipse cx="14" cy="24" rx="5" ry="9" fill="url(#sheepFace)" transform="rotate(-20 14 24)"/>
+          <ellipse cx="50" cy="24" rx="5" ry="9" fill="url(#sheepFace)" transform="rotate(20 50 24)"/>
+          <!-- 内耳粉色 -->
+          <ellipse cx="14" cy="25" rx="3" ry="6" fill="#ffb3c1" transform="rotate(-20 14 25)"/>
+          <ellipse cx="50" cy="25" rx="3" ry="6" fill="#ffb3c1" transform="rotate(20 50 25)"/>
+          <!-- 脸部 -->
+          <ellipse cx="32" cy="34" rx="15" ry="13" fill="url(#sheepFace)"/>
+          <!-- 眼睛 -->
+          <circle cx="26" cy="31" r="3.5" fill="#333"/>
+          <circle cx="38" cy="31" r="3.5" fill="#333"/>
+          <!-- 眼睛高光 -->
+          <circle cx="27" cy="29.5" r="1.3" fill="#fff"/>
+          <circle cx="39" cy="29.5" r="1.3" fill="#fff"/>
+          <!-- 腮红 -->
+          <ellipse cx="21" cy="35" rx="4" ry="2.5" fill="#ffb3c1" opacity="0.55"/>
+          <ellipse cx="43" cy="35" rx="4" ry="2.5" fill="#ffb3c1" opacity="0.55"/>
+          <!-- 鼻子 -->
+          <ellipse cx="32" cy="37" rx="3" ry="2.2" fill="#ff9999"/>
+          <!-- 嘴巴 - 微笑 -->
+          <path d="M28 40 Q32 44 36 40" stroke="#ff8888" stroke-width="1.8" fill="none" stroke-linecap="round"/>
         </svg>
       </div>
       <div class="ball-badge" id="ball-count">0</div>
@@ -1905,57 +1934,53 @@
     panel.innerHTML = `
       <div id="pdd-panel-header">
         <span class="title" id="pdd-panel-title">
-          <svg width="22" height="22" viewBox="0 0 64 64" fill="none" style="vertical-align: middle; margin-right: 8px;">
+          <svg width="24" height="24" viewBox="0 0 64 64" fill="none" style="vertical-align: middle; margin-right: 8px;">
+            <!-- 小羊图标 - 简化版 -->
             <defs>
-              <linearGradient id="panelGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#ffc2d1;stop-opacity:1" />
+              <linearGradient id="panelSheepWool" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="100%" stop-color="#ffe8f0"/>
+              </linearGradient>
+              <linearGradient id="panelSheepFace" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#fff5e6"/>
+                <stop offset="100%" stop-color="#ffe4c9"/>
               </linearGradient>
             </defs>
-            <rect x="8" y="32" width="48" height="24" rx="8" fill="url(#panelGrad1)"/>
-            <rect x="12" y="36" width="14" height="16" rx="4" fill="#ffffff"/>
-            <rect x="30" y="38" width="20" height="4" rx="2" fill="#ffffff"/>
-            <rect x="30" y="46" width="16" height="4" rx="2" fill="#ffffff" opacity="0.6"/>
-            <circle cx="24" cy="20" r="14" fill="url(#panelGrad1)"/>
-            <circle cx="20" cy="18" r="3" fill="#ffffff"/>
-            <circle cx="28" cy="18" r="3" fill="#ffffff" opacity="0.7"/>
-            <circle cx="24" cy="24" r="3" fill="#ffffff"/>
+            <ellipse cx="32" cy="38" rx="20" ry="16" fill="url(#panelSheepWool)"/>
+            <circle cx="16" cy="32" r="9" fill="url(#panelSheepWool)"/>
+            <circle cx="48" cy="32" r="9" fill="url(#panelSheepWool)"/>
+            <circle cx="23" cy="23" r="10" fill="url(#panelSheepWool)"/>
+            <circle cx="41" cy="23" r="10" fill="url(#panelSheepWool)"/>
+            <circle cx="32" cy="18" r="11" fill="url(#panelSheepWool)"/>
+            <ellipse cx="15" cy="25" rx="4" ry="7" fill="url(#panelSheepFace)" transform="rotate(-18 15 25)"/>
+            <ellipse cx="49" cy="25" rx="4" ry="7" fill="url(#panelSheepFace)" transform="rotate(18 49 25)"/>
+            <ellipse cx="32" cy="34" rx="13" ry="11" fill="url(#panelSheepFace)"/>
+            <circle cx="27" cy="31" r="3" fill="#333"/><circle cx="37" cy="31" r="3" fill="#333"/>
+            <circle cx="28" cy="30" r="1.1" fill="#fff"/><circle cx="38" cy="30" r="1.1" fill="#fff"/>
+            <path d="M29 38 Q32 41 35 38" stroke="#ff8888" stroke-width="1.6" fill="none" stroke-linecap="round"/>
           </svg>
           视频数据监控
         </span>
         <div class="header-btns">
           <button id="pdd-nav-data-page" class="nav-btn active" title="视频数据监控">
             <svg width="20" height="20" viewBox="0 0 64 64" fill="none">
-              <defs>
-                <linearGradient id="navGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                  <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                </linearGradient>
-              </defs>
-              <rect x="8" y="32" width="48" height="24" rx="8" fill="url(#navGrad)"/>
-              <rect x="12" y="36" width="14" height="16" rx="4" fill="#ffffff"/>
-              <rect x="30" y="38" width="20" height="4" rx="2" fill="#ffffff"/>
-              <rect x="30" y="46" width="16" height="4" rx="2" fill="#ffffff" opacity="0.6"/>
-              <circle cx="24" cy="20" r="14" fill="url(#navGrad)"/>
-              <circle cx="20" cy="18" r="3" fill="#ffffff"/>
-              <circle cx="28" cy="18" r="3" fill="#ffffff" opacity="0.7"/>
-              <circle cx="24" cy="24" r="3" fill="#ffffff"/>
+              <ellipse cx="32" cy="38" rx="18" ry="14" fill="#ffffff"/>
+              <circle cx="16" cy="33" r="8" fill="#ffffff"/><circle cx="48" cy="33" r="8" fill="#ffffff"/>
+              <circle cx="24" cy="25" r="9" fill="#ffffff"/><circle cx="40" cy="25" r="9" fill="#ffffff"/>
+              <circle cx="32" cy="20" r="10" fill="#ffffff"/>
+              <ellipse cx="32" cy="34" rx="11" ry="9" fill="#ffe4c9"/>
+              <circle cx="28" cy="31.5" r="2.5" fill="#333"/><circle cx="36" cy="31.5" r="2.5" fill="#333"/>
             </svg>
           </button>
           <button id="pdd-nav-auto-upload" class="nav-btn" title="视频自动上传">
             <svg width="20" height="20" viewBox="0 0 64 64" fill="none">
-              <defs>
-                <linearGradient id="uploadGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
-                  <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
-                </linearGradient>
-              </defs>
-              <rect x="10" y="28" width="44" height="26" rx="6" fill="url(#uploadGrad)"/>
-              <path d="M32 10L32 24" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
-              <path d="M24 18L32 10L40 18" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="20" cy="41" r="5" fill="#ffffff"/>
-              <circle cx="44" cy="41" r="5" fill="#ffffff"/>
-              <rect x="22" y="40" width="20" height="3" rx="1.5" fill="#ffffff"/>
+              <ellipse cx="32" cy="38" rx="18" ry="14" fill="#ffffff"/>
+              <circle cx="16" cy="33" r="8" fill="#ffffff"/><circle cx="48" cy="33" r="8" fill="#ffffff"/>
+              <circle cx="24" cy="25" r="9" fill="#ffffff"/><circle cx="40" cy="25" r="9" fill="#ffffff"/>
+              <circle cx="32" cy="20" r="10" fill="#ffffff"/>
+              <path d="M28 12 L32 6 L36 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <line x1="32" y1="10" x2="32" y2="22" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+              <rect x="24" y="26" width="16" height="14" rx="4" fill="#ff6b35"/>
             </svg>
           </button>
           <div style="width:1px;height:20px;background:rgba(255,255,255,0.3);margin:0 4px;border-radius:1px;"></div>
@@ -2051,8 +2076,8 @@
       </div>
       
       <!-- 页面类型指示器 -->
-      <div id="pdd-page-indicator" style="padding:10px 16px;background:linear-gradient(135deg, #ff4d6d 0%, #ff8fa3 100%);color:white;font-size:12px;text-align:center;font-weight:700;border-bottom:3px solid #ffb3c1;">
-        <span id="pdd-page-type">📊 视频数据监控页面</span>
+      <div id="pdd-page-indicator" style="padding:10px 16px;background:linear-gradient(90deg, #07c160 0%, #32cd68 50%, #ffd700 100%);color:white;font-size:12px;text-align:center;font-weight:700;border-bottom:none;">
+        <span id="pdd-page-type">视频数据监控页面</span>
       </div>
       
       <!-- 面板主体，支持滚动 -->
@@ -2367,68 +2392,104 @@
         --pdd-radius-lg: 24px;
         --pdd-shadow-sm: 0 4px 12px rgba(255, 77, 109, 0.12);
         --pdd-shadow: 0 6px 20px rgba(255, 77, 109, 0.18);
-        --pdd-shadow-md: 0 16px 40px rgba(255, 77, 109, 0.25);
-        --pdd-gradient-1: linear-gradient(135deg, #ff4d6d 0%, #ff8fa3 50%, #ffb3c1 100%);
-        --pdd-gradient-2: linear-gradient(135deg, #ff8fa3 0%, #ff4d6d 100%);
+        --pdd-primary: #e02e24;
+        --pdd-primary-light: #ff4d42;
+        --pdd-primary-dark: #c7261d;
+        --pdd-green: #07c160;
+        --pdd-green-dark: #06ad56;
+        --pdd-orange: #ff6b35;
+        --pdd-surface: #ffffff;
+        --pdd-bg: #f5f5f5;
+        --pdd-border: #eee;
+        --pdd-border-light: #f0f0f0;
+        --pdd-text: #222;
+        --pdd-text-secondary: #666;
+        --pdd-text-muted: #999;
+        --pdd-shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+        --pdd-shadow-md: 0 4px 16px rgba(224,46,36,0.08);
+        --pdd-shadow-lg: 0 12px 40px rgba(224,46,36,0.12);
+        --pdd-gradient-1: linear-gradient(135deg, #e02e24 0%, #c7261d 100%);
+        --pdd-gradient-2: linear-gradient(135deg, #ff4d42 0%, #e02e24 100%);
         --pdd-gradient-3: linear-gradient(135deg, #ffd43b 0%, #ffa94d 100%);
-        --pdd-gradient-4: linear-gradient(135deg, #20c997 0%, #63e6be 100%);
+        --pdd-gradient-4: linear-gradient(135deg, #07c160 0%, #32cd68 100%);
       }
       
       #pdd-monitor-ball {
         position: fixed;
         top: 50%;
-        right: 0;
-        width: 48px;
-        height: 96px;
-        background: linear-gradient(135deg, #ff4d6d 0%, #ff8fa3 50%, #ffb3c1 100%);
-        border-radius: 16px 0 0 16px;
-        box-shadow: -4px 0 28px rgba(255, 77, 109, 0.4);
+        right: 16px;
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(145deg, #ffffff 0%, #fef6f0 50%, #fff0e8 100%);
+        border-radius: 50%;
+        box-shadow:
+          0 4px 20px rgba(224, 46, 36, 0.18),
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          inset 0 -3px 8px rgba(255, 107, 107, 0.1);
         z-index: 10000;
-        cursor: pointer;
+        cursor: grab;
         display: flex;
         align-items: center;
         justify-content: center;
         touch-action: none;
         transform: translateY(-50%);
-        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: box-shadow 0.3s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 2.5px solid rgba(224, 46, 36, 0.12);
       }
       #pdd-monitor-ball:hover {
-        width: 64px;
-        box-shadow: -8px 0 40px rgba(255, 77, 109, 0.5);
+        width: 62px;
+        height: 62px;
+        box-shadow:
+          0 8px 30px rgba(224, 46, 36, 0.28),
+          0 4px 12px rgba(0, 0, 0, 0.1),
+          inset 0 -3px 10px rgba(255, 107, 107, 0.15);
+        transform: translateY(-50%) scale(1.05);
       }
       #pdd-monitor-ball:active {
-        transform: translateY(-50%) scale(0.92);
+        cursor: grabbing;
+        transform: translateY(-50%) scale(0.95);
+        transition: transform 0.1s;
+      }
+      #pdd-monitor-ball.dragging {
+        cursor: grabbing;
+        transform: scale(1.08) !important;
+        box-shadow:
+          0 16px 48px rgba(224, 46, 36, 0.35),
+          0 8px 24px rgba(0, 0, 0, 0.12) !important;
+        transition: box-shadow 0.2s;
+        opacity: 0.92;
       }
       #pdd-monitor-ball.hidden {
         display: none;
       }
       .ball-icon {
-        width: 26px;
-        height: 26px;
+        width: 38px;
+        height: 38px;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: white;
       }
       .ball-icon svg {
         display: block;
+        filter: drop-shadow(0 1px 2px rgba(0,0,0,0.08));
       }
       .ball-badge {
         position: absolute;
-        top: -8px;
-        right: -8px;
-        background: var(--pdd-gradient-2);
+        top: -4px;
+        right: -4px;
+        background: linear-gradient(135deg, #e02e24 0%, #c7261d 100%);
         color: white;
-        font-size: 11px;
-        font-weight: 700;
-        padding: 4px 9px;
-        border-radius: 16px;
-        min-width: 24px;
+        font-size: 10px;
+        font-weight: 800;
+        padding: 3px 7px;
+        border-radius: 12px;
+        min-width: 20px;
         text-align: center;
-        box-shadow: 0 3px 12px rgba(244, 63, 94, 0.45);
+        box-shadow: 0 3px 10px rgba(224, 46, 36, 0.4);
         border: 2.5px solid white;
         display: none;
         animation: badgePulse 2s infinite;
+        line-height: 1.2;
       }
       @keyframes badgePulse {
         0%, 100% { transform: scale(1); }
@@ -2445,13 +2506,13 @@
         height: 100vh;
         min-height: 100vh;
         max-height: 100vh;
-        background: var(--pdd-surface);
-        box-shadow: -8px 0 48px rgba(0, 0, 0, 0.06);
+        background: var(--pdd-bg);
+        box-shadow: -8px 0 40px rgba(224, 46, 36, 0.1);
         z-index: 9999;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', Roboto, sans-serif;
         display: flex;
         flex-direction: column;
-        border-left: 1px solid var(--pdd-border);
+        border-left: 3px solid rgba(224, 46, 36, 0.15);
         transform: translateX(100%);
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         overflow: hidden;
@@ -2467,18 +2528,18 @@
       /* 页面内容偏移样式 - 拼多多商家后台适配 */
       /* 由 JavaScript 动态调整，CSS 仅处理特殊情况 */
       #pdd-panel-header {
-        background: var(--pdd-gradient-1);
+        background: linear-gradient(135deg, #e02e24 0%, #c7261d 100%);
         color: white;
-        padding: 16px 20px;
+        padding: 14px 18px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         cursor: default;
         border-bottom: none;
-        font-weight: 600;
+        font-weight: 700;
         position: relative;
         flex-shrink: 0;
-        box-shadow: 0 4px 16px rgba(255, 107, 107, 0.25);
+        box-shadow: 0 4px 16px rgba(224, 46, 36, 0.25);
       }
       #pdd-panel-header::after {
         content: '';
@@ -2545,10 +2606,10 @@
         transform: scale(1.12);
       }
       .nav-btn.active {
-        color: #ff6b6b;
+        color: #e02e24;
         background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
         border-color: white;
-        box-shadow: 0 4px 16px rgba(255, 107, 107, 0.35), inset 0 0 0 1px rgba(255, 107, 107, 0.2);
+        box-shadow: 0 4px 16px rgba(224, 46, 36, 0.25), inset 0 0 0 1px rgba(224, 46, 36, 0.15);
         transform: translateY(-2px) scale(1.05);
       }
       .nav-btn.active svg {
@@ -2770,8 +2831,8 @@
       }
       #pdd-filter-bar input:focus,
       #pdd-filter-bar select:focus {
-        border-color: var(--pdd-primary-light);
-        box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+        border-color: #e02e24;
+        box-shadow: 0 0 0 2px rgba(224, 46, 36, 0.1);
       }
       #pdd-filter-bar input {
         flex: 1;
@@ -2982,20 +3043,23 @@
         }
       }
       .select-filtered-btn {
-        background: var(--pdd-success);
+        background: linear-gradient(135deg, #07c160 0%, #06ad56 100%);
         color: white;
         border: none;
-        padding: 6px 10px;
-        border-radius: var(--pdd-radius-sm);
+        padding: 6px 14px;
+        border-radius: 8px;
         font-size: 11px;
         cursor: pointer;
-        font-weight: 600;
+        font-weight: 700;
         transition: all 0.2s;
         white-space: nowrap;
         height: 32px;
+        box-shadow: 0 2px 8px rgba(7, 193, 96, 0.25);
       }
       .select-filtered-btn:hover {
-        background: #059669;
+        background: linear-gradient(135deg, #06ad56 0%, #059850 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(7, 193, 96, 0.35);
       }
       .sort-btn {
         background: var(--pdd-surface);
@@ -3154,7 +3218,7 @@
         transform: scale(1.1);
       }
       .summary-item .value.growth {
-        background: linear-gradient(135deg, #e02e24 0%, #f04e44 100%);
+        background: linear-gradient(135deg, #ff6b35 0%, #e85a25 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
