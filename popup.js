@@ -1,20 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // ========== Tab 切换 ==========
-  const tabs = document.querySelectorAll('.tab');
-  const tabContents = document.querySelectorAll('.tab-content');
-  
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const targetTab = tab.dataset.tab;
-      
-      tabs.forEach(t => t.classList.remove('active'));
-      tabContents.forEach(c => c.classList.remove('active'));
-      
-      tab.classList.add('active');
-      document.getElementById(`${targetTab}-panel`).classList.add('active');
-    });
-  });
-
   // ========== 数据监控功能 ==========
   const videoCountEl = document.getElementById('videoCount');
   const totalPlaysEl = document.getElementById('totalPlays');
@@ -24,9 +8,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const lastUpdateEl = document.getElementById('lastUpdate');
   const keepAliveToggle = document.getElementById('keepAliveToggle');
   const refreshBtn = document.getElementById('refreshBtn');
+  const refreshBtn2 = document.getElementById('refreshBtn2');
   const exportBtn = document.getElementById('exportBtn');
+  const exportBtn2 = document.getElementById('exportBtn2');
   const clearBtn = document.getElementById('clearBtn');
   const syncBtn = document.getElementById('syncBtn');
+  const syncBtn2 = document.getElementById('syncBtn2');
 
   loadVideoData();
   loadKeepAliveStatus();
@@ -155,13 +142,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (lastTime) {
       const date = new Date(lastTime);
-      lastUpdateEl.innerHTML = `
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <polyline points="12 6 12 12 16 14"/>
-        </svg>
-        <span>最后更新: ${formatTime(date)}</span>
-      `;
+      const monitoredPagesEl = document.getElementById('monitoredPages');
+      const totalVideosEl = document.getElementById('totalVideos');
+      if (monitoredPagesEl) {
+        const feedIds = Object.keys(history || {});
+        monitoredPagesEl.textContent = feedIds.length;
+        totalVideosEl.textContent = feedIds.reduce((sum, id) => sum + (history[id]?.length || 0), 0);
+      }
     }
   }
 
@@ -185,7 +172,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  refreshBtn.addEventListener('click', function() {
+  // 绑定按钮（header + body 两套按钮共用同一逻辑）
+  function bindButtons(btn1, btn2, handler) {
+    if (btn1) btn1.addEventListener('click', handler);
+    if (btn2) btn2.addEventListener('click', handler);
+  }
+
+  bindButtons(refreshBtn, refreshBtn2, function() {
     const originalHTML = this.innerHTML;
     this.innerHTML = `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;">
@@ -214,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  syncBtn.addEventListener('click', function() {
+  bindButtons(syncBtn, syncBtn2, function() {
     const originalHTML = this.innerHTML;
     this.innerHTML = `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;">
@@ -233,16 +226,8 @@ document.addEventListener('DOMContentLoaded', function() {
           同步成功
         `;
         this.style.background = 'linear-gradient(135deg, #34d399 0%, #10b981 100%)';
-        lastUpdateEl.innerHTML = `
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
-          <span>同步时间: ${response.lastSyncTime || new Date().toLocaleString()}</span>
-        `;
-        
+        loadVideoData();
         setTimeout(() => {
-          loadVideoData();
           syncBtn.innerHTML = originalHTML;
           syncBtn.style.background = '';
           syncBtn.disabled = false;
@@ -257,13 +242,12 @@ document.addEventListener('DOMContentLoaded', function() {
           同步失败
         `;
         this.style.background = 'linear-gradient(135deg, #f87171 0%, #ef4444 100%)';
-        lastUpdateEl.innerHTML = `<span>${response.error || '同步失败'}</span>`;
         syncBtn.disabled = false;
       }
     });
   });
 
-  exportBtn.addEventListener('click', function() {
+  bindButtons(exportBtn, exportBtn2, function() {
     chrome.storage.local.get(['videoHistory'], (result) => {
       const history = result.videoHistory || {};
       const feedIds = Object.keys(history);
@@ -320,7 +304,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  clearBtn.addEventListener('click', function() {
+  bindButtons(clearBtn, null, function() {
     if (confirm('确定要清空所有数据吗？')) {
       chrome.storage.local.set({ videoHistory: {} }, () => {
         loadVideoData();
@@ -338,6 +322,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const dismissUpdateBtn = document.getElementById('dismissUpdateBtn');
   const recheckUpdateBtn = document.getElementById('recheckUpdateBtn');
   const checkUpdateBtn = document.getElementById('checkUpdateBtn');
+  const checkUpdateBtnHeader = document.getElementById('checkUpdateBtnHeader');
 
   // 检查更新状态并显示
   function checkUpdateStatus() {
@@ -444,8 +429,8 @@ document.addEventListener('DOMContentLoaded', function() {
     recheckUpdateBtn.style.display = 'inline-flex';
   }
 
-  // 手动检查更新（底部按钮 - 始终可见）
-  checkUpdateBtn.addEventListener('click', async function() {
+  // 手动检查更新（底部按钮 + header按钮）
+  bindButtons(checkUpdateBtn, checkUpdateBtnHeader, async function() {
     showChecking();
 
     const result = await new Promise(resolve => {
