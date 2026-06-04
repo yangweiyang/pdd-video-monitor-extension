@@ -336,6 +336,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const updateNotes = document.getElementById('updateNotes');
   const downloadUpdateBtn = document.getElementById('downloadUpdateBtn');
   const dismissUpdateBtn = document.getElementById('dismissUpdateBtn');
+  const recheckUpdateBtn = document.getElementById('recheckUpdateBtn');
   const checkUpdateBtn = document.getElementById('checkUpdateBtn');
 
   // 检查更新状态并显示
@@ -387,7 +388,6 @@ document.addEventListener('DOMContentLoaded', function() {
     updateVersionInfo.textContent = '';
     updateNotes.style.display = 'none';
     downloadUpdateBtn.style.display = 'none';
-    checkUpdateBtn.style.display = 'none';
   }
 
   // 显示错误
@@ -404,13 +404,32 @@ document.addEventListener('DOMContentLoaded', function() {
     updateTitle.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 已是最新版本';
     updateVersionInfo.textContent = `当前版本: ${current}`;
     updateNotes.style.display = 'none';
-    downloadUpdateBtn.style.display = 'inline-flex';
-    checkUpdateBtn.style.display = 'inline-flex';
     downloadUpdateBtn.style.display = 'none';
+    recheckUpdateBtn.style.display = 'inline-flex';
   }
 
-  // 手动检查更新
+  // 手动检查更新（底部按钮 - 始终可见）
   checkUpdateBtn.addEventListener('click', async function() {
+    showChecking();
+
+    const result = await new Promise(resolve => {
+      chrome.runtime.sendMessage({ action: 'checkUpdate' }, resolve);
+    });
+
+    if (result.success) {
+      if (result.hasUpdate) {
+        showUpdateBanner(result.info);
+      } else {
+        showUpToDate(result.currentVersion, result.latestVersion);
+        setTimeout(() => { updateBanner.classList.remove('show'); }, 3000);
+      }
+    } else {
+      showError(result.error);
+    }
+  });
+
+  // 横幅内的重新检查
+  recheckUpdateBtn.addEventListener('click', async function() {
     showChecking();
     
     const result = await new Promise(resolve => {
