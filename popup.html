@@ -6,46 +6,45 @@
   <title>小羊多多</title>
   <style>
     :root {
-      --primary: #6366f1;
-      --primary-light: #818cf8;
-      --primary-dark: #4f46e5;
-      --primary-glow: rgba(99, 102, 241, 0.4);
-      --secondary: #64748b;
-      --success: #10b981;
-      --success-light: #34d399;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      --primary: #e53e3e;
+      --primary-light: #fc8181;
+      --primary-dark: #c53030;
+      --primary-glow: rgba(229, 62, 62, 0.35);
+      --accent: #ed8936;
+      --accent-light: #f6ad55;
+      --success: #38a169;
+      --success-light: #68d391;
+      --warning: #dd6b20;
+      --danger: #e53e3e;
+      --bg: #fff5f5;
       --surface: #ffffff;
-      --surface-glass: rgba(255, 255, 255, 0.9);
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --radius-xl: 24px;
-      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-      --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-      --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-      --shadow-glow: 0 0 20px var(--primary-glow);
+      --text: #2d3748;
+      --text-muted: #a0aec0;
+      --border: #fed7d7;
+      --border-subtle: #feebec;
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 1px 3px rgba(229,62,62,0.06);
+      --shadow: 0 4px 12px rgba(229,62,62,0.08);
+      --shadow-md: 0 8px 24px rgba(229,62,62,0.12);
+      --shadow-lg: 0 16px 40px rgba(229,62,62,0.15);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    
+
     body {
-      width: 420px;
-      min-height: 600px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      width: 400px;
+      min-height: 560px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
     }
 
-    /* Header */
+    /* ===== Header ===== */
     .header {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      padding: 24px 20px;
+      background: linear-gradient(135deg, var(--primary) 0%, #b83232 50%, #9b2c2c 100%);
+      padding: 28px 20px 24px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -53,167 +52,149 @@
     .header::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
+      top: -60%;
+      left: -30%;
+      width: 160%;
       height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-      animation: shimmer 3s ease-in-out infinite;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
     }
-    @keyframes shimmer {
-      0%, 100% { transform: translate(-30%, -30%); }
-      50% { transform: translate(30%, 30%); }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 32px;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.06));
+      pointer-events: none;
     }
     .header-icon {
-      width: 48px;
-      height: 48px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 16px;
+      width: 54px;
+      height: 54px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 12px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    .header-icon svg {
-      width: 28px;
-      height: 28px;
-      color: white;
-    }
-    .header h1 { 
-      font-size: 20px; 
-      font-weight: 700;
-      color: white;
-      margin-bottom: 4px;
+      margin: 0 auto 14px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.25);
       position: relative;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    .header .subtitle { 
-      font-size: 12px; 
-      color: rgba(255,255,255,0.85);
+    .header-icon svg { width: 28px; height: 28px; color: white; }
+    .header h1 {
+      font-size: 22px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: 1px;
       position: relative;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .header .subtitle {
+      font-size: 12px;
+      color: rgba(255,255,255,0.82);
+      margin-top: 4px;
+      position: relative;
+      letter-spacing: 0.5px;
     }
 
-    /* Status Bar */
+    /* ===== Status Bar (floating card) ===== */
     .status-bar {
       background: var(--surface);
-      padding: 20px 16px;
+      padding: 18px 14px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin: -20px 16px 16px;
+      gap: 8px;
+      margin: -22px 14px 14px;
       border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-lg);
+      box-shadow: var(--shadow-lg), 0 1px 0 rgba(255,255,255,0.8) inset;
       position: relative;
       z-index: 10;
+      border: 1px solid rgba(255,255,255,0.9);
     }
-    .status-item { 
+    .status-item {
       text-align: center;
-      padding: 8px 4px;
+      padding: 8px 4px 6px;
       border-radius: var(--radius-md);
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
     }
     .status-item:hover {
-      background: var(--bg);
+      background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
       transform: translateY(-2px);
     }
     .status-item .icon-wrap {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 8px;
+      margin: 0 auto 7px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     }
-    .status-item:nth-child(1) .icon-wrap { background: linear-gradient(135deg, #818cf8 0%, #6366f1 100%); }
-    .status-item:nth-child(2) .icon-wrap { background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%); }
-    .status-item:nth-child(3) .icon-wrap { background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); }
-    .status-item:nth-child(4) .icon-wrap { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); }
-    .status-item .icon-wrap svg {
-      width: 18px;
-      height: 18px;
-      color: white;
-    }
+    .status-item:nth-child(1) .icon-wrap { background: linear-gradient(135deg, #fc8181 0%, #e53e3e 100%); }
+    .status-item:nth-child(2) .icon-wrap { background: linear-gradient(135deg, #63b3ed 0%, #3182ce 100%); }
+    .status-item:nth-child(3) .icon-wrap { background: linear-gradient(135deg, #f6ad55 0%, #dd6b20 100%); }
+    .status-item:nth-child(4) .icon-wrap { background: linear-gradient(135deg, #68d391 0%, #38a169 100%); }
+    .status-item .icon-wrap svg { width: 17px; height: 17px; color: white; }
     .status-item .value {
-      font-size: 18px;
-      font-weight: 700;
+      font-size: 19px;
+      font-weight: 800;
       color: var(--text);
-      margin-bottom: 2px;
+      line-height: 1.2;
     }
     .status-item .label {
       font-size: 10px;
       color: var(--text-muted);
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-weight: 500;
+      letter-spacing: 0.8px;
+      margin-top: 2px;
     }
 
-    /* Buttons */
+    /* ===== Buttons ===== */
     .btn {
-      padding: 12px 18px;
+      padding: 11px 16px;
       border: none;
       border-radius: var(--radius-md);
       cursor: pointer;
       font-size: 13px;
-      font-weight: 600;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: 700;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 7px;
       position: relative;
       overflow: hidden;
+      letter-spacing: 0.3px;
     }
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s;
-    }
-    .btn:hover::before {
-      left: 100%;
-    }
-    .btn svg {
-      width: 18px;
-      height: 18px;
-      transition: all 0.3s ease;
-    }
-    .btn:hover svg {
-      transform: scale(1.1) rotate(5deg);
-    }
+    .btn svg { width: 17px; height: 17px; transition: transform 0.25s ease; }
+    .btn:hover svg { transform: scale(1.1) rotate(3deg); }
     .btn:active { transform: scale(0.96); }
 
-    .btn-primary { 
+    .btn-primary {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: white;
-      box-shadow: var(--shadow), 0 0 0 0 var(--primary-glow);
+      box-shadow: 0 4px 14px rgba(229,62,62,0.35);
     }
-    .btn-primary:hover { 
-      box-shadow: var(--shadow-md), var(--shadow-glow);
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(229,62,62,0.45);
       transform: translateY(-2px);
     }
-    .btn-primary:disabled {
-      background: var(--border);
-      color: var(--text-muted);
-      cursor: not-allowed;
-      box-shadow: none;
-    }
+    .btn-primary:disabled { background: #cbd5e0; color: #a0aec0; cursor: not-allowed; box-shadow: none; }
 
-    .btn-secondary { 
+    .btn-secondary {
       background: var(--surface);
       color: var(--text);
-      border: 2px solid var(--border);
+      border: 1.5px solid var(--border);
+      box-shadow: var(--shadow-sm);
     }
-    .btn-secondary:hover { 
-      border-color: var(--primary);
+    .btn-secondary:hover {
+      border-color: var(--primary-light);
       color: var(--primary);
-      background: rgba(99, 102, 241, 0.05);
+      background: #fffafa;
       transform: translateY(-2px);
       box-shadow: var(--shadow);
     }
@@ -221,53 +202,45 @@
     .btn-success {
       background: linear-gradient(135deg, var(--success-light) 0%, var(--success) 100%);
       color: white;
-      box-shadow: var(--shadow);
+      box-shadow: 0 4px 14px rgba(56,161,105,0.3);
     }
-    .btn-success:hover { 
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
+    .btn-success:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(56,161,105,0.4); }
 
     .btn-danger {
-      background: linear-gradient(135deg, #f87171 0%, var(--danger) 100%);
+      background: linear-gradient(135deg, #fc8181 0%, var(--danger) 100%);
       color: white;
     }
-    .btn-danger:hover { 
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
+    .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(229,62,62,0.35); }
 
-    /* Controls Row */
+    /* ===== Controls Row ===== */
     .controls-row {
-      padding: 0 16px;
+      padding: 0 14px;
       display: flex;
       gap: 10px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .controls-row .btn { flex: 1; }
 
-    /* Video List */
+    /* ===== Video List ===== */
     .video-list {
-      max-height: 280px;
+      max-height: 240px;
       overflow-y: auto;
-      padding: 0 16px;
-      margin-bottom: 16px;
+      padding: 0 14px;
+      margin-bottom: 12px;
     }
-    .video-list::-webkit-scrollbar { width: 6px; }
-    .video-list::-webkit-scrollbar-track {
-      background: transparent;
-    }
+    .video-list::-webkit-scrollbar { width: 5px; }
+    .video-list::-webkit-scrollbar-track { background: transparent; }
     .video-list::-webkit-scrollbar-thumb {
       background: linear-gradient(180deg, var(--primary-light), var(--primary));
       border-radius: 3px;
     }
     .video-item {
       background: var(--surface);
-      padding: 14px 16px;
-      margin-bottom: 10px;
+      padding: 13px 15px;
+      margin-bottom: 9px;
       border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      transition: all 0.3s ease;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.25s ease;
       position: relative;
       overflow: hidden;
     }
@@ -280,95 +253,81 @@
       height: 100%;
       background: linear-gradient(180deg, var(--primary-light), var(--primary));
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: opacity 0.25s;
     }
     .video-item:hover {
       border-color: var(--primary-light);
       box-shadow: var(--shadow-md);
-      transform: translateX(4px);
+      transform: translateX(3px);
     }
-    .video-item:hover::before {
-      opacity: 1;
-    }
+    .video-item:hover::before { opacity: 1; }
     .video-title {
       font-size: 13px;
       color: var(--text);
-      margin-bottom: 10px;
+      margin-bottom: 9px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      font-weight: 600;
-      line-height: 1.4;
+      font-weight: 700;
+      line-height: 1.45;
     }
     .video-stats {
       display: flex;
-      gap: 8px;
+      gap: 7px;
       font-size: 11px;
       color: var(--text-muted);
       flex-wrap: wrap;
     }
     .video-stats span {
-      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      background: linear-gradient(135deg, #fef5f5 0%, #fee 100%);
       padding: 4px 10px;
       border-radius: 20px;
       white-space: nowrap;
-      font-weight: 500;
+      font-weight: 600;
       display: flex;
       align-items: center;
       gap: 4px;
+      border: 1px solid var(--border-subtle);
     }
-    .video-stats span svg {
-      width: 12px;
-      height: 12px;
-    }
+    .video-stats span svg { width: 12px; height: 12px; }
 
-    /* Empty State */
+    /* ===== Empty State ===== */
     .empty-state {
       text-align: center;
-      padding: 50px 24px;
+      padding: 44px 20px;
       color: var(--text-muted);
       background: var(--surface);
       border-radius: var(--radius-lg);
       border: 2px dashed var(--border);
-      margin: 0 16px;
+      margin: 0 14px;
     }
-    .empty-state .icon-wrap { 
-      width: 80px;
-      height: 80px;
-      border-radius: 24px;
-      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    .empty-state .icon-wrap {
+      width: 72px;
+      height: 72px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 16px;
+      margin: 0 auto 14px;
     }
-    .empty-state .icon-wrap svg {
-      width: 40px;
-      height: 40px;
-      color: var(--text-muted);
-      opacity: 0.6;
-    }
-    .empty-state p { font-size: 14px; font-weight: 500; }
-    .empty-state p.sub { 
-      font-size: 12px; 
-      margin-top: 6px;
-      opacity: 0.7;
-      font-weight: 400;
-    }
+    .empty-state .icon-wrap svg { width: 36px; height: 36px; color: var(--text-muted); opacity: 0.5; }
+    .empty-state p { font-size: 14px; font-weight: 700; }
+    .empty-state p.sub { font-size: 12px; margin-top: 5px; opacity: 0.65; font-weight: 400; }
 
-    /* Keep Alive Toggle */
+    /* ===== Keep Alive Toggle ===== */
     .keep-alive-toggle {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 18px;
+      padding: 15px 16px;
       background: var(--surface);
-      margin: 0 16px;
+      margin: 0 14px;
       border-radius: var(--radius-md);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       box-shadow: var(--shadow-sm);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-subtle);
     }
     .keep-alive-toggle .label-wrap {
       display: flex;
@@ -379,151 +338,121 @@
       width: 40px;
       height: 40px;
       border-radius: 12px;
-      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      background: linear-gradient(135deg, #feebc8 0%, #fbd38d 100%);
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .keep-alive-toggle .icon-wrap svg {
-      width: 20px;
-      height: 20px;
-      color: #d97706;
-    }
-    .keep-alive-toggle .label { 
-      font-size: 14px; 
-      font-weight: 600;
-      color: var(--text);
-    }
-    .keep-alive-toggle .hint { 
-      font-size: 11px; 
-      color: var(--text-muted); 
-      margin-top: 2px;
-    }
+    .keep-alive-toggle .icon-wrap svg { width: 19px; height: 19px; color: #c05621; }
+    .keep-alive-toggle .label { font-size: 14px; font-weight: 700; color: var(--text); }
+    .keep-alive-toggle .hint { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
-    /* Toggle Switch */
-    .toggle {
-      position: relative;
-      width: 52px;
-      height: 28px;
-    }
-    .toggle input { 
-      opacity: 0; 
-      width: 0; 
-      height: 0; 
-    }
+    /* ===== Toggle Switch ===== */
+    .toggle { position: relative; width: 50px; height: 27px; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
     .toggle .slider {
       position: absolute;
       cursor: pointer;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      background: #e2e8f0;
       transition: 0.3s;
-      border-radius: 28px;
+      border-radius: 27px;
     }
     .toggle .slider:before {
       position: absolute;
       content: "";
-      height: 22px;
-      width: 22px;
+      height: 21px;
+      width: 21px;
       left: 3px;
       bottom: 3px;
       background-color: white;
       transition: 0.3s;
       border-radius: 50%;
-      box-shadow: var(--shadow);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
-    .toggle input:checked + .slider { 
+    .toggle input:checked + .slider {
       background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
-      box-shadow: 0 0 15px var(--primary-glow);
+      box-shadow: 0 0 12px var(--primary-glow);
     }
-    .toggle input:checked + .slider:before { 
-      transform: translateX(24px);
-    }
+    .toggle input:checked + .slider:before { transform: translateX(23px); }
 
-    /* Last Update */
+    /* ===== Last Update Bar ===== */
     .last-update {
       font-size: 12px;
       color: var(--text-muted);
       text-align: center;
-      padding: 12px 16px;
+      padding: 11px 14px;
       background: var(--surface);
-      margin: 0 16px;
+      margin: 0 14px;
       border-radius: var(--radius-md);
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
       box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-subtle);
     }
-    .last-update svg {
-      width: 14px;
-      height: 14px;
-    }
+    .last-update svg { width: 14px; height: 14px; }
 
-    /* Update Banner */
+    /* ===== Update Banner ===== */
     .update-banner {
-      margin: 0 16px 12px;
-      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-      border: 1px solid #f59e0b;
+      margin: 0 14px 10px;
+      background: linear-gradient(135deg, #fffaf0 0%, #feebc8 100%);
+      border: 1px solid var(--accent);
       border-radius: var(--radius-md);
-      padding: 14px 16px;
+      padding: 13px 15px;
       display: none;
-      animation: fadeIn 0.4s ease-out;
+      animation: slideUp 0.35s ease-out;
     }
     .update-banner.show { display: block; }
     .update-banner.success {
-      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
       border-color: var(--success);
     }
     .update-banner.error {
-      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
       border-color: var(--danger);
     }
     .update-banner .header-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 8px;
+      margin-bottom: 7px;
     }
     .update-banner .title {
       font-size: 13px;
-      font-weight: 700;
-      color: #92400e;
+      font-weight: 800;
+      color: #c05621;
       display: flex;
       align-items: center;
       gap: 6px;
     }
-    .update-banner.success .title { color: #065f46; }
-    .update-banner.error .title { color: #991b1b; }
-    .update-banner .title svg {
-      width: 16px;
-      height: 16px;
-    }
+    .update-banner.success .title { color: #276749; }
+    .update-banner.error .title { color: #c53030; }
+    .update-banner .title svg { width: 16px; height: 16px; }
     .update-banner .version-info {
       font-size: 11px;
-      color: #92400e;
-      margin-bottom: 8px;
+      color: #c05621;
+      margin-bottom: 7px;
+      font-weight: 500;
     }
-    .update-banner.success .version-info { color: #065f46; }
+    .update-banner.success .version-info { color: #276749; }
     .update-banner .notes {
       font-size: 11px;
-      color: #78350f;
-      max-height: 60px;
+      color: #975a16;
+      max-height: 58px;
       overflow-y: auto;
-      margin-bottom: 10px;
-      line-height: 1.5;
+      margin-bottom: 9px;
+      line-height: 1.55;
       white-space: pre-wrap;
     }
-    .update-banner.success .notes { color: #047857; }
-    .update-banner .actions {
-      display: flex;
-      gap: 8px;
-    }
+    .update-banner.success .notes { color: #22543d; }
+    .update-banner .actions { display: flex; gap: 7px; }
     .update-banner .btn-sm {
-      padding: 6px 14px;
-      font-size: 12px;
+      padding: 6px 13px;
+      font-size: 11px;
       border-radius: 8px;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 700;
       transition: all 0.2s ease;
       text-decoration: none;
       display: inline-flex;
@@ -531,65 +460,64 @@
       gap: 4px;
     }
     .update-banner .btn-download {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--warning) 100%);
       color: white;
       border: none;
+      box-shadow: 0 2px 8px rgba(237,137,54,0.3);
     }
-    .update-banner .btn-download:hover {
-      transform: translateY(-1px);
-      box-shadow: var(--shadow);
-    }
+    .update-banner .btn-download:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(237,137,54,0.4); }
     .update-banner .btn-dismiss {
       background: transparent;
-      color: #92400e;
-      border: 1px solid rgba(146,64,14,0.3);
+      color: #c05621;
+      border: 1px solid rgba(192,86,33,0.3);
     }
-    .update-banner .btn-dismiss:hover {
-      background: rgba(255,255,255,0.5);
-    }
+    .update-banner .btn-dismiss:hover { background: rgba(255,255,255,0.6); }
 
-    /* 检查更新按钮（底部始终可见） */
+    /* ===== Check Update Button (footer) ===== */
     .btn-check-update {
-      background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: white;
       border: none;
       padding: 4px 12px;
       font-size: 11px;
-      border-radius: 6px;
+      border-radius: 7px;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 700;
       transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
       gap: 4px;
       margin-left: auto;
+      box-shadow: 0 2px 8px rgba(229,62,62,0.25);
     }
     .btn-check-update:hover {
       transform: translateY(-1px);
-      box-shadow: var(--shadow);
+      box-shadow: 0 4px 12px rgba(229,62,62,0.35);
     }
-    .last-update { gap: 8px; }
 
-    /* Animations */
+    /* ===== Animations ===== */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .status-bar, .controls-row, .video-list, .keep-alive-toggle, .last-update {
-      animation: fadeIn 0.4s ease-out;
-    }
-    .controls-row:nth-child(2) { animation-delay: 0.1s; }
-    .controls-row:nth-child(3) { animation-delay: 0.15s; }
-    .video-list { animation-delay: 0.2s; }
-    .keep-alive-toggle { animation-delay: 0.25s; }
-    .last-update { animation-delay: 0.3s; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    .status-bar { animation: fadeIn 0.4s ease-out; }
+    .controls-row { animation: fadeIn 0.4s ease-out; }
+    .controls-row:nth-of-type(2) { animation-delay: 0.05s; animation-fill-mode: backwards; }
+    .controls-row:nth-of-type(3) { animation-delay: 0.1s; animation-fill-mode: backwards; }
+    .video-list { animation: fadeIn 0.4s ease-out 0.12s; animation-fill-mode: backwards; }
+    .keep-alive-toggle { animation: fadeIn 0.4s ease-out 0.16s; animation-fill-mode: backwards; }
+    .update-banner { animation-delay: 0.02s; animation-fill-mode: backwards; }
+    .last-update { animation: fadeIn 0.4s ease-out 0.2s; animation-fill-mode: backwards; }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <div class="header">
     <div class="header-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -603,20 +531,17 @@
     <p class="subtitle">拼多多视频智能助手</p>
   </div>
 
-  <!-- 数据监控面板 -->
+  <!-- Monitor Panel -->
   <div class="tab-content active" id="monitor-panel">
+    <!-- Status Cards -->
     <div class="status-bar">
       <div class="status-item">
         <div class="icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
-            <line x1="7" y1="2" x2="7" y2="22"/>
-            <line x1="17" y1="2" x2="17" y2="22"/>
-            <line x1="2" y1="12" x2="22" y2="12"/>
-            <line x1="2" y1="7" x2="7" y2="7"/>
-            <line x1="2" y1="17" x2="7" y2="17"/>
-            <line x1="17" y1="17" x2="22" y2="17"/>
-            <line x1="17" y1="7" x2="22" y2="7"/>
+            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/>
+            <line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/>
+            <line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/>
+            <line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
           </svg>
         </div>
         <div class="value" id="videoCount">0</div>
@@ -634,8 +559,7 @@
       <div class="status-item">
         <div class="icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="9" cy="21" r="1"/>
-            <circle cx="20" cy="21" r="1"/>
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
           </svg>
         </div>
@@ -654,11 +578,11 @@
       </div>
     </div>
 
+    <!-- Action Buttons Row 1 -->
     <div class="controls-row">
       <button class="btn btn-secondary" id="refreshBtn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M23 4v6h-6"/>
-          <path d="M1 20v-6h6"/>
+          <path d="M23 4v6h-6"/><path d="M1 20v-6h6"/>
           <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
         </svg>
         刷新
@@ -671,12 +595,12 @@
       </button>
     </div>
 
+    <!-- Action Buttons Row 2 -->
     <div class="controls-row">
       <button class="btn btn-secondary" id="exportBtn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" y1="15" x2="12" y2="3"/>
+          <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
         </svg>
         导出
       </button>
@@ -684,20 +608,19 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="3 6 5 6 21 6"/>
           <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-          <line x1="10" y1="11" x2="10" y2="17"/>
-          <line x1="14" y1="11" x2="14" y2="17"/>
+          <line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>
         </svg>
         清空
       </button>
     </div>
 
+    <!-- Video List -->
     <div class="video-list" id="videoList">
       <div class="empty-state">
         <div class="icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-            <circle cx="8.5" cy="8.5" r="1.5"/>
-            <polyline points="21 15 16 10 5 21"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
           </svg>
         </div>
         <p>暂无视频数据</p>
@@ -705,12 +628,12 @@
       </div>
     </div>
 
+    <!-- Auto Keep Alive -->
     <div class="keep-alive-toggle">
       <div class="label-wrap">
         <div class="icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/>
-            <line x1="12" y1="2" x2="12" y2="12"/>
+            <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
           </svg>
         </div>
         <div>
@@ -719,19 +642,17 @@
         </div>
       </div>
       <label class="toggle">
-        <input type="checkbox" id="keepAliveToggle" checked>
-        <span class="slider"></span>
+        <input type="checkbox" id="keepAliveToggle" checked><span class="slider"></span>
       </label>
     </div>
 
-    <!-- 更新提示横幅 -->
+    <!-- Update Banner -->
     <div class="update-banner" id="updateBanner">
       <div class="header-row">
         <div class="title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
+            <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
           </svg>
           <span id="updateTitle">发现新版本</span>
         </div>
@@ -743,8 +664,7 @@
         <button class="btn-sm btn-download" id="downloadUpdateBtn">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
+            <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
           </svg>
           下载更新
         </button>
@@ -752,15 +672,16 @@
       </div>
     </div>
 
+    <!-- Footer with Update Button -->
     <div class="last-update" id="lastUpdate">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <polyline points="12 6 12 12 16 14"/>
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
       </svg>
       <span>暂无数据</span>
       <button class="btn-sm btn-check-update" id="checkUpdateBtn" title="检查新版本">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
+          <path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
+          <path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
         </svg>
         检查更新
       </button>
