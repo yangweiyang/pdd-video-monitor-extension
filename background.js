@@ -694,6 +694,7 @@ async function checkForUpdate() {
       updateInfo = {
         version: latestVersion,
         downloadUrl: downloadUrl,
+        zipballUrl: data.zipball_url || null,
         releaseNotes: data.body || '',
         releaseDate: data.published_at || '',
         html_url: data.html_url || ''

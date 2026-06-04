@@ -360,31 +360,54 @@ document.addEventListener('DOMContentLoaded', function() {
     updateVersionInfo.textContent = `当前版本: ${chrome.runtime.getManifest().version} → 最新版本: ${info.version}`;
 
     if (info.releaseNotes) {
-      updateNotes.textContent = info.releaseNotes.substring(0, 300);
+      updateNotes.textContent = info.releaseNotes.substring(0, 300) +
+        '\n\n📌 下载后请解压zip文件，在 chrome://extensions 中点击"加载已解压的扩展程序"选择解压后的文件夹即可完成更新。';
       updateNotes.style.display = 'block';
     } else {
-      updateNotes.style.display = 'none';
+      updateNotes.textContent = '📌 下载后请解压zip文件，在 chrome://extensions 中点击"加载已解压的扩展程序"选择解压后的文件夹即可完成更新。';
+      updateNotes.style.display = 'block';
     }
 
     // 始终显示下载按钮
     downloadUpdateBtn.style.display = 'inline-flex';
     recheckUpdateBtn.style.display = 'inline-flex';
 
-    // 在更新说明末尾添加操作指引
-    if (info.releaseNotes) {
-      updateNotes.textContent = info.releaseNotes.substring(0, 300) + 
-        '\n\n📌 更新方法：点击"下载更新"，下载源码后解压，在 chrome://extensions 中点击"加载已解压的扩展程序"选择新文件夹即可。';
-      updateNotes.style.display = 'block';
-    } else {
-      updateNotes.textContent = '📌 更新方法：点击下方"下载更新"按钮，下载源码后解压，在 chrome://extensions 中点击"加载已解压的扩展程序"选择新文件夹即可。';
-      updateNotes.style.display = 'block';
-    }
-
-    // 点击下载：优先用下载链接，否则跳转到 Release 页面
+    // 点击下载：直接下载源码zip包
     downloadUpdateBtn.onclick = () => {
-      const url = info.downloadUrl || info.html_url || 
-                  'https://github.com/yangweiyang/pdd-video-monitor-extension/releases/latest';
-      chrome.tabs.create({ url: url });
+      const downloadUrl = info.zipballUrl || info.downloadUrl || info.html_url ||
+        'https://github.com/yangweiyang/pdd-video-monitor-extension/releases/latest';
+
+      // 按钮状态：下载中
+      downloadUpdateBtn.disabled = true;
+      downloadUpdateBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;">
+          <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+        </svg>
+        下载中...
+      `;
+
+      // 直接下载 zip 文件
+      chrome.downloads.download({
+        url: downloadUrl,
+        filename: `pdd-video-monitor-v${info.version}.zip`,
+        saveAs: true
+      }, (downloadId) => {
+        if (chrome.runtime.lastError || !downloadId) {
+          // 下载失败，回退到打开页面
+          chrome.tabs.create({ url: info.html_url || downloadUrl });
+        }
+        setTimeout(() => {
+          downloadUpdateBtn.disabled = false;
+          downloadUpdateBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            下载更新
+          `;
+        }, 2000);
+      });
     };
   }
 
