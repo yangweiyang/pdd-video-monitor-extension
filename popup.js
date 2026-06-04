@@ -358,20 +358,33 @@ document.addEventListener('DOMContentLoaded', function() {
     updateBanner.className = 'update-banner show';
     updateTitle.textContent = '发现新版本';
     updateVersionInfo.textContent = `当前版本: ${chrome.runtime.getManifest().version} → 最新版本: ${info.version}`;
-    
+
     if (info.releaseNotes) {
       updateNotes.textContent = info.releaseNotes.substring(0, 300);
       updateNotes.style.display = 'block';
     } else {
       updateNotes.style.display = 'none';
     }
-    
+
+    // 始终显示下载按钮
+    downloadUpdateBtn.style.display = 'inline-flex';
+    recheckUpdateBtn.style.display = 'inline-flex';
+
+    // 在更新说明末尾添加操作指引
+    if (info.releaseNotes) {
+      updateNotes.textContent = info.releaseNotes.substring(0, 300) + 
+        '\n\n📌 更新方法：点击"下载更新"，下载源码后解压，在 chrome://extensions 中点击"加载已解压的扩展程序"选择新文件夹即可。';
+      updateNotes.style.display = 'block';
+    } else {
+      updateNotes.textContent = '📌 更新方法：点击下方"下载更新"按钮，下载源码后解压，在 chrome://extensions 中点击"加载已解压的扩展程序"选择新文件夹即可。';
+      updateNotes.style.display = 'block';
+    }
+
+    // 点击下载：优先用下载链接，否则跳转到 Release 页面
     downloadUpdateBtn.onclick = () => {
-      if (info.downloadUrl) {
-        chrome.tabs.create({ url: info.downloadUrl });
-      } else if (info.html_url) {
-        chrome.tabs.create({ url: info.html_url });
-      }
+      const url = info.downloadUrl || info.html_url || 
+                  'https://github.com/yangweiyang/pdd-video-monitor-extension/releases/latest';
+      chrome.tabs.create({ url: url });
     };
   }
 
