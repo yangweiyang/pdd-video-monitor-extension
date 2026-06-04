@@ -8,8 +8,8 @@ const DEFAULT_ACCOUNT_ID = '默认账号';
 
 // 更新配置 - 修改这里的 GitHub 仓库地址即可
 const UPDATE_CONFIG = {
-  // GitHub Releases API 地址（替换为你的仓库）
-  repo: 'your-username/pdd-video-monitor-extension',
+  // GitHub Releases API 地址
+  repo: 'yangweiyang/pdd-video-monitor-extension',
   // 或者使用自定义更新服务器
   updateUrl: null, // 如果有自定义服务器，填写URL，否则使用GitHub
   currentVersion: chrome.runtime.getManifest().version
