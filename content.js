@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // 全局错误处理 - 防止扩展插件导致页面崩溃
@@ -289,72 +289,79 @@
   function updateGoodsListUI() {
     const goodsListEl = document.getElementById('pdd-goods-list');
     if (!goodsListEl || capturedGoodsList.length === 0) return;
-    
-    // 检查是否需要更新（比较当前显示的数量和实际数据数量）
+
+    // 检查是否需要更新
     const currentItems = goodsListEl.querySelectorAll('.pdd-goods-item');
-    if (currentItems.length === capturedGoodsList.length) return;
-    
-    // 使用 DocumentFragment 批量构建 DOM
+    if (currentItems.length === capturedGoodsList.length && currentItems.length > 0) return;
+
     const fragment = document.createDocumentFragment();
-    
+
     capturedGoodsList.forEach((item, index) => {
       const id = item.goodsId || item.goods_id || item.productId || item.id;
       const name = item.goodsName || item.goods_name || item.productName || item.name || `商品 ${id}`;
       const image = item.goodsImage || item.imageUrl || item.image || item.cover || item.thumbUrl || item.pic_url || '';
-      
+
       const div = document.createElement('div');
       div.className = 'pdd-goods-item';
       div.dataset.goodsId = id;
       div.dataset.index = index;
-      div.style.cssText = 'display:flex;align-items:center;padding:12px;background:#fff;border-radius:12px;margin-bottom:8px;cursor:pointer;transition:all 0.3s ease;box-shadow:0 1px 3px rgba(0,0,0,0.06);';
+      div.style.cssText = 'display:flex;align-items:center;padding:10px 12px;background:#fff;border-bottom:1px solid #f5f5f5;cursor:pointer;transition:all 0.15s ease;';
       div.innerHTML = `
-        <div class="goods-image" style="width:72px;height:72px;border-radius:12px;overflow:hidden;background:#fafafa;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-          ${image ? `<img src="${image}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'" />` : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:28px;">📦</div>'}
+        <div style="width:56px;height:56px;border-radius:10px;overflow:hidden;background:#f8f8f8;flex-shrink:0;border:1px solid #eee;">
+          ${image ? `<img src="${image}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'" />` : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#ddd;font-size:22px;">📦</div>'}
         </div>
-        <div class="goods-info" style="flex:1;margin-left:14px;overflow:hidden;min-width:0;">
-          <div class="goods-name" style="font-size:14px;color:#1a1a1a;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;font-weight:600;">${name}</div>
-          <div class="goods-id" style="font-size:13px;color:#fff;margin-top:8px;font-weight:700;font-family:monospace;background:linear-gradient(135deg, #e02e24 0%, #f04e44 100%);padding:5px 10px;border-radius:8px;display:inline-block;box-shadow:0 2px 8px rgba(224,46,36,0.25);letter-spacing:0.5px;">ID: ${id}</div>
+        <div style="flex:1;margin-left:12px;overflow:hidden;min-width:0;">
+          <div style="font-size:13px;color:#1a1a1a;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;font-weight:500;">${name}</div>
+          <div style="margin-top:5px;display:inline-block;padding:2px 8px;background:#fff0f0;border-radius:6px;font-size:11px;font-weight:700;color:#dc2626;font-family:monospace;letter-spacing:0.3px;border:1px solid #fecaca;">${id}</div>
         </div>
-        <button class="pdd-publish-btn" data-index="${index}" style="padding:10px 18px;background:linear-gradient(135deg, #e02e24 0%, #c41e14 100%);color:white;border:none;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;flex-shrink:0;box-shadow:0 3px 10px rgba(224,46,36,0.35);transition:all 0.2s ease;">选择</button>
+        <button class="pdd-publish-btn" data-index="${index}" style="margin-left:10px;padding:7px 16px;background:linear-gradient(135deg,#e02e24,#c7261d);color:white;border:none;border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;flex-shrink:0;white-space:nowrap;transition:all 0.15s;box-shadow:0 2px 6px rgba(224,46,36,0.25);">选择</button>
       `;
       fragment.appendChild(div);
     });
-    
+
     goodsListEl.innerHTML = '';
     goodsListEl.appendChild(fragment);
-    
+
     // 更新计数
     const countEl = document.getElementById('pdd-goods-count');
     if (countEl) {
       countEl.textContent = `(${capturedGoodsList.length}个)`;
     }
-    
-    // 绑定搜索功能
+
+    // 搜索功能
     const searchInput = document.getElementById('pdd-goods-search');
-    if (searchInput) {
-      searchInput.oninput = function() {
-        const keyword = this.value.toLowerCase().trim();
-        const allItems = document.querySelectorAll('.pdd-goods-item');
-        
-        allItems.forEach(item => {
-          const name = item.querySelector('.goods-name')?.textContent?.toLowerCase() || '';
-          const id = item.dataset.goodsId?.toLowerCase() || '';
-          
-          if (keyword === '' || name.includes(keyword) || id.includes(keyword)) {
-            item.style.display = 'flex';
-          } else {
-            item.style.display = 'none';
+    if (searchInput && !searchInput._searchBound) {
+      searchInput._searchBound = true;
+      let searchTimer = null;
+      searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => {
+          const keyword = this.value.toLowerCase().trim();
+          const allItems = goodsListEl.querySelectorAll('.pdd-goods-item');
+          let visibleCount = 0;
+          allItems.forEach(item => {
+            const name = item.querySelector('[style*="font-size:13px"]')?.textContent?.toLowerCase() || '';
+            const idText = item.dataset.goodsId?.toLowerCase() || '';
+            const match = !keyword || name.includes(keyword) || idText.includes(keyword);
+            item.style.display = match ? 'flex' : 'none';
+            if (match) visibleCount++;
+          });
+          // 更新计数显示过滤后数量
+          if (keyword && countEl) {
+            countEl.textContent = `(${visibleCount}/${capturedGoodsList.length}个)`;
+          } else if (countEl) {
+            countEl.textContent = `(${capturedGoodsList.length}个)`;
           }
-        });
-      };
+        }, 150);
+      });
     }
-    
-    // 只绑定一次事件委托
+
+    // 事件委托（只绑定一次）
     if (!goodsListEventBound) {
       goodsListEventBound = true;
-      
-      // 使用事件委托处理所有点击
+
       goodsListEl.addEventListener('click', function(e) {
+        // 点击选择按钮
         const btn = e.target.closest('.pdd-publish-btn');
         if (btn) {
           e.stopPropagation();
@@ -366,7 +373,7 @@
           }
           return;
         }
-        
+        // 点击整行也选择
         const item = e.target.closest('.pdd-goods-item');
         if (item && !e.target.closest('.pdd-publish-btn')) {
           const goodsId = item.dataset.goodsId;
@@ -376,31 +383,31 @@
           }
         }
       });
-      
-      // 使用事件委托处理 hover 效果
+
+      // hover 效果
       goodsListEl.addEventListener('mouseover', function(e) {
         const item = e.target.closest('.pdd-goods-item');
         if (item) {
-          item.style.transform = 'translateY(-2px)';
-          item.style.boxShadow = '0 4px 12px rgba(224,46,36,0.15)';
+          item.style.background='#fef2f2';
+          item.style.borderColor='#fecaca';
         }
         const btn = e.target.closest('.pdd-publish-btn');
         if (btn) {
-          btn.style.transform = 'translateY(-1px)';
-          btn.style.boxShadow = '0 4px 12px rgba(224,46,36,0.4)';
+          btn.style.transform='translateY(-1px)';
+          btn.style.boxShadow='0 4px 12px rgba(224,46,36,0.35)';
         }
       });
-      
+
       goodsListEl.addEventListener('mouseout', function(e) {
         const item = e.target.closest('.pdd-goods-item');
         if (item) {
-          item.style.transform = 'translateY(0)';
-          item.style.boxShadow = '0 1px 3px rgba(0,0,0,0.06)';
+          item.style.background='#fff';
+          item.style.borderColor='transparent';
         }
         const btn = e.target.closest('.pdd-publish-btn');
         if (btn) {
-          btn.style.transform = 'none';
-          btn.style.boxShadow = '0 2px 8px rgba(224,46,36,0.3)';
+          btn.style.transform='';
+          btn.style.boxShadow='0 2px 6px rgba(224,46,36,0.25)';
         }
       });
     }
@@ -2120,147 +2127,154 @@
             <div id="pdd-video-list"></div>
           </div>
           
-          <!-- 上传视图 -->
-          <div id="pdd-upload-view" style="display:none;padding:16px;">
+          <!-- 上传视图 - 重新设计 -->
+          <div id="pdd-upload-view" style="display:none;padding:0;">
             <input type="file" id="pdd-folder-input" webkitdirectory multiple style="display:none;" />
 
-            <!-- 商品列表区域 -->
-            <div id="pdd-goods-section">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-                <span style="font-size:16px;font-weight:700;color:#1a1a1a;display:flex;align-items:center;gap:8px;">
-                  <span style="font-size:20px;">🎁</span> 我的商品
-                  <span id="pdd-goods-count" style="font-size:13px;color:#666;font-weight:normal;background:#f5f5f5;padding:2px 8px;border-radius:12px;">(0个)</span>
-                </span>
-                <span id="pdd-goods-status" style="font-size:11px;color:#10b981;display:flex;align-items:center;gap:4px;">
-                  <span style="width:8px;height:8px;background:#10b981;border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
-                  自动更新
+            <!-- ===== 步骤1: 选择商品 ===== -->
+            <div id="pdd-goods-section" style="padding:14px 16px 10px;">
+              <!-- 区域标题栏 -->
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="width:24px;height:24px;background:linear-gradient(135deg,#e02e24,#c7261d);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;color:white;font-weight:800;">1</span>
+                  <span style="font-size:15px;font-weight:700;color:#1a1a1a;">选择商品</span>
+                  <span id="pdd-goods-count" style="font-size:11px;color:#999;background:#f5f5f5;padding:2px 8px;border-radius:10px;font-weight:600;">(0个)</span>
+                </div>
+                <span id="pdd-goods-status" style="font-size:10px;color:#07c160;font-weight:600;display:flex;align-items:center;gap:4px;">
+                  <span style="width:6px;height:6px;background:#07c160;border-radius:50%;animation:pulse 2s infinite;"></span>自动更新
                 </span>
               </div>
-              
+
               <!-- 搜索框 -->
-              <div style="margin-bottom:12px;">
-                <input type="text" id="pdd-goods-search" placeholder="🔍 搜索商品名称或ID..." style="width:100%;padding:10px 14px;border:2px solid #fecaca;border-radius:12px;font-size:13px;box-sizing:border-box;background:#fff;transition:all 0.3s;outline:none;" />
+              <div style="margin-bottom:10px;position:relative;">
+                <svg style="position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:#bbb;pointer-events:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <input type="text" id="pdd-goods-search" placeholder="搜索商品名称或ID..." style="width:100%;padding:9px 12px 9px 36px;border:1.5px solid #eee;border-radius:10px;font-size:13px;box-sizing:border-box;background:#fafafa;color:#333;transition:all 0.2s;outline:none;" onfocus="this.style.borderColor='#e02e24';this.style.background='#fff';" onblur="this.style.borderColor='#eee';this.style.background='#fafafa';" />
               </div>
-              
+
               <!-- 商品列表 -->
-              <div id="pdd-goods-list" style="max-height:380px;overflow-y:auto;border-radius:12px;background:#fafafa;border:1px solid #f5f5f5;">
-                <div style="text-align:center;padding:40px 20px;color:#999;">
-                  <div style="margin-bottom:12px;display:inline-flex;align-items:center;justify-content:center;">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.5;">
-                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                      <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                      <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                    </svg>
-                  </div>
-                  <div style="font-size:14px;font-weight:600;color:#666;margin-bottom:4px;">正在自动获取商品列表...</div>
-                  <div style="font-size:12px;color:#999;">浏览商品页面即可自动更新</div>
+              <div id="pdd-goods-list" style="max-height:300px;overflow-y:auto;border-radius:12px;background:#fff;border:1px solid #f0f0f0;">
+                <div style="text-align:center;padding:32px 16px;color:#aaa;">
+                  <div style="font-size:32px;margin-bottom:8px;">📦</div>
+                  <div style="font-size:13px;font-weight:600;">正在获取商品列表...</div>
+                  <div style="font-size:11px;margin-top:4px;color:#ccc;">浏览商品页面即可自动更新</div>
                 </div>
               </div>
             </div>
-            
-            <!-- 发布配置区域（选择商品后显示） -->
-            <div id="pdd-publish-config" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid #eee;">
-              <div style="background:linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);padding:16px;border-radius:16px;margin-bottom:16px;border:2px solid #fecaca;box-shadow:0 4px 12px rgba(239, 68, 68, 0.1);">
-                <div style="font-size:12px;color:#dc2626;margin-bottom:8px;font-weight:600;display:flex;align-items:center;gap:6px;">
-                  <span style="font-size:16px;">🎀</span> 已选择商品
+
+            <!-- ===== 步骤2: 上传配置（选择商品后显示） ===== -->
+            <div id="pdd-publish-config" style="display:none;border-top:1px solid #f0f0f0;">
+              <!-- 已选商品卡片 -->
+              <div id="pdd-selected-card" style="margin:12px 16px 0;padding:12px 14px;background:linear-gradient(135deg,#fef2f2,#fee2e2);border-radius:12px;border:1.5px solid #fecaca;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                  <span style="font-size:13px;color:#dc2626;font-weight:700;">已选商品</span>
+                  <button id="pdd-change-goods-btn" style="margin-left:auto;padding:3px 10px;background:rgba(220,38,38,0.1);color:#dc2626;border:1px solid rgba(220,38,38,0.25);border-radius:6px;cursor:pointer;font-size:10px;font-weight:600;transition:all 0.15s;">换一个</button>
                 </div>
-                <div id="pdd-selected-goods-info" style="font-size:14px;font-weight:700;color:#991b1b;line-height:1.5;"></div>
-                <div id="pdd-selected-goods-id-display" style="margin-top:8px;padding:8px 12px;background:rgba(255,255,255,0.8);border-radius:8px;font-size:16px;font-weight:800;color:#dc2626;font-family:monospace;letter-spacing:1px;border:2px dashed #fca5a5;display:inline-block;">
+                <div id="pdd-selected-goods-info" style="font-size:13px;font-weight:600;color:#991b1b;line-height:1.4;"></div>
+                <div id="pdd-selected-goods-id-display" style="margin-top:6px;padding:6px 10px;background:rgba(255,255,255,0.75);border-radius:8px;font-size:14px;font-weight:800;color:#dc2626;font-family:monospace;letter-spacing:0.5px;">
                   ID: <span id="display-goods-id">--</span>
                 </div>
               </div>
 
-              <!-- 商品ID输入（可修改） -->
-              <div style="margin-bottom:12px;">
-                <label style="font-size:12px;font-weight:600;color:#dc2626;display:block;margin-bottom:6px;display:flex;align-items:center;gap:6px;">
-                  <span style="font-size:14px;">💖</span> 商品ID（可修改）
-                </label>
-                <input type="text" id="pdd-custom-goods-id" placeholder="输入商品ID，例如: 903087322922" style="width:100%;padding:12px 14px;border:2px solid #fecaca;border-radius:12px;font-size:14px;box-sizing:border-box;background:#fef2f2;color:#991b1b;font-weight:600;transition:all 0.3s ease;" />
-                <div style="font-size:11px;color:#ef4444;margin-top:6px;font-weight:500;">💡 留空则使用已选择商品的ID</div>
-              </div>
-
-              <!-- 视频描述输入 -->
-              <div style="margin-bottom:12px;">
-                <label style="font-size:12px;font-weight:600;color:#7c3aed;display:block;margin-bottom:6px;display:flex;align-items:center;gap:6px;">
-                  <span style="font-size:14px;">📝</span> 视频描述（可选）
-                </label>
-                <textarea id="pdd-video-description" placeholder="输入视频描述，将自动填充到视频描述输入框" style="width:100%;padding:12px 14px;border:2px solid #ddd6fe;border-radius:12px;font-size:13px;box-sizing:border-box;background:#f5f3ff;color:#5b21b6;transition:all 0.3s ease;resize:vertical;min-height:60px;font-family:inherit;" rows="2"></textarea>
-                <div style="font-size:11px;color:#7c3aed;margin-top:6px;font-weight:500;">💡 留空则不自动填充描述</div>
-              </div>
-
-              <div style="margin-bottom:12px;">
-                <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#333;cursor:pointer;">
-                  <input type="checkbox" id="pdd-append-filename-suffix" style="width:16px;height:16px;cursor:pointer;" />
-                  <span>在描述末尾添加视频文件名中的数字编号</span>
-                </label>
-              </div>
-
-              <div style="margin-bottom:12px;">
-                <label style="font-size:12px;font-weight:600;color:#059669;display:block;margin-bottom:6px;display:flex;align-items:center;gap:6px;">
-                  <span style="font-size:14px;">📋</span> 内容声明（可选）
-                </label>
-                <select id="pdd-content-declaration" style="width:100%;padding:12px 14px;border:2px solid #a7f3d0;border-radius:12px;font-size:14px;box-sizing:border-box;background:#ecfdf5;color:#047857;font-weight:600;transition:all 0.3s ease;cursor:pointer;">
-                  <option value="内容无需标注">内容无需标注（默认）</option>
-                  <option value="">不设置内容声明</option>
-                  <option value="含AI生成内容">含AI生成内容</option>
-                  <option value="含虚构演绎内容">含虚构演绎内容</option>
-                  <option value="内容含营销信息">内容含营销信息</option>
-                  <option value="内容为转载">内容为转载</option>
-                  <option value="个人观点，仅供参考">个人观点，仅供参考</option>
-                </select>
-                <div style="font-size:11px;color:#059669;margin-top:6px;font-weight:500;">💡 选择后将自动填充到内容声明下拉框</div>
-              </div>
-
-              <div style="display:flex;gap:8px;margin-bottom:12px;">
-                <button id="pdd-select-folder" style="flex:1;padding:12px;background:linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);color:white;border:none;border-radius:12px;cursor:pointer;font-size:13px;font-weight:600;transition:all 0.3s;box-shadow:0 4px 12px rgba(244, 63, 94, 0.3);">
-                  📂 选择文件夹
-                </button>
-                <button id="pdd-select-videos" style="flex:1;padding:12px;background:linear-gradient(135deg, #ec4899 0%, #db2777 100%);color:white;border:none;border-radius:12px;cursor:pointer;font-size:13px;font-weight:600;transition:all 0.3s;box-shadow:0 4px 12px rgba(236, 72, 153, 0.3);">
-                  🎥 选择视频
-                </button>
-              </div>
-              
-              <!-- 已缓存视频区域 -->
-              <div id="pdd-cached-videos-area" style="display:none;margin-bottom:12px;padding:12px;background:linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);border-radius:12px;border:2px solid #86efac;">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-                  <div style="display:flex;align-items:center;gap:8px;">
-                    <span style="font-size:18px;">📦</span>
-                    <span style="font-size:13px;font-weight:700;color:#166534;">已缓存视频</span>
-                    <span id="pdd-cached-count-badge" style="background:#22c55e;color:white;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;">0个</span>
+              <!-- 核心配置区：商品ID + 视频描述 -->
+              <div style="padding:12px 16px 0;">
+                <div style="display:grid;gap:10px;">
+                  <!-- 商品ID -->
+                  <div>
+                    <label style="font-size:11px;font-weight:600;color:#dc2626;display:flex;align-items:center;gap:4px;margin-bottom:4px;">
+                      💖 商品ID <span style="color:#bbb;font-weight:400;">(可修改)</span>
+                    </label>
+                    <input type="text" id="pdd-custom-goods-id" placeholder="输入商品ID，留空使用已选商品的ID" style="width:100%;padding:10px 12px;border:1.5px solid #fecaca;border-radius:10px;font-size:14px;box-sizing:border-box;background:#fef2f2;color:#991b1b;font-weight:600;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e02e24';" onblur="this.style.borderColor='#fecaca';" />
                   </div>
-                  <button id="pdd-clear-cache" style="padding:6px 12px;background:#ef4444;color:white;border:none;border-radius:6px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.2s;">
-                    🗑️ 清空缓存
+
+                  <!-- 视频描述 -->
+                  <div>
+                    <label style="font-size:11px;font-weight:600;color:#7c3aed;display:flex;align-items:center;gap:4px;margin-bottom:4px;">
+                      📝 视频描述 <span style="color:#bbb;font-weight:400;">(可选)</span>
+                    </label>
+                    <textarea id="pdd-video-description" placeholder="留空则不自动填充，将自动填充到视频描述输入框" style="width:100%;padding:10px 12px;border:1.5px solid #e9d5ff;border-radius:10px;font-size:13px;box-sizing:border-box;background:#faf5ff;color:#5b21b6;resize:vertical;min-height:52px;font-family:inherit;line-height:1.45;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#7c3aed';" onblur="this.style.borderColor='#e9d5ff';" rows="2"></textarea>
+                  </div>
+                </div>
+
+                <!-- 可选配置折叠区 -->
+                <details style="margin-top:10px;" open>
+                  <summary style="font-size:12px;font-weight:600;color:#888;cursor:pointer;list-style:none;display:flex;align-items:center;gap:5px;padding:6px 0;user-select:none;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+                    更多选项
+                    <span style="font-size:10px;color:#bbb;font-weight:400;margin-left:4px;">内容声明 / 文件名后缀</span>
+                  </summary>
+                  <div style="padding:8px 0 4px;display:grid;gap:10px;">
+                    <!-- 内容声明 -->
+                    <div>
+                      <label style="font-size:11px;font-weight:600;color:#059669;display:flex;align-items:center;gap:4px;margin-bottom:4px;">📋 内容声明</label>
+                      <select id="pdd-content-declaration" style="width:100%;padding:9px 12px;border:1.5px solid #a7f3d0;border-radius:10px;font-size:13px;box-sizing:border-box;background:#ecfdf5;color:#047857;font-weight:600;cursor:pointer;outline:none;appearance:none;background-image:url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 fill=%22none%22 stroke=%22%23049358%22 stroke-width=%222%22%3E%3Cpolyline points=%222,4 6,8 10,4%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 10px center;">
+                        <option value="内容无需标注">无需标注（默认）</option>
+                        <option value="">不设置</option>
+                        <option value="含AI生成内容">含AI生成内容</option>
+                        <option value="含虚构演绎内容">含虚构演绎内容</option>
+                        <option value="内容含营销信息">含营销信息</option>
+                        <option value="内容为转载">内容为转载</option>
+                      </select>
+                    </div>
+                    <!-- 文件名编号 -->
+                    <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#555;cursor:pointer;padding:4px 0;">
+                      <input type="checkbox" id="pdd-append-filename-suffix" style="width:16px;height:16px;cursor:pointer;accent-color:#e02e24;" />
+                      <span>在描述末尾添加视频文件名中的数字编号</span>
+                    </label>
+                  </div>
+                </details>
+              </div>
+
+              <!-- ===== 步骤3: 选择文件 + 开始上传 ===== -->
+              <div style="padding:12px 16px 14px;">
+                <!-- 操作按钮组 -->
+                <div id="pdd-file-buttons" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+                  <button id="pdd-select-folder" style="padding:11px 0;background:linear-gradient(135deg,#f43f5e,#e11d48);color:white;border:none;border-radius:10px;cursor:pointer;font-size:13px;font-weight:700;transition:all 0.2s;box-shadow:0 3px 10px rgba(244,63,94,0.25);display:flex;align-items:center;justify-content:center;gap:5px;">
+                    📂 选择文件夹
+                  </button>
+                  <button id="pdd-select-videos" style="padding:11px 0;background:linear-gradient(135deg,#ec4899,#db2777);color:white;border:none;border-radius:10px;cursor:pointer;font-size:13px;font-weight:700;transition:all 0.2s;box-shadow:0 3px 10px rgba(236,72,153,0.25);display:flex;align-items:center;justify-content:center;gap:5px;">
+                    🎥 选择视频
                   </button>
                 </div>
-                <div id="pdd-cached-video-list" style="max-height:100px;overflow-y:auto;font-size:11px;color:#166534;line-height:1.6;"></div>
-                <div style="margin-top:10px;padding-top:10px;border-top:1px solid #86efac;">
-                  <div style="font-size:11px;color:#15803d;margin-bottom:8px;">
-                    💡 换商品ID后可直接使用缓存视频上传，无需重新选择
+
+                <!-- 已缓存视频区域 -->
+                <div id="pdd-cached-videos-area" style="display:none;margin-bottom:10px;padding:10px 12px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-radius:10px;border:1.5px solid #86efac;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                    <div style="display:flex;align-items:center;gap:6px;">
+                      <span style="font-size:14px;">📦</span>
+                      <span style="font-size:12px;font-weight:700;color:#166534;">已缓存视频</span>
+                      <span id="pdd-cached-count-badge" style="background:#22c55e;color:white;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:600;">0个</span>
+                    </div>
+                    <button id="pdd-clear-cache" style="padding:3px 8px;background:#ef4444;color:white;border:none;border-radius:5px;cursor:pointer;font-size:10px;font-weight:600;">清空</button>
                   </div>
-                  <button id="pdd-use-cache-upload" style="width:100%;padding:10px;background:linear-gradient(135deg, #22c55e 0%, #16a34a 100%);color:white;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;transition:all 0.3s;box-shadow:0 4px 12px rgba(34, 197, 94, 0.3);">
-                    🚀 使用缓存视频上传
+                  <div id="pdd-cached-video-list" style="max-height:80px;overflow-y:auto;font-size:11px;color:#166534;line-height:1.55;"></div>
+                  <div style="margin-top:6px;padding-top:6px;border-top:1px solid #86efac;">
+                    <button id="pdd-use-cache-upload" style="width:100%;padding:8px;background:linear-gradient(135deg,#22c55e,#16a34a);color:white;border:none;border-radius:7px;cursor:pointer;font-size:12px;font-weight:700;transition:all 0.2s;box-shadow:0 2px 8px rgba(34,197,94,0.25);">
+                      🚀 使用缓存视频上传
+                    </button>
+                  </div>
+                </div>
+
+                <!-- 已选择的文件区域 -->
+                <div id="pdd-selected-folders" style="display:none;margin-bottom:10px;padding:10px;background:#eff6ff;border-radius:10px;border:1.5px solid #bfdbfe;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                    <span style="font-size:11px;font-weight:700;color:#1d4ed8;">📂 已选择的文件</span>
+                    <button id="pdd-clear-files" style="padding:3px 8px;background:#ef4444;color:white;border:none;border-radius:5px;cursor:pointer;font-size:10px;font-weight:600;">清空</button>
+                  </div>
+                  <div id="pdd-folder-list" style="max-height:100px;overflow-y:auto;font-size:11px;color:#334155;"></div>
+                  <div id="pdd-total-count" style="margin-top:6px;padding-top:6px;border-top:1px solid #bfdbfe;font-size:11px;font-weight:700;color:#1d4ed8;"></div>
+                  <button id="pdd-add-more-folders" style="width:100%;margin-top:6px;padding:7px;background:linear-gradient(135deg,#3b82f6,#2563eb);color:white;border:none;border-radius:7px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.2s;">
+                    ➕ 添加更多文件夹
                   </button>
                 </div>
-              </div>
-              
-              <div id="pdd-selected-folders" style="display:none;margin-bottom:12px;padding:10px;background:#e3f2fd;border-radius:6px;border:1px solid #90caf9;">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                  <span style="font-size:12px;font-weight:600;color:#1565c0;">📂 已选择的文件</span>
-                  <button id="pdd-clear-files" style="padding:4px 8px;background:#ef5350;color:white;border:none;border-radius:4px;cursor:pointer;font-size:11px;">清空</button>
-                </div>
-                <div id="pdd-folder-list" style="max-height:120px;overflow-y:auto;font-size:11px;color:#333;"></div>
-                <div id="pdd-total-count" style="margin-top:8px;padding-top:8px;border-top:1px solid #90caf9;font-size:12px;font-weight:600;color:#1565c0;"></div>
-                <button id="pdd-add-more-folders" style="width:100%;margin-top:8px;padding:8px;background:linear-gradient(135deg, #2196f3 0%, #1976d2 100%);color:white;border:none;border-radius:4px;cursor:pointer;font-size:12px;font-weight:600;">
-                  ➕ 添加更多文件夹
+
+                <!-- 开始上传按钮 - 始终显示但默认禁用态 -->
+                <button id="pdd-start-upload" style="width:100%;padding:14px;background:linear-gradient(135deg,#ccc,#bbb);color:#999;border:none;border-radius:12px;cursor:not-allowed;font-size:15px;font-weight:800;transition:all 0.3s;letter-spacing:0.5px;display:block;">
+                  请先选择商品和视频
                 </button>
               </div>
-              
-              <button id="pdd-start-upload" style="width:100%;padding:14px;background:linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);color:white;border:none;border-radius:12px;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.3s;display:none;box-shadow:0 4px 16px rgba(244, 63, 94, 0.35);">
-                🚀 开始上传 (<span id="pdd-upload-count">0</span>个视频)
-              </button>
             </div>
-            
-            <div id="pdd-publish-status" style="font-size:11px;color:#666;padding:8px;background:#f5f5f5;border-radius:4px;display:none;"></div>
+
+            <div id="pdd-publish-status" style="font-size:11px;color:#666;padding:8px 16px;background:#fafafa;display:none;"></div>
           </div>
           
           <!-- 设置视图 - 内嵌显示 -->
@@ -5033,9 +5047,9 @@
       
       // 更新商品信息显示
       if (selectedInfo) {
-        selectedInfo.innerHTML = `<span style="font-size:16px;">📦</span> ${name}`;
+        selectedInfo.innerHTML = `<span style="font-size:14px;">📦</span> ${name}`;
       }
-      
+
       // 更新商品ID显示区域
       const goodsIdDisplay = document.getElementById('display-goods-id');
       if (goodsIdDisplay) {
@@ -5047,14 +5061,71 @@
         customGoodsIdInput.value = id;
       }
 
+      // 绑定"换一个"按钮
+      const changeBtn = document.getElementById('pdd-change-goods-btn');
+      if (changeBtn && !changeBtn._bound) {
+        changeBtn._bound = true;
+        changeBtn.addEventListener('click', function() {
+          selectedGoods = null;
+          const cfgSection = document.getElementById('pdd-publish-config');
+          if (cfgSection) cfgSection.style.display = 'none';
+          const goodsSection = document.getElementById('pdd-goods-section');
+          if (goodsSection) goodsSection.scrollIntoView({ behavior: 'smooth' });
+          updateUploadButtonState();
+        });
+      }
+
+      // 更新上传按钮状态
+      updateUploadButtonState();
+
       // 滚动到配置区域
-      if (configSection) {
+      const cfgScroll = document.getElementById('pdd-publish-config');
+      if (cfgScroll) {
         setTimeout(() => {
-          configSection.scrollIntoView({ behavior: 'smooth' });
+          cfgScroll.scrollIntoView({ behavior: 'smooth' });
         }, 100);
       }
 
       console.log('[PDD监控] 已选择商品完成:', goods);
+    }
+    
+    // 上传按钮状态管理：根据选择状态动态切换文案和样式
+    function updateUploadButtonState() {
+      const btn = document.getElementById('pdd-start-upload');
+      const countEl = document.getElementById('pdd-upload-count');
+      if (!btn) return;
+
+      const hasGoods = !!selectedGoods;
+      const hasFiles = accumulatedFiles && accumulatedFiles.length > 0;
+      const hasCached = cachedVideoFiles && cachedVideoFiles.length > 0;
+      // 标记按钮是否就绪（onclick 内部会检查此标记）
+      btn._uploadReady = hasGoods && (hasFiles || hasCached);
+
+      if (!hasGoods) {
+        // 未选商品
+        btn.style.background = 'linear-gradient(135deg, #ccc, #bbb)';
+        btn.style.color = '#999';
+        btn.style.cursor = 'not-allowed';
+        btn.style.boxShadow = 'none';
+        btn.innerHTML = '请先选择商品';
+      } else if (!hasFiles && !hasCached) {
+        // 已选商品但未选文件
+        btn.style.background = 'linear-gradient(135deg, #fbbf24, #f59e0b)';
+        btn.style.color = '#78350f';
+        btn.style.cursor = 'not-allowed';
+        btn.style.boxShadow = 'none';
+        btn.innerHTML = '请选择视频文件（下方按钮）';
+      } else {
+        // 可以上传
+        const fileCount = hasFiles ? accumulatedFiles.length : cachedVideoFiles.length;
+        btn.style.background = 'linear-gradient(135deg, #f43f5e, #e11d48)';
+        btn.style.color = 'white';
+        btn.style.cursor = 'pointer';
+        btn.style.boxShadow = '0 4px 16px rgba(244, 63, 94, 0.35)';
+        btn.innerHTML = `🚀 开始上传 (${fileCount}个视频)`;
+      }
+
+      if (countEl) countEl.textContent = hasFiles ? accumulatedFiles.length : (cachedVideoFiles.length || 0);
     }
     
     // 暴露到全局供 updateGoodsListUI 调用
@@ -5135,24 +5206,24 @@
       } else {
         container.style.display = 'none';
       }
+
+      // 更新上传按钮状态
+      updateUploadButtonState();
     }
-    
+
     function updateFolderDisplay() {
       const container = document.getElementById('pdd-selected-folders');
       const listEl = document.getElementById('pdd-folder-list');
       const countEl = document.getElementById('pdd-total-count');
-      const startUploadBtn = document.getElementById('pdd-start-upload');
-      const uploadCountEl = document.getElementById('pdd-upload-count');
-      
+
       if (accumulatedFiles.length === 0) {
         container.style.display = 'none';
-        startUploadBtn.style.display = 'none';
+        updateUploadButtonState();
         return;
       }
       
       container.style.display = 'block';
-      startUploadBtn.style.display = 'block';
-      uploadCountEl.textContent = accumulatedFiles.length;
+      updateUploadButtonState();
       
       const folderGroups = {};
       accumulatedFiles.forEach(f => {
@@ -5358,6 +5429,17 @@
     };
     
     document.getElementById('pdd-start-upload').onclick = async function() {
+      const btn = this;
+      // 状态检查：未选商品或未选文件时拦截
+      if (!btn._uploadReady) {
+        if (!selectedGoods) {
+          alert('请先选择一个商品');
+        } else {
+          alert('请先选择视频文件');
+        }
+        return;
+      }
+
       console.log('[PDD监控] ★★★ 点击开始上传按钮 ★★★');
       console.log('[PDD监控] accumulatedFiles数量:', accumulatedFiles.length);
       
@@ -6761,21 +6843,23 @@
     }
     
     // 填充视频描述到 sabo-editor（contenteditable div）
-    let lastFilledDescription = ''; // 上次填充的描述
-    let lastFillTime = 0; // 上次填充时间
-    
+    // 使用 Map 按视频项跟踪已填充的描述，避免全局去重导致漏填
+    const filledDescMap = new Map(); // key: 视频项标识 -> { desc, time }
+
     async function fillVideoDescription(description, videoItem = null) {
       console.log('[PDD监控] fillVideoDescription 被调用, description:', description ? description.substring(0, 30) + '...' : 'null');
-      
+
       if (!description) {
         console.log('[PDD监控] 没有描述内容，跳过填充');
         return false;
       }
 
-      // 防止重复填充：如果描述相同且在3秒内，跳过
+      // 按视频项级别防重复填充（而非全局），避免批量上传时相同描述被跳过
+      const itemKey = videoItem ? (videoItem.dataset.feedId || videoItem.querySelector('[data-feed-id]')?.getAttribute('data-feed-id') || String(videoItem)) : '__global__';
       const now = Date.now();
-      if (description === lastFilledDescription && (now - lastFillTime) < 3000) {
-        console.log('[PDD监控] 描述已填充过，跳过重复填充');
+      const prevFill = filledDescMap.get(itemKey);
+      if (prevFill && prevFill.desc === description && (now - prevFill.time) < 3000) {
+        console.log('[PDD监控] 该视频描述3秒内已填充过，跳过');
         return true;
       }
 
@@ -6829,8 +6913,7 @@
         const currentContent = (descEditor.textContent || '').trim();
         if (currentContent === description.trim()) {
           console.log('[PDD监控] 编辑器内容已与描述相同，跳过填充');
-          lastFilledDescription = description;
-          lastFillTime = now;
+          filledDescMap.set(itemKey, { desc: description, time: Date.now() });
           return true;
         }
 
@@ -6925,9 +7008,8 @@
 
         console.log('[PDD监控] 视频描述填充完成，当前内容:', descEditor.textContent?.substring(0, 50));
         
-        // 更新填充记录
-        lastFilledDescription = description;
-        lastFillTime = Date.now();
+        // 更新填充记录（按视频项级别）
+        filledDescMap.set(itemKey, { desc: description, time: Date.now() });
         
         return true;
       } catch (e) {
@@ -6944,27 +7026,31 @@
     }
 
     // 填充内容声明
-    // 用 WeakSet 跟踪已填充的选择器，确保每个视频只填充一次
-    const filledDeclarationSelects = new WeakSet();
-    
+    // 使用计数器跟踪已填充次数，配合当前值校验避免漏填
+    let filledDeclCount = 0;
+
     async function fillContentDeclaration(declaration, videoItem = null) {
-      if (!declaration) return false;
-      
+      if (!declaration || declaration === '内容无需标注' || declaration === '默认') {
+        console.log('[PDD监控] fillContentDeclaration: 内容声明为空或默认，跳过');
+        return true; // 默认值不需要操作
+      }
+
       try {
-        await new Promise(r => setTimeout(r, 500));
-        
-        // 1. 找到所有内容声明选择器，跳过已填充的
+        await new Promise(r => setTimeout(r, 800));
+
+        // 1. 找到所有内容声明选择器
         const allSelects = document.querySelectorAll('[class*="ST_selectValueSingle"]');
         let targetSelect = null;
-        
+
         for (const select of allSelects) {
           if (select.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
           if (select.offsetParent === null) continue;
-          if (filledDeclarationSelects.has(select)) continue; // 跳过已填充的
-          
+
+          // 向上查找"内容声明"标签
           let p = select.parentElement;
           for (let i = 0; i < 8 && p; i++) {
-            if ((p.textContent || '').includes('内容声明') && !(p.textContent || '').includes('不设置内容声明')) {
+            const text = p.textContent || '';
+            if (text.includes('内容声明') && !text.includes('不设置内容声明')) {
               targetSelect = select;
               break;
             }
@@ -6972,57 +7058,98 @@
           }
           if (targetSelect) break;
         }
-        
+
         if (!targetSelect) {
-          console.log('[PDD监控] fillContentDeclaration: 没有找到未填充的内容声明选择器');
+          console.log('[PDD监控] fillContentDeclaration: 未找到内容声明选择器');
           return false;
         }
-        
-        // 2. 点击选择器打开下拉菜单
+
+        // 2. 检查当前值是否已经是目标值（真正判断是否需要填充）
+        const currentValue = (targetSelect.textContent || '').trim();
+        if (currentValue && currentValue !== '请选择' && currentValue !== '' &&
+            (currentValue.includes(declaration) || declaration.includes(currentValue))) {
+          console.log(`[PDD监控] fillContentDeclaration: 当前值"${currentValue}"已匹配目标"${declaration}"，跳过`);
+          return true;
+        }
+
+        console.log(`[PDD监控] fillContentDeclaration: 当前值="${currentValue}"，目标="${declaration}"，开始填充`);
+
+        // 3. 点击选择器打开下拉菜单
         targetSelect.scrollIntoView({ behavior: 'instant', block: 'center' });
-        await new Promise(r => setTimeout(r, 150));
+        await new Promise(r => setTimeout(r, 200));
         targetSelect.click();
-        
-        // 3. 等待选项出现并点击目标选项（带超时保护）
+
+        // 4. 等待选项出现并点击目标选项（带超时+轮询保护）
         let observerDisconnected = false;
+
         const option = await new Promise(resolve => {
-          const opts = document.querySelectorAll('[class*="ContentDeclaration_title"]');
-          for (const o of opts) {
-            if (o.offsetParent && (o.textContent || '').includes(declaration)) { resolve(o); return; }
-          }
-          
-          const obs = new MutationObserver(() => {
-            if (observerDisconnected) return;
-            const opts2 = document.querySelectorAll('[class*="ContentDeclaration_title"]');
-            for (const o of opts2) {
+          // 先检查是否已经存在可见选项
+          const checkExisting = () => {
+            const opts = document.querySelectorAll('[class*="ContentDeclaration_title"], [class*="content-declaration"], [class*="select-option"], [class*="option-item"], [class*="dropdown-item"]');
+            for (const o of opts) {
               if (o.offsetParent && (o.textContent || '').includes(declaration)) {
-                observerDisconnected = true;
-                obs.disconnect();
-                clearTimeout(t);
-                resolve(o);
-                return;
+                return o;
               }
             }
+            return null;
+          };
+
+          const existing = checkExisting();
+          if (existing) { resolve(existing); return; }
+
+          // MutationObserver 监听新选项出现
+          const obs = new MutationObserver(() => {
+            if (observerDisconnected) return;
+            const found = checkExisting();
+            if (found) {
+              observerDisconnected = true;
+              obs.disconnect();
+              clearTimeout(t);
+              resolve(found);
+            }
           });
-          
+
           obs.observe(document.body, { childList: true, subtree: true });
+
+          // 额外轮询兜底（MutationObserver 可能遗漏）
+          let pollCount = 0;
+          const pollTimer = setInterval(() => {
+            if (observerDisconnected) { clearInterval(pollTimer); return; }
+            pollCount++;
+            const found = checkExisting();
+            if (found) {
+              observerDisconnected = true;
+              obs.disconnect();
+              clearTimeout(t);
+              clearInterval(pollTimer);
+              resolve(found);
+            } else if (pollCount >= 20) { // 10秒轮询超时
+              clearInterval(pollTimer);
+            }
+          }, 500);
+
           const t = setTimeout(() => {
             observerDisconnected = true;
             try { obs.disconnect(); } catch(e) {}
+            clearInterval(pollTimer);
             resolve(null);
-          }, 5000);
+          }, 8000); // 总超时8秒
         });
-        
+
         if (option) {
-          option.click();
+          option.scrollIntoView({ behavior: 'instant', block: 'center' });
           await new Promise(r => setTimeout(r, 100));
-          filledDeclarationSelects.add(targetSelect); // 标记为已填充
+          option.click();
+          await new Promise(r => setTimeout(r, 200));
+          filledDeclCount++;
+          console.log(`[PDD监控] fillContentDeclaration: ✅ 成功填充 (${filledDeclCount}) "${declaration}"`);
           return true;
         }
-        
+
+        console.warn('[PDD监控] fillContentDeclaration: ⚠️ 未找到选项，超时退出');
         return false;
       } catch (e) {
-        console.warn('[PDD监控] fillContentDeclaration 异常:', e.message);
+        console.error('[PDD监控] fillContentDeclaration 异常:', e.message);
         return false;
       }
     }
@@ -7130,7 +7257,11 @@
             throw new Error('商品ID填充失败');
           }
         }
+
+        // 填充完成汇总日志
+        console.log(`[PDD监控] ★ 视频${nextGoodsIdIndex || '?'}填充完成: 描述=${description ? '✅' : '⏭️跳过'} | 内容声明=${contentDeclaration ? '✅' : '⏭️跳过'} | 商品ID=${goodsId} ✅`);
       } catch (e) {
+        console.error(`[PDD监控] ✗ 视频填充异常:`, e.message);
         throw e;
       }
     }
@@ -9197,8 +9328,11 @@
             processedVideos.add(itemId);
             
             // 延迟填写，确保页面稳定
-            setTimeout(() => {
-              fillGoodsIdForVideo(item, goodsId);
+            setTimeout(async () => {
+              // 填充描述（如果有配置）
+              const desc = config.description || null;
+              const decl = config.contentDeclaration || null;
+              await fillGoodsIdForVideo(item, goodsId, desc, decl);
               filledCount++;
               
               // 更新配置
@@ -9251,8 +9385,8 @@
     }
     
     // 为指定视频填写商品ID（返回Promise版本）
-    async function fillGoodsIdForVideo(videoItem, goodsId, description = null) {
-      console.log('[PDD监控] fillGoodsIdForVideo 开始，商品ID:', goodsId, '描述:', description ? description.substring(0, 30) + '...' : 'null');
+    async function fillGoodsIdForVideo(videoItem, goodsId, description = null, contentDeclaration = null) {
+      console.log('[PDD监控] fillGoodsIdForVideo 开始，商品ID:', goodsId, '描述:', description ? description.substring(0, 30) + '...' : 'null', '内容声明:', contentDeclaration || 'null');
       
       // 添加重试机制
       const maxRetries = 3;
@@ -9260,7 +9394,7 @@
       
       while (retryCount < maxRetries) {
         try {
-          const success = await fillGoodsIdForVideoOnce(videoItem, goodsId, description);
+          const success = await fillGoodsIdForVideoOnce(videoItem, goodsId, description, contentDeclaration);
           if (success) {
             console.log('[PDD监控] 商品ID填充成功');
             return true;
@@ -9280,7 +9414,7 @@
     }
     
     // 单次填充商品ID
-    async function fillGoodsIdForVideoOnce(videoItem, goodsId, description = null) {
+    async function fillGoodsIdForVideoOnce(videoItem, goodsId, description = null, contentDeclaration = null) {
       return new Promise(async (resolve) => {
         // 滚动到视频项可见
         const rect = videoItem.getBoundingClientRect();
@@ -9334,7 +9468,14 @@
           await fillVideoDescription(description, videoItem);
           await new Promise(r => setTimeout(r, 600));
         }
-        
+
+        // 填充内容声明（如果有）- 在填充商品ID之前
+        if (contentDeclaration) {
+          console.log('[PDD监控] 开始填充内容声明:', contentDeclaration);
+          await fillContentDeclaration(contentDeclaration, videoItem);
+          await new Promise(r => setTimeout(r, 400));
+        }
+
         // 使用多种选择器策略查找添加商品按钮
         let addGoodsBtn = null;
         

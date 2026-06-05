@@ -12,6 +12,7 @@
       --pdd-green: #07c160;
       --pdd-green-dark: #06ad56;
       --pdd-orange: #ff6b35;
+      --pdd-blue: #3b82f6;
       --bg: #f5f5f5;
       --surface: #ffffff;
       --text-primary: #222;
@@ -26,8 +27,8 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      width: 380px;
-      min-height: 520px;
+      width: 400px;
+      min-height: 500px;
       font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
       background: var(--bg);
       color: var(--text-primary);
@@ -41,7 +42,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: relative;
     }
     .header-left {
       display: flex;
@@ -49,101 +49,92 @@
       gap: 10px;
     }
     .header-icon {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       background: rgba(255,255,255,0.2);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .header-icon svg { width: 18px; height: 18px; color: white; }
+    .header-icon svg { width: 19px; height: 19px; color: white; }
     .header-title {
-      font-size: 16px;
-      font-weight: 700;
+      font-size: 17px;
+      font-weight: 800;
       color: white;
       letter-spacing: 0.5px;
     }
-    .header-actions {
-      display: flex;
-      gap: 6px;
-    }
-    .header-action-btn {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-    .header-action-btn:hover { background: rgba(255,255,255,0.28); }
-    .header-action-btn svg { width: 15px; height: 15px; color: white; }
 
-    /* ===== Green Bar ===== */
-    .green-bar {
-      background: linear-gradient(90deg, var(--pdd-green) 0%, #32cd68 50%, #ffd700 100%);
-      height: 3px;
-    }
-
-    /* ===== Page Title ===== */
-    .page-title {
-      padding: 12px 16px 8px;
-      font-size: 13px;
-      color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .page-title svg { width: 14px; height: 14px; color: var(--pdd-green); }
-
-    /* ===== Stats Grid ===== */
-    .stats-grid {
+    /* ===== Stats Overview ===== */
+    .stats-overview {
+      padding: 12px 16px 0;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 8px;
-      padding: 0 16px 12px;
     }
-    .stat-card {
+    .stat-item {
       background: var(--surface);
       border-radius: 10px;
-      padding: 12px 8px 10px;
+      padding: 10px 6px 8px;
       text-align: center;
       box-shadow: var(--shadow);
-      transition: all 0.25s ease;
       border: 1px solid var(--border-light);
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
     }
-    .stat-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
+    .stat-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 10px 10px 0 0;
     }
+    .stat-item:nth-child(1)::before { background: var(--pdd-blue); }
+    .stat-item:nth-child(2)::before { background: var(--pdd-red-light); }
+    .stat-item:nth-child(3)::before { background: var(--pdd-orange); }
+    .stat-item:nth-child(4)::before { background: var(--pdd-green); }
     .stat-label {
-      font-size: 11px;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
       font-weight: 500;
     }
     .stat-value {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 800;
-      color: var(--text-primary);
       line-height: 1.2;
     }
-    .stat-card:last-child .stat-value {
-      color: var(--pdd-orange);
-    }
+    .stat-item:nth-child(1) .stat-value { color: var(--pdd-blue); }
+    .stat-item:nth-child(2) .stat-value { color: var(--pdd-red); }
+    .stat-item:nth-child(3) .stat-value { color: var(--pdd-orange); }
+    .stat-item:nth-child(4) .stat-value { color: var(--pdd-green); }
 
-    /* ===== Action Bar ===== */
-    .action-bar {
-      padding: 0 16px 10px;
+    /* ===== Toolbar ===== */
+    .toolbar {
+      padding: 10px 16px;
       display: flex;
       gap: 8px;
+      align-items: center;
+    }
+    .search-box {
+      flex: 1;
+      position: relative;
+    }
+    .search-box svg {
+      position: absolute;
+      left: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      color: var(--text-muted);
+      pointer-events: none;
     }
     .search-input {
-      flex: 1;
+      width: 100%;
       height: 34px;
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -152,148 +143,185 @@
       outline: none;
       background: var(--surface);
       color: var(--text-primary);
-      position: relative;
+      transition: border-color 0.2s;
     }
-    .search-input:focus { border-color: var(--pdd-red); }
-    .input-wrapper {
-      flex: 1;
-      position: relative;
-    }
-    .input-wrapper svg {
-      position: absolute;
-      left: 9px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 13px;
-      height: 13px;
-      color: var(--text-muted);
-    }
-    .date-picker {
-      flex: 1;
+    .search-input:focus { border-color: var(--pdd-red); box-shadow: 0 0 0 3px rgba(224,46,36,0.1); }
+    .search-input::placeholder { color: var(--text-muted); }
+
+    .sort-btn {
       height: 34px;
+      padding: 0 10px;
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 0 10px 0 28px;
-      font-size: 12px;
-      outline: none;
       background: var(--surface);
-      color: var(--text-primary);
       cursor: pointer;
-    }
-    .date-wrapper {
-      flex: 1;
-      position: relative;
-    }
-    .date-wrapper svg {
-      position: absolute;
-      left: 8px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 13px;
-      height: 13px;
-      color: var(--text-muted);
-    }
-    .btn-select-all {
-      height: 34px;
-      padding: 0 16px;
-      border: none;
-      border-radius: 8px;
-      background: linear-gradient(135deg, var(--pdd-green) 0%, var(--pdd-green-dark) 100%);
-      color: white;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.2s;
-      box-shadow: 0 2px 8px rgba(7,193,96,0.3);
-    }
-    .btn-select-all:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(7,193,96,0.4);
-    }
-
-    /* ===== Control Buttons ===== */
-    .controls-row {
-      padding: 0 16px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
       display: flex;
-      gap: 8px;
-      margin-bottom: 10px;
+      align-items: center;
+      gap: 3px;
+      transition: all 0.2s;
+      white-space: nowrap;
     }
-    .btn {
+    .sort-btn:hover { border-color: var(--pdd-red); color: var(--pdd-red); }
+    .sort-btn.active {
+      background: var(--pdd-red);
+      color: white;
+      border-color: var(--pdd-red);
+    }
+    .sort-btn svg { width: 12px; height: 12px; }
+
+    /* ===== Batch Actions Bar ===== */
+    .batch-bar {
+      padding: 0 16px 8px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+    .batch-bar.show { display: flex; animation: slideUp 0.2s ease-out; }
+    .batch-info {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--pdd-red);
+      white-space: nowrap;
+    }
+    .batch-actions {
+      display: flex;
+      gap: 6px;
       flex: 1;
-      height: 36px;
-      border-radius: 9px;
+      justify-content: flex-end;
+    }
+    .btn-batch {
+      height: 28px;
+      padding: 0 10px;
+      border-radius: 6px;
       border: none;
       cursor: pointer;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 5px;
-      transition: all 0.2s ease;
+      gap: 3px;
+      transition: all 0.15s;
     }
-    .btn svg { width: 15px; height: 15px; }
-    .btn:active { transform: scale(0.97); }
-
-    .btn-refresh {
-      background: var(--surface);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-    .btn-refresh:hover { border-color: var(--pdd-red); color: var(--pdd-red); }
-
-    .btn-sync {
-      background: linear-gradient(135deg, var(--pdd-red) 0%, var(--pdd-red-dark) 100%);
+    .btn-batch svg { width: 12px; height: 12px; }
+    .btn-batch-export {
+      background: linear-gradient(135deg, var(--pdd-green), var(--pdd-green-dark));
       color: white;
-      box-shadow: 0 2px 10px rgba(224,46,36,0.3);
     }
-    .btn-sync:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(224,46,36,0.4); }
-
-    .btn-export {
-      background: var(--surface);
-      color: var(--text-primary);
+    .btn-batch-export:hover { transform: translateY(-1px); }
+    .btn-batch-clear {
+      background: #fff;
+      color: var(--text-secondary);
       border: 1px solid var(--border);
-      box-shadow: var(--shadow);
     }
-    .btn-export:hover { border-color: var(--pdd-green); color: var(--pdd-green); }
-
-    .btn-clear {
-      background: var(--surface);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-    .btn-clear:hover { border-color: var(--pdd-orange); color: var(--pdd-orange); }
+    .btn-batch-clear:hover { border-color: var(--pdd-red); color: var(--pdd-red); }
 
     /* ===== Video List ===== */
-    .video-list {
-      max-height: 200px;
-      overflow-y: auto;
+    .list-section {
       padding: 0 16px;
-      margin-bottom: 10px;
+    }
+    .list-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 0;
+      margin-bottom: 4px;
+    }
+    .list-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .list-title svg { width: 14px; height: 14px; color: var(--pdd-red); }
+    .list-count {
+      font-size: 11px;
+      color: var(--text-muted);
+      background: #f0f0f0;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .video-list {
+      max-height: 240px;
+      overflow-y: auto;
+      margin-bottom: 8px;
     }
     .video-list::-webkit-scrollbar { width: 4px; }
     .video-list::-webkit-scrollbar-track { background: transparent; }
     .video-list::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
+
     .video-item {
       background: var(--surface);
-      padding: 11px 13px;
-      margin-bottom: 7px;
+      padding: 10px 12px;
+      margin-bottom: 6px;
       border-radius: 10px;
-      border: 1px solid var(--border-light);
+      border: 1.5px solid var(--border-light);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
       transition: all 0.2s ease;
+      cursor: pointer;
     }
     .video-item:hover {
       border-color: var(--pdd-red-light);
       box-shadow: var(--shadow);
     }
+    .video-item.selected {
+      border-color: var(--pdd-red);
+      background: #fff5f5;
+    }
+
+    /* Checkbox */
+    .video-check {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .video-check input {
+      display: none;
+    }
+    .check-box {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+      background: white;
+    }
+    .check-box svg {
+      width: 12px;
+      height: 12px;
+      color: white;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.15s;
+    }
+    .video-check input:checked + .check-box {
+      background: var(--pdd-red);
+      border-color: var(--pdd-red);
+    }
+    .video-check input:checked + .check-box svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .video-item:hover .check-box { border-color: var(--pdd-red-light); }
+
+    .video-info {
+      flex: 1;
+      min-width: 0;
+    }
     .video-title {
       font-size: 12px;
       font-weight: 600;
       color: var(--text-primary);
-      margin-bottom: 7px;
+      margin-bottom: 6px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -302,79 +330,118 @@
     }
     .video-stats {
       display: flex;
-      gap: 6px;
+      gap: 8px;
       flex-wrap: wrap;
     }
-    .video-stats span {
+    .video-stat {
       font-size: 10px;
       color: var(--text-secondary);
-      background: #f8f8f8;
-      padding: 3px 8px;
-      border-radius: 12px;
-      font-weight: 500;
       display: flex;
       align-items: center;
       gap: 3px;
+      font-weight: 500;
     }
-    .video-stats span svg { width: 11px; height: 11px; }
+    .video-stat svg { width: 12px; height: 12px; flex-shrink: 0; }
+    .video-stat.plays { color: var(--pdd-red); }
+    .video-stat.orders { color: var(--pdd-orange); }
+    .video-stat.amount { color: var(--pdd-green); font-weight: 700; }
 
     /* ===== Empty State ===== */
     .empty-state {
       text-align: center;
-      padding: 36px 20px;
+      padding: 32px 16px;
       color: var(--text-muted);
       background: var(--surface);
       border-radius: 12px;
       border: 1.5px dashed var(--border);
-      margin: 0 16px;
     }
     .empty-state .icon-wrap {
-      width: 60px;
-      height: 60px;
-      border-radius: 18px;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
       background: #fafafa;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 12px;
+      margin: 0 auto 10px;
     }
-    .empty-state .icon-wrap svg { width: 30px; height: 30px; opacity: 0.35; }
+    .empty-state .icon-wrap svg { width: 26px; height: 26px; opacity: 0.3; }
     .empty-state p { font-size: 13px; font-weight: 600; }
-    .empty-state p.sub { font-size: 11px; margin-top: 4px; opacity: 0.65; font-weight: 400; }
+    .empty-state p.sub { font-size: 11px; margin-top: 4px; opacity: 0.6; font-weight: 400; }
 
-    /* ===== Keep Alive Toggle ===== */
-    .keep-alive-toggle {
+    /* ===== Quick Actions ===== */
+    .quick-actions {
+      padding: 0 16px 8px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .action-btn {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      background: var(--surface);
-      margin: 0 16px;
+      gap: 4px;
+      padding: 10px 4px;
       border-radius: 10px;
-      margin-bottom: 8px;
-      box-shadow: var(--shadow);
       border: 1px solid var(--border-light);
+      background: var(--surface);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow);
     }
-    .keep-alive-toggle .label-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
-    .keep-alive-toggle .icon-wrap {
-      width: 34px;
-      height: 34px;
+    .action-btn:active { transform: scale(0.96); }
+    .action-btn .icon-circle {
+      width: 32px;
+      height: 32px;
       border-radius: 10px;
-      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .keep-alive-toggle .icon-wrap svg { width: 17px; height: 17px; color: #e65100; }
-    .keep-alive-toggle .label { font-size: 13px; font-weight: 700; color: var(--text-primary); }
-    .keep-alive-toggle .hint { font-size: 10px; color: var(--text-muted); margin-top: 1px; }
+    .action-btn .icon-circle svg { width: 16px; height: 16px; }
+    .action-btn .label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .action-btn.refresh .icon-circle { background: #eff6ff; }
+    .action-btn.refresh .icon-circle svg { color: var(--pdd-blue); }
+    .action-btn.sync .icon-circle { background: #fef2f2; }
+    .action-btn.sync .icon-circle svg { color: var(--pdd-red); }
+    .action-btn.export .icon-circle { background: #f0fdf4; }
+    .action-btn.export .icon-circle svg { color: var(--pdd-green); }
+    .action-btn.clear .icon-circle { background: #fffbeb; }
+    .action-btn.clear .icon-circle svg { color: var(--pdd-orange); }
+
+    /* ===== Bottom Bar ===== */
+    .bottom-bar {
+      padding: 8px 16px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .keep-alive-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+    .keep-alive-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .keep-alive-label svg { width: 13px; height: 13px; color: var(--pdd-orange); }
 
     /* Toggle Switch */
-    .toggle { position: relative; width: 46px; height: 25px; }
+    .toggle { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
     .toggle input { opacity: 0; width: 0; height: 0; }
     .toggle .slider {
       position: absolute;
@@ -382,40 +449,40 @@
       top: 0; left: 0; right: 0; bottom: 0;
       background: #ddd;
       transition: 0.25s;
-      border-radius: 25px;
+      border-radius: 22px;
     }
     .toggle .slider:before {
       content: "";
       position: absolute;
-      height: 19px; width: 19px;
+      height: 16px; width: 16px;
       left: 3px; bottom: 3px;
       background: white;
       transition: 0.25s;
       border-radius: 50%;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     }
     .toggle input:checked + .slider {
       background: linear-gradient(135deg, var(--pdd-green) 0%, var(--pdd-green-dark) 100%);
     }
-    .toggle input:checked + .slider:before { transform: translateX(21px); }
+    .toggle input:checked + .slider:before { transform: translateX(18px); }
 
-    /* ===== Status Footer ===== */
-    .status-footer {
-      font-size: 11px;
+    .update-btn {
+      height: 26px;
+      padding: 0 8px;
+      border-radius: 6px;
+      background: transparent;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 600;
       color: var(--text-muted);
-      text-align: center;
-      padding: 10px 16px;
-      background: var(--surface);
-      margin: 0 16px 10px;
-      border-radius: 10px;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border-light);
+      gap: 3px;
+      transition: all 0.2s;
     }
-    .status-footer span { display: flex; align-items: center; gap: 4px; }
-    .status-footer svg { width: 13px; height: 13px; }
+    .update-btn:hover { border-color: var(--pdd-red); color: var(--pdd-red); }
+    .update-btn svg { width: 11px; height: 11px; }
 
     /* ===== Update Banner ===== */
     .update-banner {
@@ -423,7 +490,7 @@
       background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
       border: 1px solid #ffb300;
       border-radius: 10px;
-      padding: 11px 13px;
+      padding: 10px 12px;
       display: none;
       animation: slideUp 0.3s ease-out;
     }
@@ -436,43 +503,42 @@
       background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
       border-color: var(--pdd-red);
     }
-    .update-banner .header-row {
+    .update-banner .banner-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
-    .update-banner .title {
-      font-size: 12px;
+    .update-banner .banner-title {
+      font-size: 11px;
       font-weight: 800;
       color: #e65100;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
     }
-    .update-banner.success .title { color: #2e7d32; }
-    .update-banner.error .title { color: #c62828; }
-    .update-banner .title svg { width: 14px; height: 14px; }
-    .update-banner .version-info {
-      font-size: 11px;
+    .update-banner.success .banner-title { color: #2e7d32; }
+    .update-banner.error .banner-title { color: #c62828; }
+    .update-banner .banner-title svg { width: 13px; height: 13px; }
+    .update-banner .banner-ver {
+      font-size: 10px;
       color: #bf360c;
-      margin-bottom: 6px;
       font-weight: 500;
+      margin-bottom: 5px;
     }
-    .update-banner.success .version-info { color: #1b5e20; }
-    .update-banner .notes {
+    .update-banner.success .banner-ver { color: #1b5e20; }
+    .update-banner .banner-notes {
       font-size: 10px;
       color: #a1887f;
-      max-height: 52px;
+      max-height: 48px;
       overflow-y: auto;
-      margin-bottom: 8px;
-      line-height: 1.55;
+      margin-bottom: 6px;
+      line-height: 1.5;
       white-space: pre-wrap;
     }
-    .update-banner.success .notes { color: #388e3c; }
-    .update-banner .actions { display: flex; gap: 6px; }
-    .update-banner .btn-sm {
-      padding: 5px 11px;
+    .update-banner .banner-actions { display: flex; gap: 6px; }
+    .update-banner .bn-btn {
+      padding: 4px 10px;
       font-size: 10px;
       border-radius: 6px;
       cursor: pointer;
@@ -481,45 +547,41 @@
       display: inline-flex;
       align-items: center;
       gap: 3px;
-    }
-    .update-banner .btn-download {
-      background: linear-gradient(135deg, #ffa726 0%, #f57c00 100%);
-      color: white;
       border: none;
     }
-    .update-banner .btn-download:hover { transform: translateY(-1px); }
-    .update-banner .btn-dismiss {
+    .update-banner .bn-download {
+      background: linear-gradient(135deg, #ffa726 0%, #f57c00 100%);
+      color: white;
+    }
+    .update-banner .bn-dismiss {
       background: transparent;
       color: #bf360c;
       border: 1px solid rgba(191,54,12,0.25);
     }
-    .update-banner .btn-dismiss:hover { background: rgba(255,255,255,0.6); }
-
-    /* Check Update Button */
-    .btn-check-update {
-      background: linear-gradient(135deg, var(--pdd-red) 0%, var(--pdd-red-dark) 100%);
-      color: white;
-      border: none;
-      padding: 3px 10px;
-      font-size: 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      box-shadow: 0 1px 6px rgba(224,46,36,0.25);
+    .update-banner .bn-recheck {
+      background: transparent;
+      color: #bf360c;
+      border: 1px solid rgba(191,54,12,0.25);
     }
-    .btn-check-update:hover { transform: translateY(-1px); }
 
     @keyframes slideUp {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    /* No results */
+    .no-results {
+      text-align: center;
+      padding: 20px 16px;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+    .no-results svg { width: 32px; height: 32px; opacity: 0.3; margin-bottom: 6px; }
   </style>
 </head>
 <body>
+
   <!-- Header -->
   <div class="header">
     <div class="header-left">
@@ -531,148 +593,128 @@
       </div>
       <span class="header-title">视频数据监控</span>
     </div>
-    <div class="header-actions">
-      <button class="header-action-btn" id="refreshBtn" title="刷新">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-        </svg>
-      </button>
-      <button class="header-action-btn" id="syncBtn" title="同步">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12a9 9 0 1 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.66 0 3-4.03 3-9s-1.34-9-3-9m0 18c-1.66 0-3-4.03-3-9s1.34-9 3-9m-9 9a9 9 0 0 1 9-9"/>
-        </svg>
-      </button>
-      <button class="header-action-btn" id="exportBtn" title="导出">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
-      </button>
-      <button class="header-action-btn" id="checkUpdateBtnHeader" title="检查更新">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
-        </svg>
-      </button>
-    </div>
   </div>
 
-  <!-- Green Bar -->
-  <div class="green-bar"></div>
-
-  <!-- Page Title -->
-  <div class="page-title">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>
-    </svg>
-    视频数据监控页面
-  </div>
-
-  <!-- Stats Grid -->
-  <div class="stats-grid">
-    <div class="stat-card">
+  <!-- Stats Overview -->
+  <div class="stats-overview">
+    <div class="stat-item">
       <div class="stat-label">已捕获</div>
       <div class="stat-value" id="videoCount">0</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-item">
       <div class="stat-label">总播放</div>
       <div class="stat-value" id="totalPlays">0</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-item">
       <div class="stat-label">总订单</div>
       <div class="stat-value" id="totalOrders">0</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-item">
       <div class="stat-label">总金额</div>
       <div class="stat-value" id="totalAmount">¥0</div>
     </div>
   </div>
 
-  <!-- Action Bar -->
-  <div class="action-bar">
-    <div class="input-wrapper">
+  <!-- Toolbar: Search + Sort -->
+  <div class="toolbar">
+    <div class="search-box">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-      <input type="text" class="search-input" placeholder="搜索视频..." readonly>
+      <input type="text" class="search-input" id="searchInput" placeholder="搜索视频标题...">
     </div>
-    <div class="date-wrapper">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      <input type="text" class="date-picker" placeholder="选择日期范围" readonly>
-    </div>
-    <button class="btn-select-all" id="selectAllBtn">全选</button>
-  </div>
-
-  <!-- Control Buttons -->
-  <div class="controls-row">
-    <button class="btn btn-refresh" id="refreshBtn2">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-      刷新
-    </button>
-    <button class="btn btn-sync" id="syncBtn2">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3"/></svg>
-      同步
-    </button>
-  </div>
-  <div class="controls-row">
-    <button class="btn btn-export" id="exportBtn2">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      导出
-    </button>
-    <button class="btn btn-clear" id="clearBtn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
-      清空
+    <button class="sort-btn" id="sortBtn" title="排序方式">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
+      排序
     </button>
   </div>
 
-  <!-- Video List -->
-  <div class="video-list" id="videoList">
-    <div class="empty-state">
-      <div class="icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      </div>
-      <p>暂无视频数据</p>
-      <p class="sub">请访问拼多多视频页面</p>
+  <!-- Batch Actions (shown when items selected) -->
+  <div class="batch-bar" id="batchBar">
+    <span class="batch-info" id="batchInfo">已选 0 个</span>
+    <div class="batch-actions">
+      <button class="btn-batch btn-batch-export" id="batchExportBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        导出选中
+      </button>
+      <button class="btn-batch btn-batch-clear" id="batchClearBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        取消
+      </button>
     </div>
   </div>
 
-  <!-- Keep Alive Toggle -->
-  <div class="keep-alive-toggle">
-    <div class="label-wrap">
-      <div class="icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
-      </div>
-      <div>
-        <div class="label">自动保活</div>
-        <div class="hint">每2分钟自动刷新保持登录</div>
-      </div>
+  <!-- Video List Section -->
+  <div class="list-section">
+    <div class="list-header">
+      <span class="list-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        视频列表
+      </span>
+      <span class="list-count" id="listCount">0 个视频</span>
     </div>
-    <label class="toggle">
-      <input type="checkbox" id="keepAliveToggle" checked><span class="slider"></span>
-    </label>
+    <div class="video-list" id="videoList"></div>
+  </div>
+
+  <!-- Quick Action Buttons -->
+  <div class="quick-actions">
+    <button class="action-btn refresh" id="refreshBtn" title="刷新数据">
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+      </div>
+      <span class="label">刷新</span>
+    </button>
+    <button class="action-btn sync" id="syncBtn" title="同步数据">
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-9 9m9-9a9 9 0 0 0-9-9m9-9H3m9 9c1.66 0 3-4.03 3-9s-1.34-9-3-9"/></svg>
+      </div>
+      <span class="label">同步</span>
+    </button>
+    <button class="action-btn export" id="exportBtn" title="导出全部">
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </div>
+      <span class="label">导出全部</span>
+    </button>
+    <button class="action-btn clear" id="clearBtn" title="清空数据">
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+      </div>
+      <span class="label">清空</span>
+    </button>
   </div>
 
   <!-- Update Banner -->
   <div class="update-banner" id="updateBanner">
-    <div class="header-row">
-      <div class="title">
+    <div class="banner-head">
+      <div class="banner-title" id="updateTitle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <span id="updateTitle">发现新版本</span>
+        发现新版本
       </div>
-      <button class="btn-sm btn-dismiss" id="dismissUpdateBtn">关闭</button>
+      <button class="bn-btn bn-dismiss" id="dismissUpdateBtn">关闭</button>
     </div>
-    <div class="version-info" id="updateVersionInfo"></div>
-    <div class="notes" id="updateNotes"></div>
-    <div class="actions">
-      <button class="btn-sm btn-download" id="downloadUpdateBtn">
-        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    <div class="banner-ver" id="updateVersionInfo"></div>
+    <div class="banner-notes" id="updateNotes"></div>
+    <div class="banner-actions">
+      <button class="bn-btn bn-download" id="downloadUpdateBtn">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         下载更新
       </button>
-      <button class="btn-sm btn-dismiss" id="recheckUpdateBtn">重检</button>
+      <button class="bn-btn bn-recheck" id="recheckUpdateBtn">重检</button>
     </div>
   </div>
 
-  <!-- Status Footer -->
-  <div class="status-footer" id="lastUpdate">
-    <span>已监控 <strong id="monitoredPages">0</strong> 页 | 共 <strong id="totalVideos">?</strong> 个视频</span>
-    <button class="btn-check-update" id="checkUpdateBtn" title="检查新版本">
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+  <!-- Bottom Bar: Keep Alive + Update Check -->
+  <div class="bottom-bar">
+    <div class="keep-alive-row">
+      <span class="keep-alive-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+        自动保活
+      </span>
+      <label class="toggle">
+        <input type="checkbox" id="keepAliveToggle"><span class="slider"></span>
+      </label>
+    </div>
+    <button class="update-btn" id="checkUpdateBtn" title="检查新版本">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
       检查更新
     </button>
   </div>
