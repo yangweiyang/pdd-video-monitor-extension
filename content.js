@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // 全局错误处理 - 防止扩展插件导致页面崩溃
@@ -7084,7 +7084,7 @@
         // ========== 1. 查找内容声明下拉触发器（多种策略） ==========
         let targetSelect = null;
 
-        // 策略A: 已知类名
+        // 策略A: 已知类名（优先在 videoItem 内部查找）
         const knownSelectors = [
           '[class*="ST_selectValueSingle"]',
           '[class*="selectValue"]',
@@ -7095,25 +7095,47 @@
           '[class*="declaration-select"]',
           '[class*="declarationSelect"]',
         ];
-        for (const sel of knownSelectors) {
-          const els = document.querySelectorAll(sel);
-          for (const el of els) {
-            if (el.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
-            if (el.offsetParent === null) continue;
-            // 确认是"内容声明"区域
-            let p = el.parentElement;
-            for (let i = 0; i < 8 && p; i++) {
-              if ((p.textContent || '').includes('内容声明')) { targetSelect = el; break; }
-              p = p.parentElement;
+
+        // 如果有 videoItem，先在其内部查找
+        if (videoItem) {
+          for (const sel of knownSelectors) {
+            const els = videoItem.querySelectorAll(sel);
+            for (const el of els) {
+              if (el.offsetParent === null) continue;
+              let p = el.parentElement;
+              for (let i = 0; i < 8 && p; i++) {
+                if ((p.textContent || '').includes('内容声明')) { targetSelect = el; break; }
+                p = p.parentElement;
+              }
+              if (targetSelect) break;
             }
             if (targetSelect) break;
           }
-          if (targetSelect) break;
         }
 
-        // 策略B: 文本匹配 - 查找包含"请选择"/"内容声明"的可点击元素
+        // 如果 videoItem 内没找到，再全局查找
         if (!targetSelect) {
-          const allClickable = document.querySelectorAll('[class*="select"], [class*="Select"], [class*="dropdown"], [class*="picker"], [role="listbox"], [role="combobox"], [data-type="select"]');
+          for (const sel of knownSelectors) {
+            const els = document.querySelectorAll(sel);
+            for (const el of els) {
+              if (el.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
+              if (el.offsetParent === null) continue;
+              // 确认是"内容声明"区域
+              let p = el.parentElement;
+              for (let i = 0; i < 8 && p; i++) {
+                if ((p.textContent || '').includes('内容声明')) { targetSelect = el; break; }
+                p = p.parentElement;
+              }
+              if (targetSelect) break;
+            }
+            if (targetSelect) break;
+          }
+        }
+
+        // 策略B: 文本匹配 - 查找包含"请选择"/"内容声明"的可点击元素（优先在 videoItem 内）
+        if (!targetSelect) {
+          const searchScope = videoItem || document;
+          const allClickable = searchScope.querySelectorAll('[class*="select"], [class*="Select"], [class*="dropdown"], [class*="picker"], [role="listbox"], [role="combobox"], [data-type="select"]');
           for (const el of allClickable) {
             if (el.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
             if (el.offsetParent === null) continue;
@@ -7132,7 +7154,7 @@
           }
         }
 
-        // 策略C: 在视频项内部查找（如果有videoItem）
+        // 策略C: 在视频项内部查找 cursor:pointer / role=button
         if (!targetSelect && videoItem) {
           const innerEls = videoItem.querySelectorAll('[class*="select"], [class*="Select"], [class*="dropdown"], [class*="picker"], span, div');
           for (const el of innerEls) {
