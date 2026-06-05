@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // 全局错误处理 - 防止扩展插件导致页面崩溃
@@ -5825,7 +5825,29 @@
       
       console.log('[PDD监控] pendingUploadConfig.files.length:', pendingUploadConfig.files.length);
       console.log('[PDD监控] pendingUploadConfig.pidList:', pendingUploadConfig.pidList);
-      
+
+      // 预生成所有视频的封面图（异步，不阻塞上传）
+      (async () => {
+        try {
+          const progressEl = document.getElementById('upload-progress');
+          for (let i = 0; i < pendingUploadConfig.files.length; i++) {
+            const vf = pendingUploadConfig.files[i];
+            if (vf.file && !vf.coverFile) {
+              try {
+                vf.coverFile = await captureVideoCoverFromFile(vf.file);
+                console.log(`[PDD监控] 预生成封面 ${i + 1}/${pendingUploadConfig.files.length}: ${vf.file.name}`);
+                if (progressEl) progressEl.textContent = `预生成封面 ${i + 1}/${totalFiles}...`;
+              } catch (e) {
+                console.warn(`[PDD监控] 封面预生成失败 ${vf.file.name}:`, e.message);
+              }
+            }
+          }
+          console.log('[PDD监控] 所有封面预生成完成');
+        } catch (e) {
+          console.error('[PDD监控] 封面预批量生成出错:', e.message);
+        }
+      })();
+
       const statusEl = document.getElementById('pdd-publish-status');
       const totalFiles = pendingUploadConfig.files.length;
       
@@ -12101,10 +12123,11 @@
   // 填写视频信息（商品ID和描述）
   async function fillVideoInfo(video) {
     let success = false;
-    
-    // 1. 自动选择视频封面
+
+    // 1. 自动选择视频封面（传入视频文件对象）
     try {
-      await autoSelectVideoCover();
+      const videoFile = video?.file || null;
+      await autoSelectVideoCover(videoFile);
     } catch (e) {
       console.log('[PDD监控] 自动选择封面失败，继续执行:', e.message);
     }
@@ -12171,46 +12194,145 @@
     return null;
   }
   
-  // 从视频中截取一帧作为封面
-  async function captureVideoFrame(videoElement, timeSeconds = 1) {
+  // 从视频中截取一帧作为封面（从 File 对象生成）
+  async function captureVideoCoverFromFile(videoFile) {
     return new Promise((resolve, reject) => {
-      if (!videoElement) {
-        reject(new Error('视频元素不存在'));
-        return;
+      try {
+        const video = document.createElement('video');
+        video.preload = 'metadata';
+        video.muted = true;
+        video.playsInline = true;
+        video.crossOrigin = 'anonymous';
+        const url = URL.createObjectURL(videoFile);
+
+        video.onloadeddata = () => {
+          // 跳转到第1秒截取封面（跳过黑屏开头）
+          video.currentTime = Math.min(1, video.duration * 0.1 || 1);
+        };
+
+        video.onseeked = () => {
+          try {
+            const canvas = document.createElement('canvas');
+            const w = video.videoWidth || 1280;
+            const h = video.videoHeight || 720;
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, w, h);
+
+            canvas.toBlob((blob) => {
+              URL.revokeObjectURL(url);
+              video.remove();
+              if (blob) {
+                const coverFile = new File([blob], 'cover_' + videoFile.name.replace(/\.[^.]+$/, '.jpg'), { type: 'image/jpeg' });
+                resolve(coverFile);
+              } else {
+                reject(new Error('canvas.toBlob 返回空'));
+              }
+            }, 'image/jpeg', 0.92);
+          } catch (e) {
+            URL.revokeObjectURL(url);
+            video.remove();
+            reject(e);
+          }
+        };
+
+        video.onerror = (err) => {
+          URL.revokeObjectURL(url);
+          video.remove();
+          reject(new Error('视频加载失败: ' + (video.error?.message || err)));
+        };
+
+        video.src = url;
+      } catch (e) {
+        reject(e);
       }
-      
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      
-      // 设置视频时间
-      videoElement.currentTime = timeSeconds;
-      
-      videoElement.onloadeddata = () => {
-        // 设置 canvas 尺寸
-        canvas.width = videoElement.videoWidth || 640;
-        canvas.height = videoElement.videoHeight || 360;
-        
-        try {
-          // 绘制视频帧到 canvas
-          ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-          
-          // 转换为 Blob
-          canvas.toBlob((blob) => {
-            if (blob) {
-              resolve(blob);
-            } else {
-              reject(new Error('无法创建图片 Blob'));
-            }
-          }, 'image/jpeg', 0.9);
-        } catch (e) {
-          reject(e);
-        }
-      };
-      
-      videoElement.onerror = () => {
-        reject(new Error('视频加载失败'));
-      };
     });
+  }
+
+  // 在页面上为已上传的视频设置封面图
+  async function setVideoCoverOnPage(coverFile) {
+    if (!coverFile) return false;
+
+    try {
+      // 等待页面渲染视频项
+      await new Promise(r => setTimeout(r, 1500));
+
+      // 方案1：查找封面上传的文件输入框
+      const coverInputSelectors = [
+        'input[type="file"][accept*="image"]',
+        'input[type="file"][accept*="jpg"]',
+        'input[type="file"][accept*="png"]',
+        '[class*="cover"] input[type="file"]',
+        '[class*="Cover"] input[type="file"]',
+        '[class*="upload"] input[type="file"]'
+      ];
+
+      let coverInput = null;
+      for (const sel of coverInputSelectors) {
+        const inputs = document.querySelectorAll(sel);
+        for (const inp of inputs) {
+          if (inp.offsetParent !== null && !inp.closest('#pdd-video-monitor, #pdd-batch-publish-panel')) {
+            coverInput = inp;
+            console.log('[PDD监控] 找到封面输入框:', sel);
+            break;
+          }
+        }
+        if (coverInput) break;
+      }
+
+      if (coverInput) {
+        const dt = new DataTransfer();
+        dt.items.add(coverFile);
+        const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'files')?.set;
+        if (nativeSetter) {
+          nativeSetter.call(coverInput, dt.files);
+        } else {
+          coverInput.files = dt.files;
+        }
+        coverInput.dispatchEvent(new Event('change', { bubbles: true }));
+        console.log('[PDD监控] 封面已设置到输入框');
+        return true;
+      }
+
+      // 方案2：查找封面图片元素，尝试通过拖拽或剪贴板设置
+      const coverImgSelectors = [
+        '[class*="cover"] img:not([src*="http"])',
+        '[class*="Cover"] img:not([src*="http"])',
+        '[class*="thumbnail"] img',
+        '[class*="poster"] img',
+        '.video-item img[class*="cover"]',
+        '.video-item img[class*="default"]'
+      ];
+
+      for (const sel of coverImgSelectors) {
+        const img = document.querySelector(sel);
+        if (img && img.offsetParent !== null && img.closest && !img.closest('#pdd-video-monitor, #pdd-batch-publish-panel')) {
+          // 将 blob URL 设置到 img src
+          const url = URL.createObjectURL(coverFile);
+          img.src = url;
+          img.onload = () => URL.revokeObjectURL(url);
+          console.log('[PDD监控] 封面已设置到图片元素:', sel);
+
+          // 触发 change 事件让 React 检测到变化
+          img.dispatchEvent(new Event('load', { bubbles: true }));
+
+          // 尝试触发父级容器的事件
+          const parent = img.closest('[class*="cover"], [class*="Cover"], [class*="upload"]');
+          if (parent) {
+            parent.dispatchEvent(new CustomEvent('change', { bubbles: true, detail: { type: 'cover' } }));
+          }
+          return true;
+        }
+      }
+
+      console.log('[PDD监控] 未找到可设置封面的元素');
+      return false;
+
+    } catch (e) {
+      console.error('[PDD监控] 设置封面失败:', e.message);
+      return false;
+    }
   }
   
   // 查找并点击封面选择区域
@@ -12273,50 +12395,49 @@
     }
   }
   
-  // 自动选择视频封面（从视频帧中选择）
-  async function autoSelectVideoCover() {
+  // 自动选择视频封面（从视频文件中截取帧并设置到页面）
+  async function autoSelectVideoCover(currentVideoFile) {
     try {
-      console.log('[PDD监控] 开始自动选择视频封面');
-      
-      // 查找视频预览元素
-      const videoSelectors = [
-        'video[class*="preview"]',
-        'video[class*="Preview"]',
-        '[class*="video-preview"] video',
-        '[class*="VideoPreview"] video',
-        '.video-item video',
-        'video'
-      ];
-      
-      let videoElement = null;
-      for (const selector of videoSelectors) {
-        const videos = document.querySelectorAll(selector);
-        for (const video of videos) {
-          if (video.offsetParent !== null && video.readyState >= 2) {
-            videoElement = video;
+      console.log('[PDD监控] 开始自动生成视频封面');
+
+      let videoFile = currentVideoFile;
+      let preGeneratedCover = null;
+
+      // 检查是否有预生成的封面
+      if (!videoFile && pendingUploadConfig?.files?.length > 0) {
+        // 从 pendingUploadConfig 中查找第一个有预生成封面的视频
+        for (const vf of pendingUploadConfig.files) {
+          if (vf.coverFile) {
+            preGeneratedCover = vf.coverFile;
+            videoFile = vf.file || null;
             break;
           }
         }
-        if (videoElement) break;
+        if (!preGeneratedCover && !videoFile) {
+          videoFile = pendingUploadConfig.files[0]?.file || null;
+        }
       }
-      
-      if (!videoElement) {
-        console.log('[PDD监控] 未找到视频预览元素');
+
+      // 优先使用预生成的封面文件
+      let coverFile = preGeneratedCover;
+      if (!coverFile && videoFile) {
+        console.log('[PDD监控] 正在实时截取视频帧:', videoFile.name);
+        coverFile = await captureVideoCoverFromFile(videoFile);
+      }
+
+      if (!coverFile) {
+        console.log('[PDD监控] 无可用封面，跳过');
         return false;
       }
-      
-      console.log('[PDD监控] 找到视频预览元素');
-      
-      // 截取视频帧
-      const coverBlob = await captureVideoFrame(videoElement, 1);
-      console.log('[PDD监控] 成功截取视频帧');
-      
-      // 选择封面
-      await selectVideoCover(coverBlob);
-      
-      return true;
+
+      console.log('[PDD监控] 封面图就绪:', coverFile.name, '大小:', (coverFile.size / 1024).toFixed(1) + 'KB');
+
+      const result = await setVideoCoverOnPage(coverFile);
+      console.log('[PDD监控] 封面设置', result ? '成功' : '失败');
+      return result;
+
     } catch (e) {
-      console.error('[PDD监控] 自动选择封面失败:', e);
+      console.error('[PDD监控] 自动封面失败:', e.message);
       return false;
     }
   }
