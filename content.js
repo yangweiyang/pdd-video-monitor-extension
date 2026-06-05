@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // 全局错误处理 - 防止扩展插件导致页面崩溃
@@ -7030,126 +7030,270 @@
     let filledDeclCount = 0;
 
     async function fillContentDeclaration(declaration, videoItem = null) {
-      if (!declaration || declaration === '内容无需标注' || declaration === '默认') {
-        console.log('[PDD监控] fillContentDeclaration: 内容声明为空或默认，跳过');
-        return true; // 默认值不需要操作
+      console.log(`[PDD监控] ★ fillContentDeclaration 开始: 目标="${declaration || '(空)'}"`);
+
+      // 默认值不需要操作
+      if (!declaration || declaration === '内容无需标注' || declaration === '默认' || declaration === '不设置') {
+        console.log('[PDD监控] fillContentDeclaration: 内容声明为默认值，跳过');
+        return true;
       }
 
       try {
-        await new Promise(r => setTimeout(r, 800));
+        await new Promise(r => setTimeout(r, 1000));
 
-        // 1. 找到所有内容声明选择器
-        const allSelects = document.querySelectorAll('[class*="ST_selectValueSingle"]');
+        // ========== 1. 查找内容声明下拉触发器（多种策略） ==========
         let targetSelect = null;
 
-        for (const select of allSelects) {
-          if (select.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
-          if (select.offsetParent === null) continue;
-
-          // 向上查找"内容声明"标签
-          let p = select.parentElement;
-          for (let i = 0; i < 8 && p; i++) {
-            const text = p.textContent || '';
-            if (text.includes('内容声明') && !text.includes('不设置内容声明')) {
-              targetSelect = select;
-              break;
+        // 策略A: 已知类名
+        const knownSelectors = [
+          '[class*="ST_selectValueSingle"]',
+          '[class*="selectValue"]',
+          '[class*="select-value"]',
+          '[class*="SelectValue"]',
+          '[class*="content-declaration"]',
+          '[class*="ContentDeclaration"]',
+          '[class*="declaration-select"]',
+          '[class*="declarationSelect"]',
+        ];
+        for (const sel of knownSelectors) {
+          const els = document.querySelectorAll(sel);
+          for (const el of els) {
+            if (el.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
+            if (el.offsetParent === null) continue;
+            // 确认是"内容声明"区域
+            let p = el.parentElement;
+            for (let i = 0; i < 8 && p; i++) {
+              if ((p.textContent || '').includes('内容声明')) { targetSelect = el; break; }
+              p = p.parentElement;
             }
-            p = p.parentElement;
+            if (targetSelect) break;
           }
           if (targetSelect) break;
         }
 
+        // 策略B: 文本匹配 - 查找包含"请选择"/"内容声明"的可点击元素
         if (!targetSelect) {
-          console.log('[PDD监控] fillContentDeclaration: 未找到内容声明选择器');
+          const allClickable = document.querySelectorAll('[class*="select"], [class*="Select"], [class*="dropdown"], [class*="picker"], [role="listbox"], [role="combobox"], [data-type="select"]');
+          for (const el of allClickable) {
+            if (el.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
+            if (el.offsetParent === null) continue;
+            const text = (el.textContent || '').trim();
+            // 匹配常见的默认文本
+            if (text === '' || text === '请选择' || text.includes('内容') || text.includes('声明') ||
+                text.includes('无需') || text.includes('AI生成') || text.includes('虚构') ||
+                text.includes('营销') || text.includes('转载')) {
+              let p = el.parentElement;
+              for (let i = 0; i < 6 && p; i++) {
+                if ((p.textContent || '').includes('内容声明')) { targetSelect = el; break; }
+                p = p.parentElement;
+              }
+              if (targetSelect) break;
+            }
+          }
+        }
+
+        // 策略C: 在视频项内部查找（如果有videoItem）
+        if (!targetSelect && videoItem) {
+          const innerEls = videoItem.querySelectorAll('[class*="select"], [class*="Select"], [class*="dropdown"], [class*="picker"], span, div');
+          for (const el of innerEls) {
+            if (el.offsetParent === null) continue;
+            const text = (el.textContent || '').trim();
+            if (text && (text.includes('内容声明') || text === '请选择' || text === '' ||
+                text.includes('无需标注') || text.includes('AI生成'))) {
+              // 检查是否可点击（有click事件或特定样式）
+              const style = window.getComputedStyle(el);
+              if (style.cursor === 'pointer' || el.getAttribute('role') === 'button' ||
+                  el.tagName === 'SELECT' || el.onclick || el.classList.toString().includes('select')) {
+                targetSelect = el;
+                break;
+              }
+            }
+          }
+        }
+
+        if (!targetSelect) {
+          // 输出调试信息：页面上有哪些可能的元素
+          const debugEls = document.querySelectorAll('[class*="select"], [class*="Select"], [class*="declaration"]');
+          console.warn(`[PDD监控] fillContentDeclaration: 未找到内容声明选择器 (共找到${debugEls.length}个候选元素)`);
+          debugEls.forEach((el, i) => {
+            if (el.offsetParent !== null && !el.closest('#pdd-video-monitor')) {
+              console.warn(`  候选[${i}]: tag=${el.tagName} class=${el.className.substring(0, 60)} text="${(el.textContent||'').trim().substring(0, 30)}"`);
+            }
+          });
           return false;
         }
 
-        // 2. 检查当前值是否已经是目标值（真正判断是否需要填充）
+        console.log(`[PDD监控] fillContentDeclaration: 找到选择器 tag=${targetSelect.tagName} class=${targetSelect.className.substring(0, 50)} text="${(targetSelect.textContent||'').trim().substring(0, 30)}"`);
+
+        // ========== 2. 检查当前值是否已匹配 ==========
         const currentValue = (targetSelect.textContent || '').trim();
-        if (currentValue && currentValue !== '请选择' && currentValue !== '' &&
-            (currentValue.includes(declaration) || declaration.includes(currentValue))) {
+        const isMatched = currentValue && currentValue !== '请选择' && currentValue !== '' &&
+          (currentValue.includes(declaration) || declaration.includes(currentValue));
+
+        if (isMatched) {
           console.log(`[PDD监控] fillContentDeclaration: 当前值"${currentValue}"已匹配目标"${declaration}"，跳过`);
           return true;
         }
 
-        console.log(`[PDD监控] fillContentDeclaration: 当前值="${currentValue}"，目标="${declaration}"，开始填充`);
+        console.log(`[PDD监控] fillContentDeclaration: 当前值="${currentValue}" → 目标="${declaration}"，开始操作`);
 
-        // 3. 点击选择器打开下拉菜单
+        // ========== 3. 用真实鼠标事件打开下拉菜单 ==========
         targetSelect.scrollIntoView({ behavior: 'instant', block: 'center' });
-        await new Promise(r => setTimeout(r, 200));
-        targetSelect.click();
+        await new Promise(r => setTimeout(r, 300));
 
-        // 4. 等待选项出现并点击目标选项（带超时+轮询保护）
-        let observerDisconnected = false;
+        const rect = targetSelect.getBoundingClientRect();
 
-        const option = await new Promise(resolve => {
-          // 先检查是否已经存在可见选项
-          const checkExisting = () => {
-            const opts = document.querySelectorAll('[class*="ContentDeclaration_title"], [class*="content-declaration"], [class*="select-option"], [class*="option-item"], [class*="dropdown-item"]');
-            for (const o of opts) {
-              if (o.offsetParent && (o.textContent || '').includes(declaration)) {
-                return o;
+        // 先聚焦
+        targetSelect.focus();
+        await new Promise(r => setTimeout(r, 100));
+
+        // 触发 mousedown + mouseup + click 完整序列（模拟真实用户操作）
+        const mouseOpts = { bubbles: true, cancelable: true, view: window, clientX: rect.left + rect.width / 2, clientY: rect.top + rect.height / 2 };
+        targetSelect.dispatchEvent(new MouseEvent('mousedown', mouseOpts));
+        await new Promise(r => setTimeout(r, 50));
+        targetSelect.dispatchEvent(new MouseEvent('mouseup', mouseOpts));
+        await new Promise(r => setTimeout(r, 50));
+        targetSelect.dispatchEvent(new MouseEvent('click', mouseOpts));
+        await new Promise(r => setTimeout(r, 500)); // 等待下拉菜单动画
+
+        // 如果 .click() 不生效，尝试 pointer 事件
+        const pointerOpts = { bubbles: true, cancelable: true, view: window, clientX: rect.left + rect.width / 2, clientY: rect.top + rect.height / 2, pointerId: 1, pointerType: 'mouse' };
+        targetSelect.dispatchEvent(new PointerEvent('pointerdown', pointerOpts));
+        await new Promise(r => setTimeout(r, 50));
+        targetSelect.dispatchEvent(new PointerEvent('pointerup', pointerOpts));
+        await new Promise(r => setTimeout(r, 400));
+
+        // ========== 4. 查找并点击目标选项（多策略） ==========
+        let option = null;
+
+        // 4a. 直接查找可见选项元素
+        const optionSelectors = [
+          '[class*="ContentDeclaration_title"]',
+          '[class*="content-declaration"]',
+          '[class*="option-item"]',
+          '[class*="option_item"]',
+          '[class*="select-option"]',
+          '[class*="select_option"]',
+          '[class*="dropdown-item"]',
+          '[class*="dropdown_item"]',
+          '[class*="list-item"]',
+          '[class*="list_item"]',
+          '[class*="menu-item"]',
+          '[class*="menuItem"]',
+          '[role="option"]',
+          '[role="listitem"]',
+          '[data-value]',
+          'li[class*="option"]',
+          'li[class*="item"]',
+          'div[class*="item"]',
+        ];
+
+        const findOption = () => {
+          // 先用精确选择器
+          for (const sel of optionSelectors) {
+            try {
+              const opts = document.querySelectorAll(sel);
+              for (const o of opts) {
+                if (o.offsetParent === null) continue;
+                if (o.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
+                const txt = (o.textContent || '').trim();
+                if (txt.includes(declaration)) {
+                  console.log(`[PDD监控] 找到选项(${sel}): "${txt.substring(0, 40)}"`);
+                  return o;
+                }
+              }
+            } catch(e) {}
+          }
+
+          // 4b. 全局搜索包含目标文字的可见元素（在下拉菜单区域内）
+          const allVisible = document.querySelectorAll('div, span, li, p, label');
+          for (const el of allVisible) {
+            if (el.offsetParent === null) continue;
+            if (el.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
+            // 排除太大的容器
+            const er = el.getBoundingClientRect();
+            if (er.width > 600 || er.height > 200) continue;
+            const txt = (el.textContent || '').trim();
+            // 精确或近似匹配
+            if (txt === declaration || txt.includes(declaration) || declaration.includes(txt)) {
+              // 确保不是选择器本身
+              if (el === targetSelect) continue;
+              // 确保文字长度合理（选项通常较短）
+              if (txt.length > 0 && txt.length < 30) {
+                // 检查是否在弹出的菜单/浮层中
+                const parent = el.closest('[class*="popup"], [class*="Popover"], [class*="popover"], [class*="dropdown"], [class*="Dropdown"], [class*="menu"], [class*="Menu"], [class*="overlay"], [class*="Overlay"], [class*="modal"], [role="listbox"], [role="dialog"]');
+                if (parent || er.top > rect.bottom) { // 在选择器下方出现
+                  console.log(`[PDD监控] 找到选项(全局搜索): tag=${el.tagName} text="${txt}"`);
+                  return el;
+                }
               }
             }
-            return null;
-          };
+          }
+          return null;
+        };
 
-          const existing = checkExisting();
-          if (existing) { resolve(existing); return; }
+        // 立即检查一次
+        option = findOption();
 
-          // MutationObserver 监听新选项出现
-          const obs = new MutationObserver(() => {
-            if (observerDisconnected) return;
-            const found = checkExisting();
-            if (found) {
-              observerDisconnected = true;
-              obs.disconnect();
-              clearTimeout(t);
-              resolve(found);
-            }
+        if (!option) {
+          // 等待+轮询（MutationObserver + setInterval 双保险）
+          option = await new Promise(resolve => {
+            let resolved = false;
+            const done = (result) => {
+              if (resolved) return;
+              resolved = true;
+              resolve(result);
+            };
+
+            // MutationObserver
+            const obs = new MutationObserver(() => {
+              const found = findOption();
+              if (found) { obs.disconnect(); clearInterval(poll); clearTimeout(t); done(found); }
+            });
+            obs.observe(document.body, { childList: true, subtree: true, attributes: true });
+
+            // 轮询兜底
+            let pollCount = 0;
+            const poll = setInterval(() => {
+              pollCount++;
+              const found = findOption();
+              if (found) { obs.disconnect(); clearInterval(poll); clearTimeout(t); done(found); }
+              else if (pollCount >= 25) clearInterval(poll); // 12.5秒
+            }, 500);
+
+            // 超时
+            const t = setTimeout(() => {
+              obs.disconnect(); clearInterval(poll);
+              done(null);
+            }, 12000);
           });
-
-          obs.observe(document.body, { childList: true, subtree: true });
-
-          // 额外轮询兜底（MutationObserver 可能遗漏）
-          let pollCount = 0;
-          const pollTimer = setInterval(() => {
-            if (observerDisconnected) { clearInterval(pollTimer); return; }
-            pollCount++;
-            const found = checkExisting();
-            if (found) {
-              observerDisconnected = true;
-              obs.disconnect();
-              clearTimeout(t);
-              clearInterval(pollTimer);
-              resolve(found);
-            } else if (pollCount >= 20) { // 10秒轮询超时
-              clearInterval(pollTimer);
-            }
-          }, 500);
-
-          const t = setTimeout(() => {
-            observerDisconnected = true;
-            try { obs.disconnect(); } catch(e) {}
-            clearInterval(pollTimer);
-            resolve(null);
-          }, 8000); // 总超时8秒
-        });
+        }
 
         if (option) {
+          // 点击选项
           option.scrollIntoView({ behavior: 'instant', block: 'center' });
-          await new Promise(r => setTimeout(r, 100));
+          await new Promise(r => setTimeout(r, 150));
+
+          const oRect = option.getBoundingClientRect();
+          const oMouseOpts = { bubbles: true, cancelable: true, view: window, clientX: oRect.left + oRect.width / 2, clientY: oRect.top + oRect.height / 2 };
+          option.dispatchEvent(new MouseEvent('mousedown', oMouseOpts));
+          await new Promise(r => setTimeout(r, 50));
+          option.dispatchEvent(new MouseEvent('mouseup', oMouseOpts));
+          await new Promise(r => setTimeout(r, 50));
           option.click();
           await new Promise(r => setTimeout(r, 200));
+
           filledDeclCount++;
-          console.log(`[PDD监控] fillContentDeclaration: ✅ 成功填充 (${filledDeclCount}) "${declaration}"`);
+          console.log(`[PDD监控] fillContentDeclaration: ✅ 成功填充 (#${filledDeclCount}) "${declaration}"`);
           return true;
         }
 
-        console.warn('[PDD监控] fillContentDeclaration: ⚠️ 未找到选项，超时退出');
+        console.warn(`[PDD监控] fillContentDeclaration: ⚠️ 未找到选项 "${declaration}"，超时退出`);
+        // 尝试关闭可能打开的下拉菜单
+        document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27, bubbles: true }));
         return false;
       } catch (e) {
-        console.error('[PDD监控] fillContentDeclaration 异常:', e.message);
+        console.error('[PDD监控] fillContentDeclaration 异常:', e.message, e.stack);
         return false;
       }
     }
