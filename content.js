@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // 全局错误处理 - 防止扩展插件导致页面崩溃
@@ -4471,28 +4471,12 @@
       }
     }
     
-    // 读取保存的视图状态
+    // 注意：不再在这里恢复保存的视图状态
+    // 视图状态完全由 autoSwitchViewByPage() 根据当前页面URL决定
+    // 避免在数据页面错误显示上传面板
     const savedView = localStorage.getItem('__pdd_panel_view');
-    if (savedView === 'upload') {
-      // 恢复到上传视图
-      currentView = 'upload';
-      const dataView = document.getElementById('pdd-data-view');
-      const uploadView = document.getElementById('pdd-upload-view');
-      const settingsView = document.getElementById('pdd-settings-view');
-      const panelTitle = document.getElementById('pdd-panel-title');
-      const navDataPageBtn = document.getElementById('pdd-nav-data-page');
-      const navAutoUploadBtn = document.getElementById('pdd-nav-auto-upload');
-      
-      if (dataView) dataView.style.display = 'none';
-      if (uploadView) uploadView.style.display = 'block';
-      if (settingsView) settingsView.style.display = 'none';
-      if (panelTitle) panelTitle.textContent = '📹 视频批量上传';
-      // 更新导航按钮状态
-      if (navAutoUploadBtn) navAutoUploadBtn.classList.add('active');
-      if (navDataPageBtn) navDataPageBtn.classList.remove('active');
-      console.log('[PDD监控] 恢复上传视图状态');
-    }
-    
+    console.log('[PDD监控] 保存的视图状态:', savedView, '(将在autoSwitchViewByPage中根据页面类型应用)');
+
     // 根据页面类型自动切换视图
     function autoSwitchViewByPage() {
       const currentUrl = window.location.href;
@@ -4508,15 +4492,21 @@
       const isUploadPage = currentUrl.includes('/video/publish') ||
                            currentUrl.includes('/creator/video/publish') ||
                            currentUrl.includes('/n-creator/video/publish') ||
-                           currentUrl.includes('/n-creator/video/home');
+                           currentUrl.includes('/n-creator/video/home') ||
+                           currentUrl.includes('/mms/video/publish');
 
       const isDataPage = currentUrl.includes('/video/list') ||
                          currentUrl.includes('/video/data') ||
                          currentUrl.includes('/creator/video/list') ||
                          currentUrl.includes('/n-creator/video/list') ||
-                         currentUrl.includes('/n-creator/video/mall-goods-video');
+                         currentUrl.includes('/n-creator/video/mall-goods-video') ||
+                         currentUrl.includes('/n-creator/video/data') ||
+                         currentUrl.includes('/mall-goods-video');
 
-      // 强制：根据页面类型显示对应视图
+      console.log('[PDD监控] 页面URL:', currentUrl);
+      console.log('[PDD监控] 页面类型检测: isUploadPage=', isUploadPage, ', isDataPage=', isDataPage);
+
+      // 强制：根据页面类型显示对应视图（这是唯一决定视图的地方）
       if (isUploadPage) {
         // 在上传页面，显示上传视图
         currentView = 'upload';
@@ -4528,26 +4518,37 @@
         // 更新导航按钮状态
         if (navAutoUploadBtn) navAutoUploadBtn.classList.add('active');
         if (navDataPageBtn) navDataPageBtn.classList.remove('active');
-        console.log('[PDD监控] 自动切换到上传视图');
+        console.log('[PDD监控] ★★ 自动切换到上传视图 ★★');
       } else if (isDataPage) {
         // 在数据页面，显示数据视图（强制隐藏上传视图）
         currentView = 'data';
         if (dataView) dataView.style.display = 'block';
-        if (uploadView) uploadView.style.display = 'none';
+        if (uploadView) uploadView.style.display = 'none';  // 关键：强制隐藏！
         if (settingsView) settingsView.style.display = 'none';
         if (panelTitle) panelTitle.textContent = '📊 视频数据监控';
         if (pageTypeIndicator) pageTypeIndicator.textContent = '📊 视频数据监控页面';
         // 更新导航按钮状态
         if (navDataPageBtn) navDataPageBtn.classList.add('active');
         if (navAutoUploadBtn) navAutoUploadBtn.classList.remove('active');
-        console.log('[PDD监控] 自动切换到数据视图（已隐藏上传面板）');
+        console.log('[PDD监控] ★★ 自动切换到数据视图（已强制隐藏上传面板）★★');
+      } else {
+        // 其他页面：默认显示数据视图，隐藏上传视图
+        currentView = 'data';
+        if (dataView) dataView.style.display = 'block';
+        if (uploadView) uploadView.style.display = 'none';  // 关键：默认也隐藏！
+        if (settingsView) settingsView.style.display = 'none';
+        if (panelTitle) panelTitle.textContent = '📊 视频数据监控';
+        if (pageTypeIndicator) pageTypeIndicator.textContent = '📊 视频数据监控页面';
+        if (navDataPageBtn) navDataPageBtn.classList.add('active');
+        if (navAutoUploadBtn) navAutoUploadBtn.classList.remove('active');
+        console.log('[PDD监控] ★★ 默认显示数据视图（未知页面类型，已隐藏上传面板）★★');
       }
-      
+
       // 保存当前视图状态
       localStorage.setItem('__pdd_panel_view', currentView);
     }
-    
-    // 页面加载时自动切换视图
+
+    // 页面加载时自动切换视图（这是初始化视图的唯一入口）
     autoSwitchViewByPage();
     
     // 视频数据监控页面按钮 - 切换到数据视图（不刷新页面）
@@ -5355,13 +5356,32 @@
         statusEl.innerHTML = `<div style="color:#e65100;">⚠️ 请先从商品列表中选择一个商品</div>`;
         return;
       }
-      
+
       if (!checkUploadPage()) {
         statusEl.style.display = 'block';
-        statusEl.innerHTML = '<div style="color:#f44336;">❌ 当前不在视频发布页面<br>请先点击左侧菜单"多多视频" → "发布视频"进入发布页面</div>';
+        statusEl.innerHTML = `<div style="color:#f44336; padding: 10px;">
+          ❌ 当前不在视频发布页面<br>
+          <span style="font-size: 12px; color: #666;">请先点击左侧菜单"多多视频" → "发布视频"进入发布页面</span><br><br>
+          <button id="pdd-goto-publish-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: bold; margin-top: 5px;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+            🚀 一键跳转到发布视频页面
+          </button>
+        </div>`;
+        // 绑定跳转按钮事件
+        const gotoBtn = document.getElementById('pdd-goto-publish-btn');
+        if (gotoBtn) {
+          gotoBtn.onclick = async function() {
+            gotoBtn.textContent = '⏳ 正在跳转...';
+            gotoBtn.disabled = true;
+            const navigated = await navigateToVideoUploadPage();
+            if (!navigated) {
+              gotoBtn.textContent = '❌ 跳转失败，请手动导航';
+              setTimeout(() => { gotoBtn.textContent = '🚀 一键跳转到发布视频页面'; gotoBtn.disabled = false; }, 2000);
+            }
+          };
+        }
         return;
       }
-      
+
       const customGoodsId = document.getElementById('pdd-custom-goods-id')?.value.trim();
       const goodsId = customGoodsId || selectedGoods.goodsId || selectedGoods.goods_id || selectedGoods.productId || selectedGoods.id;
       const appendFilenameSuffix = document.getElementById('pdd-append-filename-suffix')?.checked || false;
@@ -5474,7 +5494,25 @@
         const navigated = await navigateToVideoUploadPage();
         console.log('[PDD监控] 导航结果:', navigated);
         if (!navigated) {
-          statusEl.innerHTML = '<div style="color:#f44336;">❌ 当前不在视频发布页面<br>请先点击左侧菜单"多多视频" → "发布视频"进入发布页面</div>';
+          statusEl.innerHTML = `<div style="color:#f44336; padding: 10px;">
+            ❌ 当前不在视频发布页面<br>
+            <span style="font-size: 12px; color: #666;">请先点击左侧菜单"多多视频" → "发布视频"进入发布页面</span><br><br>
+            <button id="pdd-goto-publish-btn-2" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: bold; margin-top: 5px;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+              🚀 一键跳转到发布视频页面
+            </button>
+          </div>`;
+          const gotoBtn2 = document.getElementById('pdd-goto-publish-btn-2');
+          if (gotoBtn2) {
+            gotoBtn2.onclick = async function() {
+              gotoBtn2.textContent = '⏳ 正在跳转...';
+              gotoBtn2.disabled = true;
+              const navigated = await navigateToVideoUploadPage();
+              if (!navigated) {
+                gotoBtn2.textContent = '❌ 跳转失败，请手动导航';
+                setTimeout(() => { gotoBtn2.textContent = '🚀 一键跳转到发布视频页面'; gotoBtn2.disabled = false; }, 2000);
+              }
+            };
+          }
           return;
         }
         
@@ -5556,20 +5594,38 @@
       
       statusEl.style.display = 'block';
       statusEl.innerHTML = '<div style="color:#1565c0;">📦 使用缓存视频上传中...</div>';
-      
+
       // 检查是否在发布页面
       const isUploadPage = checkUploadPage();
       console.log('[PDD监控] 是否在发布页面:', isUploadPage);
-      
+
       if (!isUploadPage) {
         statusEl.innerHTML = '<div style="color:#1565c0;">🔄 正在导航到视频发布页面...</div>';
-        
+
         const navigated = await navigateToVideoUploadPage();
         if (!navigated) {
-          statusEl.innerHTML = '<div style="color:#f44336;">❌ 当前不在视频发布页面<br>请先点击左侧菜单"多多视频" → "发布视频"进入发布页面</div>';
+          statusEl.innerHTML = `<div style="color:#f44336; padding: 10px;">
+            ❌ 当前不在视频发布页面<br>
+            <span style="font-size: 12px; color: #666;">请先点击左侧菜单"多多视频" → "发布视频"进入发布页面</span><br><br>
+            <button id="pdd-goto-publish-btn-3" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: bold; margin-top: 5px;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+              🚀 一键跳转到发布视频页面
+            </button>
+          </div>`;
+          const gotoBtn3 = document.getElementById('pdd-goto-publish-btn-3');
+          if (gotoBtn3) {
+            gotoBtn3.onclick = async function() {
+              gotoBtn3.textContent = '⏳ 正在跳转...';
+              gotoBtn3.disabled = true;
+              const navigated = await navigateToVideoUploadPage();
+              if (!navigated) {
+                gotoBtn3.textContent = '❌ 跳转失败，请手动导航';
+                setTimeout(() => { gotoBtn3.textContent = '🚀 一键跳转到发布视频页面'; gotoBtn3.disabled = false; }, 2000);
+              }
+            };
+          }
           return;
         }
-        
+
         await new Promise(r => setTimeout(r, 2000));
       }
       
@@ -5748,7 +5804,25 @@
       // 检查是否在发布页面
       if (!checkUploadPage()) {
         statusEl.style.display = 'block';
-        statusEl.innerHTML = '<div style="color:#f44336;">❌ 当前不在视频发布页面<br>请先点击左侧菜单"多多视频" → "发布视频"进入发布页面</div>';
+        statusEl.innerHTML = `<div style="color:#f44336; padding: 10px;">
+          ❌ 当前不在视频发布页面<br>
+          <span style="font-size: 12px; color: #666;">请先点击左侧菜单"多多视频" → "发布视频"进入发布页面</span><br><br>
+          <button id="pdd-goto-publish-btn-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: bold; margin-top: 5px;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+            🚀 一键跳转到发布视频页面
+          </button>
+        </div>`;
+        const gotoBtn4 = document.getElementById('pdd-goto-publish-btn-4');
+        if (gotoBtn4) {
+          gotoBtn4.onclick = async function() {
+            gotoBtn4.textContent = '⏳ 正在跳转...';
+            gotoBtn4.disabled = true;
+            const navigated = await navigateToVideoUploadPage();
+            if (!navigated) {
+              gotoBtn4.textContent = '❌ 跳转失败，请手动导航';
+              setTimeout(() => { gotoBtn4.textContent = '🚀 一键跳转到发布视频页面'; gotoBtn4.disabled = false; }, 2000);
+            }
+          };
+        }
         return;
       }
 
