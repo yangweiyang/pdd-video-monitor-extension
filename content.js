@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // 全局错误处理 - 防止扩展插件导致页面崩溃
@@ -5359,27 +5359,21 @@
 
       if (!checkUploadPage()) {
         statusEl.style.display = 'block';
-        statusEl.innerHTML = `<div style="color:#f44336; padding: 10px;">
-          ❌ 当前不在视频发布页面<br>
-          <span style="font-size: 12px; color: #666;">请先点击左侧菜单"多多视频" → "发布视频"进入发布页面</span><br><br>
-          <button id="pdd-goto-publish-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: bold; margin-top: 5px;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-            🚀 一键跳转到发布视频页面
-          </button>
-        </div>`;
-        // 绑定跳转按钮事件
-        const gotoBtn = document.getElementById('pdd-goto-publish-btn');
-        if (gotoBtn) {
-          gotoBtn.onclick = async function() {
-            gotoBtn.textContent = '⏳ 正在跳转...';
-            gotoBtn.disabled = true;
-            const navigated = await navigateToVideoUploadPage();
-            if (!navigated) {
-              gotoBtn.textContent = '❌ 跳转失败，请手动导航';
-              setTimeout(() => { gotoBtn.textContent = '🚀 一键跳转到发布视频页面'; gotoBtn.disabled = false; }, 2000);
-            }
-          };
+        statusEl.innerHTML = `<div style="color:#1565c0;">🔄 正在自动跳转到视频发布页面...</div>`;
+
+        // 自动跳转到发布页面
+        const navigated = await navigateToVideoUploadPage();
+        if (!navigated) {
+          statusEl.innerHTML = `<div style="color:#f44336; padding: 10px;">
+            ❌ 自动跳转失败，请手动导航<br>
+            <span style="font-size: 12px; color: #666;">点击左侧菜单"多多视频" → "发布视频"进入发布页面</span>
+          </div>`;
+          return;
         }
-        return;
+
+        // 等待页面加载
+        statusEl.innerHTML = `<div style="color:#1565c0;">✅ 已跳转到发布页面，正在准备选择文件...</div>`;
+        await new Promise(r => setTimeout(r, 1500));
       }
 
       const customGoodsId = document.getElementById('pdd-custom-goods-id')?.value.trim();
@@ -5804,26 +5798,21 @@
       // 检查是否在发布页面
       if (!checkUploadPage()) {
         statusEl.style.display = 'block';
-        statusEl.innerHTML = `<div style="color:#f44336; padding: 10px;">
-          ❌ 当前不在视频发布页面<br>
-          <span style="font-size: 12px; color: #666;">请先点击左侧菜单"多多视频" → "发布视频"进入发布页面</span><br><br>
-          <button id="pdd-goto-publish-btn-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: bold; margin-top: 5px;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-            🚀 一键跳转到发布视频页面
-          </button>
-        </div>`;
-        const gotoBtn4 = document.getElementById('pdd-goto-publish-btn-4');
-        if (gotoBtn4) {
-          gotoBtn4.onclick = async function() {
-            gotoBtn4.textContent = '⏳ 正在跳转...';
-            gotoBtn4.disabled = true;
-            const navigated = await navigateToVideoUploadPage();
-            if (!navigated) {
-              gotoBtn4.textContent = '❌ 跳转失败，请手动导航';
-              setTimeout(() => { gotoBtn4.textContent = '🚀 一键跳转到发布视频页面'; gotoBtn4.disabled = false; }, 2000);
-            }
-          };
+        statusEl.innerHTML = `<div style="color:#1565c0;">🔄 正在自动跳转到视频发布页面...</div>`;
+
+        // 自动跳转到发布页面
+        const navigated = await navigateToVideoUploadPage();
+        if (!navigated) {
+          statusEl.innerHTML = `<div style="color:#f44336; padding: 10px;">
+            ❌ 自动跳转失败，请手动导航<br>
+            <span style="font-size: 12px; color: #666;">点击左侧菜单"多多视频" → "发布视频"进入发布页面</span>
+          </div>`;
+          return;
         }
-        return;
+
+        // 等待页面加载
+        statusEl.innerHTML = `<div style="color:#1565c0;">✅ 已跳转到发布页面，正在准备选择文件夹...</div>`;
+        await new Promise(r => setTimeout(r, 1500));
       }
 
       // 优先使用自定义商品ID，如果没有则使用已选择商品的ID
