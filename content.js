@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -1884,18 +1884,22 @@
   function addPanel() {
     console.log('[PDD监控] addPanel 被调用');
 
-    // ★★★ 排除不需要显示小羊助手的页面 ★★★
+    // ★★★ 白名单模式：只在多多视频相关页面显示悬浮球 ★★★
     const currentUrl = window.location.href;
-    const excludedPages = [
-      '/tool/promotion',    // 营销工具页面
-      '/tool/',             // 其他工具页面
-      '/service/',          // 服务市场
-      '/mms/tool/'          // MMS工具页面
+    const allowedPages = [
+      '/n-creator/video/',      // 多多视频（发布、列表、数据等）
+      '/creator/video/',        // 旧版创作者视频
+      '/video/publish',         // 视频发布
+      '/video/list',            // 视频列表
+      '/video/data',            // 视频数据
+      '/mall-goods-video',      // 商品视频
+      '/mms/video/',            // MMS视频
+      '/replay-manage'          // 回放管理
     ];
-    const isExcludedPage = excludedPages.some(pattern => currentUrl.includes(pattern));
+    const isAllowedPage = allowedPages.some(pattern => currentUrl.includes(pattern));
 
-    if (isExcludedPage) {
-      console.log('[PDD监控] 当前为工具/营销类页面，不显示小羊助手:', currentUrl);
+    if (!isAllowedPage) {
+      console.log('[PDD监控] 当前非多多视频页面，不显示小羊助手:', currentUrl);
       // 如果已存在悬浮球则隐藏它
       const existingBall = document.getElementById('pdd-monitor-ball');
       if (existingBall) existingBall.style.display = 'none';
