@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -4695,43 +4695,42 @@
         console.log('[PDD监控] 点击获取所有数据按钮');
         fetchDataBtn.textContent = '⏳ 正在获取...';
         fetchDataBtn.disabled = true;
-        fetchStatusEl.textContent = '正在请求视频列表API...';
+        fetchStatusEl.innerHTML = '<span style="color:#1565c0;">🔍 正在分析页面数据...</span>';
 
         try {
-          // 方案1：通过API获取
-          const count = await fetchAllVideos();
+          // ★ 优先使用DOM提取（更可靠）★
+          console.log('[PDD监控] 方案1：从DOM提取视频数据...');
+          const domCount = extractVideosFromDOM();
 
-          if (count === 0) {
-            // 方案2：如果API失败，从DOM提取
-            console.log('[PDD监控] API未返回数据，尝试从DOM提取...');
-            fetchStatusEl.innerHTML = '<span style="color:#e65100;">📋 API无数据，正在从页面提取...</span>';
-
-            const domCount = extractVideosFromDOM();
-            if (domCount > 0) {
-              fetchStatusEl.innerHTML = `<span style="color:#4caf50;">✅ 从页面提取 ${domCount} 个视频</span>`;
-            } else {
-              fetchStatusEl.innerHTML = '<span style="color:#f44336;">❌ 无法获取数据，请刷新页面重试</span>';
-            }
+          if (domCount > 0) {
+            fetchStatusEl.innerHTML = `<span style="color:#4caf50;">✅ 成功从页面提取 ${domCount} 个视频数据</span>`;
+            console.log('[PDD监控] DOM提取成功:', domCount, '个视频');
           } else {
-            fetchStatusEl.innerHTML = `<span style="color:#4caf50;">✅ 成功获取 ${count} 个视频数据</span>`;
+            // DOM提取失败，尝试API
+            console.log('[PDD监控] DOM未找到数据，尝试API...');
+            fetchStatusEl.innerHTML = '<span style="color:#e65100;">📡 页面无数据，尝试API请求...</span>';
+
+            const apiCount = await fetchAllVideos();
+
+            if (apiCount > 0) {
+              fetchStatusEl.innerHTML = `<span style="color:#4caf50;">✅ API成功获取 ${apiCount} 个视频</span>`;
+            } else {
+              fetchStatusEl.innerHTML = `<span style="color:#f44336;">❌ 无法获取数据（请确保页面已加载完成）</span>
+                <div style="font-size:11px;color:#999;margin-top:4px;">
+                  提示：请先点击"查看全部"打开视频列表弹窗
+                </div>`;
+            }
           }
+
         } catch (error) {
           console.error('[PDD监控] 获取数据失败:', error);
-
-          // 备选：从DOM提取
-          console.log('[PDD监控] 尝试从DOM提取数据...');
-          const domCount = extractVideosFromDOM();
-          if (domCount > 0) {
-            fetchStatusEl.innerHTML = `<span style="color:#4caf50;">✅ 从页面提取 ${domCount} 个视频</span>`;
-          } else {
-            fetchStatusEl.innerHTML = `<span style="color:#f44336;">❌ 请求失败: ${error.message}</span>`;
-          }
+          fetchStatusEl.innerHTML = `<span style="color:#f44336;">❌ 错误: ${error.message}</span>`;
         }
 
         setTimeout(() => {
           fetchDataBtn.textContent = '⚡ 获取所有视频数据';
           fetchDataBtn.disabled = false;
-        }, 2000);
+        }, 3000);
       };
     }
 
@@ -4740,24 +4739,98 @@
       let extractedCount = 0;
 
       try {
-        // 查找商品回放视频列表的表格行
-        const videoRows = document.querySelectorAll('.replay-goods-list .goods-item, .video-list-item, [class*="video-item"], tr[class*="row"]');
+        console.log('[PDD监控] 开始从DOM提取视频数据...');
 
-        if (videoRows.length > 0) {
-          console.log('[PDD监控] 找到', videoRows.length, '个视频元素');
+        // 方法1：查找弹窗中的商品列表
+        const modal = document.querySelector('.ant-modal-body, .modal-content, [class*="dialog"], [class*="Modal"]');
+        if (modal) {
+          console.log('[PDD监控] 找到弹窗容器');
+          const rows = modal.querySelectorAll('tr, [class*="row"], [class*="item"], li');
+          console.log('[PDD监控] 弹窗中找到', rows.length, '行元素');
 
-          videoRows.forEach((row, index) => {
-            const videoData = parseVideoFromRow(row);
-            if (videoData && !allVideos.find(v => v.videoId === videoData.videoId)) {
-              allVideos.push(videoData);
-              extractedCount++;
+          rows.forEach((row, index) => {
+            const text = row.innerText || '';
+            // 检查是否包含数字（可能是播放量/订单数）
+            if (text.includes('热度') || text.match(/\d{4,}/)) {
+              const videoData = parseVideoRow(row);
+              if (videoData && !allVideos.find(v => v.goodsName === videoData.goodsName)) {
+                allVideos.push(videoData);
+                extractedCount++;
+              }
+            }
+          });
+        }
+
+        // 方法2：如果方法1没找到，尝试查找整个页面的表格
+        if (extractedCount === 0) {
+          console.log('[PDD监控] 尝试查找页面所有表格...');
+
+          // 查找包含数字的元素
+          const allElements = document.querySelectorAll('div, tr, li, td');
+          const potentialVideos = [];
+
+          allElements.forEach(el => {
+            const text = el.innerText || '';
+            // 检查是否看起来像一行视频数据（包含热度、评论、订单等）
+            if (text.match(/热度\s*\d+.*评论\d+.*订单/) ||
+                text.match(/\d{5,}/) && text.length > 50 && text.length < 500) {
+              potentialVideos.push(el);
             }
           });
 
-          updatePanel();
-        } else {
-          console.log('[PDD监控] 未找到视频元素');
+          console.log('[PDD监控] 找到', potentialVideos.length, '个潜在视频元素');
+
+          potentialVideos.forEach((el, index) => {
+            // 避免重复（子元素和父元素可能都匹配）
+            const isChildOfExisting = potentialVideos.slice(0, index).some(parent =>
+              parent.contains(el) && parent !== el
+            );
+            if (!isChildOfExisting) {
+              const videoData = parseVideoRow(el);
+              if (videoData && !allVideos.find(v => v.goodsName === videoData.goodsName)) {
+                allVideos.push(videoData);
+                extractedCount++;
+              }
+            }
+          });
         }
+
+        // 方法3：直接查找特定模式的元素
+        if (extractedCount === 0) {
+          console.log('[PDD监控] 尝试查找特定选择器...');
+
+          const selectors = [
+            '[class*="goods"]',
+            '[class*="replay"]',
+            '[class*="video-list"]',
+            '[class*="table-row"]',
+            '.ant-table-tbody tr'
+          ];
+
+          for (const selector of selectors) {
+            const elements = document.querySelectorAll(selector);
+            if (elements.length > 0) {
+              console.log('[PDD监控] 选择器', selector, '找到', elements.length, '个元素');
+
+              elements.forEach(el => {
+                const videoData = parseVideoRow(el);
+                if (videoData && !allVideos.find(v => v.goodsName === videoData.goodsName)) {
+                  allVideos.push(videoData);
+                  extractedCount++;
+                }
+              });
+
+              if (extractedCount > 0) break;
+            }
+          }
+        }
+
+        console.log('[PDD监控] DOM提取完成，共提取', extractedCount, '个视频');
+
+        if (extractedCount > 0) {
+          updatePanel();
+        }
+
       } catch (error) {
         console.error('[PDD监控] DOM提取失败:', error);
       }
@@ -4765,22 +4838,38 @@
       return extractedCount;
     }
 
-    // 解析单个视频行的数据
-    function parseVideoFromRow(row) {
+    // 解析单个视频行的数据（增强版）
+    function parseVideoRow(row) {
       try {
-        const text = row.innerText || row.textContent || '';
-        const links = row.querySelectorAll('a, img');
-        const firstLink = links[0];
+        const text = (row.innerText || row.textContent || '').trim();
+        if (!text || text.length < 10) return null;
+
+        // 提取图片URL
+        const img = row.querySelector('img');
+        const coverUrl = img?.src || img?.dataset?.src || '';
+
+        // 提取商品名称（通常是第一个较长的文本）
+        const nameMatch = text.match(/^([^\d\n]{10,100})/);
+        const goodsName = nameMatch ? nameMatch[1].trim().substring(0, 80) : text.substring(0, 80);
+
+        // 提取各种数值
+        const heatMatch = text.match(/热度[\s:：]*(\d+)/);
+        const commentMatch = text.match(/评论[\s:：]*(\d+)/);
+        const orderMatch = text.match(/订单[\s:：]*(\d+)/);
+        const amountMatch = text.match(/金额[\s:：]*¥?([\d,.]+)/);
+        const playMatch = text.match(/(\d{4,})/); // 大数字作为播放量
 
         return {
           videoId: `dom_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-          goodsName: text.substring(0, 100),
-          coverUrl: firstLink?.src || firstLink?.href || '',
-          playCount: extractNumber(text.match(/播放[\s:：]*(\d+)/)),
-          orderCount: extractNumber(text.match(/订单[\s:：]*(\d+)/)),
-          amount: extractNumber(text.match(/金额[\s:：]*¥?(\d+)/)),
+          goodsName: goodsName,
+          coverUrl: coverUrl,
+          playCount: extractNumber(heatMatch) || extractNumber(playMatch),
+          orderCount: extractNumber(orderMatch),
+          amount: parseFloat(amountMatch?.[1]?.replace(/,/g, '')) || 0,
+          commentCount: extractNumber(commentMatch),
           publishTime: new Date().toLocaleString(),
-          status: '已发布'
+          status: '已发布',
+          source: 'DOM提取'
         };
       } catch (error) {
         return null;
