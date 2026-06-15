@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -4691,7 +4691,7 @@
       return items;
     }
 
-    // 解析单个视频项的数据 - 精确版
+    // 解析单个视频项的数据 - 精确版 v2
     function parseVideoItem(item, index) {
       try {
         const text = (item.innerText || item.textContent || '').trim();
@@ -4709,38 +4709,79 @@
         const timeMatch = text.match(/(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})/);
         const publishTime = timeMatch ? timeMatch[1] : new Date().toLocaleString();
 
-        // ★ 提取热度/播放量（通常是第一个大数字）★
-        let playCount = 0;
-        const heatMatch = text.match(/热度\s*[\s:：]*(\d+)/);
-        if (heatMatch) {
-          playCount = parseInt(heatMatch[1]) || 0;
-        } else {
-          // 备选：查找ID和时间之后的大数字
-          const numbers = text.match(/\b(\d{2,})\b/g) || [];
-          for (const num of numbers) {
-            const n = parseInt(num);
-            if (n > 10 && n < 100000 && !num.startsWith('20') && !num.startsWith('ID')) {
-              playCount = n;
-              break;
-            }
-          }
+        // ★★ 提取所有数值（按表格列顺序）★★
+        // 从截图看，列顺序是：热度 | 评论 | 订单(¥) | 金额(¥) | 人数
+
+        let playCount = 0;      // 热度/播放量
+        let commentCount = 0;   // 评论数
+        let orderCount = 0;     // 订单数
+        let amount = 0;         // 金额
+        let dealPeopleCount = 0;// 成交人数
+
+        // 方法1：使用精确的关键词定位
+        // 匹配 "热度" 或 "播放" 后面的数字
+        const heatResult = text.match(/热度\s*[\s:：]*([\d,]+\.?\d*)/);
+        if (heatResult) {
+          playCount = parseFloat(heatResult[1].replace(/,/g, '')) || 0;
         }
 
-        // ★ 提取评论数 ★
-        const commentMatch = text.match(/评论\s*[量数]?[\s:：]*(\d+)/);
-        const commentCount = commentMatch ? parseInt(commentMatch[1]) : 0;
+        // 匹配 "评论" 后面的数字
+        const commentResult = text.match(/评论\s*[\s:：]*([\d,]+\.?\d*)/);
+        if (commentResult) {
+          commentCount = parseFloat(commentResult[1].replace(/,/g, '')) || 0;
+        }
 
-        // ★ 提取订单数（带¥符号的数字）★
-        const orderMatch = text.match(/订单\s*[\s:：]*\¥?\s*(\d+\.?\d*)/);
-        const orderCount = orderMatch ? parseFloat(orderMatch[1]) : 0;
+        // 匹配 "订单" 后面的数字（可能带¥）
+        const orderResult = text.match(/订单\s*[\s:：]*\¥?\s*([\d,]+\.?\d*)/);
+        if (orderResult) {
+          orderCount = parseFloat(orderResult[1].replace(/,/g, '')) || 0;
+        }
 
-        // ★ 提取金额（订单后的数字）★
-        const amountMatch = text.match(/金额\s*[\s:：]*\¥?\s*(\d+\.?\d*)/);
-        const amount = amountMatch ? parseFloat(amountMatch[1]) : 0;
+        // 匹配 "金额" 后面的数字（可能带¥）
+        const amountResult = text.match(/金额\s*[\s:：]*\¥?\s*([\d,]+\.?\d*)/);
+        if (amountResult) {
+          amount = parseFloat(amountResult[1].replace(/,/g, '')) || 0;
+        }
 
-        // ★ 提取成交人数 ★
-        const peopleMatch = text.match(/人数\s*[\s:：]*(\d+)/);
-        const dealPeopleCount = peopleMatch ? parseInt(peopleMatch[1]) : 0;
+        // 匹配 "人数" 后面的数字
+        const peopleResult = text.match(/人数\s*[\s:：]*([\d,]+)/);
+        if (peopleResult) {
+          dealPeopleCount = parseInt(peopleResult[1].replace(/,/g, '')) || 0;
+        }
+
+        // 方法2：如果关键词匹配失败，尝试按位置提取
+        if (playCount === 0 && commentCount === 0) {
+          console.log('[PDD监控] 关键词匹配失败，尝试位置提取...');
+          console.log('[PDD监控] 原始文本:', text);
+
+          // 查找所有数字（排除ID和时间）
+          const allNumbers = [];
+          const numRegex = /\b(\d+\.?\d*)\b/g;
+          let match;
+          while ((match = numRegex.exec(text)) !== null) {
+            const numStr = match[1];
+            const numVal = parseFloat(numStr.replace(/,/g, ''));
+            // 排除：ID（15位以上）、时间格式（2024-08-14）、过小的数字
+            if (numStr.length < 15 && !numStr.includes('-') && !text.substring(match.index - 5, match.index).includes(':') && numVal >= 0) {
+              allNumbers.push({
+                value: numVal,
+                index: match.index,
+                str: numStr
+              });
+            }
+          }
+
+          console.log('[PDD监控] 提取到的数字:', allNumbers);
+
+          // 假设顺序：热度、评论、订单、金额、人数（根据截图）
+          if (allNumbers.length >= 3) {
+            playCount = allNumbers[0]?.value || 0;
+            commentCount = allNumbers[1]?.value || 0;
+            orderCount = allNumbers[2]?.value || 0;
+            amount = allNumbers[3]?.value || 0;
+            dealPeopleCount = allNumbers[4]?.value || 0;
+          }
+        }
 
         // 提取商品名称（视频标题）
         const lines = text.split('\n').filter(l => l.trim());
@@ -4751,6 +4792,18 @@
 
         // 验证至少有ID或播放量
         if (!idMatch && playCount === 0) return null;
+
+        // 调试输出
+        console.log(`[PDD监控] 视频${index + 1}解析结果:`, {
+          videoId: videoId,
+          goodsName: goodsName?.substring(0, 30),
+          publishTime: publishTime,
+          playCount: playCount,
+          commentCount: commentCount,
+          orderCount: orderCount,
+          amount: amount,
+          dealPeopleCount: dealPeopleCount
+        });
 
         return {
           videoId: videoId,
