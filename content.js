@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -4734,95 +4734,41 @@
       };
     }
 
-    // ★★★ 从DOM提取视频数据（备选方案）★★★
+    // ★★★ 从DOM提取视频数据（精确匹配弹窗表格）★★★
     function extractVideosFromDOM() {
       let extractedCount = 0;
 
       try {
         console.log('[PDD监控] 开始从DOM提取视频数据...');
 
-        // 方法1：查找弹窗中的商品列表
-        const modal = document.querySelector('.ant-modal-body, .modal-content, [class*="dialog"], [class*="Modal"]');
-        if (modal) {
-          console.log('[PDD监控] 找到弹窗容器');
-          const rows = modal.querySelectorAll('tr, [class*="row"], [class*="item"], li');
-          console.log('[PDD监控] 弹窗中找到', rows.length, '行元素');
+        // 清空旧数据（避免重复）
+        // allVideos = [];  // 不清空，只添加新数据
 
-          rows.forEach((row, index) => {
-            const text = row.innerText || '';
-            // 检查是否包含数字（可能是播放量/订单数）
-            if (text.includes('热度') || text.match(/\d{4,}/)) {
-              const videoData = parseVideoRow(row);
-              if (videoData && !allVideos.find(v => v.goodsName === videoData.goodsName)) {
-                allVideos.push(videoData);
-                extractedCount++;
-              }
+        // 方法1：查找弹窗中的表格行（最精确）
+        const tableRows = findTableInModal();
+        if (tableRows.length > 0) {
+          console.log('[PDD监控] 找到弹窗表格，共', tableRows.length, '行');
+
+          tableRows.forEach((row, index) => {
+            const videoData = parseTableRow(row);
+            if (videoData && !allVideos.find(v => v.videoId === videoData.videoId)) {
+              allVideos.push(videoData);
+              extractedCount++;
             }
           });
         }
 
-        // 方法2：如果方法1没找到，尝试查找整个页面的表格
+        // 方法2：如果方法1没找到，尝试查找主页面表格
         if (extractedCount === 0) {
-          console.log('[PDD监控] 尝试查找页面所有表格...');
-
-          // 查找包含数字的元素
-          const allElements = document.querySelectorAll('div, tr, li, td');
-          const potentialVideos = [];
-
-          allElements.forEach(el => {
-            const text = el.innerText || '';
-            // 检查是否看起来像一行视频数据（包含热度、评论、订单等）
-            if (text.match(/热度\s*\d+.*评论\d+.*订单/) ||
-                text.match(/\d{5,}/) && text.length > 50 && text.length < 500) {
-              potentialVideos.push(el);
+          console.log('[PDD监控] 弹窗未找到，尝试主页面表格...');
+          const mainTableRows = document.querySelectorAll('table tbody tr, [class*="table"] [class*="row"]');
+          mainTableRows.forEach(row => {
+            const videoData = parseTableRow(row);
+            if (videoData && !allVideos.find(v => v.videoId === videoData.videoId)) {
+              allVideos.push(videoData);
+              extractedCount++;
             }
           });
-
-          console.log('[PDD监控] 找到', potentialVideos.length, '个潜在视频元素');
-
-          potentialVideos.forEach((el, index) => {
-            // 避免重复（子元素和父元素可能都匹配）
-            const isChildOfExisting = potentialVideos.slice(0, index).some(parent =>
-              parent.contains(el) && parent !== el
-            );
-            if (!isChildOfExisting) {
-              const videoData = parseVideoRow(el);
-              if (videoData && !allVideos.find(v => v.goodsName === videoData.goodsName)) {
-                allVideos.push(videoData);
-                extractedCount++;
-              }
-            }
-          });
-        }
-
-        // 方法3：直接查找特定模式的元素
-        if (extractedCount === 0) {
-          console.log('[PDD监控] 尝试查找特定选择器...');
-
-          const selectors = [
-            '[class*="goods"]',
-            '[class*="replay"]',
-            '[class*="video-list"]',
-            '[class*="table-row"]',
-            '.ant-table-tbody tr'
-          ];
-
-          for (const selector of selectors) {
-            const elements = document.querySelectorAll(selector);
-            if (elements.length > 0) {
-              console.log('[PDD监控] 选择器', selector, '找到', elements.length, '个元素');
-
-              elements.forEach(el => {
-                const videoData = parseVideoRow(el);
-                if (videoData && !allVideos.find(v => v.goodsName === videoData.goodsName)) {
-                  allVideos.push(videoData);
-                  extractedCount++;
-                }
-              });
-
-              if (extractedCount > 0) break;
-            }
-          }
         }
 
         console.log('[PDD监控] DOM提取完成，共提取', extractedCount, '个视频');
@@ -4838,40 +4784,114 @@
       return extractedCount;
     }
 
-    // 解析单个视频行的数据（增强版）
-    function parseVideoRow(row) {
-      try {
-        const text = (row.innerText || row.textContent || '').trim();
-        if (!text || text.length < 10) return null;
+    // 查找弹窗中的表格
+    function findTableInModal() {
+      const rows = [];
 
-        // 提取图片URL
+      // 查找所有可能的弹窗容器
+      const modals = document.querySelectorAll(
+        '.ant-modal-wrap, .ant-modal-body, ' +
+        '[class*="Modal"], [class*="modal"], ' +
+        '[class*="dialog"], [class*="Dialog"], ' +
+        '[role="dialog"]'
+      );
+
+      for (const modal of modals) {
+        // 在弹窗内查找表格行
+        const tableRows = modal.querySelectorAll(
+          'tbody tr, ' +
+          '[class*="tbody"] [class*="tr"], ' +
+          '[class*="list-item"], ' +
+          '[class*="goods-item"], ' +
+          'tr[class*="row"]'
+        );
+
+        if (tableRows.length > 0) {
+          console.log('[PDD监控] 在弹窗中找到', tableRows.length, '行');
+          rows.push(...Array.from(tableRows));
+          break; // 找到一个就够了
+        }
+      }
+
+      // 如果弹窗没找到，尝试直接查找带"查看全部"的区域的表格
+      if (rows.length === 0) {
+        // 查找包含"查看全部"文字的区域
+        const allElements = document.querySelectorAll('*');
+        for (const el of allElements) {
+          if (el.innerText?.includes('查看全部') || el.innerText?.includes('个视频')) {
+            // 找到了相关区域，向上查找表格容器
+            let parent = el.parentElement;
+            for (let i = 0; i < 5; i++) { // 向上查5层
+              if (!parent) break;
+              const tableRows = parent.querySelectorAll('tr, [class*="row"]');
+              if (tableRows.length > 2) { // 至少3行才算表格
+                console.log('[PDD监控] 在"查看全部"附近找到表格,', tableRows.length, '行');
+                rows.push(...Array.from(tableRows));
+                break;
+              }
+              parent = parent.parentElement;
+            }
+            if (rows.length > 0) break;
+          }
+        }
+      }
+
+      return rows;
+    }
+
+    // 解析表格行数据（精确版）
+    function parseTableRow(row) {
+      try {
+        // 获取所有单元格或子元素
+        const cells = row.querySelectorAll('td, [class*="cell"], [class*="column"]');
+        const text = (row.innerText || row.textContent || '').trim();
+
+        if (!text || text.length < 15) return null;
+
+        // 提取商品图片
         const img = row.querySelector('img');
         const coverUrl = img?.src || img?.dataset?.src || '';
 
-        // 提取商品名称（通常是第一个较长的文本）
-        const nameMatch = text.match(/^([^\d\n]{10,100})/);
-        const goodsName = nameMatch ? nameMatch[1].trim().substring(0, 80) : text.substring(0, 80);
+        // 提取商品ID（通常在第一列）
+        const idMatch = text.match(/(\d{10,})/);
+        const goodsId = idMatch ? idMatch[1] : '';
 
-        // 提取各种数值
-        const heatMatch = text.match(/热度[\s:：]*(\d+)/);
-        const commentMatch = text.match(/评论[\s:：]*(\d+)/);
-        const orderMatch = text.match(/订单[\s:：]*(\d+)/);
-        const amountMatch = text.match(/金额[\s:：]*¥?([\d,.]+)/);
-        const playMatch = text.match(/(\d{4,})/); // 大数字作为播放量
+        // 提取商品名称（通常是较长的文本）
+        const nameMatch = text.match(/([^\d]{8,80})/);
+        const goodsName = nameMatch ? nameMatch[1].trim().substring(0, 60) : '';
+
+        // 提取数值（热度、评论、订单、金额）
+        const numbers = text.match(/\d+[\d,.]*/g) || [];
+        const heatIndex = text.indexOf('热度') !== -1 ? text.indexOf('热度') : -1;
+        const commentIndex = text.indexOf('评论') !== -1 ? text.indexOf('评论') : -1;
+        const orderIndex = text.indexOf('订单') !== -1 ? text.indexOf('订单') : -1;
+        const amountIndex = text.indexOf('金额') !== -1 ? text.indexOf('金额') : -1;
+
+        // 根据关键词位置提取对应数值
+        function getNumberAfter(keyword) {
+          const idx = text.indexOf(keyword);
+          if (idx === -1) return 0;
+          const afterText = text.substring(idx + keyword.length, idx + keyword.length + 20);
+          const num = afterText.match(/[\d,]+\.?\d*/);
+          return num ? parseFloat(num[0].replace(/,/g, '')) : 0;
+        }
 
         return {
-          videoId: `dom_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+          videoId: `table_${Date.now()}_${Math.random().toString(36).substr(2, 6)}_${goodsId}`,
+          goodsId: goodsId,
           goodsName: goodsName,
           coverUrl: coverUrl,
-          playCount: extractNumber(heatMatch) || extractNumber(playMatch),
-          orderCount: extractNumber(orderMatch),
-          amount: parseFloat(amountMatch?.[1]?.replace(/,/g, '')) || 0,
-          commentCount: extractNumber(commentMatch),
+          heatCount: getNumberAfter('热度'),
+          commentCount: getNumberAfter('评论'),
+          orderCount: getNumberAfter('订单'),
+          amount: getNumberAfter('金额'),
+          playCount: getNumberAfter('热度'), // 热度作为播放量
           publishTime: new Date().toLocaleString(),
           status: '已发布',
-          source: 'DOM提取'
+          source: 'DOM表格提取'
         };
       } catch (error) {
+        console.error('[PDD监控] 解析行失败:', error);
         return null;
       }
     }
