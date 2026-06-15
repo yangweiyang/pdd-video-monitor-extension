@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -2136,16 +2136,6 @@
               <div>已监控 <span id="page-count">0</span> 页 | 共 <span id="total-count">?</span> 个视频</div>
               <div id="auto-status" style="margin-top:4px;color:#999;"></div>
             </div>
-            <!-- 获取数据按钮 -->
-            <div style="text-align:center;margin-bottom:10px;">
-              <button id="pdd-fetch-data-btn" style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:bold;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-                ⚡ 获取所有视频数据
-              </button>
-              <button id="pdd-auto-paging-btn" style="background:linear-gradient(135deg, #f093fb 0%, #f5576c 100%);color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:bold;display:inline-flex;align-items:center;gap:6px;margin-left:8px;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-                🔄 自动翻页
-              </button>
-            </div>
-            <div id="pdd-fetch-status" style="text-align:center;font-size:12px;color:#666;margin-bottom:10px;"></div>
             <div id="pdd-comparison" style="display:none;margin-bottom:10px;padding:10px;background:linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);border-radius:8px;">
               <div style="font-size:12px;font-weight:600;color:#2e7d32;margin-bottom:8px;">📊 数据对比</div>
               <div id="pdd-comparison-content" style="font-size:11px;color:#333;"></div>
@@ -4565,174 +4555,8 @@
       if (navDataPageBtn) navDataPageBtn.classList.remove('active');
     }
 
-    // ★★★ 获取数据按钮事件绑定 ★★★
-    const fetchDataBtn = document.getElementById('pdd-fetch-data-btn');
-    const autoPagingBtn = document.getElementById('pdd-auto-paging-btn');
-    const fetchStatusEl = document.getElementById('pdd-fetch-status');
-
-    // 根据当前页面URL确定API端点
-    function getVideoApiEndpoint() {
-      const url = window.location.href;
-
-      if (url.includes('/n-creator/video/mall-goods-video')) {
-        // 商品回放视频页面 - 使用回放API
-        return {
-          endpoint: '/carllive/replay/page/goods',
-          params: { pageNum: 1, pageSize: 20 },
-          dataPath: 'result',
-          isReplayApi: true  // 标记为回放API，数据结构不同
-        };
-      } else if (url.includes('/n-creator/video/list') || url.includes('/n-creator/video/home')) {
-        // 视频列表页面
-        return {
-          endpoint: '/api/backbone/goods/consumer/video/list',
-          params: { pageNum: 1, pageSize: 20 },
-          dataPath: 'influenceVideoItemList',
-          pageKey: 'pageNum'
-        };
-      } else if (url.includes('/n-creator/video/replay-manage')) {
-        // 回放管理页面
-        return {
-          endpoint: '/carllive/replay/page/goods',
-          params: { pageNum: 1, pageSize: 20 },
-          dataPath: 'result',
-          isReplayApi: true
-        };
-      }
-
-      // 默认
-      return {
-        endpoint: '/api/backbone/goods/consumer/video/list',
-        params: { pageNum: 1, pageSize: 20 },
-        dataPath: 'influenceVideoItemList',
-        pageKey: 'pageNum'
-      };
-    }
-
-    // 获取单页数据
-    async function fetchVideoPage(pageNum = 1) {
-      const apiConfig = getVideoApiEndpoint();
-      const params = { ...apiConfig.params, [apiConfig.pageKey]: pageNum };
-
-      console.log('[PDD监控] 请求API:', apiConfig.endpoint, '参数:', params);
-
-      const response = await fetch(apiConfig.endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(params)
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log('[PDD监控] API响应:', data);
-
-      return data;
-    }
-
-    // 获取所有页面的数据
-    async function fetchAllVideos() {
-      let allVideosCount = 0;
-      let currentPage = 1;
-      let hasMore = true;
-      const apiConfig = getVideoApiEndpoint();
-
-      while (hasMore && currentPage <= 50) { // 最多获取50页
-        try {
-          const data = await fetchVideoPage(currentPage);
-          let videoList = [];
-
-          if (apiConfig.isReplayApi) {
-            // 回放API的数据结构：data.result 是数组
-            videoList = data.result || [];
-            console.log('[PDD监控] 回放API数据:', videoList.length, '条');
-          } else {
-            // 普通视频列表API
-            videoList = data.result?.[apiConfig.dataPath] || [];
-          }
-
-          if (videoList.length === 0) {
-            hasMore = false;
-            break;
-          }
-
-          // 处理当前页的数据
-          processVideoData(data);
-          allVideosCount += videoList.length;
-
-          fetchStatusEl.innerHTML = `<span style="color:#1565c0;">📥 已获取 ${allVideosCount} 个视频（第${currentPage}页）...</span>`;
-
-          // 检查是否还有下一页
-          let totalCount = 0;
-          if (apiConfig.isReplayApi) {
-            totalCount = data.totalCount || data.total || 0;
-          } else {
-            totalCount = data.result?.total || data.result?.totalCount || 0;
-          }
-          const totalPage = Math.ceil(totalCount / apiConfig.params.pageSize);
-          hasMore = currentPage < totalPage && totalPage > 1;
-          currentPage++;
-
-          // 延迟500ms避免请求过快
-          await new Promise(r => setTimeout(r, 500));
-        } catch (error) {
-          console.error('[PDD监控] 获取第', currentPage, '页失败:', error);
-          hasMore = false;
-        }
-      }
-
-      updatePanel();
-      return allVideosCount;
-    }
-
-    if (fetchDataBtn) {
-      fetchDataBtn.onclick = async function() {
-        console.log('[PDD监控] 点击获取所有数据按钮');
-        fetchDataBtn.textContent = '⏳ 正在获取...';
-        fetchDataBtn.disabled = true;
-        fetchStatusEl.innerHTML = '<span style="color:#1565c0;">🔍 正在分析页面数据...</span>';
-
-        try {
-          // ★ 优先使用DOM提取（更可靠）★
-          console.log('[PDD监控] 方案1：从DOM提取视频数据...');
-          const domCount = extractVideosFromDOM();
-
-          if (domCount > 0) {
-            fetchStatusEl.innerHTML = `<span style="color:#4caf50;">✅ 成功从页面提取 ${domCount} 个视频数据</span>`;
-            console.log('[PDD监控] DOM提取成功:', domCount, '个视频');
-          } else {
-            // DOM提取失败，尝试API
-            console.log('[PDD监控] DOM未找到数据，尝试API...');
-            fetchStatusEl.innerHTML = '<span style="color:#e65100;">📡 页面无数据，尝试API请求...</span>';
-
-            const apiCount = await fetchAllVideos();
-
-            if (apiCount > 0) {
-              fetchStatusEl.innerHTML = `<span style="color:#4caf50;">✅ API成功获取 ${apiCount} 个视频</span>`;
-            } else {
-              fetchStatusEl.innerHTML = `<span style="color:#f44336;">❌ 无法获取数据（请确保页面已加载完成）</span>
-                <div style="font-size:11px;color:#999;margin-top:4px;">
-                  提示：请先点击"查看全部"打开视频列表弹窗
-                </div>`;
-            }
-          }
-
-        } catch (error) {
-          console.error('[PDD监控] 获取数据失败:', error);
-          fetchStatusEl.innerHTML = `<span style="color:#f44336;">❌ 错误: ${error.message}</span>`;
-        }
-
-        setTimeout(() => {
-          fetchDataBtn.textContent = '⚡ 获取所有视频数据';
-          fetchDataBtn.disabled = false;
-        }, 3000);
-      };
-    }
+    // ★★★ 自动获取视频数据（无需手动点击）★★★
+    startAutoDataCapture();
 
     // ★★★ 从DOM提取视频数据（精确匹配弹窗表格）★★★
     function extractVideosFromDOM() {
@@ -4900,19 +4724,90 @@
       return match ? parseInt(match[1]) || 0 : 0;
     }
 
-    if (autoPagingBtn) {
-      autoPagingBtn.onclick = function() {
-        console.log('[PDD监控] 点击自动翻页按钮');
-        startAutoPaging();
-        autoPagingBtn.textContent = '⏹️ 停止翻页';
-        autoPagingBtn.onclick = function() {
-          stopAutoPaging();
-          autoPagingBtn.textContent = '🔄 自动翻页获取';
-          autoPagingBtn.onclick = arguments.callee; // 恢复原来的onclick
-        };
-      };
+    // ★★★ 自动获取视频数据（核心功能）★★★
+    let autoCaptureObserver = null;
+    let autoCaptureTimer = null;
+    let lastAutoCaptureTime = 0;
+
+    function startAutoDataCapture() {
+      console.log('[PDD监控] ★★ 启动自动数据捕获 ★★');
+
+      // 方法1：立即尝试提取一次（页面可能已加载）
+      setTimeout(() => {
+        console.log('[PDD监控] 首次自动提取...');
+        performAutoCapture();
+      }, 1500);
+
+      // 方法2：使用MutationObserver监听DOM变化
+      autoCaptureObserver = new MutationObserver((mutations) => {
+        // 防抖：避免频繁触发
+        const now = Date.now();
+        if (now - lastAutoCaptureTime < 2000) return; // 至少间隔2秒
+
+        // 检查是否有弹窗出现或表格变化
+        const hasModalChange = mutations.some(m =>
+          m.addedNodes.length > 0 &&
+          Array.from(m.addedNodes).some(node =>
+            node.nodeType === 1 && (
+              node.classList?.contains('ant-modal-wrap') ||
+              node.classList?.contains('ant-modal-body') ||
+              node.querySelector?.('.ant-modal-wrap') ||
+              node.querySelector?.('table')
+            )
+          )
+        );
+
+        if (hasModalChange) {
+          console.log('[PDD监控] 检测到弹窗/表格变化，延迟1秒后提取...');
+          lastAutoCaptureTime = now;
+          setTimeout(performAutoCapture, 1000);
+        }
+      });
+
+      // 监听整个body的变化
+      autoCaptureObserver.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: false,
+        characterData: false
+      });
+
+      // 方法3：定时轮询（每5秒检查一次）
+      autoCaptureTimer = setInterval(() => {
+        performAutoCapture();
+      }, 5000);
+
+      console.log('[PDD监控] ✓ 自动数据捕获已启动（MutationObserver + 定时轮询）');
     }
-    
+
+    function performAutoCapture() {
+      try {
+        const count = extractVideosFromDOM();
+
+        if (count > 0) {
+          const statusEl = document.getElementById('auto-status');
+          if (statusEl) {
+            statusEl.innerHTML = `<span style="color:#4caf50;">✅ 已自动获取 ${allVideos.length} 个视频</span>`;
+          }
+          console.log('[PDD监控] 自动获取成功:', count, '个新视频，总计', allVideos.length, '个');
+        }
+      } catch (error) {
+        console.error('[PDD监控] 自动获取失败:', error);
+      }
+    }
+
+    function stopAutoDataCapture() {
+      if (autoCaptureObserver) {
+        autoCaptureObserver.disconnect();
+        autoCaptureObserver = null;
+      }
+      if (autoCaptureTimer) {
+        clearInterval(autoCaptureTimer);
+        autoCaptureTimer = null;
+      }
+      console.log('[PDD监控] ✗ 自动数据捕获已停止');
+    }
+
     // 批量发布功能
     let isPublishing = false;
     let publishInterval = null;
