@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -4674,7 +4674,7 @@
       return items;
     }
 
-    // 解析单个视频项的数据
+    // 解析单个视频项的数据 - 精确版
     function parseVideoItem(item, index) {
       try {
         const text = (item.innerText || item.textContent || '').trim();
@@ -4684,42 +4684,67 @@
         const img = item.querySelector('img');
         const coverUrl = img?.src || img?.dataset?.src || '';
 
-        // 提取视频标题（通常是第一个长文本）
+        // ★ 提取视频ID（格式：ID:0052114794412015515）★
+        const idMatch = text.match(/ID[：:]\s*(\d{15,})/i);
+        const videoId = idMatch ? idMatch[1] : `video_${Date.now()}_${index}`;
+
+        // ★ 提取发布时间（格式：2024-08-14 17:03:05）★
+        const timeMatch = text.match(/(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})/);
+        const publishTime = timeMatch ? timeMatch[1] : new Date().toLocaleString();
+
+        // ★ 提取热度/播放量（通常是第一个大数字）★
+        let playCount = 0;
+        const heatMatch = text.match(/热度\s*[\s:：]*(\d+)/);
+        if (heatMatch) {
+          playCount = parseInt(heatMatch[1]) || 0;
+        } else {
+          // 备选：查找ID和时间之后的大数字
+          const numbers = text.match(/\b(\d{2,})\b/g) || [];
+          for (const num of numbers) {
+            const n = parseInt(num);
+            if (n > 10 && n < 100000 && !num.startsWith('20') && !num.startsWith('ID')) {
+              playCount = n;
+              break;
+            }
+          }
+        }
+
+        // ★ 提取评论数 ★
+        const commentMatch = text.match(/评论\s*[量数]?[\s:：]*(\d+)/);
+        const commentCount = commentMatch ? parseInt(commentMatch[1]) : 0;
+
+        // ★ 提取订单数（带¥符号的数字）★
+        const orderMatch = text.match(/订单\s*[\s:：]*\¥?\s*(\d+\.?\d*)/);
+        const orderCount = orderMatch ? parseFloat(orderMatch[1]) : 0;
+
+        // ★ 提取金额（订单后的数字）★
+        const amountMatch = text.match(/金额\s*[\s:：]*\¥?\s*(\d+\.?\d*)/);
+        const amount = amountMatch ? parseFloat(amountMatch[1]) : 0;
+
+        // ★ 提取成交人数 ★
+        const peopleMatch = text.match(/人数\s*[\s:：]*(\d+)/);
+        const dealPeopleCount = peopleMatch ? parseInt(peopleMatch[1]) : 0;
+
+        // 提取商品名称（视频标题）
         const lines = text.split('\n').filter(l => l.trim());
         const titleLine = lines.find(l =>
           l.includes('202') || l.includes('-') || l.length > 10
         ) || lines[0] || '';
-        const videoTitle = titleLine.trim().substring(0, 80);
+        const goodsName = titleLine.trim().substring(0, 80);
 
-        // 提取数值 - 使用关键词定位法
-        function getNumberAfter(keyword) {
-          const idx = text.indexOf(keyword);
-          if (idx === -1) return 0;
-          const afterText = text.substring(idx + keyword.length, idx + keyword.length + 25);
-          const numMatch = afterText.match(/[\d,]+\.?\d*/);
-          return numMatch ? parseFloat(numMatch[0].replace(/,/g, '')) : 0;
-        }
-
-        // 提取各种指标
-        const heatCount = getNumberAfter('热度');
-        const commentCount = getNumberAfter('评论');
-        const orderCount = getNumberAfter('订单');
-        const amount = getNumberAfter('金额');
-
-        // 只有当至少有一个有效数据时才返回
-        const hasValidData = heatCount > 0 || commentCount > 0 || orderCount > 0 || amount > 0;
-        if (!hasValidData) return null;
+        // 验证至少有ID或播放量
+        if (!idMatch && playCount === 0) return null;
 
         return {
-          videoId: `video_${Date.now()}_${index}_${Math.random().toString(36).substr(2, 6)}`,
-          goodsName: videoTitle,
+          videoId: videoId,
+          goodsName: goodsName,
           coverUrl: coverUrl,
-          playCount: heatCount, // 热度作为播放量
-          heatCount: heatCount,
-          commentCount: commentCount,
-          orderCount: orderCount,
-          amount: amount,
-          publishTime: new Date().toLocaleString(),
+          publishTime: publishTime,
+          playCount: playCount,           // 热度/播放量
+          commentCount: commentCount,     // 评论数
+          orderCount: orderCount,         // 订单数（¥）
+          amount: amount,                // 金额
+          dealPeopleCount: dealPeopleCount, // 成交人数
           status: '已发布',
           source: 'DOM自动提取'
         };
@@ -11459,7 +11484,7 @@
     
     if (allVideos.length === 0) {
       if (listEl) {
-        listEl.innerHTML = '<div class="no-data">暂无视频数据<br><small>点击 ⚡ 自动获取所有数据</small></div>';
+        listEl.innerHTML = '<div class="no-data">暂无视频数据<br><small>请打开"查看全部"弹窗后自动获取</small></div>';
       }
       if (totalVideosEl) totalVideosEl.textContent = '0';
       if (totalPlaysEl) totalPlaysEl.textContent = '0';
@@ -11532,11 +11557,11 @@
     
     // 构建视频卡片
     sortedVideos.forEach((video, idx) => {
-      totalPlays += video.playCount;
-      totalOrders += video.orderCount;
-      totalAmount += video.orderAmount;
+      totalPlays += (video.playCount || 0);
+      totalOrders += (video.orderCount || 0);
+      totalAmount += (video.orderAmount || video.amount || 0);
       
-      const growth = getVideoGrowth(video.feedId);
+      const growth = getVideoGrowth(video.feedId || video.videoId);
       
       let playGrowthBadge = '';
       let orderGrowthBadge = '';
@@ -11578,23 +11603,36 @@
       
       const card = document.createElement('div');
       card.className = `video-card ${video.auditStatus === 'failed' ? 'audit-failed' : ''}`;
-      card.dataset.feedId = video.feedId;
+      card.dataset.feedId = video.videoId || video.feedId;
       card.dataset.videoIndex = idx;
+
+      // 使用DOM提取的字段或API字段
+      const displayId = video.feedId || video.videoId || '';
+      const displayDesc = video.desc || video.goodsName || '无描述';
+      const displayDate = video.publishTime || video.date || '';
+      const displayPlay = video.playCount || 0;
+      const displayOrder = video.orderCount || 0;
+      const displayAmount = video.orderAmount || video.amount || 0;
+      const displayComment = video.commentCount || 0;
+      const displayPeople = video.dealPeopleCount || 0;
+
       card.innerHTML = `
-        <input type="checkbox" class="video-checkbox video-item-checkbox" data-feed-id="${escapeHtml(video.feedId)}">
+        <input type="checkbox" class="video-checkbox video-item-checkbox" data-feed-id="${escapeHtml(displayId)}">
         <img class="video-cover" src="${escapeHtml(video.coverUrl)}" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 60 60%22><rect fill=%22%23eee%22 width=%2260%22 height=%2260%22/><text x=%2230%22 y=%2235%22 text-anchor=%22middle%22 fill=%22%23999%22 font-size=%2212%22>无封面</text></svg>'">
         <div class="video-info">
-          <div class="video-desc">${escapeHtml(video.desc) || '无描述'} ${auditBadge}</div>
+          <div class="video-desc">${escapeHtml(displayDesc)} ${auditBadge}</div>
           <div class="video-stats">
-            <span class="stat-item">▶️ <span class="num">${formatNumber(video.playCount)}</span>${playGrowthBadge}</span>
-            <span class="stat-item">🛒 <span class="num">${video.orderCount}</span>${orderGrowthBadge}</span>
-            <span class="stat-item amount">💰 <span class="num">¥${formatNumber(video.orderAmount)}</span>${amountGrowthBadge}</span>
+            <span class="stat-item">▶️ <span class="num">${formatNumber(displayPlay)}</span>${playGrowthBadge}</span>
+            <span class="stat-item">🛒 <span class="num">${displayOrder}</span>${orderGrowthBadge}</span>
+            <span class="stat-item amount">💰 <span class="num">¥${formatNumber(displayAmount)}</span>${amountGrowthBadge}</span>
+            ${displayComment > 0 ? `<span class="stat-item">💬 <span class="num">${displayComment}</span></span>` : ''}
           </div>
           <div class="video-meta">
-            <span class="video-id">ID: ${escapeHtml(video.feedId)}</span>
-            <div style="display:flex;gap:4px;align-items:center;">
-              ${video.date ? `<span class="video-date">📅 ${escapeHtml(video.date)}</span>` : ''}
-              <button class="video-expand-btn" data-feed-id="${escapeHtml(video.feedId)}">📄 详情</button>
+            <span class="video-id">ID: ${escapeHtml(displayId)}</span>
+            <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap;">
+              ${displayDate ? `<span class="video-date">📅 ${escapeHtml(displayDate)}</span>` : ''}
+              ${displayPeople > 0 ? `<span style="font-size:10px;color:#666;">👥 ${displayPeople}人</span>` : ''}
+              <button class="video-expand-btn" data-feed-id="${escapeHtml(displayId)}">📄 详情</button>
             </div>
           </div>
         </div>
