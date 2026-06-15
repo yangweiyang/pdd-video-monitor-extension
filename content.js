@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -4575,12 +4575,12 @@
       const url = window.location.href;
 
       if (url.includes('/n-creator/video/mall-goods-video')) {
-        // 商品回放视频页面 - 使用商品视频列表API
+        // 商品回放视频页面 - 使用回放API
         return {
-          endpoint: '/api/backbone/goods/consumer/video/list',
+          endpoint: '/carllive/replay/page/goods',
           params: { pageNum: 1, pageSize: 20 },
-          dataPath: 'influenceVideoItemList',
-          pageKey: 'pageNum'
+          dataPath: 'result',
+          isReplayApi: true  // 标记为回放API，数据结构不同
         };
       } else if (url.includes('/n-creator/video/list') || url.includes('/n-creator/video/home')) {
         // 视频列表页面
@@ -4593,10 +4593,10 @@
       } else if (url.includes('/n-creator/video/replay-manage')) {
         // 回放管理页面
         return {
-          endpoint: '/api/backbone/goods/consumer/video/list',
+          endpoint: '/carllive/replay/page/goods',
           params: { pageNum: 1, pageSize: 20 },
-          dataPath: 'influenceVideoItemList',
-          pageKey: 'pageNum'
+          dataPath: 'result',
+          isReplayApi: true
         };
       }
 
@@ -4640,11 +4640,21 @@
       let allVideosCount = 0;
       let currentPage = 1;
       let hasMore = true;
+      const apiConfig = getVideoApiEndpoint();
 
       while (hasMore && currentPage <= 50) { // 最多获取50页
         try {
           const data = await fetchVideoPage(currentPage);
-          const videoList = data.result?.[getVideoApiEndpoint().dataPath] || [];
+          let videoList = [];
+
+          if (apiConfig.isReplayApi) {
+            // 回放API的数据结构：data.result 是数组
+            videoList = data.result || [];
+            console.log('[PDD监控] 回放API数据:', videoList.length, '条');
+          } else {
+            // 普通视频列表API
+            videoList = data.result?.[apiConfig.dataPath] || [];
+          }
 
           if (videoList.length === 0) {
             hasMore = false;
@@ -4658,9 +4668,14 @@
           fetchStatusEl.innerHTML = `<span style="color:#1565c0;">📥 已获取 ${allVideosCount} 个视频（第${currentPage}页）...</span>`;
 
           // 检查是否还有下一页
-          const totalCount = data.result?.total || data.result?.totalCount || 0;
-          const totalPage = Math.ceil(totalCount / getVideoApiEndpoint().params.pageSize);
-          hasMore = currentPage < totalPage;
+          let totalCount = 0;
+          if (apiConfig.isReplayApi) {
+            totalCount = data.totalCount || data.total || 0;
+          } else {
+            totalCount = data.result?.total || data.result?.totalCount || 0;
+          }
+          const totalPage = Math.ceil(totalCount / apiConfig.params.pageSize);
+          hasMore = currentPage < totalPage && totalPage > 1;
           currentPage++;
 
           // 延迟500ms避免请求过快
@@ -4683,11 +4698,34 @@
         fetchStatusEl.textContent = '正在请求视频列表API...';
 
         try {
+          // 方案1：通过API获取
           const count = await fetchAllVideos();
-          fetchStatusEl.innerHTML = `<span style="color:#4caf50;">✅ 成功获取 ${count} 个视频数据</span>`;
+
+          if (count === 0) {
+            // 方案2：如果API失败，从DOM提取
+            console.log('[PDD监控] API未返回数据，尝试从DOM提取...');
+            fetchStatusEl.innerHTML = '<span style="color:#e65100;">📋 API无数据，正在从页面提取...</span>';
+
+            const domCount = extractVideosFromDOM();
+            if (domCount > 0) {
+              fetchStatusEl.innerHTML = `<span style="color:#4caf50;">✅ 从页面提取 ${domCount} 个视频</span>`;
+            } else {
+              fetchStatusEl.innerHTML = '<span style="color:#f44336;">❌ 无法获取数据，请刷新页面重试</span>';
+            }
+          } else {
+            fetchStatusEl.innerHTML = `<span style="color:#4caf50;">✅ 成功获取 ${count} 个视频数据</span>`;
+          }
         } catch (error) {
           console.error('[PDD监控] 获取数据失败:', error);
-          fetchStatusEl.innerHTML = `<span style="color:#f44336;">❌ 请求失败: ${error.message}</span>`;
+
+          // 备选：从DOM提取
+          console.log('[PDD监控] 尝试从DOM提取数据...');
+          const domCount = extractVideosFromDOM();
+          if (domCount > 0) {
+            fetchStatusEl.innerHTML = `<span style="color:#4caf50;">✅ 从页面提取 ${domCount} 个视频</span>`;
+          } else {
+            fetchStatusEl.innerHTML = `<span style="color:#f44336;">❌ 请求失败: ${error.message}</span>`;
+          }
         }
 
         setTimeout(() => {
@@ -4695,6 +4733,62 @@
           fetchDataBtn.disabled = false;
         }, 2000);
       };
+    }
+
+    // ★★★ 从DOM提取视频数据（备选方案）★★★
+    function extractVideosFromDOM() {
+      let extractedCount = 0;
+
+      try {
+        // 查找商品回放视频列表的表格行
+        const videoRows = document.querySelectorAll('.replay-goods-list .goods-item, .video-list-item, [class*="video-item"], tr[class*="row"]');
+
+        if (videoRows.length > 0) {
+          console.log('[PDD监控] 找到', videoRows.length, '个视频元素');
+
+          videoRows.forEach((row, index) => {
+            const videoData = parseVideoFromRow(row);
+            if (videoData && !allVideos.find(v => v.videoId === videoData.videoId)) {
+              allVideos.push(videoData);
+              extractedCount++;
+            }
+          });
+
+          updatePanel();
+        } else {
+          console.log('[PDD监控] 未找到视频元素');
+        }
+      } catch (error) {
+        console.error('[PDD监控] DOM提取失败:', error);
+      }
+
+      return extractedCount;
+    }
+
+    // 解析单个视频行的数据
+    function parseVideoFromRow(row) {
+      try {
+        const text = row.innerText || row.textContent || '';
+        const links = row.querySelectorAll('a, img');
+        const firstLink = links[0];
+
+        return {
+          videoId: `dom_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+          goodsName: text.substring(0, 100),
+          coverUrl: firstLink?.src || firstLink?.href || '',
+          playCount: extractNumber(text.match(/播放[\s:：]*(\d+)/)),
+          orderCount: extractNumber(text.match(/订单[\s:：]*(\d+)/)),
+          amount: extractNumber(text.match(/金额[\s:：]*¥?(\d+)/)),
+          publishTime: new Date().toLocaleString(),
+          status: '已发布'
+        };
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function extractNumber(match) {
+      return match ? parseInt(match[1]) || 0 : 0;
     }
 
     if (autoPagingBtn) {
