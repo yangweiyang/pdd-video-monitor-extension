@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -4568,26 +4568,37 @@
       let extractedCount = 0;
 
       try {
-        console.log('[PDD监控] 开始从DOM提取视频数据...');
+        console.log('[PDD监控] ===== 开始从DOM提取视频数据 =====');
 
         // 查找所有视频项（精确匹配）
         const videoItems = findVideoItemsInModal();
 
+        console.log('[PDD监控] 找到', videoItems.length, '个候选视频项');
+
         if (videoItems.length > 0) {
-          console.log('[PDD监控] 找到', videoItems.length, '个视频项');
 
           videoItems.forEach((item, index) => {
+            const text = (item.innerText || item.textContent || '').trim();
+            console.log(`[PDD监控] 候选${index + 1}:`, text.substring(0, 200));
+
             const videoData = parseVideoItem(item, index);
-            if (videoData && !allVideos.find(v => v.videoId === videoData.videoId)) {
-              allVideos.push(videoData);
-              extractedCount++;
+            if (videoData) {
+              console.log(`[PDD监控] ✓ 提取成功:`, JSON.stringify(videoData, null, 2));
+              if (!allVideos.find(v => v.videoId === videoData.videoId)) {
+                allVideos.push(videoData);
+                extractedCount++;
+              }
+            } else {
+              console.log(`[PDD监控] ✗ 提取失败: 数据无效`);
             }
           });
         } else {
-          console.log('[PDD监控] 未找到视频项');
+          console.log('[PDD监控] 未找到任何视频项');
+          // 调试：打印页面DOM结构
+          debugPageStructure();
         }
 
-        console.log('[PDD监控] DOM提取完成，共提取', extractedCount, '个视频');
+        console.log('[PDD监控] ===== DOM提取完成，共提取', extractedCount, '个视频 =====');
 
         if (extractedCount > 0) {
           updatePanel();
@@ -4611,10 +4622,14 @@
         '[role="dialog"]'
       );
 
+      console.log('[PDD监控] 查找到', modals.length, '个弹窗容器');
+
       for (const modal of modals) {
+        console.log('[PDD监控] 检查弹窗:', modal.className);
+
         // 查找包含视频缩略图和统计数据的行/项
-        // 特征：同时包含 img 元素 和 "热度"、"评论"、"订单"、"金额" 文字
         const allRows = modal.querySelectorAll('div, li, tr');
+        console.log('[PDD监控] 弹窗内共有', allRows.length, '个元素');
 
         for (const row of allRows) {
           const text = row.innerText || '';
@@ -4625,13 +4640,15 @@
             text.includes('订单') ||
             text.includes('金额');
 
-          // 必须同时满足：有图片 + 有统计数据 + 长度适中（排除整个表格）
           if (hasImg && hasStats && text.length > 30 && text.length < 500) {
             items.push(row);
           }
         }
 
-        if (items.length > 0) break; // 找到就够了
+        if (items.length > 0) {
+          console.log('[PDD监控] 在弹窗中找到', items.length, '个视频项');
+          break;
+        }
       }
 
       // 方法2：如果方法1没找到，尝试更宽泛的搜索
@@ -4756,6 +4773,63 @@
 
     function extractNumber(match) {
       return match ? parseInt(match[1]) || 0 : 0;
+    }
+
+    // ★★★ 调试函数：打印页面DOM结构 ★★★
+    function debugPageStructure() {
+      console.log('[PDD监控] ===== 调试：分析页面DOM结构 =====');
+
+      // 1. 查找所有包含"查看全部"或"个视频"的元素
+      const allElements = document.querySelectorAll('*');
+      let foundRelated = false;
+
+      for (const el of allElements) {
+        const text = (el.innerText || '').trim();
+        if (text.includes('查看全部') || text.includes('个视频')) {
+          if (text.length < 150) { // 排除整个页面
+            foundRelated = true;
+            console.log('[PDD监控] 找到相关元素:', {
+              tag: el.tagName,
+              class: el.className,
+              id: el.id,
+              text: text.substring(0, 100),
+              childCount: el.children.length
+            });
+
+            // 打印子元素结构
+            console.log('[PDD监控] 子元素:');
+            Array.from(el.children).slice(0, 10).forEach((child, i) => {
+              console.log(`  [${i}] ${child.tagName}.${child.className}:`, (child.innerText || '').substring(0, 80));
+            });
+          }
+        }
+      }
+
+      if (!foundRelated) {
+        console.log('[PDD监控] 未找到包含"查看全部"或"个视频"的元素');
+        console.log('[PDD监控] 当前URL:', window.location.href);
+        console.log('[PDD监控] 页面标题:', document.title);
+      }
+
+      // 2. 查找所有表格
+      const tables = document.querySelectorAll('table, [class*="table"]');
+      console.log('[PDD监控] 找到', tables.length, '个表格元素');
+
+      // 3. 查找所有img元素及其父级
+      const imgs = document.querySelectorAll('img[src*="yang"], img[data-src]');
+      console.log('[PDD监控] 找到', imgs.length, '个可能的视频缩略图');
+
+      imgs.slice(0, 5).forEach((img, i) => {
+        const parent = img.parentElement;
+        console.log(`[PDD监控] 图片${i + 1}:`, {
+          src: img.src?.substring(0, 50),
+          parentTag: parent?.tagName,
+          parentClass: parent?.className,
+          parentText: (parent?.innerText || '').substring(0, 100)
+        });
+      });
+
+      console.log('[PDD监控] ===== 调试结束 =====');
     }
 
     // ★★★ 自动获取视频数据（核心功能）★★★
