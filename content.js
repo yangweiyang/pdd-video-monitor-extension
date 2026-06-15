@@ -1,7 +1,58 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿(function() {
   'use strict';
   
-  // 全局错误处理 - 防止扩展插件导致页面崩溃
+  // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
+  console.log('[PDD监控] ====== 内容脚本开始加载 ======');
+  
+  window.pddMonitorDebug = {
+    resetBallPosition: function() {
+      localStorage.removeItem('pdd-ball-position');
+      const ball = document.getElementById('pdd-monitor-ball');
+      if (ball) { ball.classList.remove('active'); console.log('[PDD监控] 导航栏按钮状态已重置'); }
+      else { console.log('[PDD监控] 导航栏按钮不存在'); }
+    },
+    showBall: function() {
+      const ball = document.getElementById('pdd-monitor-ball');
+      if (ball) {
+        ball.style.display = 'flex';
+        ball.style.opacity = '1';
+        ball.style.visibility = 'visible';
+        ball.style.zIndex = '2147483647';
+        console.log('[PDD监控] 按钮已强制显示');
+      } else {
+        console.log('[PDD监控] 按钮尚未创建（addPanel可能未执行）');
+      }
+    },
+    checkBallStatus: function() {
+      const ball = document.getElementById('pdd-monitor-ball');
+      if (!ball) { console.log('[PDD监控] 按钮不存在于DOM中，addPanel可能未被调用'); return; }
+      const rect = ball.getBoundingClientRect();
+      const style = window.getComputedStyle(ball);
+      console.log('[PDD监控] 按钮状态:', {
+        exists: true,
+        parentTag: ball.parentElement ? ball.parentElement.tagName : 'none',
+        position: { left: Math.round(rect.left), top: Math.round(rect.top), width: Math.round(rect.width), height: Math.round(rect.height) },
+        display: style.display,
+        visibility: style.visibility,
+        opacity: style.opacity,
+        zIndex: style.zIndex
+      });
+    }
+  };
+  
+  // 手动触发添加面板的接口
+  window.pddMonitorDebug.forceAddPanel = function() {
+    if (typeof addPanel !== 'undefined') {
+      addPanel();
+      console.log('[PDD监控] 已手动调用 addPanel()');
+    } else {
+      console.log('[PDD监控] addPanel 函数尚未定义');
+    }
+  };
+  
+  console.log('[PDD监控] ✓ 调试接口已暴露: window.pddMonitorDebug');
+  
+  // ========== 全局错误处理 ==========
   window.addEventListener('error', function(e) {
     if (e.error && e.error.message && e.error.message.includes('PDD监控')) {
       e.preventDefault();
@@ -1836,6 +1887,22 @@
       console.log('[PDD监控] 面板已添加，跳过');
       return;
     }
+
+    // ★★★ 排除不需要显示小羊助手的页面 ★★★
+    const currentUrl = window.location.href;
+    const excludedPages = [
+      '/tool/promotion',    // 营销工具页面
+      '/tool/',             // 其他工具页面
+      '/service/',          // 服务市场
+      '/mms/tool/'          // MMS工具页面
+    ];
+    const isExcludedPage = excludedPages.some(pattern => currentUrl.includes(pattern));
+
+    if (isExcludedPage) {
+      console.log('[PDD监控] 当前为工具/营销类页面，不显示小羊助手:', currentUrl);
+      return;  // 不创建悬浮球和面板
+    }
+
     panelAdded = true;
     console.log('[PDD监控] 开始创建悬浮球...');
     
@@ -1853,85 +1920,39 @@
     // 默认显示数据监控页面，添加上传页面切换功能
     let currentView = 'data'; // 'data' 或 'upload'
     
-    // 创建圆球容器 - 可爱小羊卡通形象
+    // 创建导航栏按钮 - 小羊助手
     const ball = document.createElement('div');
     ball.id = 'pdd-monitor-ball';
     ball.innerHTML = `
       <div class="ball-icon">
-        <svg viewBox="0 0 64 64" width="36" height="36" fill="none">
-          <!-- 羊毛 - 蓬松云朵状 -->
+        <svg viewBox="0 0 64 64" width="20" height="20" fill="none">
           <defs>
             <linearGradient id="sheepWool" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stop-color="#ffffff"/>
-              <stop offset="100%" stop-color="#f0e8f0"/>
+              <stop offset="100%" stop-color="#f0f0f0"/>
             </linearGradient>
             <linearGradient id="sheepFace" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stop-color="#fff5e6"/>
-              <stop offset="100%" stop-color="#ffe4c9"/>
+              <stop offset="100%" stop-color="#ffe8d4"/>
             </linearGradient>
-            <filter id="sheepGlow" x="-30%" y="-30%" width="160%" height="160%">
-              <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#ff6b6b" flood-opacity="0.25"/>
-            </filter>
           </defs>
-          <!-- 羊毛身体 -->
-          <ellipse cx="32" cy="38" rx="22" ry="18" fill="url(#sheepWool)" filter="url(#sheepGlow)"/>
-          <!-- 羊毛团 -->
-          <circle cx="16" cy="32" r="10" fill="url(#sheepWool)"/>
-          <circle cx="48" cy="32" r="10" fill="url(#sheepWool)"/>
-          <circle cx="22" cy="22" r="11" fill="url(#sheepWool)"/>
-          <circle cx="42" cy="22" r="11" fill="url(#sheepWool)"/>
-          <circle cx="32" cy="17" r="12" fill="url(#sheepWool)"/>
-          <!-- 耳朵 -->
-          <ellipse cx="14" cy="24" rx="5" ry="9" fill="url(#sheepFace)" transform="rotate(-20 14 24)"/>
-          <ellipse cx="50" cy="24" rx="5" ry="9" fill="url(#sheepFace)" transform="rotate(20 50 24)"/>
-          <!-- 内耳粉色 -->
-          <ellipse cx="14" cy="25" rx="3" ry="6" fill="#ffb3c1" transform="rotate(-20 14 25)"/>
-          <ellipse cx="50" cy="25" rx="3" ry="6" fill="#ffb3c1" transform="rotate(20 50 25)"/>
-          <!-- 脸部 -->
-          <ellipse cx="32" cy="34" rx="15" ry="13" fill="url(#sheepFace)"/>
-          <!-- 眼睛 -->
-          <circle cx="26" cy="31" r="3.5" fill="#333"/>
-          <circle cx="38" cy="31" r="3.5" fill="#333"/>
-          <!-- 眼睛高光 -->
-          <circle cx="27" cy="29.5" r="1.3" fill="#fff"/>
-          <circle cx="39" cy="29.5" r="1.3" fill="#fff"/>
-          <!-- 腮红 -->
-          <ellipse cx="21" cy="35" rx="4" ry="2.5" fill="#ffb3c1" opacity="0.55"/>
-          <ellipse cx="43" cy="35" rx="4" ry="2.5" fill="#ffb3c1" opacity="0.55"/>
-          <!-- 鼻子 -->
-          <ellipse cx="32" cy="37" rx="3" ry="2.2" fill="#ff9999"/>
-          <!-- 嘴巴 - 微笑 -->
-          <path d="M28 40 Q32 44 36 40" stroke="#ff8888" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <ellipse cx="32" cy="38" rx="20" ry="16" fill="url(#sheepWool)"/>
+          <circle cx="16" cy="32" r="9" fill="url(#sheepWool)"/>
+          <circle cx="48" cy="32" r="9" fill="url(#sheepWool)"/>
+          <circle cx="23" cy="23" r="10" fill="url(#sheepWool)"/>
+          <circle cx="41" cy="23" r="10" fill="url(#sheepWool)"/>
+          <circle cx="32" cy="18" r="11" fill="url(#sheepWool)"/>
+          <ellipse cx="15" cy="25" rx="4" ry="7" fill="url(#sheepFace)" transform="rotate(-18 15 25)"/>
+          <ellipse cx="49" cy="25" rx="4" ry="7" fill="url(#sheepFace)" transform="rotate(18 49 25)"/>
+          <ellipse cx="32" cy="34" rx="13" ry="11" fill="url(#sheepFace)"/>
+          <circle cx="27" cy="31" r="3" fill="#c7261d"/><circle cx="37" cy="31" r="3" fill="#c7261d"/>
+          <circle cx="28" cy="30" r="1.1" fill="#fff"/><circle cx="38" cy="30" r="1.1" fill="#fff"/>
+          <path d="M29 38 Q32 41 35 38" stroke="#c7261d" stroke-width="1.6" fill="none" stroke-linecap="round"/>
         </svg>
       </div>
+      <span class="ball-text">小羊助手</span>
       <div class="ball-badge" id="ball-count">0</div>
     `;
-    
-    // 读取保存的位置
-    const savedPosition = localStorage.getItem('pdd-ball-position');
-    if (savedPosition) {
-      try {
-        const pos = JSON.parse(savedPosition);
-        const ballSize = 56;
-        const margin = 10;
-        const maxLeft = window.innerWidth - ballSize - margin;
-        const maxTop = window.innerHeight - ballSize - margin;
-        const constrainedLeft = Math.max(margin, Math.min(pos.left, maxLeft));
-        const constrainedTop = Math.max(margin, Math.min(pos.top, maxTop));
-        
-        ball.style.left = constrainedLeft + 'px';
-        ball.style.top = constrainedTop + 'px';
-        ball.style.right = 'auto';
-        ball.style.transform = 'none';
-        
-        if (pos.atLeft) {
-          ball.classList.add('at-left');
-        }
-        console.log('[PDD监控] 恢复悬浮球位置:', { original: pos, constrained: { left: constrainedLeft, top: constrainedTop } });
-      } catch (e) {
-        console.log('[PDD监控] 读取位置失败:', e);
-      }
-    }
     
     // 创建展开的面板
     const panel = document.createElement('div');
@@ -2229,7 +2250,7 @@
                 <!-- 操作按钮组 -->
                 <div id="pdd-file-buttons" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
                   <button id="pdd-select-folder" style="padding:11px 0;background:linear-gradient(135deg,#f43f5e,#e11d48);color:white;border:none;border-radius:10px;cursor:pointer;font-size:13px;font-weight:700;transition:all 0.2s;box-shadow:0 3px 10px rgba(244,63,94,0.25);display:flex;align-items:center;justify-content:center;gap:5px;">
-                    📂 选择文件夹
+                    📂 选择文件夹(多选)
                   </button>
                   <button id="pdd-select-videos" style="padding:11px 0;background:linear-gradient(135deg,#ec4899,#db2777);color:white;border:none;border-radius:10px;cursor:pointer;font-size:13px;font-weight:700;transition:all 0.2s;box-shadow:0 3px 10px rgba(236,72,153,0.25);display:flex;align-items:center;justify-content:center;gap:5px;">
                     🎥 选择视频
@@ -2263,7 +2284,7 @@
                   <div id="pdd-folder-list" style="max-height:100px;overflow-y:auto;font-size:11px;color:#334155;"></div>
                   <div id="pdd-total-count" style="margin-top:6px;padding-top:6px;border-top:1px solid #bfdbfe;font-size:11px;font-weight:700;color:#1d4ed8;"></div>
                   <button id="pdd-add-more-folders" style="width:100%;margin-top:6px;padding:7px;background:linear-gradient(135deg,#3b82f6,#2563eb);color:white;border:none;border-radius:7px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.2s;">
-                    ➕ 添加更多文件夹
+                    ➕ 添加更多(多选)
                   </button>
                 </div>
 
@@ -2429,81 +2450,79 @@
       }
       
       #pdd-monitor-ball {
-        position: fixed;
-        top: 50%;
-        right: 16px;
-        width: 56px;
-        height: 56px;
-        background: linear-gradient(145deg, #ffffff 0%, #fef6f0 50%, #fff0e8 100%);
-        border-radius: 50%;
-        box-shadow:
-          0 4px 20px rgba(224, 46, 36, 0.18),
-          0 2px 8px rgba(0, 0, 0, 0.08),
-          inset 0 -3px 8px rgba(255, 107, 107, 0.1);
-        z-index: 10000;
-        cursor: grab;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        touch-action: none;
-        transform: translateY(-50%);
-        transition: box-shadow 0.3s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 2.5px solid rgba(224, 46, 36, 0.12);
-      }
-      #pdd-monitor-ball:hover {
-        width: 62px;
-        height: 62px;
-        box-shadow:
-          0 8px 30px rgba(224, 46, 36, 0.28),
-          0 4px 12px rgba(0, 0, 0, 0.1),
-          inset 0 -3px 10px rgba(255, 107, 107, 0.15);
-        transform: translateY(-50%) scale(1.05);
-      }
-      #pdd-monitor-ball:active {
-        cursor: grabbing;
-        transform: translateY(-50%) scale(0.95);
-        transition: transform 0.1s;
-      }
-      #pdd-monitor-ball.dragging {
-        cursor: grabbing;
-        transform: scale(1.08) !important;
-        box-shadow:
-          0 16px 48px rgba(224, 46, 36, 0.35),
-          0 8px 24px rgba(0, 0, 0, 0.12) !important;
-        transition: box-shadow 0.2s;
-        opacity: 0.92;
-      }
-      #pdd-monitor-ball.hidden {
-        display: none;
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: unset !important;
+        max-height: unset !important;
+        padding: 0 !important;
+        background: #e02e24 !important;
+        color: #ffffff !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        transition: all 0.2s ease !important;
+        box-sizing: border-box !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif !important;
+        border: none !important;
+        outline: none !important;
+        margin: 0 !important;
+        text-decoration: none !important;
+        line-height: 1.4 !important;
+        border-radius: 4px !important;
+        overflow: hidden !important;
       }
       .ball-icon {
-        width: 38px;
-        height: 38px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 20px !important;
+        height: 20px !important;
+        min-width: 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-shrink: 0 !important;
+        margin-left: 12px !important;
       }
       .ball-icon svg {
-        display: block;
-        filter: drop-shadow(0 1px 2px rgba(0,0,0,0.08));
+        display: block !important;
+      }
+      .ball-text {
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        white-space: nowrap !important;
+        line-height: 1.5 !important;
+        padding: 12px 12px 12px 0 !important;
       }
       .ball-badge {
-        position: absolute;
-        top: -4px;
-        right: -4px;
-        background: linear-gradient(135deg, #e02e24 0%, #c7261d 100%);
-        color: white;
-        font-size: 10px;
-        font-weight: 800;
-        padding: 3px 7px;
-        border-radius: 12px;
-        min-width: 20px;
-        text-align: center;
-        box-shadow: 0 3px 10px rgba(224, 46, 36, 0.4);
-        border: 2.5px solid white;
-        display: none;
-        animation: badgePulse 2s infinite;
-        line-height: 1.2;
+        position: absolute !important;
+        top: 50% !important;
+        right: 10px !important;
+        transform: translateY(-50%) !important;
+        background: #fff !important;
+        color: #e02e24 !important;
+        font-size: 10px !important;
+        font-weight: 700 !important;
+        padding: 2px 6px !important;
+        border-radius: 10px !important;
+        min-width: 16px !important;
+        text-align: center !important;
+        display: none !important;
+        line-height: 1.2 !important;
+        border: 2px solid #e02e24 !important;
+      }
+      .ball-badge.show {
+        display: block !important;
+      }
+      #pdd-monitor-ball:hover {
+        background: #c7261d !important;
+        color: #fff !important;
+      }
+      #pdd-monitor-ball.active {
+        background: #c7261d !important;
+        color: #fff !important;
+        font-weight: 600 !important;
       }
       @keyframes badgePulse {
         0%, 100% { transform: scale(1); }
@@ -3897,20 +3916,75 @@
     
     // 确保 body 存在再添加元素
     if (!document.body) {
-      console.log('[PDD监控] 错误: document.body 不存在，无法添加悬浮球');
+      console.log('[PDD监控] 错误: document.body 不存在，无法添加导航栏按钮');
       return;
     }
     
-    document.body.appendChild(ball);
+    // 查找发布视频按钮并插入导航栏按钮
+    function insertNavButton() {
+      console.log('[PDD监控] 开始查找导航栏...');
+      
+      let navItem = null;
+      
+      // 遍历所有元素，找到包含"发布视频"文本的最小容器（即导航项本身）
+      const allElements = document.querySelectorAll('a, li, div, span');
+      for (const el of allElements) {
+        // 跳过太深的元素和我们的按钮
+        if (el.id === 'pdd-monitor-ball') continue;
+        const text = (el.textContent || '').trim();
+        // 精确匹配：元素的纯文本正好是"发布视频"或以"发布视频"开头且不太长
+        if ((text === '发布视频' || text === '发布视频 ' || text.match(/^发布视频\s*$/)) && el.children.length < 5) {
+          navItem = el;
+          console.log('[PDD监控] 找到发布视频导航项:', el.tagName, el.className?.substring(0, 80), 'innerHTML长度:', el.innerHTML.length);
+          break;
+        }
+      }
+      
+      let inserted = false;
+      
+      if (navItem && navItem.parentElement) {
+        console.log('[PDD监控] 发布视频父元素:', navItem.parentElement.tagName, navItem.parentElement.className?.substring(0, 80));
+        
+        // 在发布视频导航项后面插入我们的按钮
+        if (navItem.nextElementSibling) {
+          navItem.parentElement.insertBefore(ball, navItem.nextElementSibling);
+        } else {
+          navItem.parentElement.appendChild(ball);
+        }
+        inserted = true;
+        console.log('[PDD监控] ✅ 导航栏按钮已插入到发布视频下方（红色高亮样式）');
+      }
+      
+      if (!inserted) {
+        console.log('[PDD监控] ⚠️ 未找到发布视频导航项，使用浮动回退模式');
+        document.body.appendChild(ball);
+        ball.style.position = 'fixed';
+        ball.style.bottom = '80px';
+        ball.style.right = '20px';
+        ball.style.zIndex = '2147483647';
+        ball.style.width = 'auto';
+        ball.style.background = 'linear-gradient(135deg, #e02e24, #c7261d)';
+        ball.style.borderRadius = '50%';
+        ball.style.boxShadow = '0 4px 20px rgba(224,46,36,0.4)';
+        ball.style.display = 'flex';
+        ball.style.alignItems = 'center';
+        ball.style.justifyContent = 'center';
+        ball.style.color = 'white';
+        ball.style.padding = '15px';
+        ball.style.cursor = 'pointer';
+      }
+    }
+    
+    insertNavButton();
     document.body.appendChild(panel);
     
     // 调试日志：确认元素已添加
     const addedBall = document.getElementById('pdd-monitor-ball');
     const addedPanel = document.getElementById('pdd-video-monitor');
-    console.log('[PDD监控] 悬浮球添加状态:', addedBall ? '成功' : '失败', '面板添加状态:', addedPanel ? '成功' : '失败');
+    console.log('[PDD监控] 导航栏按钮添加状态:', addedBall ? '成功' : '失败', '面板添加状态:', addedPanel ? '成功' : '失败');
     if (addedBall) {
       const rect = addedBall.getBoundingClientRect();
-      console.log('[PDD监控] 悬浮球位置:', { left: rect.left, top: rect.top, width: rect.width, height: rect.height });
+      console.log('[PDD监控] 导航栏按钮位置:', { left: rect.left, top: rect.top, width: rect.width, height: rect.height });
     }
     
     const settingsModal = document.createElement('div');
@@ -4128,15 +4202,13 @@
       }
     }
     
-    // 圆球点击事件 - 展开/收起面板
+    // 导航栏按钮点击事件 - 展开/收起面板
     ball.addEventListener('click', (e) => {
-      if (ballDragStarted) return;
-      
       const isVisible = panel.classList.contains('show');
       
       if (!isVisible) {
         panel.classList.add('show');
-        ball.classList.add('hidden');
+        ball.classList.add('active');
         document.body.classList.add('pdd-sidebar-open');
         
         // 使用 JavaScript 强制调整拼多多页面布局
@@ -4159,7 +4231,7 @@
         }, { timeout: 100 });
       } else {
         panel.classList.remove('show');
-        ball.classList.remove('hidden');
+        ball.classList.remove('active');
         document.body.classList.remove('pdd-sidebar-open');
         
         // 恢复拼多多页面布局
@@ -4167,168 +4239,12 @@
       }
     });
     
-    // 圆球拖拽功能
-    let ballDragging = false;
-    let ballDragStarted = false;
-    let ballStartX, ballStartY, ballStartLeft, ballStartTop;
-    
-    // 保存位置到 localStorage
-    function saveBallPosition() {
-      const rect = ball.getBoundingClientRect();
-      const isAtLeft = ball.classList.contains('at-left');
-      const position = {
-        left: rect.left,
-        top: rect.top,
-        atLeft: isAtLeft
-      };
-      localStorage.setItem('pdd-ball-position', JSON.stringify(position));
-    }
-    
-    // 吸附到最近的边缘
-    function snapToEdge(left, top) {
-      const ballSize = 56;
-      const centerX = left + ballSize / 2;
-      const screenCenterX = window.innerWidth / 2;
-      
-      const constrainedTop = Math.max(28, Math.min(top, window.innerHeight - ballSize - 28));
-      
-      ball.classList.add('snapping');
-      
-      if (centerX < screenCenterX) {
-        ball.classList.add('at-left');
-        ball.style.left = '-28px';
-        ball.style.right = 'auto';
-        ball.style.top = constrainedTop + 'px';
-        ball.style.transform = 'translateY(-50%)';
-      } else {
-        ball.classList.remove('at-left');
-        ball.style.left = 'auto';
-        ball.style.right = '-28px';
-        ball.style.top = constrainedTop + 'px';
-        ball.style.transform = 'translateY(-50%)';
-      }
-      
-      setTimeout(() => {
-        ball.classList.remove('snapping');
-      }, 300);
-      
-      saveBallPosition();
-    }
-    
-    // 限制位置在屏幕内
-    function constrainPosition(left, top) {
-      const ballSize = 56;
-      const maxLeft = window.innerWidth - ballSize;
-      const maxTop = window.innerHeight - ballSize;
-      return {
-        left: Math.max(0, Math.min(left, maxLeft)),
-        top: Math.max(0, Math.min(top, maxTop))
-      };
-    }
-    
-    // 鼠标事件 - 使用命名函数以便移除
-    const handleMouseMove = (e) => {
-      if (!ballDragging) return;
-      
-      const dx = e.clientX - ballStartX;
-      const dy = e.clientY - ballStartY;
-      
-      if (!ballDragStarted && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
-        ballDragStarted = true;
-        ball.classList.add('dragging');
-      }
-      
-      if (ballDragStarted) {
-        const newLeft = ballStartLeft + dx;
-        const newTop = ballStartTop + dy;
-        const constrained = constrainPosition(newLeft, newTop);
-        ball.style.left = constrained.left + 'px';
-        ball.style.top = constrained.top + 'px';
-        ball.style.right = 'auto';
-        ball.style.transform = 'none';
-      }
-    };
-    
-    const handleMouseUp = (e) => {
-      if (ballDragging && ballDragStarted) {
-        const rect = ball.getBoundingClientRect();
-        snapToEdge(rect.left, rect.top);
-      }
-      ball.classList.remove('dragging');
-      ballDragging = false;
-      ballDragStarted = false;
-    };
-    
-    // 触摸事件处理函数
-    const handleTouchMove = (e) => {
-      if (!ballDragging) return;
-      
-      const touch = e.touches[0];
-      const dx = touch.clientX - ballStartX;
-      const dy = touch.clientY - ballStartY;
-      
-      if (!ballDragStarted && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
-        ballDragStarted = true;
-        ball.classList.add('dragging');
-      }
-      
-      if (ballDragStarted) {
-        const newLeft = ballStartLeft + dx;
-        const newTop = ballStartTop + dy;
-        const constrained = constrainPosition(newLeft, newTop);
-        ball.style.left = constrained.left + 'px';
-        ball.style.top = constrained.top + 'px';
-        ball.style.right = 'auto';
-        ball.style.transform = 'none';
-      }
-    };
-    
-    const handleTouchEnd = () => {
-      if (ballDragging && ballDragStarted) {
-        const rect = ball.getBoundingClientRect();
-        snapToEdge(rect.left, rect.top);
-      }
-      ball.classList.remove('dragging');
-      ballDragging = false;
-      ballDragStarted = false;
-    };
-    
-    ball.addEventListener('mousedown', (e) => {
-      ballDragging = true;
-      ballDragStarted = false;
-      ballStartX = e.clientX;
-      ballStartY = e.clientY;
-      const rect = ball.getBoundingClientRect();
-      ballStartLeft = rect.left;
-      ballStartTop = rect.top;
-      e.preventDefault();
-      
-      // 动态添加document级别的事件监听
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp, { once: true });
-    });
-    
-    // 触摸事件（移动端支持）
-    ball.addEventListener('touchstart', (e) => {
-      ballDragging = true;
-      ballDragStarted = false;
-      const touch = e.touches[0];
-      ballStartX = touch.clientX;
-      ballStartY = touch.clientY;
-      const rect = ball.getBoundingClientRect();
-      ballStartLeft = rect.left;
-      ballStartTop = rect.top;
-      e.preventDefault();
-      
-      // 动态添加document级别的事件监听
-      document.addEventListener('touchmove', handleTouchMove, { passive: false });
-      document.addEventListener('touchend', handleTouchEnd, { once: true });
-    }, { passive: false });
+    // 导航栏按钮无需拖拽功能
     
     // 面板事件绑定
     document.getElementById('pdd-minimize').onclick = () => {
       panel.classList.remove('show');
-      ball.classList.remove('hidden');
+      ball.classList.remove('active');
       document.body.classList.remove('pdd-sidebar-open');
       adjustPageLayout(false);
     };
@@ -5217,9 +5133,220 @@
     // 多文件夹累积存储
     let accumulatedFiles = [];
     let folderPaths = [];
-    
+
     // 视频缓存（用于换商品ID后重复上传）
     let cachedVideoFiles = [];
+
+    // ========== 多选文件夹：公共函数 ==========
+
+    const VIDEO_EXTS = ['mp4', 'webm', 'mov', 'avi', 'mkv'];
+
+    // 扫描单个目录（File System Access API），返回视频文件数组
+    async function scanDirectoryForVideos(dirHandle) {
+      const videoFiles = [];
+
+      async function scanDir(handle, basePath = '') {
+        for await (const entry of handle.values()) {
+          if (entry.kind === 'file') {
+            const ext = entry.name.toLowerCase().split('.').pop();
+            if (VIDEO_EXTS.includes(ext)) {
+              const file = await entry.getFile();
+              const relativePath = basePath ? `${basePath}/${entry.name}` : entry.name;
+              videoFiles.push({
+                name: entry.name,
+                file: file,
+                size: file.size,
+                folderPath: dirHandle.name + (basePath ? `/${basePath}` : ''),
+                relativePath: relativePath
+              });
+            }
+          } else if (entry.kind === 'directory') {
+            const subPath = basePath ? `${basePath}/${entry.name}` : entry.name;
+            await scanDir(entry, subPath);
+          }
+        }
+      }
+
+      await scanDir(dirHandle);
+      return videoFiles;
+    }
+
+    // 将一批视频文件去重后加入累积列表，返回 { added, total, skipped }
+    function addVideoFilesToAccumulator(newVideoFiles, sourceFolderName) {
+      let addedCount = 0;
+      let skippedCount = 0;
+
+      newVideoFiles.forEach(newFile => {
+        const exists = accumulatedFiles.some(existing =>
+          existing.name === newFile.name && existing.size === newFile.size
+        );
+        if (!exists) {
+          accumulatedFiles.push(newFile);
+          addedCount++;
+        } else {
+          skippedCount++;
+        }
+      });
+
+      // 记录来源文件夹路径
+      if (sourceFolderName && !folderPaths.includes(sourceFolderName)) {
+        folderPaths.push(sourceFolderName);
+      }
+
+      // 同步到 pendingUploadConfig
+      if (pendingUploadConfig) {
+        pendingUploadConfig.files = accumulatedFiles;
+      }
+
+      return { added: addedCount, total: accumulatedFiles.length, skipped: skippedCount };
+    }
+
+    // ★ 核心：多选文件夹循环
+    // 调用 showDirectoryPicker 循环，用户每次选一个文件夹后自动弹出下一个对话框
+    // 直到用户按 Cancel 或达到可选的最大数量
+    //
+    // 参数:
+    //   options.statusEl         - 状态显示元素
+    //   options.onStart()        - 开始选择时回调（首次）
+    //   options.onEachFolder(result) - 每选择一个文件夹回调  result: { name, added, total }
+    //   options.onComplete(summary) - 全部完成（用户Cancel）回调  summary: { folders, totalFiles }
+    //   options.maxFolders       - 最大文件夹数限制（默认无限制）
+    //   options.initialPrompt    - 首次提示文字
+    //   options.continuePrompt   - 继续选择提示文字
+    //
+    async function selectMultipleFolders(options = {}) {
+      const {
+        statusEl,
+        onStart,
+        onEachFolder,
+        onComplete,
+        maxFolders = 0,       // 0 = 无限制
+        initialPrompt = '📂 请选择视频文件夹（可多选）...',
+        continuePrompt = '✅ 已选{N}个文件夹，继续选择下一个或【取消】结束...',
+        isAddMoreMode = false  // 是否为"添加更多"模式
+      } = options;
+
+      let selectedFolderCount = 0;
+      let totalAddedFiles = 0;
+
+      // 首次开始回调
+      if (onStart) onStart();
+
+      // 只支持 File System Access API 的多选循环
+      if (!('showDirectoryPicker' in window)) {
+        // 回退模式：只能单选
+        statusEl.innerHTML = `<div style="color:#1565c0;">📂 请选择视频文件夹...</div>`;
+        isWaitingForFolderSelect = true;
+        document.getElementById('pdd-folder-input').click();
+        return { folders: 0, totalFiles: 0 };
+      }
+
+      while (true) {
+        // 检查是否超过最大文件夹数限制
+        if (maxFolders > 0 && selectedFolderCount >= maxFolders) {
+          statusEl.innerHTML = `<div style="color:#e65100;">⚠️ 已达最大文件夹数限制 (${maxFolders}个)</div>`;
+          break;
+        }
+
+        // 更新提示文字
+        const promptText = selectedFolderCount > 0
+          ? continuePrompt.replace('{N}', selectedFolderCount)
+          : initialPrompt;
+        statusEl.innerHTML = `<div style="color:#1565c0;">${promptText}</div>`;
+
+        // 弹出文件夹选择对话框
+        let dirHandle;
+        try {
+          dirHandle = await window.showDirectoryPicker();
+        } catch (e) {
+          if (e.name === 'AbortError') {
+            // 用户按了 Cancel → 结束多选
+            console.log('[PDD监控] 多选文件夹: 用户取消选择');
+            break;
+          }
+          console.error('[PDD监控] showDirectoryPicker 异常:', e);
+          statusEl.innerHTML = `<div style="color:#f44336;">❌ 选择文件夹出错: ${e.message}</div>`;
+          break;
+        }
+
+        selectedFolderCount++;
+        const folderName = dirHandle.name;
+        console.log(`[PDD监控] 多选文件夹 [${selectedFolderCount}]:`, folderName);
+
+        // 扫描文件夹中的视频文件
+        try {
+          const videoFiles = await scanDirectoryForVideos(dirHandle);
+
+          if (videoFiles.length === 0) {
+            statusEl.innerHTML = `<div style="color:#e65100;">
+              ⚠️ 文件夹 "${folderName}" 中没有视频文件<br>
+              <span style="font-size:11px;color:#999;">已选 ${selectedFolderCount - 1} 个文件夹，继续选择或取消</span>
+            </div>`;
+
+            // 空文件夹也记录（但不算有效文件夹用于计数？还是算？算吧，用户确实选了）
+            if (onEachFolder) {
+              onEachFolder({ name: folderName, added: 0, total: accumulatedFiles.length, isEmpty: true });
+            }
+
+            // 空文件夹也记录路径
+            if (!folderPaths.includes(folderName)) {
+              folderPaths.push(folderName);
+            }
+
+            // 不 continue，让用户有机会取消或继续
+            await new Promise(r => setTimeout(r, 600));
+            continue;
+          }
+
+          // 去重并累积
+          const result = addVideoFilesToAccumulator(videoFiles, folderName);
+          totalAddedFiles += result.added;
+
+          console.log(`[PDD监控] 多选文件夹 "${folderName}": +${result.added} 视频(跳过${result.skipped}), 累计 ${result.total}`);
+
+          // 更新显示
+          updateFolderDisplay();
+
+          // 单个文件夹回调
+          if (onEachFolder) {
+            onEachFolder({ name: folderName, added: result.added, total: result.total, skipped: result.skipped });
+          }
+
+          // 更新状态提示
+          statusEl.innerHTML = `<div style="color:#2e7d32;">
+            ✅ "${folderName}" +${result.added} 个视频 ${result.skipped > 0 ? `(${result.skipped}重复跳过)` : ''},
+            累计 ${result.total} 个 · 已选 ${selectedFolderCount} 个文件夹
+          </div>
+          <div style="margin-top:4px;color:#1565c0;font-size:11px;">🔄 将自动弹出下一个文件夹选择...</div>`;
+
+          // 短暂延迟后再弹下一个，让用户看到当前状态
+          await new Promise(r => setTimeout(r, 800));
+
+        } catch (scanErr) {
+          console.error('[PDD监控] 扫描文件夹异常:', scanErr);
+          statusEl.innerHTML = `<div style="color:#f44336;">❌ 扫描 "${folderName}" 失败: ${scanErr.message}<br><span style="font-size:11px;">将尝试选择下一个...</span></div>`;
+          await new Promise(r => setTimeout(r, 1000));
+        }
+      }
+
+      // 全部完成
+      const summary = { folders: selectedFolderCount, totalFiles: accumulatedFiles.length, totalAdded: totalAddedFiles };
+
+      if (summary.folders > 0) {
+        statusEl.innerHTML = `<div style="color:#2e7d32;">
+          ✅ 多选完成！共选择了 <b>${summary.folders}</b> 个文件夹，
+          <b>${summary.totalFiles}</b> 个视频文件
+          ${totalAddedFiles !== summary.totalFiles ? `(${summary.totalFiles - totalAddedFiles}个来自之前选择)` : ''}
+        </div>
+        <div style="margin-top:4px;color:#1565c0;font-size:11px;">💡 可点击下方按钮继续添加更多文件夹</div>`;
+      } else {
+        statusEl.innerHTML = `<div style="color:#666;">已取消选择</div>`;
+      }
+
+      if (onComplete) onComplete(summary);
+
+      return summary;
+    }
     
     function updateCachedVideosDisplay() {
       const container = document.getElementById('pdd-cached-videos-area');
@@ -5255,10 +5382,11 @@
         updateUploadButtonState();
         return;
       }
-      
+
       container.style.display = 'block';
       updateUploadButtonState();
-      
+
+      // 按来源文件夹分组
       const folderGroups = {};
       accumulatedFiles.forEach(f => {
         const folder = f.folderPath || '未知文件夹';
@@ -5267,22 +5395,68 @@
         }
         folderGroups[folder].push(f);
       });
-      
+
+      const folderCount = Object.keys(folderGroups).length;
+
       let html = '';
-      Object.keys(folderGroups).forEach(folder => {
+      Object.keys(folderGroups).forEach((folder) => {
         const files = folderGroups[folder];
         const folderName = folder.split(/[/\\]/).pop() || folder;
-        html += `<div style="margin-bottom:6px;padding:6px;background:#fff;border-radius:4px;">
-          <div style="font-weight:600;color:#1976d2;margin-bottom:4px;">📁 ${folderName} (${files.length}个视频)</div>
-          <div style="max-height:60px;overflow-y:auto;padding-left:8px;">
-            ${files.slice(0, 5).map(f => `<div style="color:#666;">• ${f.name}</div>`).join('')}
-            ${files.length > 5 ? `<div style="color:#999;">... 还有 ${files.length - 5} 个文件</div>` : ''}
+        const totalSizeMB = (files.reduce((s, f) => s + (f.size || 0), 0) / 1024 / 1024).toFixed(1);
+
+        html += `<div style="margin-bottom:6px;padding:8px;background:#fff;border-radius:6px;border:1px solid #e8edf3;position:relative;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <div style="font-weight:600;color:#1976d2;font-size:12px;">📁 ${folderName}
+              <span style="color:#888;font-weight:400;margin-left:4px;">(${files.length}个视频 · ${totalSizeMB}MB)</span>
+            </div>
+            <button data-remove-folder="${encodeURIComponent(folder)}"
+              style="padding:1px 7px;background:#fef2f2;color:#dc2626;border:1px solid #fecaca;border-radius:4px;cursor:pointer;font-size:10px;font-weight:600;line-height:1.4;"
+              onmouseover="this.style.background='#fee2e2'"
+              onmouseout="this.style.background='#fef2f2'"
+              title="移除此文件夹的所有视频">✕</button>
+          </div>
+          <div style="max-height:${folderCount > 1 ? '50' : '60'}px;overflow-y:auto;padding-left:6px;font-size:11px;">
+            ${files.slice(0, folderCount > 1 ? 4 : 5).map(f => `<div style="color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${f.name} · ${(f.size/1024/1024).toFixed(1)}MB">• ${f.name}</div>`).join('')}
+            ${files.length > (folderCount > 1 ? 4 : 5) ? `<div style="color:#999;">... 还有 ${files.length - (folderCount > 1 ? 4 : 5)} 个文件</div>` : ''}
           </div>
         </div>`;
       });
-      
+
       listEl.innerHTML = html;
-      countEl.textContent = `共 ${accumulatedFiles.length} 个视频文件`;
+
+      // 绑定单个文件夹的删除事件
+      listEl.querySelectorAll('[data-remove-folder]').forEach(btn => {
+        btn.onclick = function() {
+          const targetPath = decodeURIComponent(this.getAttribute('data-remove-folder'));
+          // 移除该文件夹下的所有文件
+          const before = accumulatedFiles.length;
+          accumulatedFiles = accumulatedFiles.filter(f => f.folderPath !== targetPath);
+          const removed = before - accumulatedFiles.length;
+
+          // 从 folderPaths 中也移除
+          folderPaths = folderPaths.filter(fp => fp !== targetPath);
+
+          console.log('[PDD监控] 移除文件夹 "' + targetPath.split('/').pop() + targetPath.split('\\').pop() || targetPath + '": -' + removed + ' 视频, 剩余 ' + accumulatedFiles.length);
+
+          // 同步 pendingUploadConfig
+          if (pendingUploadConfig) {
+            pendingUploadConfig.files = accumulatedFiles;
+          }
+
+          updateFolderDisplay();
+
+          // 状态提示
+          const statusEl = document.getElementById('pdd-publish-status');
+          if (statusEl && accumulatedFiles.length > 0) {
+            statusEl.innerHTML = '<div style="color:#e65100;">已移除 "' + (targetPath.split(/[/\\]/).pop() || targetPath) + '" 的 ' + removed + ' 个视频，剩余 ' + accumulatedFiles.length + ' 个</div>';
+          }
+        };
+      });
+
+      // 底部汇总信息
+      const totalSizeMB = (accumulatedFiles.reduce((s, f) => s + (f.size || 0), 0) / 1024 / 1024).toFixed(1);
+      countEl.innerHTML = '<span>共 <b>' + accumulatedFiles.length + '</b> 个视频 (' + totalSizeMB + 'MB) · 来自 <b>' + folderCount + '</b> 个文件夹</span>'
+        + (folderCount > 1 ? '<br><span style="font-size:10px;color:#999;">💡 点击 ✕ 可单独移除某个文件夹</span>' : '');
     }
     
     document.getElementById('pdd-clear-files').onclick = function() {
@@ -5291,91 +5465,33 @@
       updateFolderDisplay();
       document.getElementById('pdd-publish-status').style.display = 'none';
     };
-    
-    // 添加更多文件夹按钮
+
+    // 添加更多文件夹按钮（多选模式，追加到已有列表）
     document.getElementById('pdd-add-more-folders').onclick = async function() {
-      console.log('[PDD监控] 点击添加更多文件夹按钮');
-      
+      console.log('[PDD监控] 点击添加更多文件夹按钮（多选模式）');
+
       const statusEl = document.getElementById('pdd-publish-status');
       statusEl.style.display = 'block';
-      statusEl.innerHTML = `<div style="color:#1565c0;">📂 请选择更多视频文件夹...</div>`;
-      
-      // 使用 File System Access API 选择文件夹
-      if ('showDirectoryPicker' in window) {
-        try {
-          const dirHandle = await window.showDirectoryPicker();
-          console.log('[PDD监控] 选择了文件夹:', dirHandle.name);
-          
-          // 递归遍历文件夹获取所有视频文件
-          const videoFiles = [];
-          const videoExts = ['mp4', 'webm', 'mov', 'avi', 'mkv'];
-          
-          async function scanDirectory(handle, basePath = '') {
-            for await (const entry of handle.values()) {
-              if (entry.kind === 'file') {
-                const ext = entry.name.toLowerCase().split('.').pop();
-                if (videoExts.includes(ext)) {
-                  const file = await entry.getFile();
-                  const relativePath = basePath ? `${basePath}/${entry.name}` : entry.name;
-                  videoFiles.push({
-                    name: entry.name,
-                    file: file,
-                    size: file.size,
-                    folderPath: dirHandle.name + (basePath ? `/${basePath}` : ''),
-                    relativePath: relativePath
-                  });
-                }
-              } else if (entry.kind === 'directory') {
-                // 递归扫描子文件夹
-                const subPath = basePath ? `${basePath}/${entry.name}` : entry.name;
-                await scanDirectory(entry, subPath);
-              }
-            }
+
+      // ★ 多选文件夹循环（追加模式，不清空已有文件）
+      await selectMultipleFolders({
+        statusEl: statusEl,
+        isAddMoreMode: true,
+        initialPrompt: '📂 请选择要添加的文件夹（可连续选择多个）...',
+        continuePrompt: '✅ 本次已选 <b>{N}</b> 个文件夹，继续添加或按【取消】结束...',
+
+        onEachFolder: (result) => {
+          if (result.isEmpty) {
+            console.log(`[PDD监控] [追加] 文件夹 "${result.name}" 为空`);
+          } else {
+            console.log(`[PDD监控] [追加] ✅ "${result.name}": +${result.added} 视频`);
           }
-          
-          await scanDirectory(dirHandle);
-          
-          if (videoFiles.length === 0) {
-            statusEl.innerHTML = `<div style="color:#e65100;">⚠️ 文件夹 "${dirHandle.name}" 中没有找到视频文件（包含子文件夹）</div>`;
-            return;
-          }
-          
-          // 去重并添加到累积列表
-          let addedCount = 0;
-          videoFiles.forEach(newFile => {
-            const exists = accumulatedFiles.some(existing => 
-              existing.name === newFile.name && existing.size === newFile.size
-            );
-            if (!exists) {
-              accumulatedFiles.push(newFile);
-              addedCount++;
-            }
-          });
-          
-          if (!folderPaths.includes(dirHandle.name)) {
-            folderPaths.push(dirHandle.name);
-          }
-          
-          console.log('[PDD监控] 从文件夹', dirHandle.name, '添加了', addedCount, '个视频，累计', accumulatedFiles.length, '个');
-          
-          updateFolderDisplay();
-          
-          statusEl.innerHTML = `<div style="color:#2e7d32;">✅ 从 "${dirHandle.name}" 添加了 ${addedCount} 个视频，累计 ${accumulatedFiles.length} 个</div>`;
-          
-          return;
-        } catch (e) {
-          if (e.name === 'AbortError') {
-            console.log('[PDD监控] 用户取消了文件夹选择');
-            statusEl.innerHTML = `<div style="color:#666;">已取消选择</div>`;
-            return;
-          }
-          console.log('[PDD监控] showDirectoryPicker 不可用:', e);
+        },
+
+        onComplete: (summary) => {
+          console.log(`[PDD监控] [追加] 完成: +${summary.folders}个文件夹, 总计${summary.totalFiles}个视频`);
         }
-      }
-      
-      // 回退到传统方式
-      isWaitingForFolderSelect = true;
-      document.getElementById('pdd-folder-input').click();
+      });
     };
     
     document.getElementById('pdd-select-videos').onclick = async function() {
@@ -5816,23 +5932,22 @@
     }
     
     document.getElementById('pdd-select-folder').onclick = async function() {
-      console.log('[PDD监控] 点击选择文件夹按钮');
-      
+      console.log('[PDD监控] 点击选择文件夹按钮（多选模式）');
+
       const statusEl = document.getElementById('pdd-publish-status');
-      
+
       // 检查是否选择了商品
       if (!selectedGoods) {
         statusEl.style.display = 'block';
         statusEl.innerHTML = `<div style="color:#e65100;">⚠️ 请先从商品列表中选择一个商品</div>`;
         return;
       }
-      
+
       // 检查是否在发布页面
       if (!checkUploadPage()) {
         statusEl.style.display = 'block';
         statusEl.innerHTML = `<div style="color:#1565c0;">🔄 正在自动跳转到视频发布页面...</div>`;
 
-        // 自动跳转到发布页面
         const navigated = await navigateToVideoUploadPage();
         if (!navigated) {
           statusEl.innerHTML = `<div style="color:#f44336; padding: 10px;">
@@ -5842,12 +5957,11 @@
           return;
         }
 
-        // 等待页面加载
         statusEl.innerHTML = `<div style="color:#1565c0;">✅ 已跳转到发布页面，正在准备选择文件夹...</div>`;
         await new Promise(r => setTimeout(r, 1500));
       }
 
-      // 优先使用自定义商品ID，如果没有则使用已选择商品的ID
+      // 读取配置
       const customGoodsId = document.getElementById('pdd-custom-goods-id')?.value.trim();
       const goodsId = customGoodsId || selectedGoods.goodsId || selectedGoods.goods_id || selectedGoods.productId || selectedGoods.id;
       const appendFilenameSuffix = document.getElementById('pdd-append-filename-suffix')?.checked || false;
@@ -5866,95 +5980,40 @@
         source: 'folder',
         isAccumulated: true
       };
-      
+
       statusEl.style.display = 'block';
-      statusEl.innerHTML = `<div style="color:#1565c0;">📂 请选择视频文件夹...</div>`;
-      
-      // 使用 File System Access API 选择文件夹
-      if ('showDirectoryPicker' in window) {
-        try {
-          const dirHandle = await window.showDirectoryPicker();
-          console.log('[PDD监控] 选择了文件夹:', dirHandle.name);
-          
-          // 递归遍历文件夹获取所有视频文件
-          const videoFiles = [];
-          const videoExts = ['mp4', 'webm', 'mov', 'avi', 'mkv'];
-          
-          async function scanDirectory(handle, basePath = '') {
-            for await (const entry of handle.values()) {
-              if (entry.kind === 'file') {
-                const ext = entry.name.toLowerCase().split('.').pop();
-                if (videoExts.includes(ext)) {
-                  const file = await entry.getFile();
-                  const relativePath = basePath ? `${basePath}/${entry.name}` : entry.name;
-                  videoFiles.push({
-                    name: entry.name,
-                    file: file,
-                    size: file.size,
-                    folderPath: dirHandle.name + (basePath ? `/${basePath}` : ''),
-                    relativePath: relativePath
-                  });
-                }
-              } else if (entry.kind === 'directory') {
-                // 递归扫描子文件夹
-                const subPath = basePath ? `${basePath}/${entry.name}` : entry.name;
-                await scanDirectory(entry, subPath);
-              }
-            }
-          }
-          
-          await scanDirectory(dirHandle);
-          
-          if (videoFiles.length === 0) {
-            statusEl.innerHTML = `<div style="color:#e65100;">⚠️ 文件夹 "${dirHandle.name}" 中没有找到视频文件（包含子文件夹）</div>`;
-            return;
-          }
-          
-          // 去重并添加到累积列表
-          let addedCount = 0;
-          videoFiles.forEach(newFile => {
-            const exists = accumulatedFiles.some(existing => 
-              existing.name === newFile.name && existing.size === newFile.size
-            );
-            if (!exists) {
-              accumulatedFiles.push(newFile);
-              addedCount++;
-            }
-          });
-          
-          if (!folderPaths.includes(dirHandle.name)) {
-            folderPaths.push(dirHandle.name);
-          }
-          
-          console.log('[PDD监控] 从文件夹', dirHandle.name, '添加了', addedCount, '个视频，累计', accumulatedFiles.length, '个');
-          
-          // 更新 pendingUploadConfig.files，确保 startBatchUpload 能获取到文件
-          if (pendingUploadConfig) {
-            pendingUploadConfig.files = accumulatedFiles;
-            console.log('[PDD监控] 已更新 pendingUploadConfig.files，数量:', pendingUploadConfig.files.length);
-          }
-          
-          updateFolderDisplay();
-          
-          statusEl.innerHTML = `<div style="color:#2e7d32;">✅ 从 "${dirHandle.name}" 添加了 ${addedCount} 个视频，累计 ${accumulatedFiles.length} 个</div>
-            <div style="margin-top:4px;color:#1565c0;">可继续点击选择更多文件夹</div>`;
-          
-          return;
-        } catch (e) {
-          if (e.name === 'AbortError') {
-            console.log('[PDD监控] 用户取消了文件夹选择');
-            statusEl.innerHTML = `<div style="color:#666;">已取消选择</div>`;
-            return;
-          }
-          console.log('[PDD监控] showDirectoryPicker 不可用:', e);
-        }
+
+      // ★ 多选文件夹循环（首次选择会清空之前的文件）
+      const previousCount = accumulatedFiles.length;
+      if (previousCount > 0) {
+        // 首次点击"选择文件夹"，清空之前的累积文件重新开始
+        accumulatedFiles = [];
+        folderPaths = [];
+        if (pendingUploadConfig) pendingUploadConfig.files = accumulatedFiles;
+        updateFolderDisplay();
       }
-      
-      // 回退到传统 webkitdirectory 方式
-      isWaitingForFolderSelect = true;
-      console.log('[PDD监控] 使用传统方式选择文件夹');
-      statusEl.innerHTML = `<div style="color:#1565c0;">📂 请选择视频文件夹...</div>`;
-      document.getElementById('pdd-folder-input').click();
+
+      await selectMultipleFolders({
+        statusEl: statusEl,
+        initialPrompt: '📂 请选择视频文件夹（可连续选择多个，选完按【取消】结束）...',
+        continuePrompt: '✅ 已选 <b>{N}</b> 个文件夹，继续选择下一个或按【取消】结束多选...',
+
+        onStart: () => {
+          console.log('[PDD监控] 多选文件夹开始');
+        },
+
+        onEachFolder: (result) => {
+          if (result.isEmpty) {
+            console.log(`[PDD监控] 文件夹 "${result.name}" 为空`);
+          } else {
+            console.log(`[PDD监控] ✅ 文件夹 "${result.name}": +${result.added} 视频`);
+          }
+        },
+
+        onComplete: (summary) => {
+          console.log(`[PDD监控] ★ 多选文件夹完成: ${summary.folders}个文件夹, ${summary.totalFiles}个视频`);
+        }
+      });
     };
     
     document.getElementById('pdd-folder-input').addEventListener('change', function(e) {
@@ -6038,23 +6097,32 @@
         appendFilenameSuffix: pendingUploadConfig.appendFilenameSuffix
       }));
 
-      // 预生成所有视频的封面图（异步，不阻塞上传）
+      // 预生成所有视频的封面图（异步，不阻塞上传）— 带超时控制
       (async () => {
         try {
           const progressEl = document.getElementById('upload-progress');
+          const PREGEN_TIMEOUT = 8000;  // 每个视频截帧超时8秒
           for (let i = 0; i < pendingUploadConfig.files.length; i++) {
             const vf = pendingUploadConfig.files[i];
             if (vf.file && !vf.coverFile) {
               try {
-                vf.coverFile = await captureVideoCoverFromFile(vf.file);
-                console.log(`[PDD监控] 预生成封面 ${i + 1}/${pendingUploadConfig.files.length}: ${vf.file.name}`);
+                // 带超时的截帧
+                vf.coverFile = await Promise.race([
+                  captureVideoCoverFromFile(vf.file, PREGEN_TIMEOUT),
+                  new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('预生成超时')), PREGEN_TIMEOUT + 1000)
+                  )
+                ]);
+                console.log(`[PDD监控] ✅ 预生成封面 ${i + 1}/${pendingUploadConfig.files.length}: ${vf.file.name}`);
                 if (progressEl) progressEl.textContent = `预生成封面 ${i + 1}/${totalFiles}...`;
               } catch (e) {
-                console.warn(`[PDD监控] 封面预生成失败 ${vf.file.name}:`, e.message);
+                console.warn(`[PDD监控] ⚠️ 封面预生成失败 [${i + 1}/${pendingUploadConfig.files.length}] ${vf.file.name}:`, e.message);
+                // 单个失败不阻断后续
               }
             }
           }
-          console.log('[PDD监控] 所有封面预生成完成');
+          console.log('[PDD监控] 封面预生成全部完成');
+          if (progressEl) progressEl.textContent = `预生成封面完成 (${pendingUploadConfig.files.length})`;
         } catch (e) {
           console.error('[PDD监控] 封面预批量生成出错:', e.message);
         }
@@ -6499,11 +6567,12 @@
             
             const lastVideo = videoItems[videoItems.length - 1];
             const addGoodsBtn = lastVideo.querySelector('.AddGoodsTrigger_addGoodsTrigger__nbdhF, [class*="AddGoods"], [class*="addGoods"]');
-            
+
             const progressBar = lastVideo.querySelector('[class*="progress"], [class*="Progress"]');
             const uploadingIndicator = lastVideo.querySelector('[class*="uploading"], [class*="Uploading"], [class*="loading"], [class*="Loading"]');
-            
-            if (addGoodsBtn && addGoodsBtn.offsetParent !== null) {
+
+            // ★ 修复：按钮存在即表示上传完成（不再要求可视）
+            if (addGoodsBtn) {
               cleanup();
               
               fillVideoInfo(lastVideo, goodsId, fileName, description, contentDeclaration);
@@ -6636,63 +6705,89 @@
     
     // 条件等待函数
     // 检查视频是否上传完成
+    // ★ 修复：不再要求按钮在可视区内（离屏视频也是已上传完成的）
     function isVideoUploadComplete(videoItem) {
-      // 检查是否有上传进度条
+      // 检查是否有上传进度条（还在上传中）
       const progressBar = videoItem.querySelector('[class*="progress"], [class*="Progress"]');
       if (progressBar) {
         const width = progressBar.style.width || progressBar.getAttribute('data-width');
         if (width && parseInt(width) < 100) return false;
       }
-      
+
       // 检查是否有上传中的标志
       const uploadingIndicator = videoItem.querySelector('[class*="uploading"], [class*="Uploading"], [class*="loading"], [class*="Loading"]');
-      if (uploadingIndicator) return false;
-      
-      // 检查是否有"添加商品"按钮且可见（表示上传完成）- 这是最重要的判断
+      if (uploadingIndicator && uploadingIndicator.offsetParent !== null) return false;
+
+      // 检查是否存在"添加商品"按钮（只要存在于DOM中即表示上传完成，不论是否在视口内）
       const addGoodsBtn = videoItem.querySelector('.AddGoodsTrigger_addGoodsTrigger__nbdhF, [class*="AddGoods"], [class*="addGoods"]');
-      if (addGoodsBtn && addGoodsBtn.offsetParent !== null) {
-        // 额外检查：确保按钮文本包含"添加商品"
-        const btnText = addGoodsBtn.textContent || '';
-        if (btnText.includes('添加商品') || btnText.includes('添加') || btnText === '') {
+      if (addGoodsBtn) {
+        // 额外检查：确保按钮文本包含"添加"类文字（不是"更换/修改"）
+        const btnText = (addGoodsBtn.textContent || '').trim();
+        if (btnText.includes('添加商品') || btnText.includes('添加') || btnText === '' || btnText.includes('关联')) {
           return true;
         }
       }
-      
+
       return false;
     }
     
     // 检查视频是否已填充商品ID（用于验证填充成功）
+    // ★ 修复：不再因为按钮离屏就误判为"已填充"，必须检测到实际商品数据才返回true
     function isVideoAlreadyFilled(videoItem) {
+      // ★★★ 修复：更严格的判断逻辑，避免宽泛选择器误判 ★★★
+      // 之前的bug：[class*="goods-info"]等选择器太宽泛，可能匹配到推荐商品区域→误判为已填充→跳过整个填充
+
+      // 策略1: 检查是否有"更换商品"/"修改商品"按钮（这是最可靠的特征）
+      const changeGoodsBtn = videoItem.querySelector(
+        '[class*="ChangeGoods"], [class*="changeGoods"], [class*="change-goods"], ' +
+        '[class*="EditGoods"], [class*="editGoods"], [class*="edit-goods"], ' +
+        '[class*="ModifyGoods"], [class*="modifyGoods"]'
+      );
+      if (changeGoodsBtn) {
+        console.log('[PDD监控] isVideoAlreadyFilled: 找到更换/修改商品按钮 → 已填充');
+        return true;
+      }
+
+      // 策略2: 检查按钮文字是否明确表示已关联商品
       const addGoodsBtn = videoItem.querySelector('.AddGoodsTrigger_addGoodsTrigger__nbdhF, [class*="AddGoods"], [class*="addGoods"]');
-      const btnText = addGoodsBtn ? (addGoodsBtn.textContent || '').trim() : '';
-      
-      if (!addGoodsBtn || addGoodsBtn.offsetParent === null) {
+      if (addGoodsBtn) {
+        const btnText = (addGoodsBtn.textContent || '').trim();
+        if (btnText.includes('更换') || btnText.includes('修改') || btnText.includes('编辑')) {
+          console.log('[PDD监控] isVideoAlreadyFilled: 按钮文字"' + btnText + '" → 已填充');
+          return true;
+        }
+        if (btnText.includes('添加')) {
+          console.log('[PDD监控] isVideoAlreadyFilled: 按钮文字"' + btnText + '" → 未填充');
+          return false;
+        }
+      }
+
+      // 策略3: 检查是否有实际的商品卡片（需要排除推荐区域）
+      // ★ 关键改进：只查找视频项直接子级的商品信息，避免匹配到推荐商品
+      const goodsCard = videoItem.querySelector(
+        ':scope > [class*="goods-card"] > *, ' +          // 直接子级
+        ':scope > [class*="GoodsCard"] > *, ' +
+        '[class*="BoundGoods"], [class*="boundGoods"], ' +  // 已绑定商品
+        '[class*="LinkedGoods"], [class*="linkedGoods"]'    // 已关联商品
+      );
+      if (goodsCard) {
+        console.log('[PDD监控] isVideoAlreadyFilled: 找到已绑定商品卡片 → 已填充');
         return true;
       }
-      
-      const goodsInfo = videoItem.querySelector('[class*="goods-info"], [class*="goodsInfo"], [class*="product-info"], [class*="goods_name"], [class*="goods-name"], [class*="GoodsInfo"]');
-      if (goodsInfo) {
-        return true;
-      }
-      
-      const goodsIdDisplay = videoItem.querySelector('[class*="goods-id"], [class*="goodsId"], [class*="GoodsId"]');
+
+      // 策略4: 检查商品ID显示（只查找明确的商品ID展示元素）
+      const goodsIdDisplay = videoItem.querySelector('[class*="GoodsId"], [class*="goods-id-display"], [class*="goodsIdDisplay"]');
       if (goodsIdDisplay) {
-        return true;
+        const idText = goodsIdDisplay.textContent.trim();
+        // 必须包含数字（商品ID是数字），避免空白或占位文本误判
+        if (idText && /\d{4,}/.test(idText)) {
+          console.log('[PDD监控] isVideoAlreadyFilled: 找到商品ID显示"' + idText + '" → 已填充');
+          return true;
+        }
       }
-      
-      const hasGoodsCard = videoItem.querySelector('[class*="goods-card"], [class*="GoodsCard"], [class*="product-card"]');
-      if (hasGoodsCard) {
-        return true;
-      }
-      
-      if (btnText.includes('更换') || btnText.includes('修改') || btnText.includes('编辑')) {
-        return true;
-      }
-      
-      if (!btnText.includes('添加') && btnText.length > 0) {
-        return true;
-      }
-      
+
+      // 无明确已填充特征 → 默认返回false（未填充），让调用方继续尝试
+      console.log('[PDD监控] isVideoAlreadyFilled: 无已填充特征 → 未填充');
       return false;
     }
     
@@ -6743,6 +6838,11 @@
           '.video-list_itemWrap__7xLB4',
           '[class*="video-list_item"]'
         ].join(', '));
+
+        // ★ 详细日志：定期报告轮询状态
+        if (attempts % 10 === 1 || videoItems.length > 0 || pendingFillQueue.length > 0) {
+          console.log(`[PDD监控] 轮询 #${attempts}: ${videoItems}个视频项, 成功${successfullyFilledItems.size}/${totalFiles}, 队列${pendingFillQueue.length}, 已处理${processedElements.size}`);
+        }
         
         for (let i = 0; i < videoItems.length; i++) {
           const item = videoItems[i];
@@ -6792,19 +6892,38 @@
         
         if (pendingFillQueue.length > 0) {
           isBatchFilling = true;
-          
+
           while (pendingFillQueue.length > 0) {
             const { item, goodsId, fileName, itemId, description: itemDesc, contentDeclaration: itemContentDecl } = pendingFillQueue.shift();
-            
+
+            // ★ 滚动当前视频项到视口内（确保DOM操作有效）
+            try { item.scrollIntoView({ behavior: 'instant', block: 'center' }); } catch(e) {}
+            await new Promise(r => setTimeout(r, 200));
+
+            console.log('[PDD监控] ⚡ 开始处理视频 #' + (successfullyFilledItems.size + processedElements.size + pendingFillQueue.length + 1) +
+              '/' + totalFiles + ' goodsId=' + goodsId + (fileName ? ' file=' + fileName.substring(0,20) : ''));
+
             try {
-              await fillVideoInfo(item, goodsId, fileName, itemDesc, itemContentDecl);
-              await new Promise(r => setTimeout(r, 500));
-              
-              if (isVideoAlreadyFilled(item)) {
+              console.log('[PDD监控] ▶ fillVideoInfo 开始...');
+              const fillResult = await fillVideoInfo(item, goodsId, fileName, itemDesc, itemContentDecl);
+              console.log('[PDD监控] ◀ fillVideoInfo 返回:', fillResult, '等待DOM更新后验证...');
+
+              // ★ 改进验证策略：增加等待时间+多次重试验证
+              let verified = false;
+              for (let verifyAttempt = 0; verifyAttempt < 3; verifyAttempt++) {
+                const verifyWait = [1000, 1500, 2000][verifyAttempt] || 1500;
+                await new Promise(r => setTimeout(r, verifyWait));
+                verified = isVideoAlreadyFilled(item);
+                console.log('[PDD监控]   验证尝试', verifyAttempt + 1, '/3:', verified ? '✅通过' : '❌未通过', '等待:', verifyWait + 'ms');
+                if (verified) break;
+              }
+
+              if (verified) {
                 successfullyFilledItems.add(itemId);
                 processedElements.add(item);
+                console.log('[PDD监控] ✅ 视频 #' + itemId + ' 填充成功! 累计成功:', successfullyFilledItems.size + '/' + totalFiles);
               } else {
-                throw new Error('商品ID填充验证失败');
+                throw new Error('商品ID填充验证失败(3次重试均未通过)');
               }
             } catch (e) {
               const currentFailures = failedItemsCount.get(itemId) || 0;
@@ -7016,24 +7135,23 @@
           
           for (const selector of internalSelectors) {
             const el = videoItem.querySelector(selector);
-            if (el && el.offsetParent !== null) {
+            if (el) {  // ★ 修复：移除offsetParent限制
               descEditor = el;
               console.log('[PDD监控] 在视频项内部找到描述输入框:', selector, 'id:', el.id);
               break;
             }
           }
         }
-        
+
         // 如果视频项内部没有找到，查找全局描述输入框（优化：只查一次）
         if (!descEditor) {
           const editors = document.querySelectorAll('[id^="sabo-editor"], [contenteditable="true"]');
           for (const el of editors) {
             if (el.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel, #pdd-auto-fill-panel')) continue;
             if (el.closest('.video-list_itemWrap__7xLB4, [class*="video-list_item"], [class*="video-item"]')) continue;
-            if (el.offsetParent !== null) {
-              descEditor = el;
-              break;
-            }
+            // ★ 修复：移除offsetParent限制
+            descEditor = el;
+            break;
           }
         }
 
@@ -7159,12 +7277,15 @@
     }
 
     // 填充内容声明
-    // 使用计数器跟踪已填充次数，配合当前值校验避免漏填
-    let filledDeclCount = 0;
+    // ★ 全局标志：内容声明只需填充一次（PDD页面级别设置，非每视频独立）
+    let __contentDeclarationGlobalFilled = false;   // 是否已成功全局填充
+    let __contentDeclarationGlobalValue = null;      // 已填充的值
+    let filledDeclCount = 0;                          // 兼容旧日志
 
     async function fillContentDeclaration(declaration, videoItem = null) {
       console.log(`[PDD监控] ★★★ fillContentDeclaration 被调用 ★★★`);
       console.log(`[PDD监控] 参数: declaration="${declaration || '(空)'}" videoItem=${videoItem ? '有' : '无'}`);
+      console.log(`[PDD监控] 全局状态: __contentDeclarationGlobalFilled=${__contentDeclarationGlobalFilled}, 已填值="${__contentDeclarationGlobalValue || '(空)'}"`);
 
       // 空值或"不设置"才跳过，"内容无需标注"是有效选项需要填充
       if (!declaration || declaration === '不设置') {
@@ -7172,10 +7293,18 @@
         return true;
       }
 
+      // ★ 快速路径：如果已经全局填充过相同值，跳过（避免60个视频反复操作）
+      if (__contentDeclarationGlobalFilled && __contentDeclarationGlobalValue === declaration) {
+        console.log('[PDD监控] ✅ 内容声明已全局填充过("' + declaration + '")，本次跳过（第' + (filledDeclCount + 1) + '个视频）');
+        filledDeclCount++;
+        return true;
+      }
+
       console.log(`[PDD监控] ✓ 内容声明值有效: "${declaration}"，开始查找选择器...`);
 
       try {
-        await new Promise(r => setTimeout(r, 1000));
+        // 减少等待时间：已有全局跳过机制，不需要太长的初始延迟
+        await new Promise(r => setTimeout(r, 300));
 
         // ========== 1. 查找内容声明下拉触发器（多种策略） ==========
         let targetSelect = null;
@@ -7197,7 +7326,7 @@
           for (const sel of knownSelectors) {
             const els = videoItem.querySelectorAll(sel);
             for (const el of els) {
-              if (el.offsetParent === null) continue;
+              // ★ 修复：移除offsetParent限制，离屏/隐藏元素也可能需要操作
               let p = el.parentElement;
               for (let i = 0; i < 8 && p; i++) {
                 if ((p.textContent || '').includes('内容声明')) { targetSelect = el; break; }
@@ -7215,7 +7344,7 @@
             const els = document.querySelectorAll(sel);
             for (const el of els) {
               if (el.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
-              if (el.offsetParent === null) continue;
+              // ★ 修复：移除offsetParent限制
               // 确认是"内容声明"区域
               let p = el.parentElement;
               for (let i = 0; i < 8 && p; i++) {
@@ -7234,7 +7363,7 @@
           const allClickable = searchScope.querySelectorAll('[class*="select"], [class*="Select"], [class*="dropdown"], [class*="picker"], [role="listbox"], [role="combobox"], [data-type="select"]');
           for (const el of allClickable) {
             if (el.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
-            if (el.offsetParent === null) continue;
+            // ★ 修复：移除offsetParent限制
             const text = (el.textContent || '').trim();
             // 匹配常见的默认文本
             if (text === '' || text === '请选择' || text.includes('内容') || text.includes('声明') ||
@@ -7254,7 +7383,7 @@
         if (!targetSelect && videoItem) {
           const innerEls = videoItem.querySelectorAll('[class*="select"], [class*="Select"], [class*="dropdown"], [class*="picker"], span, div');
           for (const el of innerEls) {
-            if (el.offsetParent === null) continue;
+            // ★ 修复：移除offsetParent限制
             const text = (el.textContent || '').trim();
             if (text && (text.includes('内容声明') || text === '请选择' || text === '' ||
                 text.includes('无需标注') || text.includes('AI生成'))) {
@@ -7352,7 +7481,7 @@
             try {
               const opts = document.querySelectorAll(sel);
               for (const o of opts) {
-                if (o.offsetParent === null) continue;
+                // ★ 修复：移除offsetParent限制（下拉选项可能在动画中出现）
                 if (o.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
                 const txt = (o.textContent || '').trim();
                 if (txt.includes(declaration)) {
@@ -7366,7 +7495,7 @@
           // 4b. 全局搜索包含目标文字的可见元素（在下拉菜单区域内）
           const allVisible = document.querySelectorAll('div, span, li, p, label');
           for (const el of allVisible) {
-            if (el.offsetParent === null) continue;
+            // ★ 修复：移除offsetParent限制（下拉选项可能在动画中出现）
             if (el.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
             // 排除太大的容器
             const er = el.getBoundingClientRect();
@@ -7442,7 +7571,10 @@
           await new Promise(r => setTimeout(r, 200));
 
           filledDeclCount++;
-          console.log(`[PDD监控] fillContentDeclaration: ✅ 成功填充 (#${filledDeclCount}) "${declaration}"`);
+          // ★ 标记全局已填充（内容声明是页面级设置，一次成功=全部生效）
+          __contentDeclarationGlobalFilled = true;
+          __contentDeclarationGlobalValue = declaration;
+          console.log(`[PDD监控] fillContentDeclaration: ✅ 成功填充 (#${filledDeclCount}) "${declaration}" [全局标记已设置]`);
           return true;
         }
 
@@ -7456,121 +7588,9 @@
       }
     }
 
-    // 填写视频信息（异步版本）
-    async function fillVideoInfo(videoItem, goodsId, fileName = null, description = null, contentDeclaration = null) {
-      if (!isBatchFilling) {
-        console.log('[PDD监控] fillVideoInfo 开始, goodsId:', goodsId);
-      }
-      
-      try {
-        // 先检查商品ID是否已填充，如果已填充则跳过整个流程
-        if (isVideoAlreadyFilled(videoItem)) {
-          console.log('[PDD监控] 商品ID已填充，跳过');
-          return;
-        }
-        
-        // 滚动到视频项可见
-        const rect = videoItem.getBoundingClientRect();
-        if (rect.top < 0 || rect.bottom > window.innerHeight) {
-          videoItem.scrollIntoView({ behavior: 'instant', block: 'center' });
-          await new Promise(r => setTimeout(r, 200));
-        }
-        
-        // 点击视频项
-        let clickTarget = null;
-        const nonCoverSelectors = [
-          '.video-list_infoWrap__kVj5S',
-          '[class*="infoWrap"]',
-          '[class*="videoInfo"]',
-          '[class*="meta"]'
-        ];
-        
-        for (const selector of nonCoverSelectors) {
-          const el = videoItem.querySelector(selector);
-          if (el && el.offsetParent !== null) {
-            clickTarget = el;
-            break;
-          }
-        }
-        
-        if (!clickTarget) {
-          clickTarget = videoItem;
-        }
-        
-        // 点击选中视频项
-        const clickEvent = new MouseEvent('click', {
-          bubbles: true,
-          cancelable: true,
-          view: window,
-          clientX: rect.left + 10,
-          clientY: rect.top + rect.height / 2
-        });
-        clickTarget.dispatchEvent(clickEvent);
-        
-        // 等待编辑面板出现（使用 MutationObserver）
-        await waitForEditorPanel(3000);
-        
-        // 填充描述
-        console.log('[PDD监控] fillVideoInfo: description=', description ? '有' : '无', 'fileName=', fileName || '无');
-        
-        if (description) {
-          let finalDesc = description;
-          if (fileName) {
-            const suffix = extractNumberSuffix(fileName);
-            console.log('[PDD监控] fillVideoInfo: 提取到的编号:', suffix, ', 文件名:', fileName);
-            if (suffix) {
-              finalDesc = description + ' ' + suffix;
-            }
-          }
-          console.log('[PDD监控] fillVideoInfo: 最终描述:', finalDesc);
-          await fillVideoDescription(finalDesc, videoItem);
-          await new Promise(r => setTimeout(r, 500));
-        } else if (fileName) {
-          const suffix = extractNumberSuffix(fileName);
-          console.log('[PDD监控] fillVideoInfo: 仅填充编号, 提取到的编号:', suffix);
-          if (suffix) {
-            await fillVideoDescription(suffix, videoItem);
-            await new Promise(r => setTimeout(r, 500));
-          }
-        }
-        
-        // 填充内容声明
-        console.log(`[PDD监控] ★ fillVideoInfo 内部: contentDeclaration参数="${contentDeclaration || '(空)'}"`);
-        if (contentDeclaration) {
-          // 等待编辑面板完全刷新（特别是内容声明区域）
-          await new Promise(r => setTimeout(r, 800));
-          console.log('[PDD监控] 开始填充内容声明:', contentDeclaration);
-          const declResult = await fillContentDeclaration(contentDeclaration, videoItem);
-          console.log('[PDD监控] 内容声明填充结果:', declResult);
-          if (!declResult) {
-            await new Promise(r => setTimeout(r, 500));
-            const retryResult = await fillContentDeclaration(contentDeclaration, videoItem);
-            console.log('[PDD监控] 内容声明重试结果:', retryResult);
-          }
-          await new Promise(r => setTimeout(r, 200));
-        } else {
-          console.log('[PDD监控] ⚠️ contentDeclaration为空，跳过填充');
-        }
-        
-        // 关闭可能出现的弹窗
-        closeTopicPopup();
-        
-        // 填充商品ID（再次检查是否已填充）
-        if (!isVideoAlreadyFilled(videoItem)) {
-          const goodsIdFilled = await fillGoodsId(videoItem, goodsId);
-          if (!goodsIdFilled) {
-            throw new Error('商品ID填充失败');
-          }
-        }
+    // ~~ 旧版 fillVideoInfo 已移至文件后面统一版本（第12482行），避免重复声明覆盖问题 ~~
+    // 以下 waitForEditorPanel 等辅助函数保留供新版本调用
 
-        // 填充完成汇总日志
-        console.log(`[PDD监控] ★ 视频${nextGoodsIdIndex || '?'}填充完成: 描述=${description ? '✅' : '⏭️跳过'} | 内容声明=${contentDeclaration ? '✅' : '⏭️跳过'} | 商品ID=${goodsId} ✅`);
-      } catch (e) {
-        console.error(`[PDD监控] ✗ 视频填充异常:`, e.message);
-        throw e;
-      }
-    }
-    
     // 等待编辑面板出现
     async function waitForEditorPanel(timeout = 3000) {
       return new Promise((resolve) => {
@@ -7581,15 +7601,15 @@
             // 排除扩展面板和视频列表项
             if (ed.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
             if (ed.closest('.video-list_itemWrap__7xLB4, [class*="video-list_item"], [class*="video-item"]')) continue;
-            if (ed.offsetParent !== null) {
-              return true;
-            }
+            // ★ 修复：移除offsetParent限制 - 编辑面板可能在离屏滚动区域中
+            return true;
           }
           // 也检查商品ID输入框
           const inputs = document.querySelectorAll('input[type="text"]');
           for (const inp of inputs) {
             if (inp.closest('.video-list_itemWrap__7xLB4, [class*="video-list_item"], [class*="video-item"]')) continue;
-            if (inp.offsetParent !== null && (inp.placeholder || '').includes('商品')) {
+            // ★ 修复：移除offsetParent限制
+            if ((inp.placeholder || '').includes('商品')) {
               return true;
             }
           }
@@ -7765,7 +7785,7 @@
             
             for (const selector of inputSelectors) {
               const input = modal.querySelector(selector);
-              if (input && input.offsetParent !== null) {
+              if (input && !input.disabled) {  // ★ 修复：移除offsetParent限制
                 goodsIdInput = input;
                 break;
               }
@@ -7809,7 +7829,7 @@
             let nextBtn = null;
             for (const selector of nextBtnSelectors) {
               const btn = modal.querySelector(selector);
-              if (btn && !btn.disabled && btn.offsetParent !== null) {
+              if (btn && !btn.disabled) {  // ★ 修复：移除offsetParent限制
                 nextBtn = btn;
                 break;
               }
@@ -7818,7 +7838,7 @@
             if (!nextBtn) {
               const allButtons = modal.querySelectorAll('button');
               for (const btn of allButtons) {
-                if (btn.offsetParent !== null && !btn.disabled) {
+                if (!btn.disabled) {  // ★ 修复：移除offsetParent限制
                   const text = btn.textContent.trim();
                   if (text.includes('下一步') || text.includes('确认') || text.includes('确定')) {
                     nextBtn = btn;
@@ -7833,7 +7853,7 @@
               await new Promise(r => setTimeout(r, 800));
               
               const modalStillOpen = document.querySelector('.MDL_inner_5-180-0, [class*="modal"]:not([class*="mask"]), [class*="Modal"]');
-              if (modalStillOpen && modalStillOpen.offsetParent !== null) {
+              if (modalStillOpen) {  // ★ 修复：移除offsetParent限制（弹窗存在即可）
                 await new Promise(r => setTimeout(r, 400));
                 nextBtn.click();
                 await new Promise(r => setTimeout(r, 600));
@@ -8437,8 +8457,9 @@
               console.log('[PDD监控] 批量上传: 视频项', index, 'HTML:', videoItem.innerHTML.substring(0, 200));
             }
           }
-          
-          if (addGoodsBtn && addGoodsBtn.offsetParent !== null) {
+
+          // ★ 修复：按钮存在即可（不再要求可视）
+          if (addGoodsBtn) {
             let displayedFileName = null;
             const fileNameSelectors = [
               '.video-list_fileName___Diex p',
@@ -8665,7 +8686,7 @@
           
           for (const selector of inputSelectors) {
             const inputDirect = modal.querySelector(selector);
-            if (inputDirect && inputDirect.offsetParent !== null) {
+            if (inputDirect && !inputDirect.disabled) {  // ★ 修复：移除offsetParent限制
               console.log('[PDD监控] 批量: 未切换Tab但找到输入框，直接填写:', goodsId);
               setNativeValue(inputDirect, goodsId);
               inputDirect.dispatchEvent(new Event('input', { bubbles: true }));
@@ -8704,7 +8725,7 @@
           
           for (const selector of inputSelectors) {
             input = modal.querySelector(selector);
-            if (input && input.offsetParent !== null) {
+            if (input && !input.disabled) {  // ★ 修复：移除offsetParent限制
               inputFound = true;
               break;
             }
@@ -8739,7 +8760,7 @@
                 setTimeout(() => {
                   for (const selector of inputSelectors) {
                     const inputRetry = modal.querySelector(selector);
-                    if (inputRetry && inputRetry.offsetParent !== null) {
+                    if (inputRetry && !inputRetry.disabled) {  // ★ 修复：移除offsetParent限制
                       inputRetry.scrollIntoView({ behavior: 'instant', block: 'center' });
                       
                       setTimeout(() => {
@@ -8832,16 +8853,16 @@
       let nextBtn = null;
       for (const selector of nextBtnSelectors) {
         const btn = modal.querySelector(selector);
-        if (btn && !btn.disabled && btn.offsetParent !== null) {
+        if (btn && !btn.disabled) {  // ★ 修复：移除offsetParent限制
           nextBtn = btn;
           break;
         }
       }
-      
+
       if (!nextBtn) {
         const allButtons = modal.querySelectorAll('button');
         for (const btn of allButtons) {
-          if (btn.offsetParent !== null && !btn.disabled) {
+          if (!btn.disabled) {  // ★ 修复：移除offsetParent限制
             const text = btn.textContent.trim();
             if (text.includes('下一步') || text.includes('确认') || text.includes('确定')) {
               nextBtn = btn;
@@ -8850,15 +8871,15 @@
           }
         }
       }
-      
+
       if (nextBtn) {
         nextBtn.click();
-        
+
         // 等待模态框关闭（增加等待时间到3秒）
         setTimeout(() => {
           // 检查模态框是否真的关闭了
           const modalStillOpen = document.querySelector('.MDL_inner_5-180-0, [class*="modal"]:not([class*="mask"]), [class*="Modal"]');
-          if (modalStillOpen && modalStillOpen.offsetParent !== null) {
+          if (modalStillOpen) {  // ★ 修复：移除offsetParent限制
             if (retryCount < maxRetries) {
               // 尝试再次点击
               setTimeout(() => {
@@ -9067,7 +9088,8 @@
               }
               
               // 检查是否有添加商品按钮（说明视频已处理完成）
-              if (addGoodsBtn && addGoodsBtn.offsetParent !== null) {
+              // ★ 修复：不再要求按钮在可视区内
+              if (addGoodsBtn) {
                 // 额外检查：确保视频有封面图
                 const coverImg = video.querySelector('img[src*="blob:"], img[src*="http"], img[class*="cover"], img[class*="thumbnail"]');
                 if (coverImg && coverImg.complete && coverImg.naturalWidth > 10) {
@@ -9090,7 +9112,7 @@
               statusEl.textContent = `📝 填写商品信息中... (第${totalProcessedCount}个)`;
               
               try {
-                const success = await fillGoodsIdForVideo(targetVideo, goodsId);
+                const success = await fillGoodsIdForVideo(targetVideo, goodsId, description, contentDeclaration);
                 if (success) {
                   statusEl.textContent = `✅ 商品信息已填写 (第${totalProcessedCount}个)`;
                   console.log(`[PDD监控] 第${totalProcessedCount}个视频商品ID填充成功`);
@@ -9121,7 +9143,8 @@
               const videoId = video.getAttribute('data-key') || video.dataset.id || `video_${i}`;
               if (!window.__pddProcessedVideos.has(videoId)) {
                 const addGoodsBtn = video.querySelector('.AddGoodsTrigger_addGoodsTrigger__nbdhF, [class*="AddGoods"]');
-                if (addGoodsBtn && addGoodsBtn.offsetParent !== null) {
+                // ★ 修复：按钮存在即表示未完成（不再要求可视）
+                if (addGoodsBtn) {
                   allProcessed = false;
                   break;
                 }
@@ -9272,15 +9295,15 @@
       
       for (const selector of classSelectors) {
         const btn = document.querySelector(selector);
-        if (btn && btn.offsetParent !== null) {
+        if (btn) {  // ★ 修复：移除offsetParent限制
           return btn;
         }
       }
-      
+
       // 再通过文本内容查找
       const allButtons = document.querySelectorAll('button');
       for (const btn of allButtons) {
-        if (btn.offsetParent !== null && 
+        if (  // ★ 修复：移除offsetParent限制
             (btn.textContent.includes('添加视频') || btn.textContent.includes('上传视频'))) {
           return btn;
         }
@@ -9341,8 +9364,9 @@
           if (videoItems.length > 0) {
             const lastVideo = videoItems[videoItems.length - 1];
             const addGoodsBtn = lastVideo.querySelector('.AddGoodsTrigger_addGoodsTrigger__nbdhF, [class*="AddGoods"]');
-            
-            if (addGoodsBtn && addGoodsBtn.offsetParent !== null) {
+
+            // ★ 修复：按钮存在即可（不再要求可视）
+            if (addGoodsBtn) {
               clearInterval(checkInterval);
               const idx = activeResources.intervals.indexOf(checkInterval);
               if (idx > -1) activeResources.intervals.splice(idx, 1);
@@ -9371,7 +9395,7 @@
       // 先查找所有按钮，找到包含"下一步"或"确认"文字的
       const allButtons = modal.querySelectorAll('button');
       for (const btn of allButtons) {
-        if (btn && !btn.disabled && btn.offsetParent !== null) {
+        if (btn && !btn.disabled) {  // ★ 修复：移除offsetParent限制
           const text = btn.textContent || '';
           if (text.includes('下一步') || text.includes('确认')) {
             console.log('[PDD监控] 点击下一步按钮:', text);
@@ -9380,17 +9404,17 @@
           }
         }
       }
-      
+
       // 备用方案：通过选择器查找
       const nextBtnSelectors = [
         'button[data-testid="beast-core-modal-ok-button"]',
         '.MDL_okBtn_5-180-0'
       ];
-      
+
       for (const selector of nextBtnSelectors) {
         try {
           const btn = modal.querySelector(selector);
-          if (btn && !btn.disabled && btn.offsetParent !== null) {
+          if (btn && !btn.disabled) {  // ★ 修复：移除offsetParent限制
             console.log('[PDD监控] 点击下一步按钮(selector)');
             btn.click();
             return true;
@@ -9456,7 +9480,7 @@
             continue;
           }
           
-          if (input.offsetParent !== null && !input.disabled && !input.readOnly) {
+          if (!input.disabled && !input.readOnly) {  // ★ 修复：移除offsetParent限制
             const rect = input.getBoundingClientRect();
             if (rect.width > 50) {
               input.scrollIntoView({ behavior: 'instant', block: 'center' });
@@ -9622,10 +9646,14 @@
           if (processedVideos.has(itemId)) return;
           
           // 检查是否需要填写商品ID（查找"添加商品"按钮）
+          // ★ 修复：不再要求按钮在可视区内，DOM存在即表示上传完成
           const addGoodsBtn = item.querySelector('.AddGoodsTrigger_addGoodsTrigger__nbdhF, [class*="AddGoods"]');
-          
-          // 只有当"添加商品"按钮可见时，才说明视频上传完成
-          if (addGoodsBtn && addGoodsBtn.offsetParent !== null && filledCount < config.pidList.length) {
+
+          if (addGoodsBtn && filledCount < config.pidList.length) {
+            // 确认按钮文字是"添加商品"类（不是已填充后的"更换/修改"）
+            const btnText = (addGoodsBtn.textContent || '').trim();
+            if (btnText.includes('更换') || btnText.includes('修改') || btnText.includes('编辑')) return; // 已填充过
+
             const goodsId = config.pidList[filledCount];
             console.log('[PDD监控] 检测到新视频上传完成，自动填写商品ID:', goodsId, '视频:', itemId);
             
@@ -9636,6 +9664,7 @@
             setTimeout(async () => {
               // 填充描述（如果有配置）
               const desc = config.description || null;
+              // ★ 填充内容声明（如果有配置）
               const decl = config.contentDeclaration || null;
               await fillGoodsIdForVideo(item, goodsId, desc, decl);
               filledCount++;
@@ -9742,7 +9771,7 @@
         
         for (const selector of nonCoverSelectors) {
           const el = videoItem.querySelector(selector);
-          if (el && el.offsetParent !== null) {
+          if (el) {  // ★ 修复：移除offsetParent限制，离屏元素也可以点击
             clickTarget = el;
             console.log('[PDD监控] 找到视频信息区域:', selector);
             break;
@@ -9796,7 +9825,7 @@
         
         for (const selector of addGoodsBtnSelectors) {
           const btn = videoItem.querySelector(selector);
-          if (btn && btn.offsetParent !== null) {
+          if (btn) {  // ★ 修复：移除offsetParent限制，离屏视频也需要填充
             addGoodsBtn = btn;
             console.log('[PDD监控] 找到添加商品按钮(方法1)，选择器:', selector);
             break;
@@ -9811,11 +9840,10 @@
             if ((text.includes('添加商品') || (text.includes('添加') && text.includes('商品'))) && 
                 !text.includes('流量卡') && !text.includes('奖励') && 
                 !text.includes('审核通过')) {
-              if (btn.offsetParent !== null) {
-                addGoodsBtn = btn;
-                console.log('[PDD监控] 找到添加商品按钮(方法2-文本匹配):', text.substring(0, 20) + '...');
-                break;
-              }
+              // ★ 修复：移除offsetParent限制
+              addGoodsBtn = btn;
+              console.log('[PDD监控] 找到添加商品按钮(方法2-文本匹配):', text.substring(0, 20) + '...');
+              break;
             }
           }
         }
@@ -9824,7 +9852,7 @@
         if (!addGoodsBtn) {
           const iconBtns = videoItem.querySelectorAll('[class*="plus"], [class*="add"], [class*="goods"]');
           for (const btn of iconBtns) {
-            if (btn.offsetParent !== null && (btn.tagName === 'BUTTON' || btn.getAttribute('role') === 'button')) {
+            if (btn.tagName === 'BUTTON' || btn.getAttribute('role') === 'button') {  // ★ 修复：移除offsetParent限制
               addGoodsBtn = btn;
               console.log('[PDD监控] 找到添加商品按钮(方法3-图标匹配)');
               break;
@@ -9836,15 +9864,21 @@
           const btnRect = addGoodsBtn.getBoundingClientRect();
           const isInViewport = btnRect.top >= 0 && btnRect.bottom <= window.innerHeight;
           if (!isInViewport) {
-            addGoodsBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            addGoodsBtn.scrollIntoView({ behavior: 'instant', block: 'center' });
+            await new Promise(r => setTimeout(r, 300));  // 等待滚动完成
           }
-          
-          setTimeout(async () => {
-            console.log('[PDD监控] 点击添加商品按钮');
-            addGoodsBtn.click();
-            
+
+          // ★★★ 关键修复：同步等待弹窗填充完成（原版setTimeout异步导致resolve时填充未完成） ★★★
+          console.log('[PDD监控] 点击添加商品按钮');
+          addGoodsBtn.click();
+
+          try {
+            // 等待弹窗出现
+            await new Promise(r => setTimeout(r, 800));
+
             const fillSuccess = await fillGoodsIdInModal(goodsId);
-            
+            console.log('[PDD监控] fillGoodsIdForVideoOnce 弹窗填充结果:', fillSuccess);
+
             // 验证商品ID是否填充成功
             if (fillSuccess) {
               await new Promise(r => setTimeout(r, 800));
@@ -9853,7 +9887,10 @@
             } else {
               resolve(false);
             }
-          }, 300);
+          } catch(e) {
+            console.error('[PDD监控] fillGoodsIdForVideoOnce 异常:', e.message);
+            resolve(false);
+          }
         } else {
           console.log('[PDD监控] 未找到添加商品按钮');
           resolve(false);
@@ -9889,7 +9926,8 @@
       
       // 检查添加商品按钮是否还在（如果不在说明已添加）
       const addGoodsBtn = videoItem.querySelector('[class*="AddGoodsTrigger"], [class*="addGoods"]');
-      if (!addGoodsBtn || addGoodsBtn.offsetParent === null) {
+      // ★ 修复：不再用offsetParent判断，改用按钮文字判断
+      if (!addGoodsBtn) {
         console.log('[PDD监控] 验证成功：添加商品按钮已消失');
         return true;
       }
@@ -10004,13 +10042,13 @@
           let modal = null;
           for (const selector of modalSelectors) {
             const found = document.querySelector(selector);
-            if (found && found.offsetParent !== null) {
+            if (found) {  // ★ 修复：移除offsetParent限制（弹窗可能在动画中offsetParent为null）
               modal = found;
               break;
             }
           }
-          
-          if (modal && modal.offsetParent !== null) {
+
+          if (modal) {  // ★ 修复：移除offsetParent限制
             const modalText = modal.textContent || '';
             if (modalText.includes('礼物收益') || modalText.includes('拼多多商家版APP')) {
               closeInterferenceModal();
@@ -10038,7 +10076,7 @@
                 const inputs = modal.querySelectorAll(selector);
                 
                 for (const input of inputs) {
-                  if (input && input.offsetParent !== null && !input.disabled) {
+                  if (input && !input.disabled) {  // ★ 修复：移除offsetParent限制（弹窗内输入框可能需要滚动）
                     input.scrollIntoView({ behavior: 'instant', block: 'center' });
                     
                     setTimeout(() => {
@@ -10076,7 +10114,7 @@
             
             const allInputs = document.querySelectorAll('input[type="text"]:not([readonly])');
             for (const input of allInputs) {
-              if (input.offsetParent !== null && !input.disabled) {
+              if (!input.disabled) {  // ★ 修复：移除offsetParent限制（备用方案也需要工作）
                 const placeholder = input.placeholder || '';
                 if (placeholder.includes('商品') || placeholder.includes('ID')) {
                   setNativeValue(input, goodsId);
@@ -10161,7 +10199,7 @@
         console.log('[PDD监控] 选择器:', selector, '找到', btns.length, '个按钮');
         
         for (const btn of btns) {
-          if (btn && !btn.disabled && btn.offsetParent !== null) {
+          if (btn && !btn.disabled) {  // ★ 修复：移除offsetParent限制
             console.log('[PDD监控] 找到可点击按钮:', btn.textContent || btn.className);
             console.log('[PDD监控] 点击下一步按钮');
             btn.click();
@@ -10169,12 +10207,12 @@
           }
         }
       }
-      
+
       // 如果没找到，尝试查找所有按钮
       console.log('[PDD监控] 未找到特定按钮，查找所有按钮');
       const allBtns = modal.querySelectorAll('button');
       for (const btn of allBtns) {
-        if (btn && !btn.disabled && btn.offsetParent !== null) {
+        if (btn && !btn.disabled) {  // ★ 修复：移除offsetParent限制
           const text = (btn.textContent || '').trim();
           if (text.includes('确定') || text.includes('确认') || text.includes('下一步') || text.includes('提交')) {
             console.log('[PDD监控] 找到按钮（通过文本）:', text);
@@ -12569,39 +12607,240 @@
     }, 1000);
   }
   
-  // 填写视频信息（商品ID和描述）
-  async function fillVideoInfo(video) {
-    let success = false;
+  // 填写视频信息（统一版）— 兼容两种调用方式 + 封面自动识别 + 完整填充流程
+  //
+  // 调用方式:
+  //   ① 旧版(批量上传): fillVideoInfo(videoItemDOM, goodsId, fileName, description, contentDeclaration)
+  //   ② 新版(批量发布): fillVideoInfo({ file, goodsId, description, ... })
+  //
+  async function fillVideoInfo(videoOrItem, goodsId, fileName, description, contentDeclaration) {
 
-    // 1. 自动选择视频封面（传入视频文件对象）
-    try {
-      const videoFile = video?.file || null;
-      await autoSelectVideoCover(videoFile);
-    } catch (e) {
-      console.log('[PDD监控] 自动选择封面失败，继续执行:', e.message);
-    }
-    
-    // 2. 点击"添加商品"按钮
-    const addGoodsBtn = findAddGoodsButton();
-    if (addGoodsBtn) {
-      console.log('[PDD监控] 点击添加商品按钮');
-      addGoodsBtn.click();
-      
-      // 等待弹窗出现，然后填写商品ID
-      setTimeout(async () => {
-        await fillGoodsIdInModal(video.goodsId);
-        
-        // 填充视频描述（如果有）
-        if (video.description || batchPublishConfig?.description) {
-          const desc = video.description || batchPublishConfig.description;
-          await fillVideoDescription(desc);
+    // ========== 参数归一化 ==========
+    let videoFile = null;
+    let actualGoodsId = null;
+    let actualDesc = null;
+    let actualContentDecl = null;
+    let videoItemDom = null;
+
+    if (videoOrItem && typeof videoOrItem === 'object' && videoOrItem.nodeType === 1) {
+      // ---- 旧版：DOM 元素 ----
+      videoItemDom = videoOrItem;
+      actualGoodsId = goodsId;
+      actualDesc = description || batchPublishConfig?.description || null;
+      actualContentDecl = contentDeclaration;
+      console.log('[PDD监控] ★ fillVideoInfo [DOM模式] goodsId=', actualGoodsId, ' desc=', (actualDesc||'').substring(0,30), ' decl=', actualContentDecl);
+
+      // 从 pendingUploadConfig 中查找对应的视频文件（供封面截取用）
+      if (pendingUploadConfig?.files?.length > 0) {
+        const existingItems = document.querySelectorAll('.video-list_itemWrap__7xLB4, [class*="video-list_item"], [class*="video-item"]');
+        const idx = Math.max(0, existingItems.length - 1);
+
+        if (idx < pendingUploadConfig.files.length) {
+          videoFile = pendingUploadConfig.files[idx]?.file || null;
         }
-      }, 500);
-      
-      success = true;
+        // 文件名精确匹配作为备选
+        if (!videoFile && fileName) {
+          for (const vf of pendingUploadConfig.files) {
+            if (vf.file?.name === fileName) { videoFile = vf.file; break; }
+          }
+        }
+        if (videoFile) console.log('[PDD监控]   匹配到视频文件:', videoFile.name);
+      }
+
+    } else if (videoOrItem && typeof videoOrItem === 'object') {
+      // ---- 新版：对象 ----
+      videoFile = videoOrItem.file || null;
+      actualGoodsId = videoOrItem.goodsId || goodsId || null;
+      actualDesc = videoOrItem.description || batchPublishConfig?.description || null;
+      actualContentDecl = videoOrItem.contentDeclaration || contentDeclaration || null;
+      videoItemDom = videoOrItem.domElement || null;
+      console.log('[PDD监控] ★ fillVideoInfo [对象模式] file=', videoFile ? videoFile.name : '无');
+    } else {
+      console.warn('[PDD监控] fillVideoInfo: 参数无法识别');
+      return false;
     }
-    
-    return success;
+
+    // ========== Step 0: 先滚动到视口内（修复：必须在防重复检查之前！）==========
+    if (videoItemDom) {
+      const rect = videoItemDom.getBoundingClientRect();
+      // 如果元素不在视口中，先滚动过去（确保后续的offsetParent/isVideoAlreadyFilled判断正确）
+      if (rect.top < 0 || rect.bottom > window.innerHeight || rect.width === 0) {
+        videoItemDom.scrollIntoView({ behavior: 'instant', block: 'center' });
+        await new Promise(r => setTimeout(r, 300)); // 等待浏览器完成滚动和布局更新
+      }
+    }
+
+    // ========== 防重复检查（现在元素已在视口内，判断准确） ==========
+    if (videoItemDom && isVideoAlreadyFilled(videoItemDom)) {
+      console.log('[PDD监控] 商品ID已填充，跳过整个流程');
+      return true;
+    }
+
+    try {
+      // ========== Step 1: 自动选择视频封面（非阻塞，失败不中断）==========
+      console.log('[PDD监控] ┌─ Step 1/5: 封面识别');
+      try {
+        if (videoFile) {
+          console.log('[PDD监控] │  截取视频帧:', videoFile.name);
+          await autoSelectVideoCover(videoFile);
+        } else {
+          // 无文件对象时，尝试从预生成封面中获取
+          console.log('[PDD监控] │  无视频文件，尝试预生成封面...');
+          await autoSelectVideoCover(null);
+        }
+      } catch (coverErr) {
+        console.warn('[PDD监控] │  封面异常（非致命）:', coverErr.message);
+      }
+      console.log('[PDD监控] ├─ Step 2/5: 选中视频项');
+
+      // ========== Step 2: 滚动 + 选中视频项 ==========
+      if (videoItemDom) {
+        const rect = videoItemDom.getBoundingClientRect();
+        if (rect.top < 0 || rect.bottom > window.innerHeight) {
+          videoItemDom.scrollIntoView({ behavior: 'instant', block: 'center' });
+          await new Promise(r => setTimeout(r, 200));
+        }
+        // 点击视频项的非封面区域（避免触发封面选择弹窗）
+        let clickTarget = null;
+        for (const sel of ['.video-list_infoWrap__kVj5S', '[class*="infoWrap"]', '[class*="videoInfo"]', '[class*="meta"]']) {
+          const el = videoItemDom.querySelector(sel);
+          if (el) { clickTarget = el; break; }  // ★ 修复：移除offsetParent限制
+        }
+        if (!clickTarget) clickTarget = videoItemDom;
+        clickTarget.dispatchEvent(new MouseEvent('click', {
+          bubbles: true, cancelable: true, view: window,
+          clientX: rect.left + 10, clientY: rect.top + rect.height / 2
+        }));
+      }
+
+      // ========== Step 3: 等待编辑面板出现 ==========
+      console.log('[PDD监控] ├─ Step 3/5: 等待编辑面板');
+      await waitForEditorPanel(3000);
+
+      // ========== Step 4: 填充描述 ==========
+      console.log('[PDD监控] ├─ Step 4/5: 填充描述/声明');
+      if (actualDesc) {
+        let finalDesc = actualDesc;
+        if (fileName) {
+          const suffix = extractNumberSuffix(fileName);
+          if (suffix) finalDesc = actualDesc + ' ' + suffix;
+        }
+        console.log('[PDD监控] │  描述:', finalDesc.substring(0, 40));
+        await fillVideoDescription(finalDesc, videoItemDom);
+        await new Promise(r => setTimeout(r, 500));
+      } else if (fileName) {
+        const suffix = extractNumberSuffix(fileName);
+        if (suffix) {
+          await fillVideoDescription(suffix, videoItemDom);
+          await new Promise(r => setTimeout(r, 500));
+        }
+      }
+
+      // 填充内容声明（全局设置：首次成功后自动跳过后续视频）
+      if (actualContentDecl) {
+        await new Promise(r => setTimeout(r, 500));   // 等编辑面板完全渲染
+        console.log('[PDD监控] │  内容声明:', actualContentDecl);
+        let declOk = await fillContentDeclaration(actualContentDecl, videoItemDom);
+        if (!declOk) {
+          // 首次失败给一次重试机会
+          console.log('[PDD监控] │  内容声明首次失败，1.5s后重试...');
+          await new Promise(r => setTimeout(r, 1500));
+          declOk = await fillContentDeclaration(actualContentDecl, videoItemDom);
+        }
+        if (declOk) {
+          console.log('[PDD监控] │  ✅ 内容声明OK');
+        } else {
+          console.warn('[PDD监控] │  ⚠️ 内容声明未成功（非致命，后续视频会继续尝试）');
+        }
+        await new Promise(r => setTimeout(r, 200));
+      } else {
+        console.log('[PDD监控] │  内容声明: 无(跳过)');
+      }
+
+      // 关闭可能出现的弹窗
+      closeTopicPopup();
+
+      // ========== Step 5: 填充商品ID ==========
+      console.log('[PDD监控] └─ Step 5/5: 商品ID =', actualGoodsId);
+
+      // ★ 方式A: 优先在当前视频项内查找"添加商品"按钮（修复：不再用全局搜索）
+      let addGoodsBtn = null;
+
+      if (videoItemDom) {
+        // 先在当前视频项的DOM范围内查找
+        const localSelectors = [
+          '.AddGoodsTrigger_addGoodsTrigger__nbdhF',
+          '[class*="AddGoodsTrigger"]',
+          '[class*="addGoods"]',
+          'div[class*="AddGoods"]'
+        ];
+        for (const sel of localSelectors) {
+          const btn = videoItemDom.querySelector(sel);
+          if (btn) {
+            addGoodsBtn = btn;
+            console.log('[PDD监控]   在videoItemDom内找到添加商品按钮:', sel);
+            break;
+          }
+        }
+      }
+
+      // 当前项内没找到时，回退到全局搜索
+      if (!addGoodsBtn) {
+        addGoodsBtn = findAddGoodsButton();
+        if (addGoodsBtn) {
+          console.log('[PDD监控]   ⚠️ 回退到全局查找添加商品按钮');
+        }
+      }
+
+      if (addGoodsBtn) {
+        console.log('[PDD监控]   点击添加商品按钮，等待弹窗...');
+        addGoodsBtn.click();
+
+        // ★★★ 关键修复：同步等待弹窗填充完成（不再使用异步setTimeout） ★★★
+        // 之前的bug：setTimeout(async ()=>{...}, 500) 异步执行fillGoodsIdInModal，
+        // 但fillVideoInfo立即return true → 外层验证时弹窗还没填完 → 验证失败 → 3次重试后永久跳过
+        try {
+          // 等待弹窗出现（拼多多弹窗通常需要600-1200ms渲染）
+          await new Promise(r => setTimeout(r, 800));
+
+          console.log('[PDD监控]   开始填充商品ID弹窗, goodsId=', actualGoodsId);
+          const fillResult = await fillGoodsIdInModal(actualGoodsId);
+          console.log('[PDD监控]   商品ID弹窗填充结果:', fillResult ? '✅成功' : '⚠️失败');
+
+          // 等待弹窗关闭/DOM更新
+          await new Promise(r => setTimeout(r, 500));
+
+          // 弹窗内补充描述（如果之前没填成功）
+          if (actualDesc) {
+            try {
+              const descFilled = await fillVideoDescription(actualDesc, videoItemDom);
+              console.log('[PDD监控]   弹窗后描述补充:', descFilled ? 'OK' : '跳过');
+            } catch(descErr) {
+              console.warn('[PDD监控]   弹窗后描述异常:', descErr.message);
+            }
+          }
+        } catch(e) {
+          console.error('[PDD监控]   弹窗填写异常:', e.message);
+          // ★ 不抛出异常 - 弹窗填充失败不应阻断整个流程（可能是弹窗未弹出/已关闭等）
+          // 外层会通过isVideoAlreadyFilled验证来判断最终结果
+        }
+
+        return true;
+      }
+
+      // 方式B: 直接填充（无按钮时）
+      if (videoItemDom && !isVideoAlreadyFilled(videoItemDom)) {
+        const filled = await fillGoodsId(videoItemDom, actualGoodsId);
+        if (!filled) throw new Error('商品ID填充失败');
+      }
+
+      console.log('[PDD监控] ✅ fillVideoInfo 全部完成!');
+      return true;
+
+    } catch (e) {
+      console.error('[PDD监控] ❌ fillVideoInfo 异常:', e.message);
+      throw e;
+    }
   }
   
   // 查找"添加商品"按钮
@@ -12617,7 +12856,7 @@
     for (const selector of classSelectors) {
       try {
         const btn = document.querySelector(selector);
-        if (btn && btn.offsetParent !== null) {
+        if (btn) {  // ★ 修复：移除offsetParent限制
           // 如果找到的是svg，返回其父元素
           if (btn.tagName === 'svg') {
             return btn.closest('div[class*="AddGoods"]') || btn.parentElement;
@@ -12632,156 +12871,444 @@
     // 备用方案：查找所有按钮，找到包含"添加商品"文字的
     const allButtons = document.querySelectorAll('button, div[role="button"]');
     for (const btn of allButtons) {
-      if (btn.offsetParent !== null) {
-        const text = btn.textContent || '';
-        if (text.includes('添加商品') || text.includes('添加')) {
-          return btn;
-        }
+      // ★ 修复：移除offsetParent限制
+      const text = btn.textContent || '';
+      if (text.includes('添加商品') || text.includes('添加')) {
+        return btn;
       }
     }
     
     return null;
   }
   
-  // 从视频中截取一帧作为封面（从 File 对象生成）
-  async function captureVideoCoverFromFile(videoFile) {
+  // 从视频中截取一帧作为封面（从 File 对象生成）— 优化版：超时+多时间点重试
+  async function captureVideoCoverFromFile(videoFile, timeoutMs = 10000) {
+    const CAPTURE_TIMEOUT = timeoutMs;
+    const SEEK_POINTS = [1, 2, 0.5, 3]; // 多个seek时间点依次尝试
+
     return new Promise((resolve, reject) => {
+      let isResolved = false;
+      const cleanup = (url, video) => {
+        try { URL.revokeObjectURL(url); } catch(e) {}
+        try { video.remove(); } catch(e) {}
+      };
+
+      let url = null;
+      let currentSeekIndex = 0;
+      let video = null;   // 先声明，后面再赋值
+
+    // 超时定时器
+      const timer = setTimeout(() => {
+        if (isResolved) return;
+        isResolved = true;
+        cleanup(url, video);
+        reject(new Error('视频截帧超时(' + CAPTURE_TIMEOUT + 'ms)：视频文件可能过大或格式不支持'));
+      }, CAPTURE_TIMEOUT);
+
       try {
-        const video = document.createElement('video');
-        video.preload = 'metadata';
+        video = document.createElement('video');
+        video.preload = 'auto';       // 改为auto，更快加载
         video.muted = true;
         video.playsInline = true;
-        video.crossOrigin = 'anonymous';
-        const url = URL.createObjectURL(videoFile);
+        // 注意：不设置crossOrigin——blob URL不需要CORS，设了反而可能出错
+        url = URL.createObjectURL(videoFile);
 
-        video.onloadeddata = () => {
-          // 跳转到第1秒截取封面（跳过黑屏开头）
-          video.currentTime = Math.min(1, video.duration * 0.1 || 1);
-        };
-
-        video.onseeked = () => {
+        const doCapture = () => {
+          if (isResolved) return;
           try {
+            // 检查视频尺寸是否有效（避免黑屏/空白帧）
+            if (video.videoWidth < 10 || video.videoHeight < 10) {
+              // 尺寸无效，尝试下一个seek点
+              tryNextSeek();
+              return;
+            }
+
             const canvas = document.createElement('canvas');
-            const w = video.videoWidth || 1280;
-            const h = video.videoHeight || 720;
+            // 限制最大尺寸，避免内存问题
+            const maxW = 1920, maxH = 1080;
+            let w = video.videoWidth || 1280;
+            let h = video.videoHeight || 720;
+            if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+            if (h > maxH) { w = Math.round(w * maxH / h); h = maxH; }
             canvas.width = w;
             canvas.height = h;
             const ctx = canvas.getContext('2d');
             ctx.drawImage(video, 0, 0, w, h);
 
             canvas.toBlob((blob) => {
-              URL.revokeObjectURL(url);
-              video.remove();
-              if (blob) {
+              if (isResolved) return;
+              clearTimeout(timer);
+              isResolved = true;
+              cleanup(url, video);
+              if (blob && blob.size > 0) {   // 检查blob不为空
                 const coverFile = new File([blob], 'cover_' + videoFile.name.replace(/\.[^.]+$/, '.jpg'), { type: 'image/jpeg' });
                 resolve(coverFile);
               } else {
-                reject(new Error('canvas.toBlob 返回空'));
+                reject(new Error('canvas.toBlob 返回空或size=0'));
               }
             }, 'image/jpeg', 0.92);
           } catch (e) {
-            URL.revokeObjectURL(url);
-            video.remove();
-            reject(e);
+            if (isResolved) return;
+            tryNextSeek();
           }
         };
 
+        const tryNextSeek = () => {
+          if (isResolved) return;
+          currentSeekIndex++;
+          if (currentSeekIndex >= SEEK_POINTS.length) {
+            // 所有seek点都失败了
+            isResolved = true;
+            clearTimeout(timer);
+            cleanup(url, video);
+            reject(new Error('所有截帧尝试均失败（视频可能损坏或不支持）'));
+            return;
+          }
+          const seekTime = Math.min(SEEK_POINTS[currentSeekIndex], video.duration - 0.1);
+          if (seekTime > 0) {
+            video.currentTime = seekTime;
+          } else {
+            // 视频duration不可用，直接用当前帧尝试
+            doCapture();
+          }
+        };
+
+        // 使用loadedmetadata（比loadeddata更早触发）
+        video.onloadedmetadata = () => {
+          if (isResolved) return;
+          // 立即seek到第一个时间点
+          const seekTime = Math.min(SEEK_POINTS[0], (video.duration || 10) - 0.1);
+          video.currentTime = Math.max(0.5, seekTime);
+        };
+
+        // 兼容：有些浏览器不触发loadedmetadata但会触发loadeddata
+        video.onloadeddata = () => {
+          if (isResolved) return;
+          // 如果还没开始seek，手动触发
+          if (!video.currentTime || video.currentTime < 0.1) {
+            const seekTime = Math.min(SEEK_POINTS[0], (video.duration || 10) - 0.1);
+            video.currentTime = Math.max(0.5, seekTime);
+          }
+        };
+
+        video.onseeked = () => {
+          if (isResolved) return;
+          doCapture();
+        };
+
+        // canplay也可以作为备选事件
+        video.oncanplay = () => {
+          if (isResolved) return;
+          // 如果seeked迟迟没触发，在canplay时也尝试截取
+          setTimeout(() => {
+            if (!isResolved) doCapture();
+          }, 500);
+        };
+
         video.onerror = (err) => {
-          URL.revokeObjectURL(url);
-          video.remove();
-          reject(new Error('视频加载失败: ' + (video.error?.message || err)));
+          if (isResolved) return;
+          isResolved = true;
+          clearTimeout(timer);
+          cleanup(url, video);
+          reject(new Error('视频加载失败: ' + (video.error?.message || JSON.stringify(video.error) || '未知错误')));
         };
 
         video.src = url;
       } catch (e) {
+        if (isResolved) return;
+        isResolved = true;
+        clearTimeout(timer);
+        try { if (url) URL.revokeObjectURL(url); } catch(ex) {}
         reject(e);
       }
     });
   }
 
-  // 在页面上为已上传的视频设置封面图
-  async function setVideoCoverOnPage(coverFile) {
+  // 在页面上为已上传的视频设置封面图 — 重写版：多种方案+重试+交互式封面按钮
+  async function setVideoCoverOnPage(coverFile, retryCount = 0) {
+    const MAX_RETRIES = 3;
     if (!coverFile) return false;
 
     try {
-      // 等待页面渲染视频项
-      await new Promise(r => setTimeout(r, 1500));
+      // 等待页面稳定（视频刚上传完时页面DOM可能还在变化）
+      await new Promise(r => setTimeout(r, 800));
 
-      // 方案1：查找封面上传的文件输入框
-      const coverInputSelectors = [
-        'input[type="file"][accept*="image"]',
-        'input[type="file"][accept*="jpg"]',
-        'input[type="file"][accept*="png"]',
-        '[class*="cover"] input[type="file"]',
-        '[class*="Cover"] input[type="file"]',
-        '[class*="upload"] input[type="file"]'
-      ];
+      console.log(`[PDD监控] 设置封面(第${retryCount + 1}次尝试)...`);
 
-      let coverInput = null;
-      for (const sel of coverInputSelectors) {
-        const inputs = document.querySelectorAll(sel);
-        for (const inp of inputs) {
-          if (inp.offsetParent !== null && !inp.closest('#pdd-video-monitor, #pdd-batch-publish-panel')) {
-            coverInput = inp;
-            console.log('[PDD监控] 找到封面输入框:', sel);
-            break;
-          }
-        }
-        if (coverInput) break;
-      }
-
-      if (coverInput) {
-        const dt = new DataTransfer();
-        dt.items.add(coverFile);
-        const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'files')?.set;
-        if (nativeSetter) {
-          nativeSetter.call(coverInput, dt.files);
-        } else {
-          coverInput.files = dt.files;
-        }
-        coverInput.dispatchEvent(new Event('change', { bubbles: true }));
-        console.log('[PDD监控] 封面已设置到输入框');
+      // ========== 方案A：点击"编辑封面"按钮 → 触发文件选择 → 设置文件 ==========
+      // 拼多多的封面上传需要先点击"编辑封面"/"已编辑封面"按钮
+      const coverBtnResult = await trySetCoverViaEditButton(coverFile);
+      if (coverBtnResult) {
+        console.log('[PDD监控] 封面已通过"编辑封面"按钮设置 ✓');
         return true;
       }
 
-      // 方案2：查找封面图片元素，尝试通过拖拽或剪贴板设置
-      const coverImgSelectors = [
-        '[class*="cover"] img:not([src*="http"])',
-        '[class*="Cover"] img:not([src*="http"])',
-        '[class*="thumbnail"] img',
-        '[class*="poster"] img',
-        '.video-item img[class*="cover"]',
-        '.video-item img[class*="default"]'
-      ];
-
-      for (const sel of coverImgSelectors) {
-        const img = document.querySelector(sel);
-        if (img && img.offsetParent !== null && img.closest && !img.closest('#pdd-video-monitor, #pdd-batch-publish-panel')) {
-          // 将 blob URL 设置到 img src
-          const url = URL.createObjectURL(coverFile);
-          img.src = url;
-          img.onload = () => URL.revokeObjectURL(url);
-          console.log('[PDD监控] 封面已设置到图片元素:', sel);
-
-          // 触发 change 事件让 React 检测到变化
-          img.dispatchEvent(new Event('load', { bubbles: true }));
-
-          // 尝试触发父级容器的事件
-          const parent = img.closest('[class*="cover"], [class*="Cover"], [class*="upload"]');
-          if (parent) {
-            parent.dispatchEvent(new CustomEvent('change', { bubbles: true, detail: { type: 'cover' } }));
-          }
-          return true;
-        }
+      // ========== 方案B：直接查找页面上可见的文件输入框 ==========
+      const inputResult = await trySetCoverViaFileInput(coverFile);
+      if (inputResult) {
+        console.log('[PDD监控] 封面已通过文件输入框设置 ✓');
+        return true;
       }
 
-      console.log('[PDD监控] 未找到可设置封面的元素');
+      // ========== 方案C：通过img元素设置base64 ==========
+      const imgResult = await trySetCoverViaImgElement(coverFile);
+      if (imgResult) {
+        console.log('[PDD监控] 封面已通过img元素(base64)设置 ✓');
+        return true;
+      }
+
+      // ========== 方案D：拖拽方式模拟 ==========
+      const dragResult = await trySetCoverViaDragDrop(coverFile);
+      if (dragResult) {
+        console.log('[PDD监控] 封面已通过拖拽模拟设置 ✓');
+        return true;
+      }
+
+      // 所有方案都失败，考虑重试
+      if (retryCount < MAX_RETRIES - 1) {
+        console.log(`[PDD监控] 封面设置未成功，${2}秒后重试(${retryCount + 1}/${MAX_RETRIES})...`);
+        await new Promise(r => setTimeout(r, 2000));
+        return setVideoCoverOnPage(coverFile, retryCount + 1);
+      }
+
+      console.warn('[PDD监控] 所有封面设置方案均失败（非致命，可手动点击"编辑封面"选择）');
       return false;
 
     } catch (e) {
-      console.error('[PDD监控] 设置封面失败:', e.message);
+      console.error('[PDD监控] 设置封面异常:', e.message);
+      // 异常也重试一次
+      if (retryCount < MAX_RETRIES - 1) {
+        await new Promise(r => setTimeout(r, 2000));
+        return setVideoCoverOnPage(coverFile, retryCount + 1);
+      }
       return false;
     }
+  }
+
+  // 方案A：通过"编辑封面"按钮设置
+  async function trySetCoverViaEditButton(coverFile) {
+    // 查找"编辑封面"、"已编辑封面"、"选择封面"等按钮
+    const editCoverSelectors = [
+      'span', 'button', 'div', 'a', 'label',
+      '[class*="edit"]', '[class*="Edit"]',
+      '[class*="cover"]', '[class*="Cover"]',
+      '[class*="upload"]', '[class*="Upload"]'
+    ];
+
+    let editBtn = null;
+
+    // 先通过文本内容精确查找
+    const allElements = document.querySelectorAll('span, button, div, a, label');
+    for (const el of allElements) {
+      // ★ 修复：移除offsetParent限制（封面按钮可能在离屏区域）
+      if (el.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
+
+      const text = (el.textContent || '').trim();
+      // 匹配"编辑封面"、"已编辑封面"、"选择封面"等
+      if ((text.includes('编辑封面') || text === '已编辑封面' || text.includes('选择封面'))
+          && el.children.length < 5   // 避误匹配到大容器
+          && text.length < 20) {       // 按钮文字不会太长
+        editBtn = el;
+        console.log('[PDD监控] 找到封面编辑按钮:', text, el.tagName, el.className?.substring(0, 50));
+        break;
+      }
+    }
+
+    if (!editBtn) {
+      // 备用：通过class名称模糊匹配
+      for (const sel of editCoverSelectors) {
+        const els = document.querySelectorAll(sel);
+        for (const el of els) {
+          // ★ 修复：移除offsetParent限制
+          if (el.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
+          const cls = el.className || '';
+          const text = (el.textContent || '').trim();
+          // class包含 cover/edit/upload 且不是大容器
+          if ((cls.match(/cover|Cover|edit|upload/i) || text.match(/封面|编辑/))
+              && el.offsetWidth < 300 && el.offsetHeight < 100) {
+            editBtn = el;
+            break;
+          }
+        }
+        if (editBtn) break;
+      }
+    }
+
+    if (!editBtn) return false;
+
+    // 点击编辑封面按钮
+    editBtn.click();
+    console.log('[PDD监控] 已点击封面编辑按钮');
+
+    // 等待文件输入框或弹窗出现（可能弹出新窗口、打开系统对话框、或创建隐藏input）
+    await new Promise(r => setTimeout(r, 800));
+
+    // 尝试查找新出现的文件输入框（可能是动态创建的）
+    const dynamicInputSelectors = [
+      'input[type="file"]',
+      'input[accept*="image"]',
+      'input[accept*="jpg"]',
+      'input[accept*="png"]'
+    ];
+
+    for (const sel of dynamicInputSelectors) {
+      // 反向查找（后添加的元素在后面），优先找动态创建的
+      const inputs = Array.from(document.querySelectorAll(sel)).reverse();
+      for (const inp of inputs) {
+        if (inp.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
+
+        // 设置文件到这个input
+        try {
+          const dt = new DataTransfer();
+          dt.items.add(coverFile);
+          const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'files')?.set;
+          if (nativeSetter) {
+            nativeSetter.call(inp, dt.files);
+          } else {
+            inp.files = dt.files;
+          }
+          inp.dispatchEvent(new Event('change', { bubbles: true }));
+          inp.dispatchEvent(new Event('input', { bubbles: true }));
+          console.log('[PDD监控] 已通过动态input设置封面文件');
+          return true;
+        } catch(e) {
+          // 继续尝试下一个input
+        }
+      }
+    }
+
+    // 如果没找到input，可能点击后打开了系统原生对话框
+    // 这种情况下我们无法程序化设置文件，但至少已经帮用户点了正确的按钮
+    console.log('[PDD监控] 点击了编辑封面按钮但未找到可设置的文件输入框（可能打开了原生对话框）');
+
+    // 尝试用 clipboardData 的方式——某些React组件支持粘贴
+    return false;
+  }
+
+  // 方案B：直接查找文件输入框
+  async function trySetCoverViaFileInput(coverFile) {
+    const coverInputSelectors = [
+      'input[type="file"][accept*="image"]',
+      'input[type="file"][accept*="jpg"]',
+      'input[type="file"][accept*="png"]',
+      '[class*="cover"] input[type="file"]',
+      '[class*="Cover"] input[type="file"]',
+      '[class*="poster"] input[type="file"]',
+      '[class*="thumb"] input[type="file"]',
+      '[class*="upload"] input[type="file"]'
+    ];
+
+    for (const sel of coverInputSelectors) {
+      const inputs = document.querySelectorAll(sel);
+      for (const inp of inputs) {
+        // 排除扩展自身的input
+        // ★ 修复：移除offsetParent限制（file input通常隐藏，但需要操作）
+        if (inp.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
+
+        try {
+          const dt = new DataTransfer();
+          dt.items.add(coverFile);
+          const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'files')?.set;
+          if (nativeSetter) {
+            nativeSetter.call(inp, dt.files);
+          } else {
+            inp.files = dt.files;
+          }
+          inp.dispatchEvent(new Event('change', { bubbles: true }));
+          inp.dispatchEvent(new Event('input', { bubbles: true }));
+          console.log('[PDD监控] 找到并设置封面input:', sel);
+          return true;
+        } catch(e) {
+          continue;
+        }
+      }
+    }
+    return false;
+  }
+
+  // 方案C：通过img元素设置base64
+  async function trySetCoverViaImgElement(coverFile) {
+    const coverImgSelectors = [
+      // 更广泛的选择器
+      '[class*="cover"] img', '[class*="Cover"] img',
+      '[class*="thumbnail"] img', '[class*="Thumbnail"] img',
+      '[class*="poster"] img', '[class*="Poster"] img',
+      '[class*="preview"] img', '[class*="Preview"] img',
+      '.video-item img', '.video-list img',
+      // 默认占位图（通常是灰色背景的默认图）
+      'img[src*="default"]', 'img[src*="placeholder"]', 'img[src*="cover"]',
+      '[class*="video"] [class*="cover"] img',
+      '[class*="video"] [class*="img"] img'
+    ];
+
+    for (const sel of coverImgSelectors) {
+      try {
+        const imgs = document.querySelectorAll(sel);
+        for (const img of imgs) {
+          // ★ 修复：移除offsetParent限制（封面图可能在离屏区域）
+          if (img.closest('#pdd-video-monitor, #pdd-batch-publish-panel, #pdd-auto-upload-panel')) continue;
+
+          // 使用 FileReader 转为 base64 data URL（永不过期）
+          const reader = new FileReader();
+          const dataUrl = await new Promise((resolve, reject) => {
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = () => reject(new Error('FileReader读取失败'));
+            reader.readAsDataURL(coverFile);
+          });
+
+          img.src = dataUrl;
+
+          // 触发事件通知框架
+          setTimeout(() => {
+            img.dispatchEvent(new Event('load', { bubbles: true }));
+            // 向父容器传播change事件
+            let parent = img.parentElement;
+            for (let i = 0; i < 5 && parent; i++) {
+              parent.dispatchEvent(new CustomEvent('change', { bubbles: true, detail: { type: 'cover-change' } }));
+              parent = parent.parentElement;
+            }
+          }, 100);
+
+          console.log('[PDD监控] 封面已设置到img元素(base64):', sel);
+          return true;
+        }
+      } catch(e) {
+        continue;
+      }
+    }
+    return false;
+  }
+
+  // 方案D：模拟拖拽上传
+  async function trySetCoverViaDragDrop(coverFile) {
+    // 查找可能的拖拽目标区域（封面区域）
+    const dropTargets = document.querySelectorAll(
+      '[class*="cover"], [class*="Cover"], [class*="upload-area"], [class*="drop-zone"], [class*="drag"]'
+    );
+
+    for (const target of dropTargets) {
+      // ★ 修复：移除offsetParent限制（拖拽区域可能在离屏位置）
+      if (target.closest('#pdd-video-monitor, #pdd-batch-publish-panel')) continue;
+      // 太大的容器跳过
+      if (target.offsetWidth > 500 || target.offsetHeight > 400) continue;
+
+      try {
+        const dt = new DataTransfer();
+        dt.items.add(coverFile);
+
+        const dragStartEvent = new DragEvent('dragstart', { dataTransfer: dt, bubbles: true });
+        const dragOverEvent = new DragEvent('dragover', { dataTransfer: dt, bubbles: true });
+        const dropEvent = new DropEvent('drop', { dataTransfer: dt, bubbles: true });
+
+        target.dispatchEvent(dragOverEvent);
+        target.dispatchEvent(dropEvent);
+        console.log('[PDD监控] 尝试拖拽方式设置封面');
+        return true;
+      } catch(e) {
+        continue;
+      }
+    }
+    return false;
   }
   
   // 查找并点击封面选择区域
@@ -12799,38 +13326,36 @@
       
       for (const selector of coverSelectors) {
         const coverImg = document.querySelector(selector);
-        if (coverImg && coverImg.offsetParent !== null) {
+        if (coverImg) {  // ★ 修复：移除offsetParent限制
           console.log('[PDD监控] 找到封面区域:', selector);
-          
+
           // 点击封面区域，触发封面选择
           coverImg.click();
           await new Promise(r => setTimeout(r, 500));
-          
+
           // 查找"选择封面"或"编辑封面"按钮
           const allButtons = document.querySelectorAll('button, div[role="button"]');
           for (const btn of allButtons) {
-            if (btn.offsetParent !== null) {
-              const text = btn.textContent || '';
-              if (text.includes('选择封面') || text.includes('编辑封面')) {
-                btn.click();
-                await new Promise(r => setTimeout(r, 500));
-                break;
-              }
+            // ★ 修复：移除offsetParent限制
+            const text = btn.textContent || '';
+            if (text.includes('选择封面') || text.includes('编辑封面')) {
+              btn.click();
+              await new Promise(r => setTimeout(r, 500));
+              break;
             }
           }
-          
+
           // 查找"从视频中选择"选项
           for (const btn of allButtons) {
-            if (btn.offsetParent !== null) {
-              const text = btn.textContent || '';
-              if (text.includes('从视频中选择') || text.includes('视频帧')) {
-                btn.click();
-                await new Promise(r => setTimeout(r, 500));
-                break;
-              }
+            // ★ 修复：移除offsetParent限制
+            const text = btn.textContent || '';
+            if (text.includes('从视频中选择') || text.includes('视频帧')) {
+              btn.click();
+              await new Promise(r => setTimeout(r, 500));
+              break;
             }
           }
-          
+
           console.log('[PDD监控] 封面选择完成');
           return true;
         }
@@ -12844,21 +13369,23 @@
     }
   }
   
-  // 自动选择视频封面（从视频文件中截取帧并设置到页面）
+  // 自动选择视频封面（从视频文件中截取帧并设置到页面）— 增强版
   async function autoSelectVideoCover(currentVideoFile) {
+    const startTime = Date.now();
     try {
-      console.log('[PDD监控] 开始自动生成视频封面');
+      console.log('[PDD监控] ===== 开始自动生成视频封面 =====');
+      console.log('[PDD监控] [1/4] 检查视频源...');
 
       let videoFile = currentVideoFile;
       let preGeneratedCover = null;
 
-      // 检查是否有预生成的封面
+      // 检查是否有预生成的封面（上传前预生成的）
       if (!videoFile && pendingUploadConfig?.files?.length > 0) {
-        // 从 pendingUploadConfig 中查找第一个有预生成封面的视频
         for (const vf of pendingUploadConfig.files) {
           if (vf.coverFile) {
             preGeneratedCover = vf.coverFile;
             videoFile = vf.file || null;
+            console.log('[PDD监控] 找到预生成封面:', vf.coverFile.name);
             break;
           }
         }
@@ -12870,24 +13397,71 @@
       // 优先使用预生成的封面文件
       let coverFile = preGeneratedCover;
       if (!coverFile && videoFile) {
-        console.log('[PDD监控] 正在实时截取视频帧:', videoFile.name);
-        coverFile = await captureVideoCoverFromFile(videoFile);
+        console.log('[PDD监控] [2/4] 实时截取视频帧:', videoFile.name,
+                    '大小:', (videoFile.size / 1024 / 1024).toFixed(1), 'MB');
+        try {
+          // 截帧超时8秒
+          coverFile = await captureVideoCoverFromFile(videoFile, 8000);
+          console.log('[PDD监控] 视频帧截取成功, 耗时:', ((Date.now() - startTime) / 1000).toFixed(1), 's');
+        } catch (e) {
+          console.warn('[PDD监控] ⚠️ 截取视频帧失败:', e.message);
+        }
       }
 
       if (!coverFile) {
-        console.log('[PDD监控] 无可用封面，跳过');
+        const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+        console.log('[PDD监控] ⚠️ 无可用封面，跳过（非致命）耗时:', elapsed, 's');
+        showCoverStatusTip('封面生成失败，可手动点击"编辑封面"选择');
         return false;
       }
 
-      console.log('[PDD监控] 封面图就绪:', coverFile.name, '大小:', (coverFile.size / 1024).toFixed(1) + 'KB');
+      // 验证封面文件有效性
+      if (coverFile.size < 1000) {
+        console.warn('[PDD监控] ⚠️ 封面文件异常小(', coverFile.size, 'bytes)，可能无效');
+      }
 
+      console.log('[PDD监控] [3/4] 封面图就绪:', coverFile.name,
+                  '大小:', (coverFile.size / 1024).toFixed(1), 'KB');
+
+      // 设置到页面
+      console.log('[PDD监控] [4/4] 正在设置封面到页面...');
       const result = await setVideoCoverOnPage(coverFile);
-      console.log('[PDD监控] 封面设置', result ? '成功' : '失败');
+
+      const totalElapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+      if (result) {
+        console.log('[PDD监控] ✅ 封面设置成功! 总耗时:', totalElapsed, 's');
+        showCoverStatusTip('封面已自动设置 ✓', 'success');
+      } else {
+        console.log('[PDD监控] ⚠️ 封面设置未成功（非致命，不影响发布）耗时:', totalElapsed, 's');
+        showCoverStatusTip('封面未自动设置，可手动点击"编辑封面"', 'warning');
+      }
       return result;
 
     } catch (e) {
-      console.error('[PDD监控] 自动封面失败:', e.message);
+      console.error('[PDD监控] ❌ 自动封面异常（非致命）:', e.message);
+      showCoverStatusTip('封面设置异常: ' + e.message, 'error');
       return false;
+    }
+  }
+
+  // 显示封面状态提示（在面板或控制台）
+  function showCoverStatusTip(message, type = 'info') {
+    try {
+      // 尝试在批量发布状态区域显示提示
+      const statusEl = document.getElementById('batch-publish-status');
+      if (statusEl) {
+        const colors = { success: '#2e7d32', warning: '#e65100', error: '#c62828', info: '#1565c0' };
+        const prefix = { success: '✅', warning: '⚠️', error: '❌', info: 'ℹ️' };
+        const tipEl = document.createElement('div');
+        tipEl.style.cssText = `font-size:11px;color:${colors[type]||colors.info};margin-top:4px;padding:2px 0;`;
+        tipEl.textContent = `${prefix[type]||''} ${message}`;
+        statusEl.appendChild(tipEl);
+
+        // 10秒后移除提示
+        setTimeout(() => { try { tipEl.remove(); } catch(e){} }, 10000);
+      }
+    } catch(e) {
+      // 不影响主流程
     }
   }
   
@@ -13252,7 +13826,7 @@
   function waitForElement(selector, timeout = 5000) {
     return new Promise((resolve) => {
       const element = document.querySelector(selector);
-      if (element && element.offsetParent !== null) {
+      if (element) {  // ★ 修复：移除offsetParent限制（元素存在即可）
         resolve(element);
         return;
       }
@@ -13262,7 +13836,7 @@
       
       const check = () => {
         const el = document.querySelector(selector);
-        if (el && el.offsetParent !== null) {
+        if (el) {  // ★ 修复：移除offsetParent限制
           if (timeoutId) clearTimeout(timeoutId);
           resolve(el);
           return;
@@ -13295,7 +13869,7 @@
     // 智能等待输入框出现
     const input = await waitForElement(inputSelectors.join(','), 3000);
     
-    if (input && input.offsetParent !== null) {
+    if (input) {  // ★ 修复：移除offsetParent限制
       console.log('[PDD监控] 找到商品ID输入框:', input);
       input.focus();
       input.value = goodsId;
@@ -13331,7 +13905,7 @@
     
     // 智能等待商品项出现
     const item = await waitForElement(goodsSelectors.join(','), 3000);
-    if (item && item.offsetParent !== null) {
+    if (item) {  // ★ 修复：移除offsetParent限制
       console.log('[PDD监控] 找到商品项:', item);
       item.click();
       statusEl.textContent = '✅ 已选择商品';
@@ -13356,31 +13930,29 @@
     for (const selector of inputSelectors) {
       const inputs = document.querySelectorAll(selector);
       for (const input of inputs) {
-        // 检查输入框是否可见
-        if (input.offsetParent !== null) {
-          console.log('[PDD监控] 找到商品ID输入框:', input);
-          input.focus();
-          input.value = goodsId;
-          input.dispatchEvent(new Event('input', { bubbles: true }));
-          input.dispatchEvent(new Event('change', { bubbles: true }));
-          statusEl.textContent = '✅ 已填写商品ID: ' + goodsId;
-          
-          // 点击搜索按钮
-          setTimeout(() => {
-            const searchBtn = document.querySelector('button[class*="search"], [class*="搜索"], button[type="submit"]');
-            if (searchBtn) {
-              searchBtn.click();
-              statusEl.textContent = '正在搜索商品...';
-              
-              // 等待搜索结果，然后选择第一个商品
-              setTimeout(() => {
-                selectFirstGoods(statusEl);
-              }, 1500);
-            }
-          }, 500);
-          
-          return;
-        }
+        // ★ 修复：移除offsetParent限制
+        console.log('[PDD监控] 找到商品ID输入框:', input);
+        input.focus();
+        input.value = goodsId;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+        statusEl.textContent = '✅ 已填写商品ID: ' + goodsId;
+
+        // 点击搜索按钮
+        setTimeout(() => {
+          const searchBtn = document.querySelector('button[class*="search"], [class*="搜索"], button[type="submit"]');
+          if (searchBtn) {
+            searchBtn.click();
+            statusEl.textContent = '正在搜索商品...';
+
+            // 等待搜索结果，然后选择第一个商品
+            setTimeout(() => {
+              selectFirstGoods(statusEl);
+            }, 1500);
+          }
+        }, 500);
+
+        return;
       }
     }
     
@@ -13403,13 +13975,11 @@
     for (const selector of goodsSelectors) {
       const items = document.querySelectorAll(selector);
       for (const item of items) {
-        // 检查是否可见
-        if (item.offsetParent !== null) {
-          console.log('[PDD监控] 找到商品项:', item);
-          item.click();
-          statusEl.textContent = '✅ 已选择商品';
-          return;
-        }
+        // ★ 修复：移除offsetParent限制
+        console.log('[PDD监控] 找到商品项:', item);
+        item.click();
+        statusEl.textContent = '✅ 已选择商品';
+        return;
       }
     }
     
@@ -13569,7 +14139,10 @@
       // 上传视频到页面
       console.log('[PDD监控] 调用 uploadVideoToPage');
       const fileName = autoUploadConfig?.appendFilenameSuffix ? video.fileName : null;
-      await uploadVideoToPage(videoData, video.goodsId, fileName);
+      // ★ 修复：传递description和contentDeclaration参数
+      const desc = video.description || autoUploadConfig?.description || null;
+      const decl = video.contentDeclaration || autoUploadConfig?.contentDeclaration || null;
+      await uploadVideoToPage(videoData, video.goodsId, fileName, desc, decl);
       
       autoUploadIndex++;
       setTimeout(uploadNextVideo, 3000);
@@ -13673,7 +14246,7 @@
   }
   
   // 上传视频到页面
-  async function uploadVideoToPage(videoData, goodsId, fileName = null) {
+  async function uploadVideoToPage(videoData, goodsId, fileName = null, description = null, contentDeclaration = null) {
     return new Promise(async (resolve, reject) => {
       try {
         // 将 base64 转换为 File 对象
@@ -13704,10 +14277,10 @@
           console.log('[PDD监控] 拖拽事件已触发');
           
           // 等待视频上传完成
-          waitForVideoUploadComplete(goodsId, resolve, fileName);
+          waitForVideoUploadComplete(goodsId, resolve, fileName, description, contentDeclaration);
           return;
         }
-        
+
         // 方式2：查找文件 input 并直接设置
         let fileInput = findFileInput();
         
@@ -13721,10 +14294,10 @@
           console.log('[PDD监控] 文件已设置到 input:', videoData.fileName);
           
           // 等待视频上传完成
-          waitForVideoUploadComplete(goodsId, resolve, fileName);
+          waitForVideoUploadComplete(goodsId, resolve, fileName, description, contentDeclaration);
           return;
         }
-        
+
         // 方式3：等待文件 input 出现
         let inputRetryCount = 0;
         const inputMaxRetries = 5;
@@ -13746,10 +14319,10 @@
           console.log('[PDD监控] 文件已设置到 input:', videoData.fileName);
           
           // 等待视频上传完成
-          waitForVideoUploadComplete(goodsId, resolve, fileName);
+          waitForVideoUploadComplete(goodsId, resolve, fileName, description, contentDeclaration);
           return;
         }
-        
+
         // 方式4：最后尝试点击上传按钮
         const uploadBtn = findUploadButton();
         
@@ -13770,7 +14343,7 @@
             
             console.log('[PDD监控] 文件已设置到 input:', videoData.fileName);
             
-            waitForVideoUploadComplete(goodsId, resolve, fileName);
+            waitForVideoUploadComplete(goodsId, resolve, fileName, description, contentDeclaration);
           } else {
             reject(new Error('点击后仍未找到文件输入框'));
           }
@@ -13784,7 +14357,7 @@
   }
   
   // 等待视频上传完成
-  async function waitForVideoUploadComplete(goodsId, resolve, fileName = null) {
+  async function waitForVideoUploadComplete(goodsId, resolve, fileName = null, description = null, contentDeclaration = null) {
     let attempts = 0;
     const maxAttempts = 180; // 增加到3分钟
     let isProcessing = false;
@@ -13824,8 +14397,9 @@
           for (let i = 0; i < videoItems.length; i++) {
             if (!window.__pddFilledVideoIndexes.has(i)) {
               const item = videoItems[i];
+              // ★ 修复：不再要求按钮在可视区内
               const addGoodsBtn = item.querySelector('[class*="AddGoods"], [class*="addGoods"], [class*="add-goods"]');
-              if (addGoodsBtn && addGoodsBtn.offsetParent !== null) {
+              if (addGoodsBtn) {
                 targetVideo = item;
                 targetIndex = i;
                 
@@ -13863,7 +14437,7 @@
             if (statusEl) statusEl.textContent = '填写商品信息中...';
             
             try {
-              const success = await fillGoodsIdForVideo(targetVideo, goodsId);
+              const success = await fillGoodsIdForVideo(targetVideo, goodsId, description, contentDeclaration);
               if (success) {
                 if (statusEl) statusEl.textContent = '商品信息填写完成';
               } else {
@@ -13894,9 +14468,10 @@
           if (videoItems.length > 0) {
             const lastVideo = videoItems[videoItems.length - 1];
             const addGoodsBtn = lastVideo.querySelector('[class*="AddGoods"], [class*="addGoods"]');
-            if (addGoodsBtn && addGoodsBtn.offsetParent !== null) {
+            // ★ 修复：按钮存在即可（不再要求可视）
+            if (addGoodsBtn) {
               try {
-                await fillGoodsIdForVideo(lastVideo, goodsId);
+                await fillGoodsIdForVideo(lastVideo, goodsId, description, contentDeclaration);
               } catch (e) {
                 console.error('[PDD监控] 超时后填写失败:', e);
               }
@@ -14138,13 +14713,17 @@
           
           // 检查是否已填写商品ID（通过查找"添加商品"按钮是否还在）
           const addGoodsBtn = item.querySelector('.AddGoodsTrigger_addGoodsTrigger__nbdhF');
-          
-          if (addGoodsBtn && addGoodsBtn.offsetParent !== null) {
+
+          // ★ 修复：按钮存在即表示未填写（不再要求可视）
+          if (addGoodsBtn) {
             // 未填写商品ID，进行填写
             const goodsId = autoFillConfig.goodsIds[filledVideoCount];
             if (goodsId) {
               console.log('[PDD监控] 为视频填写商品ID:', goodsId);
-              fillGoodsIdForVideo(item, goodsId);
+              // ★ 传递内容声明和描述配置
+              const desc = autoFillConfig.description || null;
+              const decl = autoFillConfig.contentDeclaration || null;
+              fillGoodsIdForVideo(item, goodsId, desc, decl);
               processedVideos.add(itemId);
               
               // 更新状态
@@ -14194,19 +14773,19 @@
     for (const selector of nextBtnSelectors) {
       const btn = modal.querySelector(selector);
       console.log('[PDD监控] 选择器:', selector, '找到:', btn ? '是' : '否', 'disabled:', btn?.disabled, '可见:', btn?.offsetParent !== null);
-      if (btn && !btn.disabled && btn.offsetParent !== null) {
+      if (btn && !btn.disabled) {  // ★ 修复：移除offsetParent限制
         nextBtn = btn;
         console.log('[PDD监控] 找到可点击按钮:', selector, btn.textContent?.trim());
         break;
       }
     }
-    
+
     // 如果选择器没找到，尝试通过文本查找
     if (!nextBtn) {
       const allButtons = modal.querySelectorAll('button');
       console.log('[PDD监控] 模态框中按钮总数:', allButtons.length);
       for (const btn of allButtons) {
-        if (btn.offsetParent !== null && !btn.disabled) {
+        if (!btn.disabled) {  // ★ 修复：移除offsetParent限制
           const text = btn.textContent.trim();
           console.log('[PDD监控] 检查按钮:', text);
           if (text.includes('下一步') || text.includes('确认') || text.includes('确定')) {
@@ -14225,7 +14804,7 @@
       // 等待检查模态框是否关闭
       setTimeout(() => {
         const modalStillOpen = document.querySelector('.MDL_inner_5-180-0, [class*="modal"]:not([class*="mask"]), [class*="Modal"]');
-        if (modalStillOpen && modalStillOpen.offsetParent !== null) {
+        if (modalStillOpen) {  // ★ 修复：移除offsetParent限制
           console.log('[PDD监控] 警告: 模态框仍然打开，可能需要重新尝试');
           // 检查当前是否在商品ID Tab
           const goodsIdInput = modalStillOpen.querySelector('input[placeholder*="商品ID"], input[placeholder*="商品id"]');
@@ -14371,15 +14950,13 @@
     const allBtnsDebug = document.querySelectorAll('button, div[role="button"], [class*="btn"], [class*="button"]');
     console.log('[PDD监控] 页面上按钮总数:', allBtnsDebug.length);
     
-    // 收集所有可见按钮的文本信息用于调试
+    // 收集所有按钮的文本信息用于调试
     const visibleButtons = [];
     allBtnsDebug.forEach((btn, idx) => {
-      if (btn.offsetParent !== null) {
-        const text = (btn.textContent || btn.innerText || '').trim();
-        const className = btn.className || '';
-        if (text || className.includes('add') || className.includes('Add') || className.includes('upload') || className.includes('Upload')) {
-          visibleButtons.push({ idx, text: text.slice(0, 50), className: className.slice(0, 100) });
-        }
+      const text = (btn.textContent || btn.innerText || '').trim();
+      const className = btn.className || '';
+      if (text || className.includes('add') || className.includes('Add') || className.includes('upload') || className.includes('Upload')) {
+        visibleButtons.push({ idx, text: text.slice(0, 50), className: className.slice(0, 100) });
       }
     });
     console.log('[PDD监控] 可见按钮列表:', visibleButtons.slice(0, 20)); // 只打印前20个
@@ -14403,7 +14980,7 @@
         const btns = document.querySelectorAll(selector);
         console.log('[PDD监控] 尝试选择器:', selector, '找到:', btns.length);
         for (const btn of btns) {
-          if (btn && btn.offsetParent !== null) {
+          if (btn) {  // ★ 修复：移除offsetParent限制
             console.log('[PDD监控] findUploadButton 找到添加更多视频按钮:', selector, btn);
             return btn;
           }
@@ -14425,7 +15002,7 @@
       try {
         const btns = document.querySelectorAll(selector);
         for (const btn of btns) {
-          if (btn && btn.offsetParent !== null) {
+          if (btn) {  // ★ 修复：移除offsetParent限制
             console.log('[PDD监控] findUploadButton 找到初始上传按钮:', selector, btn);
             return btn;
           }
@@ -14438,38 +15015,35 @@
     // 通过文本查找 - 更宽松的匹配
     const allButtons = document.querySelectorAll('button, div[role="button"], [class*="btn"], a[role="button"]');
     console.log('[PDD监控] 通过文本查找，检查按钮数:', allButtons.length);
-    
+
     for (const btn of allButtons) {
-      if (btn.offsetParent !== null) {
-        const text = (btn.textContent || btn.innerText || '').trim();
-        // 优先查找"添加"相关按钮
-        if (text.includes('添加视频') || text.includes('继续添加') || text.includes('添加更多') || text.includes('添加')) {
-          console.log('[PDD监控] findUploadButton 通过文本找到(添加):', text, btn);
-          return btn;
-        }
+      // ★ 修复：移除offsetParent限制
+      const text = (btn.textContent || btn.innerText || '').trim();
+      // 优先查找"添加"相关按钮
+      if (text.includes('添加视频') || text.includes('继续添加') || text.includes('添加更多') || text.includes('添加')) {
+        console.log('[PDD监控] findUploadButton 通过文本找到(添加):', text, btn);
+        return btn;
       }
     }
-    
+
     // 最后尝试"上传"相关按钮
     for (const btn of allButtons) {
-      if (btn.offsetParent !== null) {
-        const text = (btn.textContent || btn.innerText || '').trim();
-        if (text.includes('上传视频') || text.includes('上传')) {
-          console.log('[PDD监控] findUploadButton 通过文本找到(上传):', text, btn);
-          return btn;
-        }
+      // ★ 修复：移除offsetParent限制
+      const text = (btn.textContent || btn.innerText || '').trim();
+      if (text.includes('上传视频') || text.includes('上传')) {
+        console.log('[PDD监控] findUploadButton 通过文本找到(上传):', text, btn);
+        return btn;
       }
     }
-    
+
     // 最后的尝试：查找任何包含"视频"或"video"的按钮
     for (const btn of allButtons) {
-      if (btn.offsetParent !== null) {
-        const text = (btn.textContent || btn.innerText || '').trim().toLowerCase();
-        const className = (btn.className || '').toLowerCase();
-        if (text.includes('视频') || text.includes('video') || className.includes('video')) {
-          console.log('[PDD监控] findUploadButton 通过视频关键词找到:', text || className, btn);
-          return btn;
-        }
+      // ★ 修复：移除offsetParent限制
+      const text = (btn.textContent || btn.innerText || '').trim().toLowerCase();
+      const className = (btn.className || '').toLowerCase();
+      if (text.includes('视频') || text.includes('video') || className.includes('video')) {
+        console.log('[PDD监控] findUploadButton 通过视频关键词找到:', text || className, btn);
+        return btn;
       }
     }
     
@@ -14584,13 +15158,14 @@
           const lastVideo = videoItems[videoItems.length - 1];
           
           const addGoodsBtn = lastVideo.querySelector('.AddGoodsTrigger_addGoodsTrigger__nbdhF, [class*="AddGoods"]');
-          
-          if (addGoodsBtn && addGoodsBtn.offsetParent !== null) {
+
+          // ★ 修复：按钮存在即可（不再要求可视）
+          if (addGoodsBtn) {
             clearInterval(checkInterval);
             const idx = activeResources.intervals.indexOf(checkInterval);
             if (idx > -1) activeResources.intervals.splice(idx, 1);
             
-            fillGoodsIdForVideo(lastVideo, goodsId);
+            fillGoodsIdForVideo(lastVideo, goodsId, description, contentDeclaration);
             
             notifyUploadComplete();
             resolve();
@@ -14656,17 +15231,32 @@
   // 根据页面类型决定是否添加面板
   console.log('[PDD监控] 页面检测结果:', { isTargetPage, isUploadPage, isDataPage, currentUrl });
   
+  // 延迟添加面板的函数，确保React完成渲染
+  function delayedAddPanel() {
+    console.log('[PDD监控] 准备延迟添加面板，当前panelAdded:', panelAdded);
+    if (panelAdded) {
+      console.log('[PDD监控] 面板已添加，跳过');
+      return;
+    }
+    
+    // 再延迟500ms，确保React完成渲染
+    setTimeout(() => {
+      console.log('[PDD监控] 延迟500ms后，开始添加面板');
+      addPanel();
+    }, 500);
+  }
+  
   if (isTargetPage) {
     console.log('[PDD监控] 是目标页面，准备添加面板');
     if (document.readyState === 'loading') {
       console.log('[PDD监控] 页面还在加载中，等待 DOMContentLoaded');
       document.addEventListener('DOMContentLoaded', () => {
-        console.log('[PDD监控] DOMContentLoaded 触发，添加面板');
-        addPanel();
+        console.log('[PDD监控] DOMContentLoaded 触发，延迟添加面板');
+        delayedAddPanel();
       });
     } else {
-      console.log('[PDD监控] 页面已加载，立即添加面板');
-      addPanel();
+      console.log('[PDD监控] 页面已加载，延迟添加面板');
+      delayedAddPanel();
     }
   } else {
     // 即使初始检测不是目标页面，也延迟检查一次（页面可能还在加载）
@@ -14674,8 +15264,8 @@
     setTimeout(() => {
       console.log('[PDD监控] 延迟检测中...', { panelAdded, isVideoUploadListPage: isVideoUploadListPage() });
       if (!panelAdded && isVideoUploadListPage()) {
-        console.log('[PDD监控] 延迟检测到视频上传页面，添加面板');
-        addPanel();
+        console.log('[PDD监控] 延迟检测到视频上传页面，延迟添加面板');
+        delayedAddPanel();
       } else {
         console.log('[PDD监控] 延迟检测后仍不是目标页面');
       }
@@ -14692,56 +15282,7 @@
     }
   });
   
-  // 暴露全局调试接口
-  window.pddMonitorDebug = {
-    // 重置悬浮球位置
-    resetBallPosition: function() {
-      localStorage.removeItem('pdd-ball-position');
-      const ball = document.getElementById('pdd-monitor-ball');
-      if (ball) {
-        ball.style.left = 'auto';
-        ball.style.top = '50%';
-        ball.style.right = '-28px';
-        ball.style.transform = 'translateY(-50%)';
-        ball.classList.remove('at-left');
-        console.log('[PDD监控] 悬浮球位置已重置');
-      } else {
-        console.log('[PDD监控] 悬浮球不存在，刷新页面后生效');
-      }
-    },
-    // 强制显示悬浮球（调试用）
-    showBall: function() {
-      const ball = document.getElementById('pdd-monitor-ball');
-      if (ball) {
-        ball.style.display = 'flex';
-        ball.style.opacity = '1';
-        ball.style.visibility = 'visible';
-        ball.style.zIndex = '9999999';
-        console.log('[PDD监控] 悬浮球已强制显示');
-      } else {
-        console.log('[PDD监控] 悬浮球不存在');
-      }
-    },
-    // 检查悬浮球状态
-    checkBallStatus: function() {
-      const ball = document.getElementById('pdd-monitor-ball');
-      if (!ball) {
-        console.log('[PDD监控] 悬浮球不存在于DOM中');
-        return;
-      }
-      const rect = ball.getBoundingClientRect();
-      const computedStyle = window.getComputedStyle(ball);
-      console.log('[PDD监控] 悬浮球状态:', {
-        exists: true,
-        position: { left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom },
-        size: { width: rect.width, height: rect.height },
-        display: computedStyle.display,
-        visibility: computedStyle.visibility,
-        opacity: computedStyle.opacity,
-        zIndex: computedStyle.zIndex
-      });
-    }
-  };
+  console.log('[PDD监控] ====== 内容脚本加载完成 ======');
   
   // 初始化：从存储中恢复已捕获的商品ID
   try {
