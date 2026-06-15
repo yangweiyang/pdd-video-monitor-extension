@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -2136,6 +2136,16 @@
               <div>已监控 <span id="page-count">0</span> 页 | 共 <span id="total-count">?</span> 个视频</div>
               <div id="auto-status" style="margin-top:4px;color:#999;"></div>
             </div>
+            <!-- 获取数据按钮 -->
+            <div style="text-align:center;margin-bottom:10px;">
+              <button id="pdd-fetch-data-btn" style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:bold;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                ⚡ 获取视频数据
+              </button>
+              <button id="pdd-auto-paging-btn" style="background:linear-gradient(135deg, #f093fb 0%, #f5576c 100%);color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:bold;display:inline-flex;align-items:center;gap:6px;margin-left:8px;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                🔄 自动翻页获取
+              </button>
+            </div>
+            <div id="pdd-fetch-status" style="text-align:center;font-size:12px;color:#666;margin-bottom:10px;"></div>
             <div id="pdd-comparison" style="display:none;margin-bottom:10px;padding:10px;background:linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);border-radius:8px;">
               <div style="font-size:12px;font-weight:600;color:#2e7d32;margin-bottom:8px;">📊 数据对比</div>
               <div id="pdd-comparison-content" style="font-size:11px;color:#333;"></div>
@@ -4553,6 +4563,72 @@
     } else if (currentView === 'upload' && navAutoUploadBtn) {
       navAutoUploadBtn.classList.add('active');
       if (navDataPageBtn) navDataPageBtn.classList.remove('active');
+    }
+
+    // ★★★ 获取数据按钮事件绑定 ★★★
+    const fetchDataBtn = document.getElementById('pdd-fetch-data-btn');
+    const autoPagingBtn = document.getElementById('pdd-auto-paging-btn');
+    const fetchStatusEl = document.getElementById('pdd-fetch-status');
+
+    if (fetchDataBtn) {
+      fetchDataBtn.onclick = async function() {
+        console.log('[PDD监控] 点击获取数据按钮');
+        fetchDataBtn.textContent = '⏳ 正在获取...';
+        fetchDataBtn.disabled = true;
+        fetchStatusEl.textContent = '正在请求视频列表API...';
+
+        try {
+          // 主动调用拼多多的视频列表API
+          const response = await fetch('/api/backbone/goods/consumer/video/list', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              pageNum: 1,
+              pageSize: 20
+            })
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            console.log('[PDD监控] API响应:', data);
+
+            // 处理视频数据
+            if (data.result && data.result.influenceVideoItemList) {
+              processVideoData(data);
+              fetchStatusEl.innerHTML = '<span style="color:#4caf50;">✅ 成功获取 ' + data.result.influenceVideoItemList.length + ' 个视频</span>';
+              updatePanel();
+            } else {
+              fetchStatusEl.innerHTML = '<span style="color:#e65100;">⚠️ 响应中没有视频数据，尝试刷新页面...</span>';
+            }
+          } else {
+            fetchStatusEl.innerHTML = '<span style="color:#f44336;">❌ API请求失败 (' + response.status + ')，请刷新页面重试</span>';
+          }
+        } catch (error) {
+          console.error('[PDD监控] 获取数据失败:', error);
+          fetchStatusEl.innerHTML = '<span style="color:#f44336;">❌ 请求失败: ' + error.message + '</span>';
+        }
+
+        setTimeout(() => {
+          fetchDataBtn.textContent = '⚡ 获取视频数据';
+          fetchDataBtn.disabled = false;
+        }, 2000);
+      };
+    }
+
+    if (autoPagingBtn) {
+      autoPagingBtn.onclick = function() {
+        console.log('[PDD监控] 点击自动翻页按钮');
+        startAutoPaging();
+        autoPagingBtn.textContent = '⏹️ 停止翻页';
+        autoPagingBtn.onclick = function() {
+          stopAutoPaging();
+          autoPagingBtn.textContent = '🔄 自动翻页获取';
+          autoPagingBtn.onclick = arguments.callee; // 恢复原来的onclick
+        };
+      };
     }
     
     // 批量发布功能
