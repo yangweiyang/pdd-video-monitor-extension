@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -4481,9 +4481,16 @@
 
     // ★★★ 关键修复：监听URL变化，自动重新切换视图 + 显示/隐藏悬浮球 ★★★
     let lastUrl = window.location.href;
+    let manualViewOverride = null;  // 标记用户是否手动切换过视图
+    let manualOverrideTime = 0;     // 手动切换的时间戳
 
     // URL变化时的统一处理函数
     function handleUrlChange() {
+      // 如果用户最近5秒内手动切换过视图，跳过自动切换（尊重用户选择）
+      if (manualViewOverride && (Date.now() - manualOverrideTime < 5000)) {
+        console.log('[PDD监控] URL变化但用户最近手动切换过视图，跳过自动切换');
+        return;
+      }
       console.log('[PDD监控] 检测到URL变化，重新评估页面状态');
       autoSwitchViewByPage();  // 切换面板视图
       addPanel();              // 重新评估是否需要显示/隐藏悬浮球
@@ -4492,12 +4499,14 @@
     // 监听popstate事件（浏览器前进/后退）
     window.addEventListener('popstate', function() {
       console.log('[PDD监控] 检测到popstate事件');
+      manualViewOverride = null;  // 浏器导航清除手动标记
       setTimeout(handleUrlChange, 500);
     });
 
     // 监听hashchange事件（hash路由变化）
     window.addEventListener('hashchange', function() {
       console.log('[PDD监控] 检测到hashchange事件');
+      manualViewOverride = null;
       setTimeout(handleUrlChange, 500);
     });
 
@@ -4507,60 +4516,69 @@
       if (currentUrl !== lastUrl) {
         console.log('[PDD监控] 检测到URL变化:', lastUrl, '→', currentUrl);
         lastUrl = currentUrl;
+        manualViewOverride = null;  // URL变化清除手动标记
         handleUrlChange();
       }
     }, 2000);  // 每2秒检查一次
 
-    console.log('[PDD监控] ✓ URL变化监听器已启动（popstate + hashchange + 轮询 + 动态悬浮球）');
+    console.log('[PDD监控] ✓ URL变化监听器已启动（popstate + hashchange + 轮询 + 动态悬浮球 + 手动切换保护）');
     
     // 视频数据监控页面按钮 - 切换到数据视图（不刷新页面）
     const navDataPageBtn = document.getElementById('pdd-nav-data-page');
     if (navDataPageBtn) {
       navDataPageBtn.onclick = function() {
-        console.log('[PDD监控] 切换到视频数据监控页面视图');
+        console.log('[PDD监控] ★ 用户手动切换到视频数据监控页面视图');
+        // 设置手动切换标记，防止自动切换覆盖用户选择
+        manualViewOverride = 'data';
+        manualOverrideTime = Date.now();
+
         const dataView = document.getElementById('pdd-data-view');
         const uploadView = document.getElementById('pdd-upload-view');
         const settingsView = document.getElementById('pdd-settings-view');
         const panelTitle = document.getElementById('pdd-panel-title');
         const pageTypeIndicator = document.getElementById('pdd-page-type');
-        
+
         currentView = 'data';
         if (dataView) dataView.style.display = 'block';
         if (uploadView) uploadView.style.display = 'none';
         if (settingsView) settingsView.style.display = 'none';
         if (panelTitle) panelTitle.textContent = '📊 视频数据监控';
         if (pageTypeIndicator) pageTypeIndicator.textContent = '📊 视频数据监控页面';
-        
+
         // 更新按钮 active 状态
         navDataPageBtn.classList.add('active');
         if (navAutoUploadBtn) navAutoUploadBtn.classList.remove('active');
-        
+
         localStorage.setItem('__pdd_panel_view', 'data');
       };
     }
-    
+
     // 视频自动上传页面按钮 - 切换到上传视图（不刷新页面）
     const navAutoUploadBtn = document.getElementById('pdd-nav-auto-upload');
     if (navAutoUploadBtn) {
       navAutoUploadBtn.onclick = function() {
-        console.log('[PDD监控] 切换到视频自动上传页面视图');
+        console.log('[PDD监控] ★ 用户手动切换到视频自动上传页面视图');
+        // 设置手动切换标记，防止自动切换覆盖用户选择
+        manualViewOverride = 'upload';
+        manualOverrideTime = Date.now();
+
         const dataView = document.getElementById('pdd-data-view');
         const uploadView = document.getElementById('pdd-upload-view');
         const settingsView = document.getElementById('pdd-settings-view');
         const panelTitle = document.getElementById('pdd-panel-title');
         const pageTypeIndicator = document.getElementById('pdd-page-type');
-        
+
         currentView = 'upload';
         if (dataView) dataView.style.display = 'none';
         if (uploadView) uploadView.style.display = 'block';
         if (settingsView) settingsView.style.display = 'none';
         if (panelTitle) panelTitle.textContent = '📹 视频自动上传';
         if (pageTypeIndicator) pageTypeIndicator.textContent = '📹 视频自动上传页面';
-        
+
         // 更新按钮 active 状态
         navAutoUploadBtn.classList.add('active');
         if (navDataPageBtn) navDataPageBtn.classList.remove('active');
-        
+
         localStorage.setItem('__pdd_panel_view', 'upload');
       };
     }
