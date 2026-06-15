@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -4481,17 +4481,32 @@
 
     // ★★★ 关键修复：监听URL变化，自动重新切换视图 + 显示/隐藏悬浮球 ★★★
     let lastUrl = window.location.href;
-    let manualViewOverride = null;  // 标记用户是否手动切换过视图
-    let manualOverrideTime = 0;     // 手动切换的时间戳
+    let isManualViewMode = false;  // 用户是否手动切换过视图
 
     // URL变化时的统一处理函数
-    function handleUrlChange() {
-      // 如果用户最近5秒内手动切换过视图，跳过自动切换（尊重用户选择）
-      if (manualViewOverride && (Date.now() - manualOverrideTime < 5000)) {
-        console.log('[PDD监控] URL变化但用户最近手动切换过视图，跳过自动切换');
+    function handleUrlChange(newUrl) {
+      console.log('[PDD监控] 检测到URL变化:', lastUrl, '→', newUrl, ', 手动模式:', isManualViewMode);
+
+      if (isManualViewMode) {
+        // 手动模式下：只更新悬浮球显示/隐藏，不切换面板视图
+        console.log('[PDD监控] 手动模式，只更新悬浮球');
+        addPanel();
+        // 同时更新 autoSwitchViewByPage 内部的 currentView 但不操作 DOM
+        const url = newUrl || window.location.href;
+        const isUploadPage = url.includes('/video/publish') ||
+                             url.includes('/creator/video/publish') ||
+                             url.includes('/n-creator/video/publish') ||
+                             url.includes('/n-creator/video/home') ||
+                             url.includes('/mms/video/publish');
+        if (isUploadPage) {
+          if (typeof currentView !== 'undefined') currentView = 'upload';
+        } else {
+          if (typeof currentView !== 'undefined') currentView = 'data';
+        }
         return;
       }
-      console.log('[PDD监控] 检测到URL变化，重新评估页面状态');
+
+      // 自动模式下：完全由 autoSwitchViewByPage 控制
       autoSwitchViewByPage();  // 切换面板视图
       addPanel();              // 重新评估是否需要显示/隐藏悬浮球
     }
@@ -4499,38 +4514,35 @@
     // 监听popstate事件（浏览器前进/后退）
     window.addEventListener('popstate', function() {
       console.log('[PDD监控] 检测到popstate事件');
-      manualViewOverride = null;  // 浏器导航清除手动标记
-      setTimeout(handleUrlChange, 500);
+      isManualViewMode = false;  // 浏览器导航退出手动模式
+      setTimeout(() => handleUrlChange(window.location.href), 500);
     });
 
     // 监听hashchange事件（hash路由变化）
     window.addEventListener('hashchange', function() {
       console.log('[PDD监控] 检测到hashchange事件');
-      manualViewOverride = null;
-      setTimeout(handleUrlChange, 500);
+      isManualViewMode = false;
+      setTimeout(() => handleUrlChange(window.location.href), 500);
     });
 
     // 定时轮询检测URL变化（SPA应用可能不触发上述事件）
     setInterval(function() {
       const currentUrl = window.location.href;
       if (currentUrl !== lastUrl) {
-        console.log('[PDD监控] 检测到URL变化:', lastUrl, '→', currentUrl);
         lastUrl = currentUrl;
-        manualViewOverride = null;  // URL变化清除手动标记
-        handleUrlChange();
+        isManualViewMode = false;  // URL变化退出手动模式
+        handleUrlChange(currentUrl);
       }
     }, 2000);  // 每2秒检查一次
 
-    console.log('[PDD监控] ✓ URL变化监听器已启动（popstate + hashchange + 轮询 + 动态悬浮球 + 手动切换保护）');
+    console.log('[PDD监控] ✓ URL变化监听器已启动（popstate + hashchange + 轮询 + 动态悬浮球 + 手动模式保护）');
     
     // 视频数据监控页面按钮 - 切换到数据视图（不刷新页面）
     const navDataPageBtn = document.getElementById('pdd-nav-data-page');
     if (navDataPageBtn) {
       navDataPageBtn.onclick = function() {
-        console.log('[PDD监控] ★ 用户手动切换到视频数据监控页面视图');
-        // 设置手动切换标记，防止自动切换覆盖用户选择
-        manualViewOverride = 'data';
-        manualOverrideTime = Date.now();
+        console.log('[PDD监控] ★ 用户手动切换到视频数据监控页面视图（进入手动模式）');
+        isManualViewMode = true;  // 进入手动模式，不再被自动切换覆盖
 
         const dataView = document.getElementById('pdd-data-view');
         const uploadView = document.getElementById('pdd-upload-view');
@@ -4557,10 +4569,8 @@
     const navAutoUploadBtn = document.getElementById('pdd-nav-auto-upload');
     if (navAutoUploadBtn) {
       navAutoUploadBtn.onclick = function() {
-        console.log('[PDD监控] ★ 用户手动切换到视频自动上传页面视图');
-        // 设置手动切换标记，防止自动切换覆盖用户选择
-        manualViewOverride = 'upload';
-        manualOverrideTime = Date.now();
+        console.log('[PDD监控] ★ 用户手动切换到视频自动上传页面视图（进入手动模式）');
+        isManualViewMode = true;  // 进入手动模式，不再被自动切换覆盖
 
         const dataView = document.getElementById('pdd-data-view');
         const uploadView = document.getElementById('pdd-upload-view');
