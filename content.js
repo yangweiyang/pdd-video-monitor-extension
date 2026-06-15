@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -4720,15 +4720,16 @@
       }
     }
 
+    // ★★★ 自动获取视频数据 - 变量声明（必须在函数之前）★★★
+    let autoCaptureObserver = null;
+    let autoCaptureTimer = null;
+    let lastAutoCaptureTime = 0;
+
     function extractNumber(match) {
       return match ? parseInt(match[1]) || 0 : 0;
     }
 
     // ★★★ 自动获取视频数据（核心功能）★★★
-    let autoCaptureObserver = null;
-    let autoCaptureTimer = null;
-    let lastAutoCaptureTime = 0;
-
     function startAutoDataCapture() {
       console.log('[PDD监控] ★★ 启动自动数据捕获 ★★');
 
