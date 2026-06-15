@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -2139,10 +2139,10 @@
             <!-- 获取数据按钮 -->
             <div style="text-align:center;margin-bottom:10px;">
               <button id="pdd-fetch-data-btn" style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:bold;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-                ⚡ 获取视频数据
+                ⚡ 获取所有视频数据
               </button>
               <button id="pdd-auto-paging-btn" style="background:linear-gradient(135deg, #f093fb 0%, #f5576c 100%);color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:bold;display:inline-flex;align-items:center;gap:6px;margin-left:8px;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-                🔄 自动翻页获取
+                🔄 自动翻页
               </button>
             </div>
             <div id="pdd-fetch-status" style="text-align:center;font-size:12px;color:#666;margin-bottom:10px;"></div>
@@ -4570,49 +4570,128 @@
     const autoPagingBtn = document.getElementById('pdd-auto-paging-btn');
     const fetchStatusEl = document.getElementById('pdd-fetch-status');
 
+    // 根据当前页面URL确定API端点
+    function getVideoApiEndpoint() {
+      const url = window.location.href;
+
+      if (url.includes('/n-creator/video/mall-goods-video')) {
+        // 商品回放视频页面 - 使用商品视频列表API
+        return {
+          endpoint: '/api/backbone/goods/consumer/video/list',
+          params: { pageNum: 1, pageSize: 20 },
+          dataPath: 'influenceVideoItemList',
+          pageKey: 'pageNum'
+        };
+      } else if (url.includes('/n-creator/video/list') || url.includes('/n-creator/video/home')) {
+        // 视频列表页面
+        return {
+          endpoint: '/api/backbone/goods/consumer/video/list',
+          params: { pageNum: 1, pageSize: 20 },
+          dataPath: 'influenceVideoItemList',
+          pageKey: 'pageNum'
+        };
+      } else if (url.includes('/n-creator/video/replay-manage')) {
+        // 回放管理页面
+        return {
+          endpoint: '/api/backbone/goods/consumer/video/list',
+          params: { pageNum: 1, pageSize: 20 },
+          dataPath: 'influenceVideoItemList',
+          pageKey: 'pageNum'
+        };
+      }
+
+      // 默认
+      return {
+        endpoint: '/api/backbone/goods/consumer/video/list',
+        params: { pageNum: 1, pageSize: 20 },
+        dataPath: 'influenceVideoItemList',
+        pageKey: 'pageNum'
+      };
+    }
+
+    // 获取单页数据
+    async function fetchVideoPage(pageNum = 1) {
+      const apiConfig = getVideoApiEndpoint();
+      const params = { ...apiConfig.params, [apiConfig.pageKey]: pageNum };
+
+      console.log('[PDD监控] 请求API:', apiConfig.endpoint, '参数:', params);
+
+      const response = await fetch(apiConfig.endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(params)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('[PDD监控] API响应:', data);
+
+      return data;
+    }
+
+    // 获取所有页面的数据
+    async function fetchAllVideos() {
+      let allVideosCount = 0;
+      let currentPage = 1;
+      let hasMore = true;
+
+      while (hasMore && currentPage <= 50) { // 最多获取50页
+        try {
+          const data = await fetchVideoPage(currentPage);
+          const videoList = data.result?.[getVideoApiEndpoint().dataPath] || [];
+
+          if (videoList.length === 0) {
+            hasMore = false;
+            break;
+          }
+
+          // 处理当前页的数据
+          processVideoData(data);
+          allVideosCount += videoList.length;
+
+          fetchStatusEl.innerHTML = `<span style="color:#1565c0;">📥 已获取 ${allVideosCount} 个视频（第${currentPage}页）...</span>`;
+
+          // 检查是否还有下一页
+          const totalCount = data.result?.total || data.result?.totalCount || 0;
+          const totalPage = Math.ceil(totalCount / getVideoApiEndpoint().params.pageSize);
+          hasMore = currentPage < totalPage;
+          currentPage++;
+
+          // 延迟500ms避免请求过快
+          await new Promise(r => setTimeout(r, 500));
+        } catch (error) {
+          console.error('[PDD监控] 获取第', currentPage, '页失败:', error);
+          hasMore = false;
+        }
+      }
+
+      updatePanel();
+      return allVideosCount;
+    }
+
     if (fetchDataBtn) {
       fetchDataBtn.onclick = async function() {
-        console.log('[PDD监控] 点击获取数据按钮');
+        console.log('[PDD监控] 点击获取所有数据按钮');
         fetchDataBtn.textContent = '⏳ 正在获取...';
         fetchDataBtn.disabled = true;
         fetchStatusEl.textContent = '正在请求视频列表API...';
 
         try {
-          // 主动调用拼多多的视频列表API
-          const response = await fetch('/api/backbone/goods/consumer/video/list', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-              pageNum: 1,
-              pageSize: 20
-            })
-          });
-
-          if (response.ok) {
-            const data = await response.json();
-            console.log('[PDD监控] API响应:', data);
-
-            // 处理视频数据
-            if (data.result && data.result.influenceVideoItemList) {
-              processVideoData(data);
-              fetchStatusEl.innerHTML = '<span style="color:#4caf50;">✅ 成功获取 ' + data.result.influenceVideoItemList.length + ' 个视频</span>';
-              updatePanel();
-            } else {
-              fetchStatusEl.innerHTML = '<span style="color:#e65100;">⚠️ 响应中没有视频数据，尝试刷新页面...</span>';
-            }
-          } else {
-            fetchStatusEl.innerHTML = '<span style="color:#f44336;">❌ API请求失败 (' + response.status + ')，请刷新页面重试</span>';
-          }
+          const count = await fetchAllVideos();
+          fetchStatusEl.innerHTML = `<span style="color:#4caf50;">✅ 成功获取 ${count} 个视频数据</span>`;
         } catch (error) {
           console.error('[PDD监控] 获取数据失败:', error);
-          fetchStatusEl.innerHTML = '<span style="color:#f44336;">❌ 请求失败: ' + error.message + '</span>';
+          fetchStatusEl.innerHTML = `<span style="color:#f44336;">❌ 请求失败: ${error.message}</span>`;
         }
 
         setTimeout(() => {
-          fetchDataBtn.textContent = '⚡ 获取视频数据';
+          fetchDataBtn.textContent = '⚡ 获取所有视频数据';
           fetchDataBtn.disabled = false;
         }, 2000);
       };
