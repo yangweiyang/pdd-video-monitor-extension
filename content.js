@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -295,32 +295,25 @@
   
   // 检测是否在视频选择页面
   function isVideoSelectPage() {
-    const bodyText = document.body ? document.body.innerText : '';
-    return bodyText.includes('选择视频') || 
+    // 延迟检测：等待body完全加载
+    if (!document.body) return false;
+    const bodyText = document.body.innerText || '';
+    return bodyText.includes('选择视频') ||
            document.querySelector('[class*="select-video"], [class*="video-select"]') !== null;
   }
-  
-  const isUploadPage = currentUrl.includes('/video/publish') || 
-                       currentUrl.includes('/creator/video/publish') || 
-                       currentUrl.includes('/n-creator/video/publish') ||
-                       currentUrl.includes('/n-creator/video/home') ||
-                       currentUrl.includes('/n-creator/video/mall-goods-video') ||
-                       currentUrl.includes('/n-creator/video/replay-manage') ||
-                       currentUrl.includes('/duo-video') ||
-                       currentUrl.includes('/video/duo') ||
-                       isVideoUploadListPage();
-  const isDataPage = currentUrl.includes('/video/list') || 
-                     currentUrl.includes('/video/data') || 
-                     currentUrl.includes('/creator/video/list') || 
-                     currentUrl.includes('/n-creator/video/list') ||
-                     currentUrl.includes('/n-creator/video/mall-goods-video') ||
-                     currentUrl.includes('/n-creator/video/home') ||
-                     currentUrl.includes('/n-creator/video/replay-manage') ||
-                     currentUrl.includes('/duo-video') ||
-                     currentUrl.includes('/video/duo');
-  
-  // 如果既不是上传页面也不是数据页面，只保留基础功能
-  let isTargetPage = isUploadPage || isDataPage;
+
+  // ★★★ 延迟检测：避免在React渲染过程中读取DOM ★★★
+  // 不在脚本开始时立即检测，改为在addPanel调用时检测
+  let isTargetPage = false;  // 初始值设为false，等待延迟检测
+
+  // URL检测（不涉及DOM，可以立即执行）- 使用已有的currentUrl变量
+  const isUrlMatched = currentUrl.includes('/video/') ||
+                       currentUrl.includes('/creator/video/') ||
+                       currentUrl.includes('/n-creator/video/') ||
+                       currentUrl.includes('/mms/video/') ||
+                       currentUrl.includes('/duo-video');
+
+  console.log('[PDD监控] URL检测结果:', isUrlMatched, 'URL:', currentUrl);
   
   let allVideos = [];
   let historyData = {};
@@ -15229,9 +15222,8 @@
       console.log('[PDD监控] 通知上传错误失败:', err.message);
     }
   }
-  
   // 根据页面类型决定是否添加面板
-  console.log('[PDD监控] 页面检测结果:', { isTargetPage, isUploadPage, isDataPage, currentUrl });
+  console.log('[PDD监控] 页面检测结果:', { isUrlMatched, currentUrl });
   
   // 延迟添加面板的函数，确保React完成渲染
   function delayedAddPanel() {
@@ -15240,16 +15232,17 @@
       console.log('[PDD监控] 面板已添加，跳过');
       return;
     }
-    
-    // 再延迟500ms，确保React完成渲染
+
+    // 再延迟1000ms，确保React完成渲染（增加到1秒）
     setTimeout(() => {
-      console.log('[PDD监控] 延迟500ms后，开始添加面板');
+      console.log('[PDD监控] 延迟1000ms后，开始添加面板');
       addPanel();
-    }, 500);
+    }, 1000);
   }
-  
-  if (isTargetPage) {
-    console.log('[PDD监控] 是目标页面，准备添加面板');
+
+  // ★★★ 使用URL检测结果决定是否添加面板 ★★★
+  if (isUrlMatched) {
+    console.log('[PDD监控] URL匹配多多视频页面，准备添加面板');
     if (document.readyState === 'loading') {
       console.log('[PDD监控] 页面还在加载中，等待 DOMContentLoaded');
       document.addEventListener('DOMContentLoaded', () => {
@@ -15261,28 +15254,9 @@
       delayedAddPanel();
     }
   } else {
-    // 即使初始检测不是目标页面，也延迟检查一次（页面可能还在加载）
-    console.log('[PDD监控] 不是目标页面，2秒后重新检测');
-    setTimeout(() => {
-      console.log('[PDD监控] 延迟检测中...', { panelAdded, isVideoUploadListPage: isVideoUploadListPage() });
-      if (!panelAdded && isVideoUploadListPage()) {
-        console.log('[PDD监控] 延迟检测到视频上传页面，延迟添加面板');
-        delayedAddPanel();
-      } else {
-        console.log('[PDD监控] 延迟检测后仍不是目标页面');
-      }
-    }, 2000);
-    console.log('[PDD监控] 当前页面不是目标页面，不添加监控面板');
+    // URL不匹配，不添加面板（白名单模式）
+    console.log('[PDD监控] URL不匹配多多视频页面，不添加面板');
   }
-  
-  // 额外检查：页面完全加载后再次检测
-  window.addEventListener('load', () => {
-    console.log('[PDD监控] 页面完全加载，重新检测...');
-    if (!panelAdded && isVideoUploadListPage()) {
-      console.log('[PDD监控] 页面加载完成后检测到目标页面，添加面板');
-      addPanel();
-    }
-  });
   
   console.log('[PDD监控] ====== 内容脚本加载完成 ======');
   
