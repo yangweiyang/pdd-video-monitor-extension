@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -1882,11 +1882,7 @@
   }
   
   function addPanel() {
-    console.log('[PDD监控] addPanel 被调用，panelAdded:', panelAdded);
-    if (panelAdded) {
-      console.log('[PDD监控] 面板已添加，跳过');
-      return;
-    }
+    console.log('[PDD监控] addPanel 被调用');
 
     // ★★★ 排除不需要显示小羊助手的页面 ★★★
     const currentUrl = window.location.href;
@@ -1900,10 +1896,22 @@
 
     if (isExcludedPage) {
       console.log('[PDD监控] 当前为工具/营销类页面，不显示小羊助手:', currentUrl);
+      // 如果已存在悬浮球则隐藏它
+      const existingBall = document.getElementById('pdd-monitor-ball');
+      if (existingBall) existingBall.style.display = 'none';
+      const existingPanel = document.getElementById('pdd-video-monitor');
+      if (existingPanel) existingPanel.style.display = 'none';
       return;  // 不创建悬浮球和面板
     }
 
-    panelAdded = true;
+    // 检查是否已经创建了悬浮球（用DOM检测代替panelAdded变量，支持跨页面重评估）
+    if (document.getElementById('pdd-monitor-ball')) {
+      console.log('[PDD监控] 悬浮球已存在，显示并更新');
+      const ball = document.getElementById('pdd-monitor-ball');
+      ball.style.display = 'flex';  // 确保可见
+      return;
+    }
+
     console.log('[PDD监控] 开始创建悬浮球...');
     
     // 检测并设置账号ID
@@ -4467,24 +4475,26 @@
     // 页面加载时自动切换视图（这是初始化视图的唯一入口）
     autoSwitchViewByPage();
 
-    // ★★★ 关键修复：监听URL变化，自动重新切换视图 ★★★
-    // 解决问题：从上传页面发布视频后跳转到数据页面，视图状态没有更新
+    // ★★★ 关键修复：监听URL变化，自动重新切换视图 + 显示/隐藏悬浮球 ★★★
     let lastUrl = window.location.href;
+
+    // URL变化时的统一处理函数
+    function handleUrlChange() {
+      console.log('[PDD监控] 检测到URL变化，重新评估页面状态');
+      autoSwitchViewByPage();  // 切换面板视图
+      addPanel();              // 重新评估是否需要显示/隐藏悬浮球
+    }
 
     // 监听popstate事件（浏览器前进/后退）
     window.addEventListener('popstate', function() {
-      console.log('[PDD监控] 检测到popstate事件，重新检查页面类型');
-      setTimeout(() => {
-        autoSwitchViewByPage();
-      }, 500);  // 延迟500ms等待DOM更新
+      console.log('[PDD监控] 检测到popstate事件');
+      setTimeout(handleUrlChange, 500);
     });
 
     // 监听hashchange事件（hash路由变化）
     window.addEventListener('hashchange', function() {
-      console.log('[PDD监控] 检测到hashchange事件，重新检查页面类型');
-      setTimeout(() => {
-        autoSwitchViewByPage();
-      }, 500);
+      console.log('[PDD监控] 检测到hashchange事件');
+      setTimeout(handleUrlChange, 500);
     });
 
     // 定时轮询检测URL变化（SPA应用可能不触发上述事件）
@@ -4493,11 +4503,11 @@
       if (currentUrl !== lastUrl) {
         console.log('[PDD监控] 检测到URL变化:', lastUrl, '→', currentUrl);
         lastUrl = currentUrl;
-        autoSwitchViewByPage();
+        handleUrlChange();
       }
     }, 2000);  // 每2秒检查一次
 
-    console.log('[PDD监控] ✓ URL变化监听器已启动（popstate + hashchange + 轮询）');
+    console.log('[PDD监控] ✓ URL变化监听器已启动（popstate + hashchange + 轮询 + 动态悬浮球）');
     
     // 视频数据监控页面按钮 - 切换到数据视图（不刷新页面）
     const navDataPageBtn = document.getElementById('pdd-nav-data-page');
