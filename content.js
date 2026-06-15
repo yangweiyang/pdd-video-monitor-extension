@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -1913,9 +1913,11 @@
       console.log('[PDD监控] 悬浮球已存在，显示并更新');
       const ball = document.getElementById('pdd-monitor-ball');
       ball.style.display = 'flex';  // 确保可见
+      panelAdded = true;  // 同步更新全局变量
       return;
     }
 
+    panelAdded = true;  // 标记面板已添加（updatePanel等函数依赖此变量）
     console.log('[PDD监控] 开始创建悬浮球...');
     
     // 检测并设置账号ID
