@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  // 全局错误处理 - 彻底抑制拼多多页面自身的ACE编辑器错误
+  // 全局错误处理 - 彻底抑制拼多多页面自身的ACE编辑器错误和React Hydration错误
   const suppressedErrors = [
     'Invalid node to range',
     'ace_fastIncorp',
@@ -22,7 +22,13 @@
     'HookListener',  // Hook 监听器错误
     'acePostKeyEvent',  // ACE 编辑器按键事件错误
     '在当前页面中找不到节点',  // 节点查找错误
-    '找不到节点'  // 节点查找错误
+    '找不到节点',  // 节点查找错误
+    'Minified React error',  // React 压缩错误
+    'Hydration failed',  // React Hydration 失败
+    'error #418',  // React Hydration 错误代码
+    'error #423',  // React Hydration 错误代码
+    'does not match what was rendered',  // SSR内容不匹配
+    'There was an error while hydrating'  // Hydration 过程中出错
   ];
   
   function shouldSuppressError(args) {
