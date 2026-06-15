@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -820,21 +820,10 @@
       return;
     }
     
-    // 检测页面内容是否变化到视频页面（使用URL白名单 + DOM检测双重判断）
+    // 检测页面内容是否变化到视频上传列表页面
     const isUpload = isVideoUploadListPage();
-    const spaUrl = window.location.href;
-    const isSpaVideoPage = spaUrl.includes('/n-creator/video/') ||
-                           spaUrl.includes('/creator/video/') ||
-                           spaUrl.includes('/video/publish') ||
-                           spaUrl.includes('/video/list') ||
-                           spaUrl.includes('/video/data') ||
-                           spaUrl.includes('/mall-goods-video') ||
-                           spaUrl.includes('/mms/video/') ||
-                           spaUrl.includes('/replay-manage');
-    const isSpaTarget = isUpload || isSpaVideoPage;
-
-    if (isSpaTarget) {
-      console.log('[PDD监控] ★★★ SPA内容变化：检测到视频页面！isUpload:', isUpload, ', isSpaVideoPage:', isSpaVideoPage);
+    if (isUpload) {
+      console.log('[PDD监控] ★★★ SPA内容变化：检测到视频上传列表页面！');
       isTargetPage = true;
       addPanel();
     }
@@ -892,23 +881,12 @@
       return;
     }
     
-    // 检测是否是目标页面（使用URL白名单 + DOM检测双重判断）
+    // 检测是否是目标页面
     const isUpload = isVideoUploadListPage();
-    const currentUrl = window.location.href;
-    const isVideoPage = currentUrl.includes('/n-creator/video/') ||
-                        currentUrl.includes('/creator/video/') ||
-                        currentUrl.includes('/video/publish') ||
-                        currentUrl.includes('/video/list') ||
-                        currentUrl.includes('/video/data') ||
-                        currentUrl.includes('/mall-goods-video') ||
-                        currentUrl.includes('/mms/video/') ||
-                        currentUrl.includes('/replay-manage');
-    const shouldAddPanel = isUpload || isVideoPage;
-
-    console.log('[PDD监控] 初始化检测 - isVideoUploadListPage:', isUpload, ', isVideoPage:', isVideoPage, ', panelAdded:', panelAdded);
-
-    if (shouldAddPanel && !panelAdded) {
-      console.log('[PDD监控] ★★★ 初始化检测：检测到视频页面！');
+    console.log('[PDD监控] 初始化检测 - isVideoUploadListPage:', isUpload, 'panelAdded:', panelAdded);
+    
+    if (isUpload && !panelAdded) {
+      console.log('[PDD监控] ★★★ 初始化检测：检测到视频上传列表页面！');
       isTargetPage = true;
       addPanel();
       return; // 添加面板后退出，不再启动轮询
@@ -1904,42 +1882,30 @@
   }
   
   function addPanel() {
-    console.log('[PDD监控] addPanel 被调用');
+    console.log('[PDD监控] addPanel 被调用，panelAdded:', panelAdded);
+    if (panelAdded) {
+      console.log('[PDD监控] 面板已添加，跳过');
+      return;
+    }
 
-    // ★★★ 白名单模式：只在多多视频相关页面显示悬浮球 ★★★
+    // ★★★ 白名单模式：只在多多视频相关页面显示小羊助手 ★★★
     const currentUrl = window.location.href;
     const allowedPages = [
-      '/n-creator/video/',      // 多多视频（发布、列表、数据等）
-      '/creator/video/',        // 旧版创作者视频
-      '/video/publish',         // 视频发布
-      '/video/list',            // 视频列表
-      '/video/data',            // 视频数据
-      '/mall-goods-video',      // 商品视频
-      '/mms/video/',            // MMS视频
-      '/replay-manage'          // 回放管理
+      '/n-creator/video/',     // 创作者视频页面（发布、列表、数据等）
+      '/video/',               // 视频相关页面
+      '/mms/video/',           // MMS视频页面
+      '/creator/video/'        // 创作者视频页面（旧路径）
     ];
     const isAllowedPage = allowedPages.some(pattern => currentUrl.includes(pattern));
 
     if (!isAllowedPage) {
       console.log('[PDD监控] 当前非多多视频页面，不显示小羊助手:', currentUrl);
-      // 如果已存在悬浮球则隐藏它
-      const existingBall = document.getElementById('pdd-monitor-ball');
-      if (existingBall) existingBall.style.display = 'none';
-      const existingPanel = document.getElementById('pdd-video-monitor');
-      if (existingPanel) existingPanel.style.display = 'none';
       return;  // 不创建悬浮球和面板
     }
 
-    // 检查是否已经创建了悬浮球（用DOM检测代替panelAdded变量，支持跨页面重评估）
-    if (document.getElementById('pdd-monitor-ball')) {
-      console.log('[PDD监控] 悬浮球已存在，显示并更新');
-      const ball = document.getElementById('pdd-monitor-ball');
-      ball.style.display = 'flex';  // 确保可见
-      panelAdded = true;  // 同步更新全局变量
-      return;
-    }
+    console.log('[PDD监控] 当前为多多视频页面，显示小羊助手:', currentUrl);
 
-    panelAdded = true;  // 标记面板已添加（updatePanel等函数依赖此变量）
+    panelAdded = true;
     console.log('[PDD监控] 开始创建悬浮球...');
     
     // 检测并设置账号ID
@@ -4503,116 +4469,86 @@
     // 页面加载时自动切换视图（这是初始化视图的唯一入口）
     autoSwitchViewByPage();
 
-    // ★★★ 关键修复：监听URL变化，自动重新切换视图 + 显示/隐藏悬浮球 ★★★
+    // ★★★ 关键修复：监听URL变化，自动重新切换视图 ★★★
+    // 解决问题：从上传页面发布视频后跳转到数据页面，视图状态没有更新
     let lastUrl = window.location.href;
-    let isManualViewMode = false;  // 用户是否手动切换过视图
-
-    // URL变化时的统一处理函数
-    function handleUrlChange(newUrl) {
-      console.log('[PDD监控] 检测到URL变化:', lastUrl, '→', newUrl, ', 手动模式:', isManualViewMode);
-
-      if (isManualViewMode) {
-        // 手动模式下：只更新悬浮球显示/隐藏，不切换面板视图
-        console.log('[PDD监控] 手动模式，只更新悬浮球');
-        addPanel();
-        // 同时更新 autoSwitchViewByPage 内部的 currentView 但不操作 DOM
-        const url = newUrl || window.location.href;
-        const isUploadPage = url.includes('/video/publish') ||
-                             url.includes('/creator/video/publish') ||
-                             url.includes('/n-creator/video/publish') ||
-                             url.includes('/n-creator/video/home') ||
-                             url.includes('/mms/video/publish');
-        if (isUploadPage) {
-          if (typeof currentView !== 'undefined') currentView = 'upload';
-        } else {
-          if (typeof currentView !== 'undefined') currentView = 'data';
-        }
-        return;
-      }
-
-      // 自动模式下：完全由 autoSwitchViewByPage 控制
-      autoSwitchViewByPage();  // 切换面板视图
-      addPanel();              // 重新评估是否需要显示/隐藏悬浮球
-    }
 
     // 监听popstate事件（浏览器前进/后退）
     window.addEventListener('popstate', function() {
-      console.log('[PDD监控] 检测到popstate事件');
-      isManualViewMode = false;  // 浏览器导航退出手动模式
-      setTimeout(() => handleUrlChange(window.location.href), 500);
+      console.log('[PDD监控] 检测到popstate事件，重新检查页面类型');
+      setTimeout(() => {
+        autoSwitchViewByPage();
+      }, 500);  // 延迟500ms等待DOM更新
     });
 
     // 监听hashchange事件（hash路由变化）
     window.addEventListener('hashchange', function() {
-      console.log('[PDD监控] 检测到hashchange事件');
-      isManualViewMode = false;
-      setTimeout(() => handleUrlChange(window.location.href), 500);
+      console.log('[PDD监控] 检测到hashchange事件，重新检查页面类型');
+      setTimeout(() => {
+        autoSwitchViewByPage();
+      }, 500);
     });
 
     // 定时轮询检测URL变化（SPA应用可能不触发上述事件）
     setInterval(function() {
       const currentUrl = window.location.href;
       if (currentUrl !== lastUrl) {
+        console.log('[PDD监控] 检测到URL变化:', lastUrl, '→', currentUrl);
         lastUrl = currentUrl;
-        isManualViewMode = false;  // URL变化退出手动模式
-        handleUrlChange(currentUrl);
+        autoSwitchViewByPage();
       }
     }, 2000);  // 每2秒检查一次
 
-    console.log('[PDD监控] ✓ URL变化监听器已启动（popstate + hashchange + 轮询 + 动态悬浮球 + 手动模式保护）');
+    console.log('[PDD监控] ✓ URL变化监听器已启动（popstate + hashchange + 轮询）');
     
     // 视频数据监控页面按钮 - 切换到数据视图（不刷新页面）
     const navDataPageBtn = document.getElementById('pdd-nav-data-page');
     if (navDataPageBtn) {
       navDataPageBtn.onclick = function() {
-        console.log('[PDD监控] ★ 用户手动切换到视频数据监控页面视图（进入手动模式）');
-        isManualViewMode = true;  // 进入手动模式，不再被自动切换覆盖
-
+        console.log('[PDD监控] 切换到视频数据监控页面视图');
         const dataView = document.getElementById('pdd-data-view');
         const uploadView = document.getElementById('pdd-upload-view');
         const settingsView = document.getElementById('pdd-settings-view');
         const panelTitle = document.getElementById('pdd-panel-title');
         const pageTypeIndicator = document.getElementById('pdd-page-type');
-
+        
         currentView = 'data';
         if (dataView) dataView.style.display = 'block';
         if (uploadView) uploadView.style.display = 'none';
         if (settingsView) settingsView.style.display = 'none';
         if (panelTitle) panelTitle.textContent = '📊 视频数据监控';
         if (pageTypeIndicator) pageTypeIndicator.textContent = '📊 视频数据监控页面';
-
+        
         // 更新按钮 active 状态
         navDataPageBtn.classList.add('active');
         if (navAutoUploadBtn) navAutoUploadBtn.classList.remove('active');
-
+        
         localStorage.setItem('__pdd_panel_view', 'data');
       };
     }
-
+    
     // 视频自动上传页面按钮 - 切换到上传视图（不刷新页面）
     const navAutoUploadBtn = document.getElementById('pdd-nav-auto-upload');
     if (navAutoUploadBtn) {
       navAutoUploadBtn.onclick = function() {
-        console.log('[PDD监控] ★ 用户手动切换到视频自动上传页面视图（进入手动模式）');
-        isManualViewMode = true;  // 进入手动模式，不再被自动切换覆盖
-
+        console.log('[PDD监控] 切换到视频自动上传页面视图');
         const dataView = document.getElementById('pdd-data-view');
         const uploadView = document.getElementById('pdd-upload-view');
         const settingsView = document.getElementById('pdd-settings-view');
         const panelTitle = document.getElementById('pdd-panel-title');
         const pageTypeIndicator = document.getElementById('pdd-page-type');
-
+        
         currentView = 'upload';
         if (dataView) dataView.style.display = 'none';
         if (uploadView) uploadView.style.display = 'block';
         if (settingsView) settingsView.style.display = 'none';
         if (panelTitle) panelTitle.textContent = '📹 视频自动上传';
         if (pageTypeIndicator) pageTypeIndicator.textContent = '📹 视频自动上传页面';
-
+        
         // 更新按钮 active 状态
         navAutoUploadBtn.classList.add('active');
         if (navDataPageBtn) navDataPageBtn.classList.remove('active');
-
+        
         localStorage.setItem('__pdd_panel_view', 'upload');
       };
     }
