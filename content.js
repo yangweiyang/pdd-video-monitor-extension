@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -295,25 +295,32 @@
   
   // 检测是否在视频选择页面
   function isVideoSelectPage() {
-    // 延迟检测：等待body完全加载
-    if (!document.body) return false;
-    const bodyText = document.body.innerText || '';
-    return bodyText.includes('选择视频') ||
+    const bodyText = document.body ? document.body.innerText : '';
+    return bodyText.includes('选择视频') || 
            document.querySelector('[class*="select-video"], [class*="video-select"]') !== null;
   }
-
-  // ★★★ 延迟检测：避免在React渲染过程中读取DOM ★★★
-  // 不在脚本开始时立即检测，改为在addPanel调用时检测
-  let isTargetPage = false;  // 初始值设为false，等待延迟检测
-
-  // URL检测（不涉及DOM，可以立即执行）- 使用已有的currentUrl变量
-  const isUrlMatched = currentUrl.includes('/video/') ||
-                       currentUrl.includes('/creator/video/') ||
-                       currentUrl.includes('/n-creator/video/') ||
-                       currentUrl.includes('/mms/video/') ||
-                       currentUrl.includes('/duo-video');
-
-  console.log('[PDD监控] URL检测结果:', isUrlMatched, 'URL:', currentUrl);
+  
+  const isUploadPage = currentUrl.includes('/video/publish') || 
+                       currentUrl.includes('/creator/video/publish') || 
+                       currentUrl.includes('/n-creator/video/publish') ||
+                       currentUrl.includes('/n-creator/video/home') ||
+                       currentUrl.includes('/n-creator/video/mall-goods-video') ||
+                       currentUrl.includes('/n-creator/video/replay-manage') ||
+                       currentUrl.includes('/duo-video') ||
+                       currentUrl.includes('/video/duo') ||
+                       isVideoUploadListPage();
+  const isDataPage = currentUrl.includes('/video/list') || 
+                     currentUrl.includes('/video/data') || 
+                     currentUrl.includes('/creator/video/list') || 
+                     currentUrl.includes('/n-creator/video/list') ||
+                     currentUrl.includes('/n-creator/video/mall-goods-video') ||
+                     currentUrl.includes('/n-creator/video/home') ||
+                     currentUrl.includes('/n-creator/video/replay-manage') ||
+                     currentUrl.includes('/duo-video') ||
+                     currentUrl.includes('/video/duo');
+  
+  // 如果既不是上传页面也不是数据页面，只保留基础功能
+  let isTargetPage = isUploadPage || isDataPage;
   
   let allVideos = [];
   let historyData = {};
@@ -1880,29 +1887,6 @@
       console.log('[PDD监控] 面板已添加，跳过');
       return;
     }
-
-    // ★★★ 自动获取相关变量 - 必须在所有函数之前声明 ★★★
-    let autoCaptureObserver = null;
-    let autoCaptureTimer = null;
-    let lastAutoCaptureTime = 0;
-
-    // ★★★ 白名单模式：只在多多视频相关页面显示小羊助手 ★★★
-    const currentUrl = window.location.href;
-    const allowedPages = [
-      '/n-creator/video/',     // 创作者视频页面（发布、列表、数据等）
-      '/video/',               // 视频相关页面
-      '/mms/video/',           // MMS视频页面
-      '/creator/video/'        // 创作者视频页面（旧路径）
-    ];
-    const isAllowedPage = allowedPages.some(pattern => currentUrl.includes(pattern));
-
-    if (!isAllowedPage) {
-      console.log('[PDD监控] 当前非多多视频页面，不显示小羊助手:', currentUrl);
-      return;  // 不创建悬浮球和面板
-    }
-
-    console.log('[PDD监控] 当前为多多视频页面，显示小羊助手:', currentUrl);
-
     panelAdded = true;
     console.log('[PDD监控] 开始创建悬浮球...');
     
@@ -4559,412 +4543,7 @@
       navAutoUploadBtn.classList.add('active');
       if (navDataPageBtn) navDataPageBtn.classList.remove('active');
     }
-
-    // ★★★ 自动获取视频数据（无需手动点击）★★★
-    startAutoDataCapture();
-
-    // ★★★ 从DOM提取视频数据（精确匹配弹窗中的视频列表）★★★
-    function extractVideosFromDOM() {
-      let extractedCount = 0;
-
-      try {
-        console.log('[PDD监控] ===== 开始从DOM提取视频数据 =====');
-
-        // 查找所有视频项（精确匹配）
-        const videoItems = findVideoItemsInModal();
-
-        console.log('[PDD监控] 找到', videoItems.length, '个候选视频项');
-
-        if (videoItems.length > 0) {
-
-          videoItems.forEach((item, index) => {
-            const text = (item.innerText || item.textContent || '').trim();
-            console.log(`[PDD监控] 候选${index + 1}:`, text.substring(0, 200));
-
-            const videoData = parseVideoItem(item, index);
-            if (videoData) {
-              console.log(`[PDD监控] ✓ 提取成功:`, JSON.stringify(videoData, null, 2));
-              if (!allVideos.find(v => v.videoId === videoData.videoId)) {
-                allVideos.push(videoData);
-                extractedCount++;
-              }
-            } else {
-              console.log(`[PDD监控] ✗ 提取失败: 数据无效`);
-            }
-          });
-        } else {
-          console.log('[PDD监控] 未找到任何视频项');
-          // 调试：打印页面DOM结构
-          debugPageStructure();
-        }
-
-        console.log('[PDD监控] ===== DOM提取完成，共提取', extractedCount, '个视频 =====');
-
-        if (extractedCount > 0) {
-          updatePanel();
-        }
-
-      } catch (error) {
-        console.error('[PDD监控] DOM提取失败:', error);
-      }
-
-      return extractedCount;
-    }
-
-    // 查找弹窗中的视频项
-    function findVideoItemsInModal() {
-      const items = [];
-
-      // 方法1：在弹窗中查找包含视频缩略图的容器
-      const modals = document.querySelectorAll(
-        '.ant-modal-wrap, .ant-modal-body, ' +
-        '[class*="Modal"], [class*="modal"], ' +
-        '[role="dialog"]'
-      );
-
-      console.log('[PDD监控] 查找到', modals.length, '个弹窗容器');
-
-      for (const modal of modals) {
-        console.log('[PDD监控] 检查弹窗:', modal.className);
-
-        // 查找包含视频缩略图和统计数据的行/项
-        const allRows = modal.querySelectorAll('div, li, tr');
-        console.log('[PDD监控] 弹窗内共有', allRows.length, '个元素');
-
-        for (const row of allRows) {
-          const text = row.innerText || '';
-          const hasImg = row.querySelector('img');
-          const hasStats =
-            text.includes('热度') ||
-            text.includes('评论') ||
-            text.includes('订单') ||
-            text.includes('金额');
-
-          if (hasImg && hasStats && text.length > 30 && text.length < 500) {
-            items.push(row);
-          }
-        }
-
-        if (items.length > 0) {
-          console.log('[PDD监控] 在弹窗中找到', items.length, '个视频项');
-          break;
-        }
-      }
-
-      // 方法2：如果方法1没找到，尝试更宽泛的搜索
-      if (items.length === 0) {
-        console.log('[PDD监控] 弹窗未找到，尝试全页面搜索...');
-
-        // 查找包含"查看全部/个视频"的区域
-        const allElements = document.querySelectorAll('*');
-        for (const el of allElements) {
-          const text = el.innerText || '';
-          if ((text.includes('查看全部') || text.includes('个视频')) && text.length < 100) {
-            // 在该区域内查找视频项
-            let container = el.parentElement;
-            for (let i = 0; i < 8; i++) { // 向上查8层
-              if (!container) break;
-
-              const rows = container.querySelectorAll('div');
-              for (const row of rows) {
-                const rowText = row.innerText || '';
-                const hasImg = row.querySelector('img');
-                const hasStats = rowText.includes('热度') || rowText.includes('评论');
-
-                if (hasImg && hasStats && rowText.length > 20 && rowText.length < 400) {
-                  // 避免重复添加父元素
-                  const isParentOfExisting = items.some(existing => existing.contains(row));
-                  if (!isParentOfExisting) {
-                    items.push(row);
-                  }
-                }
-              }
-
-              if (items.length > 0) break;
-              container = container.parentElement;
-            }
-            break;
-          }
-        }
-      }
-
-      return items;
-    }
-
-    // 解析单个视频项的数据 - 精确版 v2
-    function parseVideoItem(item, index) {
-      try {
-        const text = (item.innerText || item.textContent || '').trim();
-        if (!text || text.length < 15) return null;
-
-        // 提取视频缩略图
-        const img = item.querySelector('img');
-        const coverUrl = img?.src || img?.dataset?.src || '';
-
-        // ★ 提取视频ID（格式：ID:0052114794412015515）★
-        const idMatch = text.match(/ID[：:]\s*(\d{15,})/i);
-        const videoId = idMatch ? idMatch[1] : `video_${Date.now()}_${index}`;
-
-        // ★ 提取发布时间（格式：2024-08-14 17:03:05）★
-        const timeMatch = text.match(/(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})/);
-        const publishTime = timeMatch ? timeMatch[1] : new Date().toLocaleString();
-
-        // ★★ 提取所有数值（按表格列顺序）★★
-        // 从截图看，列顺序是：热度 | 评论 | 订单(¥) | 金额(¥) | 人数
-
-        let playCount = 0;      // 热度/播放量
-        let commentCount = 0;   // 评论数
-        let orderCount = 0;     // 订单数
-        let amount = 0;         // 金额
-        let dealPeopleCount = 0;// 成交人数
-
-        // 方法1：使用精确的关键词定位
-        // 匹配 "热度" 或 "播放" 后面的数字
-        const heatResult = text.match(/热度\s*[\s:：]*([\d,]+\.?\d*)/);
-        if (heatResult) {
-          playCount = parseFloat(heatResult[1].replace(/,/g, '')) || 0;
-        }
-
-        // 匹配 "评论" 后面的数字
-        const commentResult = text.match(/评论\s*[\s:：]*([\d,]+\.?\d*)/);
-        if (commentResult) {
-          commentCount = parseFloat(commentResult[1].replace(/,/g, '')) || 0;
-        }
-
-        // 匹配 "订单" 后面的数字（可能带¥）
-        const orderResult = text.match(/订单\s*[\s:：]*\¥?\s*([\d,]+\.?\d*)/);
-        if (orderResult) {
-          orderCount = parseFloat(orderResult[1].replace(/,/g, '')) || 0;
-        }
-
-        // 匹配 "金额" 后面的数字（可能带¥）
-        const amountResult = text.match(/金额\s*[\s:：]*\¥?\s*([\d,]+\.?\d*)/);
-        if (amountResult) {
-          amount = parseFloat(amountResult[1].replace(/,/g, '')) || 0;
-        }
-
-        // 匹配 "人数" 后面的数字
-        const peopleResult = text.match(/人数\s*[\s:：]*([\d,]+)/);
-        if (peopleResult) {
-          dealPeopleCount = parseInt(peopleResult[1].replace(/,/g, '')) || 0;
-        }
-
-        // 方法2：如果关键词匹配失败，尝试按位置提取
-        if (playCount === 0 && commentCount === 0) {
-          console.log('[PDD监控] 关键词匹配失败，尝试位置提取...');
-          console.log('[PDD监控] 原始文本:', text);
-
-          // 查找所有数字（排除ID和时间）
-          const allNumbers = [];
-          const numRegex = /\b(\d+\.?\d*)\b/g;
-          let match;
-          while ((match = numRegex.exec(text)) !== null) {
-            const numStr = match[1];
-            const numVal = parseFloat(numStr.replace(/,/g, ''));
-            // 排除：ID（15位以上）、时间格式（2024-08-14）、过小的数字
-            if (numStr.length < 15 && !numStr.includes('-') && !text.substring(match.index - 5, match.index).includes(':') && numVal >= 0) {
-              allNumbers.push({
-                value: numVal,
-                index: match.index,
-                str: numStr
-              });
-            }
-          }
-
-          console.log('[PDD监控] 提取到的数字:', allNumbers);
-
-          // 假设顺序：热度、评论、订单、金额、人数（根据截图）
-          if (allNumbers.length >= 3) {
-            playCount = allNumbers[0]?.value || 0;
-            commentCount = allNumbers[1]?.value || 0;
-            orderCount = allNumbers[2]?.value || 0;
-            amount = allNumbers[3]?.value || 0;
-            dealPeopleCount = allNumbers[4]?.value || 0;
-          }
-        }
-
-        // 提取商品名称（视频标题）
-        const lines = text.split('\n').filter(l => l.trim());
-        const titleLine = lines.find(l =>
-          l.includes('202') || l.includes('-') || l.length > 10
-        ) || lines[0] || '';
-        const goodsName = titleLine.trim().substring(0, 80);
-
-        // 验证至少有ID或播放量
-        if (!idMatch && playCount === 0) return null;
-
-        // 调试输出
-        console.log(`[PDD监控] 视频${index + 1}解析结果:`, {
-          videoId: videoId,
-          goodsName: goodsName?.substring(0, 30),
-          publishTime: publishTime,
-          playCount: playCount,
-          commentCount: commentCount,
-          orderCount: orderCount,
-          amount: amount,
-          dealPeopleCount: dealPeopleCount
-        });
-
-        return {
-          videoId: videoId,
-          goodsName: goodsName,
-          coverUrl: coverUrl,
-          publishTime: publishTime,
-          playCount: playCount,           // 热度/播放量
-          commentCount: commentCount,     // 评论数
-          orderCount: orderCount,         // 订单数（¥）
-          amount: amount,                // 金额
-          dealPeopleCount: dealPeopleCount, // 成交人数
-          status: '已发布',
-          source: 'DOM自动提取'
-        };
-      } catch (error) {
-        console.error('[PDD监控] 解析视频项失败:', error);
-        return null;
-      }
-    }
-
-    function extractNumber(match) {
-      return match ? parseInt(match[1]) || 0 : 0;
-    }
-
-    // ★★★ 调试函数：打印页面DOM结构 ★★★
-    function debugPageStructure() {
-      console.log('[PDD监控] ===== 调试：分析页面DOM结构 =====');
-
-      // 1. 查找所有包含"查看全部"或"个视频"的元素
-      const allElements = document.querySelectorAll('*');
-      let foundRelated = false;
-
-      for (const el of allElements) {
-        const text = (el.innerText || '').trim();
-        if (text.includes('查看全部') || text.includes('个视频')) {
-          if (text.length < 150) { // 排除整个页面
-            foundRelated = true;
-            console.log('[PDD监控] 找到相关元素:', {
-              tag: el.tagName,
-              class: el.className,
-              id: el.id,
-              text: text.substring(0, 100),
-              childCount: el.children.length
-            });
-
-            // 打印子元素结构
-            console.log('[PDD监控] 子元素:');
-            Array.from(el.children).slice(0, 10).forEach((child, i) => {
-              console.log(`  [${i}] ${child.tagName}.${child.className}:`, (child.innerText || '').substring(0, 80));
-            });
-          }
-        }
-      }
-
-      if (!foundRelated) {
-        console.log('[PDD监控] 未找到包含"查看全部"或"个视频"的元素');
-        console.log('[PDD监控] 当前URL:', window.location.href);
-        console.log('[PDD监控] 页面标题:', document.title);
-      }
-
-      // 2. 查找所有表格
-      const tables = document.querySelectorAll('table, [class*="table"]');
-      console.log('[PDD监控] 找到', tables.length, '个表格元素');
-
-      // 3. 查找所有img元素及其父级
-      const imgs = document.querySelectorAll('img[src*="yang"], img[data-src]');
-      console.log('[PDD监控] 找到', imgs.length, '个可能的视频缩略图');
-
-      imgs.slice(0, 5).forEach((img, i) => {
-        const parent = img.parentElement;
-        console.log(`[PDD监控] 图片${i + 1}:`, {
-          src: img.src?.substring(0, 50),
-          parentTag: parent?.tagName,
-          parentClass: parent?.className,
-          parentText: (parent?.innerText || '').substring(0, 100)
-        });
-      });
-
-      console.log('[PDD监控] ===== 调试结束 =====');
-    }
-
-    // ★★★ 自动获取视频数据（核心功能）★★★
-    function startAutoDataCapture() {
-      console.log('[PDD监控] ★★ 启动自动数据捕获 ★★');
-
-      // 方法1：立即尝试提取一次（页面可能已加载）
-      setTimeout(() => {
-        console.log('[PDD监控] 首次自动提取...');
-        performAutoCapture();
-      }, 1500);
-
-      // 方法2：使用MutationObserver监听DOM变化
-      autoCaptureObserver = new MutationObserver((mutations) => {
-        // 防抖：避免频繁触发
-        const now = Date.now();
-        if (now - lastAutoCaptureTime < 2000) return; // 至少间隔2秒
-
-        // 检查是否有弹窗出现或表格变化
-        const hasModalChange = mutations.some(m =>
-          m.addedNodes.length > 0 &&
-          Array.from(m.addedNodes).some(node =>
-            node.nodeType === 1 && (
-              node.classList?.contains('ant-modal-wrap') ||
-              node.classList?.contains('ant-modal-body') ||
-              node.querySelector?.('.ant-modal-wrap') ||
-              node.querySelector?.('table')
-            )
-          )
-        );
-
-        if (hasModalChange) {
-          console.log('[PDD监控] 检测到弹窗/表格变化，延迟1秒后提取...');
-          lastAutoCaptureTime = now;
-          setTimeout(performAutoCapture, 1000);
-        }
-      });
-
-      // 监听整个body的变化
-      autoCaptureObserver.observe(document.body, {
-        childList: true,
-        subtree: true,
-        attributes: false,
-        characterData: false
-      });
-
-      // 方法3：定时轮询（每5秒检查一次）
-      autoCaptureTimer = setInterval(() => {
-        performAutoCapture();
-      }, 5000);
-
-      console.log('[PDD监控] ✓ 自动数据捕获已启动（MutationObserver + 定时轮询）');
-    }
-
-    function performAutoCapture() {
-      try {
-        const count = extractVideosFromDOM();
-
-        if (count > 0) {
-          const statusEl = document.getElementById('auto-status');
-          if (statusEl) {
-            statusEl.innerHTML = `<span style="color:#4caf50;">✅ 已自动获取 ${allVideos.length} 个视频</span>`;
-          }
-          console.log('[PDD监控] 自动获取成功:', count, '个新视频，总计', allVideos.length, '个');
-        }
-      } catch (error) {
-        console.error('[PDD监控] 自动获取失败:', error);
-      }
-    }
-
-    function stopAutoDataCapture() {
-      if (autoCaptureObserver) {
-        autoCaptureObserver.disconnect();
-        autoCaptureObserver = null;
-      }
-      if (autoCaptureTimer) {
-        clearInterval(autoCaptureTimer);
-        autoCaptureTimer = null;
-      }
-      console.log('[PDD监控] ✗ 自动数据捕获已停止');
-    }
-
+    
     // 批量发布功能
     let isPublishing = false;
     let publishInterval = null;
@@ -11611,7 +11190,7 @@
     
     if (allVideos.length === 0) {
       if (listEl) {
-        listEl.innerHTML = '<div class="no-data">暂无视频数据<br><small>请打开"查看全部"弹窗后自动获取</small></div>';
+        listEl.innerHTML = '<div class="no-data">暂无视频数据<br><small>点击 ⚡ 自动获取所有数据</small></div>';
       }
       if (totalVideosEl) totalVideosEl.textContent = '0';
       if (totalPlaysEl) totalPlaysEl.textContent = '0';
@@ -11684,11 +11263,11 @@
     
     // 构建视频卡片
     sortedVideos.forEach((video, idx) => {
-      totalPlays += (video.playCount || 0);
-      totalOrders += (video.orderCount || 0);
-      totalAmount += (video.orderAmount || video.amount || 0);
+      totalPlays += video.playCount;
+      totalOrders += video.orderCount;
+      totalAmount += video.orderAmount;
       
-      const growth = getVideoGrowth(video.feedId || video.videoId);
+      const growth = getVideoGrowth(video.feedId);
       
       let playGrowthBadge = '';
       let orderGrowthBadge = '';
@@ -11730,36 +11309,23 @@
       
       const card = document.createElement('div');
       card.className = `video-card ${video.auditStatus === 'failed' ? 'audit-failed' : ''}`;
-      card.dataset.feedId = video.videoId || video.feedId;
+      card.dataset.feedId = video.feedId;
       card.dataset.videoIndex = idx;
-
-      // 使用DOM提取的字段或API字段
-      const displayId = video.feedId || video.videoId || '';
-      const displayDesc = video.desc || video.goodsName || '无描述';
-      const displayDate = video.publishTime || video.date || '';
-      const displayPlay = video.playCount || 0;
-      const displayOrder = video.orderCount || 0;
-      const displayAmount = video.orderAmount || video.amount || 0;
-      const displayComment = video.commentCount || 0;
-      const displayPeople = video.dealPeopleCount || 0;
-
       card.innerHTML = `
-        <input type="checkbox" class="video-checkbox video-item-checkbox" data-feed-id="${escapeHtml(displayId)}">
+        <input type="checkbox" class="video-checkbox video-item-checkbox" data-feed-id="${escapeHtml(video.feedId)}">
         <img class="video-cover" src="${escapeHtml(video.coverUrl)}" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 60 60%22><rect fill=%22%23eee%22 width=%2260%22 height=%2260%22/><text x=%2230%22 y=%2235%22 text-anchor=%22middle%22 fill=%22%23999%22 font-size=%2212%22>无封面</text></svg>'">
         <div class="video-info">
-          <div class="video-desc">${escapeHtml(displayDesc)} ${auditBadge}</div>
+          <div class="video-desc">${escapeHtml(video.desc) || '无描述'} ${auditBadge}</div>
           <div class="video-stats">
-            <span class="stat-item">▶️ <span class="num">${formatNumber(displayPlay)}</span>${playGrowthBadge}</span>
-            <span class="stat-item">🛒 <span class="num">${displayOrder}</span>${orderGrowthBadge}</span>
-            <span class="stat-item amount">💰 <span class="num">¥${formatNumber(displayAmount)}</span>${amountGrowthBadge}</span>
-            ${displayComment > 0 ? `<span class="stat-item">💬 <span class="num">${displayComment}</span></span>` : ''}
+            <span class="stat-item">▶️ <span class="num">${formatNumber(video.playCount)}</span>${playGrowthBadge}</span>
+            <span class="stat-item">🛒 <span class="num">${video.orderCount}</span>${orderGrowthBadge}</span>
+            <span class="stat-item amount">💰 <span class="num">¥${formatNumber(video.orderAmount)}</span>${amountGrowthBadge}</span>
           </div>
           <div class="video-meta">
-            <span class="video-id">ID: ${escapeHtml(displayId)}</span>
-            <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap;">
-              ${displayDate ? `<span class="video-date">📅 ${escapeHtml(displayDate)}</span>` : ''}
-              ${displayPeople > 0 ? `<span style="font-size:10px;color:#666;">👥 ${displayPeople}人</span>` : ''}
-              <button class="video-expand-btn" data-feed-id="${escapeHtml(displayId)}">📄 详情</button>
+            <span class="video-id">ID: ${escapeHtml(video.feedId)}</span>
+            <div style="display:flex;gap:4px;align-items:center;">
+              ${video.date ? `<span class="video-date">📅 ${escapeHtml(video.date)}</span>` : ''}
+              <button class="video-expand-btn" data-feed-id="${escapeHtml(video.feedId)}">📄 详情</button>
             </div>
           </div>
         </div>
@@ -15645,8 +15211,9 @@
       console.log('[PDD监控] 通知上传错误失败:', err.message);
     }
   }
+  
   // 根据页面类型决定是否添加面板
-  console.log('[PDD监控] 页面检测结果:', { isUrlMatched, currentUrl });
+  console.log('[PDD监控] 页面检测结果:', { isTargetPage, isUploadPage, isDataPage, currentUrl });
   
   // 延迟添加面板的函数，确保React完成渲染
   function delayedAddPanel() {
@@ -15655,17 +15222,16 @@
       console.log('[PDD监控] 面板已添加，跳过');
       return;
     }
-
-    // 再延迟1000ms，确保React完成渲染（增加到1秒）
+    
+    // 再延迟500ms，确保React完成渲染
     setTimeout(() => {
-      console.log('[PDD监控] 延迟1000ms后，开始添加面板');
+      console.log('[PDD监控] 延迟500ms后，开始添加面板');
       addPanel();
-    }, 1000);
+    }, 500);
   }
-
-  // ★★★ 使用URL检测结果决定是否添加面板 ★★★
-  if (isUrlMatched) {
-    console.log('[PDD监控] URL匹配多多视频页面，准备添加面板');
+  
+  if (isTargetPage) {
+    console.log('[PDD监控] 是目标页面，准备添加面板');
     if (document.readyState === 'loading') {
       console.log('[PDD监控] 页面还在加载中，等待 DOMContentLoaded');
       document.addEventListener('DOMContentLoaded', () => {
@@ -15677,9 +15243,28 @@
       delayedAddPanel();
     }
   } else {
-    // URL不匹配，不添加面板（白名单模式）
-    console.log('[PDD监控] URL不匹配多多视频页面，不添加面板');
+    // 即使初始检测不是目标页面，也延迟检查一次（页面可能还在加载）
+    console.log('[PDD监控] 不是目标页面，2秒后重新检测');
+    setTimeout(() => {
+      console.log('[PDD监控] 延迟检测中...', { panelAdded, isVideoUploadListPage: isVideoUploadListPage() });
+      if (!panelAdded && isVideoUploadListPage()) {
+        console.log('[PDD监控] 延迟检测到视频上传页面，延迟添加面板');
+        delayedAddPanel();
+      } else {
+        console.log('[PDD监控] 延迟检测后仍不是目标页面');
+      }
+    }, 2000);
+    console.log('[PDD监控] 当前页面不是目标页面，不添加监控面板');
   }
+  
+  // 额外检查：页面完全加载后再次检测
+  window.addEventListener('load', () => {
+    console.log('[PDD监控] 页面完全加载，重新检测...');
+    if (!panelAdded && isVideoUploadListPage()) {
+      console.log('[PDD监控] 页面加载完成后检测到目标页面，添加面板');
+      addPanel();
+    }
+  });
   
   console.log('[PDD监控] ====== 内容脚本加载完成 ======');
   

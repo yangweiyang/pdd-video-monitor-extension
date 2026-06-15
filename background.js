@@ -1,37 +1,21 @@
 const KEEP_ALIVE_INTERVAL = 2;
 const PAGE_REFRESH_INTERVAL = 30;
-const FETCH_DATA_INTERVAL = 10;
 const SYNC_INTERVAL = 1;
-const CHECK_UPDATE_INTERVAL = 60; // 每小时检查一次更新
+const CHECK_UPDATE_INTERVAL = 60;
 const NATIVE_HOST_NAME = 'com.pdd.video.assistant';
 const DEFAULT_ACCOUNT_ID = '默认账号';
 
-// 更新配置 - 修改这里的 GitHub 仓库地址即可
 const UPDATE_CONFIG = {
-  // GitHub Releases API 地址
   repo: 'yangweiyang/pdd-video-monitor-extension',
-  // 或者使用自定义更新服务器
-  updateUrl: null, // 如果有自定义服务器，填写URL，否则使用GitHub
+  updateUrl: null,
   currentVersion: chrome.runtime.getManifest().version
 };
 
-let videoData = [];
-let lastFetchTime = null;
 let videoHistory = {};
-let pendingSaveData = null;
-let saveDataTimeout = null;
-let isSavingData = false;
 let currentAccountId = null;
 let lastSyncTime = null;
 let lastSyncHash = null;
-let syncDebounceTimeout = null;
-const SYNC_DEBOUNCE_DELAY = 500;
 let isInitialized = false;
-
-function logToFile(message) {
-  const timestamp = new Date().toISOString();
-  console.log('[PDD监控-BG]', message);
-}
 
 chrome.runtime.onInstalled.addListener(() => {
   console.log('[PDD监控] 扩展已安装');
@@ -45,26 +29,20 @@ chrome.runtime.onStartup.addListener(() => {
 
 async function initStorage() {
   try {
-    const result = await chrome.storage.local.get(['videoData', 'keepAliveEnabled', 'videoHistory', 'currentAccountId']);
-    
-    if (result.videoData) {
-      videoData = result.videoData;
-      console.log('[PDD监控] 已加载历史数据:', videoData.length, '条');
-    }
-    
+    const result = await chrome.storage.local.get(['keepAliveEnabled', 'videoHistory', 'currentAccountId']);
+
     if (result.videoHistory) {
       videoHistory = result.videoHistory;
-      console.log('[PDD监控] 已加载视频历史:', Object.keys(videoHistory).length, '个视频');
     }
-    
+
     if (result.currentAccountId) {
       currentAccountId = result.currentAccountId;
     }
-    
+
     isInitialized = true;
-    
+
     await loadRemoteDataOnStartup();
-    
+
     if (result.keepAliveEnabled !== false) {
       startKeepAlive();
     }
@@ -88,29 +66,27 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     performKeepAlive();
   } else if (alarm.name === 'pageRefresh') {
     performPageRefresh();
-  } else if (alarm.name === 'fetchData') {
-    fetchVideoData();
   } else if (alarm.name === 'syncData') {
     forceSyncToNativeHost();
+  } else if (alarm.name === 'checkUpdate') {
+    checkForUpdate();
   }
 });
 
 function startKeepAlive() {
   chrome.alarms.create('keepAlive', { periodInMinutes: KEEP_ALIVE_INTERVAL });
   chrome.alarms.create('pageRefresh', { periodInMinutes: PAGE_REFRESH_INTERVAL });
-  chrome.alarms.create('fetchData', { periodInMinutes: FETCH_DATA_INTERVAL });
   chrome.alarms.create('syncData', { periodInMinutes: SYNC_INTERVAL });
+  chrome.alarms.create('checkUpdate', { periodInMinutes: CHECK_UPDATE_INTERVAL });
   chrome.storage.local.set({ keepAliveEnabled: true });
-  console.log('[PDD监控] 保活定时器已启动，同步间隔:', SYNC_INTERVAL, '分钟');
 }
 
 function stopKeepAlive() {
   chrome.alarms.clear('keepAlive');
   chrome.alarms.clear('pageRefresh');
-  chrome.alarms.clear('fetchData');
   chrome.alarms.clear('syncData');
+  chrome.alarms.clear('checkUpdate');
   chrome.storage.local.set({ keepAliveEnabled: false });
-  console.log('[PDD监控] 保活定时器已停止');
 }
 
 function sendNativeMessage(message) {
@@ -131,81 +107,50 @@ function sendNativeMessage(message) {
 
 async function forceSyncToNativeHost() {
   const accountId = currentAccountId || DEFAULT_ACCOUNT_ID;
-  
+
   try {
-    const result = await chrome.storage.local.get(['videoHistory']);
-    const latestVideoHistory = result.videoHistory || videoHistory || {};
-    
-    if (Object.keys(latestVideoHistory).length === 0) {
-      console.log('[PDD监控] 没有数据需要同步');
-      return;
-    }
-    
-    console.log('[PDD监控] 强制同步数据到本地存储，账号:', accountId, '视频数:', Object.keys(latestVideoHistory).length);
-    
+    if (Object.keys(videoHistory).length === 0) return;
+
     const response = await sendNativeMessage({
       action: 'syncVideoHistory',
       accountId: accountId,
-      videoHistory: latestVideoHistory
+      videoHistory: videoHistory
     });
-    
+
     if (response && response.success) {
-      lastSyncHash = JSON.stringify(latestVideoHistory);
+      lastSyncHash = JSON.stringify(videoHistory);
       lastSyncTime = new Date();
-      console.log('[PDD监控] 数据已同步到本地存储，返回视频数:', Object.keys(response.videoHistory || {}).length);
-    } else {
-      console.log('[PDD监控] 同步失败:', response);
     }
   } catch (e) {
-    console.log('[PDD监控] 同步数据失败:', e.message);
+    console.error('[PDD监控] 同步数据失败:', e.message);
   }
-}
-
-async function syncDataToNativeHost() {
-  return forceSyncToNativeHost();
-}
-
-function scheduleNativeSync() {
-  if (syncDebounceTimeout) {
-    clearTimeout(syncDebounceTimeout);
-  }
-  
-  syncDebounceTimeout = setTimeout(() => {
-    forceSyncToNativeHost();
-  }, SYNC_DEBOUNCE_DELAY);
 }
 
 async function loadDataFromNativeHost(accountId) {
   const actualAccountId = accountId || DEFAULT_ACCOUNT_ID;
-  
+
   try {
-    console.log('[PDD监控] 加载账号数据，账号:', actualAccountId);
-    
     const response = await sendNativeMessage({
       action: 'readAccountData'
     });
-    
+
     if (response && response.success && response.data) {
       const allAccountData = response.data;
-      
       const accountData = allAccountData[actualAccountId];
-      
+
       if (accountData && accountData.videoHistory) {
         const result = await chrome.storage.local.get(['videoHistory']);
         const localVideoHistory = result.videoHistory || {};
         const remoteVideoHistory = accountData.videoHistory;
-        
-        console.log('[PDD监控] 本地视频数:', Object.keys(localVideoHistory).length);
-        console.log('[PDD监控] 远程视频数:', Object.keys(remoteVideoHistory).length);
-        
+
         let hasNewData = false;
         const mergedHistory = {};
-        
+
         const allFeedIds = new Set([
           ...Object.keys(localVideoHistory),
           ...Object.keys(remoteVideoHistory)
         ]);
-        
+
         for (const feedId of allFeedIds) {
           const localVideo = localVideoHistory[feedId];
           const remoteVideo = remoteVideoHistory[feedId];
