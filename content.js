@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -1880,6 +1880,11 @@
       console.log('[PDD监控] 面板已添加，跳过');
       return;
     }
+
+    // ★★★ 自动获取相关变量 - 必须在所有函数之前声明 ★★★
+    let autoCaptureObserver = null;
+    let autoCaptureTimer = null;
+    let lastAutoCaptureTime = 0;
 
     // ★★★ 白名单模式：只在多多视频相关页面显示小羊助手 ★★★
     const currentUrl = window.location.href;
@@ -4723,11 +4728,6 @@
         return null;
       }
     }
-
-    // ★★★ 自动获取视频数据 - 变量声明（必须在函数之前）★★★
-    let autoCaptureObserver = null;
-    let autoCaptureTimer = null;
-    let lastAutoCaptureTime = 0;
 
     function extractNumber(match) {
       return match ? parseInt(match[1]) || 0 : 0;
