@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿(function() {
   'use strict';
   
   // ========== 立即暴露调试接口（放在最前面，确保始终可用） ==========
@@ -820,10 +820,21 @@
       return;
     }
     
-    // 检测页面内容是否变化到视频上传列表页面
+    // 检测页面内容是否变化到视频页面（使用URL白名单 + DOM检测双重判断）
     const isUpload = isVideoUploadListPage();
-    if (isUpload) {
-      console.log('[PDD监控] ★★★ SPA内容变化：检测到视频上传列表页面！');
+    const spaUrl = window.location.href;
+    const isSpaVideoPage = spaUrl.includes('/n-creator/video/') ||
+                           spaUrl.includes('/creator/video/') ||
+                           spaUrl.includes('/video/publish') ||
+                           spaUrl.includes('/video/list') ||
+                           spaUrl.includes('/video/data') ||
+                           spaUrl.includes('/mall-goods-video') ||
+                           spaUrl.includes('/mms/video/') ||
+                           spaUrl.includes('/replay-manage');
+    const isSpaTarget = isUpload || isSpaVideoPage;
+
+    if (isSpaTarget) {
+      console.log('[PDD监控] ★★★ SPA内容变化：检测到视频页面！isUpload:', isUpload, ', isSpaVideoPage:', isSpaVideoPage);
       isTargetPage = true;
       addPanel();
     }
@@ -881,12 +892,23 @@
       return;
     }
     
-    // 检测是否是目标页面
+    // 检测是否是目标页面（使用URL白名单 + DOM检测双重判断）
     const isUpload = isVideoUploadListPage();
-    console.log('[PDD监控] 初始化检测 - isVideoUploadListPage:', isUpload, 'panelAdded:', panelAdded);
-    
-    if (isUpload && !panelAdded) {
-      console.log('[PDD监控] ★★★ 初始化检测：检测到视频上传列表页面！');
+    const currentUrl = window.location.href;
+    const isVideoPage = currentUrl.includes('/n-creator/video/') ||
+                        currentUrl.includes('/creator/video/') ||
+                        currentUrl.includes('/video/publish') ||
+                        currentUrl.includes('/video/list') ||
+                        currentUrl.includes('/video/data') ||
+                        currentUrl.includes('/mall-goods-video') ||
+                        currentUrl.includes('/mms/video/') ||
+                        currentUrl.includes('/replay-manage');
+    const shouldAddPanel = isUpload || isVideoPage;
+
+    console.log('[PDD监控] 初始化检测 - isVideoUploadListPage:', isUpload, ', isVideoPage:', isVideoPage, ', panelAdded:', panelAdded);
+
+    if (shouldAddPanel && !panelAdded) {
+      console.log('[PDD监控] ★★★ 初始化检测：检测到视频页面！');
       isTargetPage = true;
       addPanel();
       return; // 添加面板后退出，不再启动轮询
